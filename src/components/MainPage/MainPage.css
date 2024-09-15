@@ -1,0 +1,125 @@
+/* App.css */
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0; /* Remove any default margin */
+  padding: 0; /* Remove any default padding */
+  box-sizing: border-box; /* Include padding in the element's total size */
+}
+
+/* Custom scrollbar styling */
+.content {
+  flex: 1;
+  padding: 0px; /* Already set to 0, so no issue here */
+  margin: 0; /* Remove any margin to eliminate space between sidebar and content */
+  overflow-y: auto; /* Enable vertical scrolling */
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box; /* Ensure consistent sizing */
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.content::-webkit-scrollbar {
+  width: 8px; /* Make the scrollbar thinner */
+}
+
+.content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1); /* Light background */
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 255, 0, 0.7); /* Custom scrollbar color */
+  border-radius: 10px; /* Rounder edges for the scrollbar */
+  border: 2px solid rgba(0, 0, 0, 0.1); /* Adds a border for contrast */
+}
+
+/* For Firefox */
+.content {
+  scrollbar-width: thin; /* Make the scrollbar thinner */
+  scrollbar-color: rgba(0, 255, 0, 0.7) rgba(0, 0, 0, 0.1); /* Scrollbar thumb and track colors */
+}
+
+/* Sidebar styling, if applicable */
+.sidebar {
+  flex: 0 0 200px; /* Adjust width of the sidebar as needed */
+  margin: 0; /* Ensure no margin is applied */
+  padding: 0; /* Ensure no padding is applied */
+  box-sizing: border-box; /* Consistent sizing */
+}
+
+.text-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Ensures proper wrapping on smaller screens */
+  margin: 20px; /* Add margin for better spacing */
+  gap: 20px; /* Adds consistent spacing between flex items */
+}
+
+.text-content,
+.image-content {
+  flex: 1 1 45%; /* Slightly less basis to add some space between elements */
+  display: flex;
+  justify-content: center;
+  padding: 10px; /* Add padding for better spacing */
+  margin: 0; /* Remove any margin */
+  box-sizing: border-box; /* Ensures padding is included in width */
+}
+
+.intro-image,
+.services-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+  border: 2px solid rgba(0, 255, 0, 0.7);
+  transition: transform 0.3s ease; /* Smooth scaling on hover */
+}
+
+.intro-image:hover,
+.services-image:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+@media (max-width: 1024px) {
+  .text-content, .image-content {
+    flex-basis: 100%; /* Full width on medium screens */
+    padding: 10px; /* Adjust padding for medium screens */
+  }
+
+  .intro-image,
+  .services-image {
+    max-width: 80%; /* Adjusted max-width for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-top: 50px; /* Reduced margin-top for smaller screens */
+  }
+
+  .text-content, .image-content {
+    flex-basis: 100%; /* Full width on smaller screens */
+    padding: 5px; /* Reduced padding for smaller screens */
+  }
+
+  .intro-image,
+  .services-image {
+    max-width: 100%; /* Full width for images on smaller screens */
+    margin-bottom: 20px; /* Add some space below images */
+  }
+}
+
+@media (max-width: 480px) {
+  .text-image-container {
+    margin: 10px; /* Reduced margin for extra-small screens */
+    gap: 10px; /* Reduced gap for extra-small screens */
+  }
+
+  .intro-image,
+  .services-image {
+    max-width: 100%; /* Ensures images fill the available space */
+    border-radius: 5px; /* Slightly reduced border-radius for small screens */
+  }
+}

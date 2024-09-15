@@ -1,0 +1,49 @@
+/* IndicatorDots/IndicatorDots.css */
+.indicator__list-wrap {
+  position: fixed;
+  top: 50%;
+  left: 10px; /* Adjust this value to position it further left or right */
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+.indicator__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between the indicators */
+}
+
+.indicator__item {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.indicator__dot-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.indicator__dot {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #788; /* Border color of the dot */
+  border-radius: 50%;
+}
+
+.indicator__dot-inner {
+  width: 10px;
+  height: 10px;
+  background-color: #fff; /* Fill color of the dot */
+  border-radius: 50%;
+}
+
+.indicator__item--active .indicator__dot-inner {
+  background-color: #fff; /* Fill color for the active dot */
+}
