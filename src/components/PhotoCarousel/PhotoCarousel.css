@@ -1,28 +1,28 @@
 .photo-carousel {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   text-align: center; /* Center align text and buttons */
 }
 
 .carousel-image {
-  width: 100%;
-  height: auto;
+  width: 95vw;
+  height: 85vh;
 }
 
 .control-button {
   position: absolute;
-  bottom: 22.5px; /* Adjust to align with the bar */
-  left: 690px; /* Positioned on the left side */
+  bottom: 1.3rem; /* Adjust to align with the bar */
+  left: 43rem; /* Positioned on the left side */
   background: rgba(255, 255, 255, 0.5); /* Light white shade */
   border: none;
   cursor: pointer;
   font-size: 15px; /* Small size */
   padding: 5px;
   border-radius: 75%;
-  width: 22.5px; /* Small button size */
-  height: 22.5px; /* Small button size */
+  width: 1.5rem; /* Small button size */
+  height: 1.5rem; /* Small button size */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,8 +31,8 @@
 
 .image-name {
   position: absolute;
-  bottom: 40px; /* Adjust to position above the bar */
-  left: 50%;
+  bottom: 2.3rem; /* Adjust to position above the bar */
+  left: 47.5rem;
   transform: translateX(-50%);
   font-size: 16px; /* Font size for the caption */
   color: rgba(255, 255, 255, 0.5); /* Light white shade */
@@ -43,11 +43,11 @@
 
 .progress-bar-container {
   position: absolute;
-  bottom: 30px; /* Adjust as needed */
-  left: 50%;
+  bottom: 1.8rem; /* Adjust as needed */
+  left: 47.5rem;
   transform: translateX(-50%);
-  width: 80px; /* Fixed width for progress bar container */
-  height: 5px;
+  width: 5.2rem; /* Fixed width for progress bar container */
+  height: 0.4rem;
   display: flex;
   gap: 2px; /* Add some spacing between bars */
 }
@@ -65,12 +65,12 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 100rem;
   background: rgba(255, 255, 255, 0.5); /* Running bar color */
   border-radius: 3px;
   transition: width 0.1s linear;
 }
 
 .progress-bar.active .progress-bar-background {
-  width: 100%;
+  width: 100rem;
 }

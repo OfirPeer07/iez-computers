@@ -10,13 +10,12 @@ function Hacking() {
     if (!context) return;
 
     const resizeCanvas = () => {
+      // Set canvas dimensions to fill the viewport
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-
-      context.fillStyle = 'black';
-      context.fillRect(0, 0, canvas.width, canvas.height);
     };
 
+    // Set the canvas size initially and when the window is resized
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
@@ -34,21 +33,25 @@ function Hacking() {
     const letters = katakana.split('');
 
     const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = Array.from({ length: columns }, () => 1);
+    let columns = Math.floor(canvas.width / fontSize); // Recalculate columns based on canvas width
+    let drops = Array.from({ length: columns }, () => 1);
 
     const draw = () => {
+      // Reset canvas with a slight opacity to create the falling effect
       context.fillStyle = 'rgba(0, 0, 0, 0.05)';
       context.fillRect(0, 0, canvas.width, canvas.height);
 
+      // Set font color and style
       context.fillStyle = '#0F0';
       context.font = `${fontSize}px monospace`;
 
+      // Loop through columns and draw random characters
       drops.forEach((y, index) => {
         const text = letters[Math.floor(Math.random() * letters.length)];
         const x = index * fontSize;
         context.fillText(text, x, y * fontSize);
 
+        // Reset drop when it's out of view
         if (y * fontSize > canvas.height && Math.random() > 0.975) {
           drops[index] = 0;
         }
@@ -57,7 +60,19 @@ function Hacking() {
     };
 
     const interval = setInterval(draw, 33);
-    return () => clearInterval(interval);
+
+    // Handle window resize to adjust columns and drops
+    const handleResize = () => {
+      columns = Math.floor(canvas.width / fontSize);
+      drops = Array.from({ length: columns }, () => 1);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const handleNavigation = (path) => {

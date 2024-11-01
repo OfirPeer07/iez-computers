@@ -1,0 +1,319 @@
+/* VideoPlayer.css */
+:root {
+  --main-color: #0f0;
+  --background-color: #1e1e1e;
+  --text-color: #e0e0e0;
+  --error-color: #ff3333;
+  --hover-color: #00ff00;
+}
+
+.single-video-page {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  max-width: 1600px; /* הגדלנו את הרוחב המקסימלי */
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 100px);
+}
+
+.video-player-container {
+  flex: 1;
+  max-width: calc(100% - 400px); /* הגדלנו את הרוחב */
+}
+
+.back-to-videos {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--main-color);
+  font-size: 1rem;
+  border: 1px solid var(--main-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.back-to-videos:hover {
+  background-color: var(--main-color);
+  color: var(--background-color);
+}
+
+.video-player-container h1 {
+  font-size: 2rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+}
+
+.video-player-container video {
+  width: 100%;
+  max-height: 600px;
+  background-color: #000;
+  border-radius: 8px;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}.prev-video,
+.next-video {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.prev-video:hover,
+.next-video:hover {
+  background-color: var(--main-color);
+  color: var(--background-color);
+}
+
+.related-videos {
+  width: 350px; /* הגדלנו את הרוחב */
+}
+
+.related-videos h2 {
+  color: var(--main-color);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.video-scroll {
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.video-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.video-scroll::-webkit-scrollbar-track {
+  background: var(--background-color);
+  border-radius: 4px;
+}
+
+.video-scroll::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 4px;
+}
+
+.video-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--hover-color);
+}
+
+.related-video-item {
+  margin-bottom: 1.5rem;
+}
+
+.related-video-item .video-item {
+  display: flex;
+  flex-direction: column; /* שינוי לסידור אנכי */
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.related-video-item .video-thumbnail {
+  width: 100%; /* תמונה ברוחב מלא */
+  height: 0;
+  padding-bottom: 56.25%; /* יחס של 16:9 */
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 0.5rem; /* מרווח קטן מתחת לתמונה */
+}
+
+.related-video-item .video-thumbnail img,
+.related-video-item .video-thumbnail video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.related-video-item .video-info {
+  width: 100%;
+}
+
+.related-video-item .video-title {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--main-color);
+  line-height: 1.3;
+}
+
+.related-video-item .video-description {
+  font-size: 1rem;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* מאפשר עד שתי שורות */
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+  word-wrap: break-word; /* מאפשר שבירת מילים ארוכות */
+  overflow-wrap: break-word; /* תמיכה נוספת בשבירת מילים */
+}
+
+.video-md-content {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.video-unavailable-modal {
+  background-color: var(--background-color);
+  border: 2px solid var(--main-color);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  max-width: 80%;
+  width: 400px;
+  position: relative;
+}
+
+.video-unavailable-modal h3 {
+  color: var(--main-color);
+  margin-bottom: 1rem;
+}
+
+.video-unavailable-modal p {
+  margin-bottom: 1rem;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-buttons button {
+  padding: 0.5rem 1rem;
+  background-color: var(--main-color);
+  color: var(--background-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.modal-buttons button:hover {
+  opacity: 0.8;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--main-color);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .single-video-page {
+    flex-direction: column;
+  }
+
+  .video-player-container {
+    max-width: 100%;
+  }
+
+  .related-videos {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .video-scroll {
+    height: auto;
+    max-height: 600px;
+  }
+
+  .related-video-item .video-thumbnail {
+    padding-bottom: 56.25%; /* שומר על יחס 16:9 */
+  }
+}
+
+@media (max-width: 768px) {
+  .single-video-page {
+    padding: 10px;
+  }
+
+  .video-player-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .related-video-item .video-thumbnail {
+    padding-bottom: 56.25%; /* שומר על יחס 16:9 */
+  }
+
+  .related-video-item .video-title {
+    font-size: 1.1rem;
+  }
+
+  .related-video-item .video-description {
+    font-size: 0.9rem;
+    -webkit-line-clamp: 2; /* מוודא שגם במסכים קטנים יש שתי שורות */
+  }
+
+  .video-info h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.video-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7); /* רקע שחור שקוף למחצה */
+  color: var(--main-color);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.video-info {
+  margin-top: 1rem;
+}
+
+.video-info h1 {
+  font-size: 2rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+}
+
+.video-description {
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.5;
+}

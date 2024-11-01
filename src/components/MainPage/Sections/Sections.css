@@ -1,0 +1,101 @@
+/* General container styling */
+.introduction-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #0d0d0d; /* Dark theme background */
+  color: #00ff00; /* Neon green text */
+}
+
+/* Outer box - Text box styling */
+.text-box {
+  flex: 1;
+  max-width: 250%;
+  padding: 25px;
+  background-color: rgba(10, 10, 10, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  border: 2px solid rgba(0, 255, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Needed for positioning the LED effect */
+  overflow: hidden; /* Ensures the animation stays inside the box */
+}
+
+/* Glowing circular animation effect for the text-box */
+.text-box::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150vw;
+  height: 150vh;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.3), transparent 50%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 0; /* Ensure the halo is behind the text box */
+  transition: opacity 0.05s ease-in-out;
+}
+
+/* Circular loading animation */
+@keyframes circularGlow {
+  0% {
+    background: radial-gradient(circle, rgba(0, 255, 0, 0.5), transparent 50%);
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    background: radial-gradient(circle, rgba(0, 255, 0, 0.5), transparent 50%);
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Hover effect for the text-box */
+.text-box:hover::before {
+  opacity: 1;
+  animation: circularGlow 10s infinite linear; /* Apply circular animation */
+}
+
+/* Inner box styling */
+.inner-box {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+  border: 2px solid rgba(0, 255, 0, 0.5);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+  animation: fadeIn 1s ease-in-out forwards;
+  max-width: 800vw;
+  text-align: right;
+  direction: rtl;
+  position: relative; /* Needed for positioning the LED effect */
+  z-index: 1; /* Ensures content is above the LED effect */
+}
+
+/* Heading and paragraph */
+.inner-box h2 {
+  color: #00ff00;
+  font-size: 2.5vw; /* Scales with viewport */
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  font-family: 'Courier New', monospace;
+  position: relative; /* Ensure text is above the LED effect */
+  z-index: 1; /* Ensures text is above the LED effect */
+}
+
+.inner-box p {
+  font-size: 1.5vw; /* Responsive size */
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  position: relative; /* Ensure text is above the LED effect */
+  z-index: 1; /* Ensures text is above the LED effect */
+}
+
+/* Animation for fade-in effect */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

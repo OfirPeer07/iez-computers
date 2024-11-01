@@ -9,6 +9,7 @@ import './MarkdownDocs.css';
 const TroubleshootingGuides = () => {
     const { fileName } = useParams();
     const [content, setContent] = useState('');
+    const [showBox, setShowBox] = useState(true); // To control the visibility of the box
 
     useEffect(() => {
         const fetchMarkdownFile = async () => {
@@ -28,6 +29,19 @@ const TroubleshootingGuides = () => {
 
     return (
         <div className="markdown-docs">
+            {/* RTL Box Section */}
+            {showBox && (
+                <div className="rtl-box">
+                    <button className="close-btn" onClick={() => setShowBox(false)}>×</button>
+                    <p>
+                        נתקלתם בבעיה? אל דאגה! במדור זה תמצאו מדריכים פשוטים וברורים לפתרון תקלות נפוצות במחשב.
+                    </p>
+                    <p>    
+                        עם הסברים מפורטים צעד אחר צעד, נעזור לכם להתגבר על מכשולים טכניים ולהחזיר את המחשב שלכם לפעולה מהירה ויעילה.
+                    </p>
+                </div>
+            )}
+
             <ReactMarkdown
                 children={content}
                 rehypePlugins={[rehypeRaw]}

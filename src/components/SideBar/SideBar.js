@@ -73,7 +73,7 @@ function SideBar() {
           onMouseEnter={() => handleMouseEnter('computer', 'computer')}
           onMouseLeave={handleMouseLeave}
         >
-          <Link to="/markdown-docs" className="menu-icon">
+          <Link to="/information-technology-department" className="menu-icon">
             <img src="/images/computer.png" alt="computer-section" />
           </Link>
           {activeMenu === 'computer' && (
@@ -82,9 +82,9 @@ function SideBar() {
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
             >
-              <Link to="/troubleshooting-guides">מדריכי פתרון תקלות</Link>
-              <Link to="/articles">מאמרים</Link>
-              <Link to="/building-computers">הרכבות מחשבים</Link>
+              <Link to="/information-technology-department/troubleshooting-guides">מדריכי פתרון תקלות</Link>
+              <Link to="/information-technology-department/technology-news">חדשות טכנולוגיה</Link>
+              <Link to="/information-technology-department/building-computers">הרכבות מחשבים</Link>
             </div>
           )}
         </li>
