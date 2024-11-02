@@ -42,7 +42,7 @@ const LazyVideoFrame = React.memo(({ src, alt, className }) => {
         playsInline
         aria-label={alt}
       >
-        <source type="video/mp4" />
+        <source type="videos/mp4" />
         {alt}
       </video>
     </>
@@ -63,7 +63,7 @@ const VideoItem = React.memo(({ video, playlistFolder }) => {
   }, []);
 
   return (
-    <Link to={`/video/${video.id}`} className="video-item" aria-label={`צפה בסרטון: ${video.title}`}>
+    <Link to={`/hacking/videos/${video.id}`} className="video-item" aria-label={`צפה בסרטון: ${video.title}`}>
       <div className="video-thumbnail">
         <LazyVideoFrame 
           src={`/playlists/${playlistFolder}/${video.filename}`}

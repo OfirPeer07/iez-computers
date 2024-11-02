@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Wallpoet&display=swap');
+
+.page-not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+body {
+  background: black url('../../images/backgrounds/stars.jpg');
+  animation: stars 240s linear 0s infinite;
+  background-size: 150%;
+}
+
+#moon {
+  background: url('../../images/backgrounds/moon.jpg');
+  background-size: cover;
+  border: 2px solid #000;
+  border-radius: 50%;
+  right: 45%;
+  width: 46.875rem;
+  height: 46.875rem;
+  cursor: pointer;
+  animation: movimiento 240s linear 0s infinite;
+  margin: 6em auto;
+  transform: rotateX(6deg) rotateY(6deg) rotateZ(6deg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 25px RGBA(255, 255, 255, 0.1), -8px -8px 15px #000 inset, 2px 2px 25px #000 inset, -45px -45px 25px RGBA(0, 0, 0, 0.5) inset, 25px 25px 45px RGBA(0, 0, 0, 0.45) inset;
+}
+
+@keyframes movimiento {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 180px 0;
+  }
+}
+
+#moon:hover {
+  background: url('../../images/backgrounds/sun.png');
+  background-size: cover;
+  border: 2px solid #000;
+  border-radius: 50%;
+  right: 45%;
+  width: 46.875rem;
+  height: 46.875rem;
+  cursor: pointer;
+  margin: 6em auto;
+  transform: rotateX(6deg) rotateY(6deg) rotateZ(6deg);
+  position: relative;
+  overflow: hidden;
+  animation: movimiento 240s linear 0s infinite;
+  box-shadow: 0 0 25px RGBA(255, 255, 255, 0.1), -8px -8px 15px #000 inset, 2px 2px 25px #000 inset, -45px -45px 25px RGBA(0, 0, 0, 0.5) inset, 25px 25px 45px RGBA(0, 0, 0, 0.45) inset;
+}
+
+@keyframes stars {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+.astronaut {
+  position: fixed;
+  top: 100%;
+  left: 45%;
+  transform: translate(-100%, -100%);
+  width: 34.375rem;
+  height: 34.375rem;
+  background-image: url('../../images/backgrounds/astronaut.png');
+  background-size: cover;
+  z-index: 9999;
+  transition: transform 0.3s ease-in-out;
+}
+
+.text {
+  font-size: 4.0625rem;
+  font-family: "Wallpoet", cursive;
+  color: #17ca07;
+  position: fixed;
+  right: 75%;
+  top: 45%;
+  left: 26%;
+  transform: translate(-100%, -100%);
+  background: linear-gradient(180deg, #000000, #000000);
+}
+
+._404 {
+  font-size: 8.75rem;
+  font-weight: bold;
+}
+
+.Have_a {
+  white-space: nowrap;
+}
+
+.blink {
+  animation: blink 0.3s infinite;
+}
+
+.flicker {
+  opacity: 0.8;
+  text-shadow: 2px 2px 1px rgba(0,0,0,0.3), 0 0px 15px #000, 0 0 15px #15ff00, 0 0 50px #15ff00;
+  -webkit-animation: flicker 3s infinite alternate;
+  -moz-animation: flicker 3s infinite alternate;
+  -o-animation: flicker 3s infinite alternate;
+  animation: flicker 3s infinite alternate;
+}
+
+.flickerProblem {
+  opacity: 0.8;
+  text-shadow: 2px 2px 1px rgba(0,0,0,0.3), 0 0px 15px #000, 0 0 15px #15ff00, 0 0 50px #15ff00;
+  -webkit-animation: flicker 5s infinite alternate;
+  -moz-animation: flicker 5s infinite alternate;
+  -o-animation: flicker 5s infinite alternate;
+  animation: flicker 5s infinite alternate;
+}
+
+@-moz-keyframes blink {
+  70% {
+    opacity: 0.7;
+  }
+}
+@-webkit-keyframes blink {
+  45% {
+    opacity: 0.5;
+  }
+}
+@-o-keyframes blink {
+  70% {
+    opacity: 0.7;
+  }
+}
+@keyframes blink {
+  70% {
+    opacity: 0.7;
+  }
+}
+@-moz-keyframes flicker {
+  40% {
+    opacity: 0.8;
+  }
+  42% {
+    opacity: 0.1;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.1;
+  }
+  46% {
+    opacity: 0.8;
+  }
+}
+@-webkit-keyframes flicker {
+  40% {
+    opacity: 0.8;
+  }
+  42% {
+    opacity: 0.1;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.1;
+  }
+  46% {
+    opacity: 0.8;
+  }
+}
+@-o-keyframes flicker {
+  40% {
+    opacity: 0.8;
+  }
+  42% {
+    opacity: 0.1;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.1;
+  }
+  46% {
+    opacity: 0.8;
+  }
+}
+@keyframes flicker {
+  40% {
+    opacity: 0.8;
+  }
+  42% {
+    opacity: 0.1;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.1;
+  }
+  46% {
+    opacity: 0.8;
+  }
+}
+
+@-moz-keyframes flickerProblem {
+  40% {
+    opacity: 0.8;
+  }
+  42% {
+    opacity: 0.1;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.1;
+  }
+  46% {
+    opacity: 0.8;
+  }
+}
+@-webkit-keyframes flickerProblem {
+  40% {
+    opacity: 0.8;
+  }
+  42% {
+    opacity: 0.1;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.1;
+  }
+  46% {
+    opacity: 0.8;
+  }
+}
+@-o-keyframes flickerProblem {
+  40% {
+    opacity: 0.8;
+  }
+  42% {
+    opacity: 0.1;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.1;
+  }
+  46% {
+    opacity: 0.8;
+  }
+}
+@keyframes flickerProblem {
+  40% {
+    opacity: 0.8;
+  }
+  42% {
+    opacity: 0.1;
+  }
+  43% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.1;
+  }
+  46% {
+    opacity: 0.8;
+  }
+}
