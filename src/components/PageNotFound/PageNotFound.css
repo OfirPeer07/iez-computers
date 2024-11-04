@@ -47,7 +47,7 @@ body .page-not-found-container{
   font-size: 7.75rem;
   font-weight: bold;
   text-shadow: 2px 2px 1px rgba(0,0,0,0.3), 0 0px 15px #000, 0 0 15px #15ff00, 0 0 50px #15ff00;
-  -webkit-animation: flicker 5.5s infinite alternate;
+  /*-webkit-animation: flicker 5.5s infinite alternate;*/
 }
 
 .blink {
