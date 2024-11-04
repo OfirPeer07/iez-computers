@@ -12,7 +12,7 @@ import ITdepartment from '../ITdepartment/ITdepartment'
 import VideosList from '../Videos/VideosList'; // Import the VIDEOS component
 import VideoPlayer from '../Videos/VideoPlayer'; // Import the VideoPlayer component
 import ContactUs from '../ContactUs/ContactUs';
-//import PageNotFound from '../PageNotFound/PageNotFound';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
         <SideBar />
         <div className="content">
           <Routes>
+            <Route path='*' element={<PageNotFound />} />
             <Route path="/" element={<MainPage />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/hacking" element={<Hacking />} />

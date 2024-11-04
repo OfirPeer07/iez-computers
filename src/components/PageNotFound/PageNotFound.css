@@ -4,78 +4,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 82.5vh;
+  width: 100vw;
 }
 
-body {
-  background: black url('../../images/backgrounds/stars.jpg');
-  animation: stars 240s linear 0s infinite;
-  background-size: 150%;
+body .page-not-found-container{
+  background: black;
+  background-image: url('./Background.jpg');
+  background-size: 75vh;
+  background-position: 25vmax;
 }
 
-#moon {
-  background: url('../../images/backgrounds/moon.jpg');
-  background-size: cover;
-  border: 2px solid #000;
-  border-radius: 50%;
-  right: 45%;
-  width: 46.875rem;
-  height: 46.875rem;
-  cursor: pointer;
-  animation: movimiento 240s linear 0s infinite;
-  margin: 6em auto;
-  transform: rotateX(6deg) rotateY(6deg) rotateZ(6deg);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 25px RGBA(255, 255, 255, 0.1), -8px -8px 15px #000 inset, 2px 2px 25px #000 inset, -45px -45px 25px RGBA(0, 0, 0, 0.5) inset, 25px 25px 45px RGBA(0, 0, 0, 0.45) inset;
-}
-
-@keyframes movimiento {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 180px 0;
-  }
-}
-
-#moon:hover {
-  background: url('../../images/backgrounds/sun.png');
-  background-size: cover;
-  border: 2px solid #000;
-  border-radius: 50%;
-  right: 45%;
-  width: 46.875rem;
-  height: 46.875rem;
-  cursor: pointer;
-  margin: 6em auto;
-  transform: rotateX(6deg) rotateY(6deg) rotateZ(6deg);
-  position: relative;
-  overflow: hidden;
-  animation: movimiento 240s linear 0s infinite;
-  box-shadow: 0 0 25px RGBA(255, 255, 255, 0.1), -8px -8px 15px #000 inset, 2px 2px 25px #000 inset, -45px -45px 25px RGBA(0, 0, 0, 0.5) inset, 25px 25px 45px RGBA(0, 0, 0, 0.45) inset;
-}
-
-@keyframes stars {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 100%;
-  }
-}
-
-.astronaut {
-  position: fixed;
-  top: 100%;
-  left: 45%;
-  transform: translate(-100%, -100%);
-  width: 34.375rem;
-  height: 34.375rem;
-  background-image: url('../../images/backgrounds/astronaut.png');
+.hacker {
+  position: fixed; /* Position changed to fixed to ensure it's visible */
+  top: -4.3rem;
+  left: 35vmax;
+  width: 65vmax; /* Set width for visibility */
+  height: 65vmax; /* Set height for visibility */
+  background-image: url('./Hacker.png');
   background-size: cover;
   z-index: 9999;
-  transition: transform 0.3s ease-in-out;
 }
 
 .text {
@@ -83,20 +31,23 @@ body {
   font-family: "Wallpoet", cursive;
   color: #17ca07;
   position: fixed;
-  right: 75%;
-  top: 45%;
-  left: 26%;
+  right: 0%;
+  top: 70%;
+  left: 52.5%;
   transform: translate(-100%, -100%);
-  background: linear-gradient(180deg, #000000, #000000);
 }
 
 ._404 {
-  font-size: 8.75rem;
+  font-size: 6.75rem;
   font-weight: bold;
 }
 
-.Have_a {
+.error {
   white-space: nowrap;
+  font-size: 7.75rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 1px rgba(0,0,0,0.3), 0 0px 15px #000, 0 0 15px #15ff00, 0 0 50px #15ff00;
+  -webkit-animation: flicker 5.5s infinite alternate;
 }
 
 .blink {

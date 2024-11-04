@@ -82,7 +82,7 @@ function Hacking() {
   return (
     <div className="app-container">
       <canvas id="matrix" data-testid="matrix"></canvas>
-      <div className="hacker"></div>
+      <div className="hacker2"></div>
       <div className="rectangle first" onClick={() => handleNavigation('hacking/cyber-articles')}>
         <div className="title">Articles</div>
       </div>

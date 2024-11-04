@@ -4,7 +4,7 @@ import LazyVideoFrame from './LazyVideoFrame'; // וודא שהנתיב נכון
 
 const VideoItem = ({ video, playlistFolder }) => {
   return (
-    <Link to={`/video/${video.id}`} className="video-item">
+    <Link to={`/hacking/videos/${video.id}`} className="video-item">
       <div className="video-thumbnail">
         {video.filename ? (
           <LazyVideoFrame 
