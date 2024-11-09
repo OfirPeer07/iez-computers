@@ -1,0 +1,38 @@
+.page-layout {
+  display: grid;
+  width: 80%;
+  grid-template-columns: 1fr 2fr; /* Left side (1fr) for blocks, right side (2fr) for content */
+  gap: 5px;
+  padding: 20px;
+}
+
+.description-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.description-box {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.description-box:hover {
+  background-color: #e0e0e0;
+}
+
+.description-box h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.description-box p {
+  font-size: 14px;
+  color: #666;
+}
+
+

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './Hacking.css';
+import hackerImage from './Hacker.png';
 
 function Hacking() {
   useEffect(() => {
@@ -82,7 +83,7 @@ function Hacking() {
   return (
     <div className="app-container">
       <canvas id="matrix" data-testid="matrix"></canvas>
-      <div className="hacker2"></div>
+      <div className="hacker2" style={{ backgroundImage: `url(${hackerImage})` }}></div>
       <div className="rectangle first" onClick={() => handleNavigation('hacking/cyber-articles')}>
         <div className="title">Articles</div>
       </div>

@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
-import remarkEmoji from 'remark-emoji';
-import { useParams } from 'react-router-dom';
-import './MarkdownDocs.css';
+import '../../styles/Markdown-Global.css';
 
 const MarkdownDocs = () => {
     const { fileName } = useParams();

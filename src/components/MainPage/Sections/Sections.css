@@ -1,11 +1,11 @@
 /* General container styling */
-.introduction-container {
+.introduction-container, .services-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: #0d0d0d; /* Dark theme background */
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  background-color: #000; /* Dark theme background */
   color: #00ff00; /* Neon green text */
 }
 
@@ -14,9 +14,9 @@
   flex: 1;
   max-width: 250%;
   padding: 25px;
-  background-color: rgba(10, 10, 10, 0.95);
+  background-color: rgb(10, 10, 10);
   border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  box-shadow: 0 0 20px rgb(0, 255, 26);
   border: 2px solid rgba(0, 255, 0, 0.7);
   display: flex;
   align-items: center;
@@ -98,4 +98,54 @@
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* Adjust image containers */
+.intro-image, .services-image {
+  max-width: 50%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+  border: 2px solid rgba(0, 255, 0, 0.7);
+  transition: transform 0.3s ease;
+}
+
+.intro-image:hover, .services-image:hover {
+  transform: scale(1.05);
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 100%) {
+  .inner-box h2 {
+    font-size: 2vw;
+  }
+
+  .inner-box p {
+    font-size: 1.2vw;
+  }
+
+  .intro-image, .services-image {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 100%) {
+  .content {
+    margin-top: 50px;
+  }
+
+  .intro-image, .services-image {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 100%) {
+  .text-image-container {
+    margin: 10px;
+  }
+
+  .intro-image, .services-image {
+    max-width: 100%;
+    border-radius: 5px;
+  }
 }

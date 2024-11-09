@@ -16,14 +16,31 @@ body .page-not-found-container{
 }
 
 .hacker {
-  position: fixed; /* Position changed to fixed to ensure it's visible */
-  top: -4.3rem;
-  left: 35vmax;
-  width: 65vmax; /* Set width for visibility */
-  height: 65vmax; /* Set height for visibility */
-  background-image: url('./Hacker.png');
-  background-size: cover;
+  position: fixed;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   z-index: 9999;
+}
+
+/* מסך רגיל 16:9 */
+@media (min-aspect-ratio: 16/9) and (max-aspect-ratio: 21/9) {
+  .hacker {
+    top: -4.3rem;
+    left: 35vmax;
+    width: 65vmax;
+    height: 65vmax;
+  }
+}
+
+/* מסך רחב 21:9 */
+@media (min-aspect-ratio: 21/9) {
+  .hacker {
+    top: -11rem;
+    left: 45vmax;
+    width: 55vmax;
+    height: 55vmax;
+  }
 }
 
 .text {

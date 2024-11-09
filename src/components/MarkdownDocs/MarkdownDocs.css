@@ -89,7 +89,6 @@
 /* Styles for the RTL box */
 .rtl-box {
     height: 10vh;
-    width: 83.8vw;
     direction: rtl; /* Right-to-left text direction */
     background-color: #f0f0f0; /* Light grey background */
     padding: 10px;

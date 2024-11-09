@@ -1,76 +1,88 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './SideNav.css'; // Custom styles for Cyber design
+import './SideNav.css';
 
 const SideNav = () => {
-  const [cyberArticles, setCyberArticles] = useState([]);
-  const [cyberGuides, setCyberGuides] = useState([]);
-  const [techNews, setTechNews] = useState([]);
-  const [troubleshootingGuides, setTroubleshootingGuides] = useState([]);
+  const [isOpen, setIsOpen] = useState(true);
+  const [articles, setArticles] = useState({});
 
-  // Function to extract title from markdown content using regex
-  const extractTitleFromContent = (content) => {
-    const titleMatch = content.match(/^(#|##)\s*(.*)/);
-    return titleMatch ? titleMatch[2] : null;
-  };
-
-  // Load markdown files from the public folder and extract titles
-  const loadMarkdownFiles = useCallback(async (folder, setState) => {
-    try {
-      const fileNames = [
-        'file1.md', // Replace these with actual filenames
-        'file2.md',
-        'file3.md'
-      ];
-
-      for (const file of fileNames) {
-        const response = await fetch(`${process.env.PUBLIC_URL}/md/${folder}/${file}`);
-        const content = await response.text();
-        const title = extractTitleFromContent(content) || file.replace('.md', '');
-        setState(prev => [...prev, { title, path: `${folder}/${file}` }]);
+  useEffect(() => {
+    const folders = {
+      'CyberArticles': { 
+        title: 'Cyber Articles',
+        path: 'hacking/cyber-articles'
+      },
+      'CyberGuides': { 
+        title: 'Cyber Guides',
+        path: 'hacking/cyber-guides'
+      },
+      'TechnologyNews': { 
+        title: 'Technology News',
+        path: 'information-technology-department/technology-news'
+      },
+      'TroubleshootingGuides': { 
+        title: 'Troubleshooting Guides',
+        path: 'information-technology-department/troubleshooting-guides'
       }
+    };
+
+    const importAll = (r) => {
+      return r.keys().map((fileName) => ({
+        title: fileName.replace('./', '').replace('.md', '').replace(/-/g, ' '),
+        path: fileName.replace('./', '')
+      }));
+    };
+
+    try {
+      const cyberArticles = importAll(require.context('../../../public/md/CyberArticles', false, /\.md$/));
+      const cyberGuides = importAll(require.context('../../../public/md/CyberGuides', false, /\.md$/));
+      const techNews = importAll(require.context('../../../public/md/TechnologyNews', false, /\.md$/));
+      const troubleshooting = importAll(require.context('../../../public/md/TroubleshootingGuides', false, /\.md$/));
+
+      setArticles({
+        CyberArticles: { title: folders.CyberArticles.title, path: folders.CyberArticles.path, files: cyberArticles },
+        CyberGuides: { title: folders.CyberGuides.title, path: folders.CyberGuides.path, files: cyberGuides },
+        TechnologyNews: { title: folders.TechnologyNews.title, path: folders.TechnologyNews.path, files: techNews },
+        TroubleshootingGuides: { title: folders.TroubleshootingGuides.title, path: folders.TroubleshootingGuides.path, files: troubleshooting }
+      });
     } catch (error) {
-      console.error('Error fetching markdown files:', error);
+      console.error('Error loading markdown files:', error);
     }
   }, []);
 
-  useEffect(() => {
-    loadMarkdownFiles('CyberArticles', setCyberArticles);
-    loadMarkdownFiles('CyberGuides', setCyberGuides);
-    loadMarkdownFiles('TechnologyNews', setTechNews);
-    loadMarkdownFiles('TroubleshootingGuides', setTroubleshootingGuides);
-  }, [loadMarkdownFiles]);
+  const toggleNav = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <div className="sidenav">
-      <h2>CyberArticles</h2>
-      <ul>
-        {cyberArticles.map((article, index) => (
-          <li key={index}><Link to={`/${article.path}`}>{article.title}</Link></li>
+    <>
+      <button 
+        className={`toggle-nav-btn ${isOpen ? 'open' : ''}`} 
+        onClick={toggleNav}
+        aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <div className={`sidenav ${!isOpen ? 'closed' : ''}`}>
+        {Object.entries(articles).map(([category, data]) => (
+          <div key={category} className="category-section">
+            <h2>{data.title}</h2>
+            <ul>
+              {data.files.map((file, index) => (
+                <li key={index}>
+                  <Link to={`/${data.path}/${file.path}`}>
+                    {file.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
-
-      <h2>CyberGuides</h2>
-      <ul>
-        {cyberGuides.map((guide, index) => (
-          <li key={index}><Link to={`/${guide.path}`}>{guide.title}</Link></li>
-        ))}
-      </ul>
-
-      <h2>TechnologyNews</h2>
-      <ul>
-        {techNews.map((news, index) => (
-          <li key={index}><Link to={`/${news.path}`}>{news.title}</Link></li>
-        ))}
-      </ul>
-
-      <h2>TroubleshootingGuides</h2>
-      <ul>
-        {troubleshootingGuides.map((guide, index) => (
-          <li key={index}><Link to={`/${guide.path}`}>{guide.title}</Link></li>
-        ))}
-      </ul>
-    </div>
+      </div>
+    </>
   );
 };
 

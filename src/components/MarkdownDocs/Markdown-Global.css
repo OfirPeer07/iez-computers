@@ -1,0 +1,305 @@
+:root {
+    --md-primary-color: #0f0;
+    --md-background: #1e1e1e;
+    --md-text-color: #e0e0e0;
+    --md-code-background: #2d2d2d;
+    --md-border-color: rgba(0, 255, 0, 0.3);
+    --md-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+    --md-link-hover: #00ff00;
+  }
+  
+  /* מיכל MD כללי */
+  .markdown-content,
+  .markdown-docs,
+  .video-md-content {
+    direction: rtl;
+    color: var(--md-text-color);
+    line-height: 1.6;
+    font-size: 1.1rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  /* כותרות */
+  .markdown-content h1,
+  .markdown-content h2,
+  .markdown-content h3,
+  .markdown-content h4,
+  .markdown-content h5,
+  .markdown-content h6,
+  .markdown-docs h1,
+  .markdown-docs h2,
+  .markdown-docs h3,
+  .markdown-docs h4,
+  .markdown-docs h5,
+  .markdown-docs h6,
+  .video-md-content h1,
+  .video-md-content h2,
+  .video-md-content h3,
+  .video-md-content h4,
+  .video-md-content h5,
+  .video-md-content h6 {
+    color: var(--md-primary-color);
+    margin: 1.5em 0 0.8em;
+    font-weight: 600;
+    line-height: 1.3;
+    text-shadow: var(--md-shadow);
+    border-bottom: 1px solid var(--md-border-color);
+    padding-bottom: 0.3em;
+  }
+  
+  .markdown-content h1 { font-size: 2.5rem; }
+  .markdown-content h2 { font-size: 2rem; }
+  .markdown-content h3 { font-size: 1.75rem; }
+  .markdown-content h4 { font-size: 1.5rem; }
+  .markdown-content h5 { font-size: 1.25rem; }
+  .markdown-content h6 { font-size: 1.1rem; }
+  
+  .markdown-docs h1 { font-size: 2.5rem; }
+  .markdown-docs h2 { font-size: 2rem; }
+  .markdown-docs h3 { font-size: 1.75rem; }
+  .markdown-docs h4 { font-size: 1.5rem; }
+  .markdown-docs h5 { font-size: 1.25rem; }
+  .markdown-docs h6 { font-size: 1.1rem; }
+  
+  .video-md-content h1 { font-size: 2.5rem; }
+  .video-md-content h2 { font-size: 2rem; }
+  .video-md-content h3 { font-size: 1.75rem; }
+  .video-md-content h4 { font-size: 1.5rem; }
+  .video-md-content h5 { font-size: 1.25rem; }
+  .video-md-content h6 { font-size: 1.1rem; }
+  
+  /* פסקאות */
+  .markdown-content p,
+  .markdown-docs p,
+  .video-md-content p {
+    margin: 1em 0;
+    text-align: right;
+  }
+  
+  /* קישורים */
+  .markdown-content a,
+  .markdown-docs a,
+  .video-md-content a {
+    color: var(--md-primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .markdown-content a:hover,
+  .markdown-docs a:hover,
+  .video-md-content a:hover {
+    color: var(--md-link-hover);
+    border-bottom-color: var(--md-link-hover);
+    text-shadow: var(--md-shadow);
+  }
+  
+  /* רשימות */
+  .markdown-content ul,
+  .markdown-content ol,
+  .markdown-docs ul,
+  .markdown-docs ol,
+  .video-md-content ul,
+  .video-md-content ol {
+    margin: 1em 2em;
+    padding: 0;
+  }
+  
+  .markdown-content li,
+  .markdown-docs li,
+  .video-md-content li {
+    margin: 0.5em 0;
+  }
+  
+  /* בלוקים של קוד - נעדכן את הסגנונות */
+  .markdown-content pre,
+  .markdown-docs pre,
+  .video-md-content pre {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+  
+  /* מיכל הקוד - נוסיף סגנונות חדשים */
+  .code-block-container {
+    position: relative;
+    background: #282c34;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    margin: 1.5em 0;
+    overflow: hidden;
+  }
+  
+  /* סגנונות ל-SyntaxHighlighter */
+  .code-block-container pre {
+    margin: 0 !important;
+    padding: 1rem !important;
+    background: transparent !important;
+    font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace !important;
+    font-size: 0.9em !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* כפתור ההעתקה */
+  .copy-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #2ea043;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+  
+  .copy-button:hover {
+    background: #3fb950;
+  }
+  
+  .copy-button.copied {
+    background: #238636;
+  }
+  
+  .markdown-content pre code {
+    color: #abb2bf;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+  
+  .markdown-content pre code {
+    .keyword { color: #c678dd; }
+    .string { color: #98c379; }
+    .number { color: #d19a66; }
+    .function { color: #61afef; }
+    .variable { color: #e06c75; }
+    .comment { color: #5c6370; font-style: italic; }
+    .tag { color: #e06c75; }
+    .attr-name { color: #d19a66; }
+    .attr-value { color: #98c379; }
+  }
+  
+  .markdown-content code:not(pre code) {
+    color: #e06c75;
+    background: rgba(40, 44, 52, 0.5);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace;
+    font-size: 0.9em;
+  }
+  
+  /* טיפול בהערות בעברית בתוך קוד */
+  .markdown-content pre code .comment,
+  .markdown-content pre code .string {
+    unicode-bidi: embed;
+  }
+  
+  /* טבלאות */
+  .markdown-content table,
+  .markdown-docs table,
+  .video-md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .markdown-content th,
+  .markdown-content td,
+  .markdown-docs th,
+  .markdown-docs td,
+  .video-md-content th,
+  .video-md-content td {
+    padding: 0.75rem;
+    border: 1px solid var(--md-border-color);
+    text-align: right;
+  }
+  
+  .markdown-content th,
+  .markdown-docs th,
+  .video-md-content th {
+    background: rgba(0, 255, 0, 0.1);
+    color: var(--md-primary-color);
+  }
+  
+  /* תמונות */
+  .markdown-content img,
+  .markdown-docs img,
+  .video-md-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5em 0;
+    border: 1px solid var(--md-border-color);
+  }
+  
+  /* ציטוטים */
+  .markdown-content blockquote,
+  .markdown-docs blockquote,
+  .video-md-content blockquote {
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    border-right: 4px solid var(--md-primary-color);
+    background: rgba(0, 255, 0, 0.05);
+    border-radius: 4px;
+  }
+  
+  /* זיהוי שפה אוטומטי */
+  .markdown-content[lang="he"],
+  .markdown-docs[lang="he"],
+  .video-md-content[lang="he"] {
+    direction: rtl;
+    text-align: right;
+  }
+  
+  .markdown-content[lang="en"],
+  .markdown-docs[lang="en"],
+  .video-md-content[lang="en"] {
+    direction: ltr;
+    text-align: left;
+  }
+  
+  /* התאמה למסכים קטנים */
+  @media (max-width: 768px) {
+    .markdown-content,
+    .markdown-docs,
+    .video-md-content {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+  
+    .markdown-content h1 { font-size: 2rem; }
+    .markdown-content h2 { font-size: 1.75rem; }
+    .markdown-content h3 { font-size: 1.5rem; }
+    .markdown-content h4 { font-size: 1.25rem; }
+    .markdown-content h5 { font-size: 1.1rem; }
+    .markdown-content h6 { font-size: 1rem; }
+  
+    .markdown-docs h1 { font-size: 2rem; }
+    .markdown-docs h2 { font-size: 1.75rem; }
+    .markdown-docs h3 { font-size: 1.5rem; }
+    .markdown-docs h4 { font-size: 1.25rem; }
+    .markdown-docs h5 { font-size: 1.1rem; }
+    .markdown-docs h6 { font-size: 1rem; }
+  
+    .video-md-content h1 { font-size: 2rem; }
+    .video-md-content h2 { font-size: 1.75rem; }
+    .video-md-content h3 { font-size: 1.5rem; }
+    .video-md-content h4 { font-size: 1.25rem; }
+    .video-md-content h5 { font-size: 1.1rem; }
+    .video-md-content h6 { font-size: 1rem; }
+  } 

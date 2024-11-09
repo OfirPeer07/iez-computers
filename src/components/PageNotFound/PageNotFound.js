@@ -1,10 +1,12 @@
 import React from 'react';
 import './PageNotFound.css';
+import backgroundImage from './Background.jpg';
+import hackerImage from './Hacker.png';
 
 const PageNotFound = () => {
   return (
-    <div className="page-not-found-container">
-      <div class="hacker"></div>
+    <div className="page-not-found-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <div className="hacker" style={{ backgroundImage: `url(${hackerImage})` }}></div>
       <div className="text">
         <span className="flicker">We have a </span>
           <span className="blink error">Error</span>

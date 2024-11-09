@@ -14,6 +14,7 @@ import VideoPlayer from '../Videos/VideoPlayer'; // Import the VideoPlayer compo
 import ContactUs from '../ContactUs/ContactUs';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
+
 function App() {
   return (
     <Router>
@@ -26,6 +27,7 @@ function App() {
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/hacking" element={<Hacking />} />
             <Route path="/hacking/cyber-guides/:fileName" element={<CyberGuides />} />
+            <Route path="/hacking/cyber-articles/" element={<CyberArticles />} />
             <Route path="/hacking/cyber-articles/:fileName" element={<CyberArticles />} />
             <Route path="/information-technology-department/technology-news/:fileName" element={<TechnologyNews />} />
             <Route path="/information-technology-department/troubleshooting-guides/:fileName" element={<TroubleshootingGuides />} />

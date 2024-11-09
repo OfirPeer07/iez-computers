@@ -27,21 +27,6 @@
   box-sizing: border-box;
 }
 
-.intro-image, .services-image {
-  max-width: 50vw;
-  height: 75vh;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-  border: 2px solid rgba(0, 255, 0, 0.7);
-  will-change: transform;
-  transition: transform 0.3s ease;
-  margin-left: 3rem; 
-}
-
-.intro-image:hover, .services-image:hover {
-  transform: scale(1.15);
-}
-
 .content::-webkit-scrollbar {
   max-width: 8px;
   width: 8px;
