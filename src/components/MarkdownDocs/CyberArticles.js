@@ -6,8 +6,11 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import { useParams, Link } from 'react-router-dom';
 import SideNav from '../SideNav/SideNav';
-import './CyberArticles.css';
-import './Markdown-Global.css';
+
+// CSS imports order is important!
+import './Markdown-Global.css';    // 1. Base styles
+import './CyberPages.css';        // 2. Cyber specific layout
+import './CyberArticles.css';     // 3. Article specific styles
 
 // Import languages for syntax highlighting
 import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
@@ -67,6 +70,84 @@ const CodeBlock = ({ className, children }) => {
   );
 };
 
+const detectLanguageDirection = (text) => {
+  if (!text || typeof text !== 'string') return 'en';
+  const hebrewRegex = /[\u0590-\u05FF]/;
+  return hebrewRegex.test(text) ? 'he' : 'en';
+};
+
+const splitTextAndWrap = (text, isHeading = false) => {
+  if (typeof text !== 'string') return text;
+  
+  // אם זו כותרת באנגלית, להחזיר כמו שהיא
+  if (isHeading && detectLanguageDirection(text) === 'en') {
+    return text;
+  }
+
+  // רק לטקסט עברי או מעורב
+  const regex = /(\([^)]+\)|[a-zA-Z-]+(?:\s+[a-zA-Z-]+)*)/g;
+  let lastIndex = 0;
+  const parts = [];
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    parts.push(match[0]);
+    lastIndex = regex.lastIndex;
+  }
+  
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts.map((part, index) => {
+    const isEnglish = /^[a-zA-Z-\s()]+$/.test(part);
+    return isEnglish ? (
+      <span
+        key={index}
+        style={{
+          display: 'inline-block',
+          direction: 'ltr',
+          unicodeBidi: 'embed'
+        }}
+      >
+        {part}
+      </span>
+    ) : part;
+  });
+};
+
+const wrapWithLanguage = (children, parentLang, isHeading = false) => {
+  if (typeof children !== 'string') return children;
+  
+  // טי��ול מיוחד בכותרות באנגלית
+  if (isHeading && parentLang === 'en') {
+    return (
+      <span style={{ 
+        display: 'block',
+        direction: 'ltr',
+        textAlign: 'left',
+        width: '100%'
+      }}>
+        {children}
+      </span>
+    );
+  }
+
+  // טיפול בטקסט רגיל
+  return (
+    <span style={{ 
+      display: 'block',
+      direction: parentLang === 'en' ? 'ltr' : 'rtl',
+      textAlign: parentLang === 'en' ? 'left' : 'right'
+    }}>
+      {splitTextAndWrap(children, isHeading)}
+    </span>
+  );
+};
+
 const CyberArticles = () => {
   const { fileName } = useParams();
   const [content, setContent] = useState('');
@@ -94,70 +175,80 @@ const CyberArticles = () => {
   }, [fileName]);
 
   return (
-    <div className="page-layout">
-      <SideNav />
-      {/* Left-side description blocks */}
-      <div className="description-blocks">
-        <Link to="/hacking/cyber-guides">
-          <div className="description-box">
-            <h3>Cyber Guides</h3>
-            <p>Explore various guides and tutorials on cybersecurity topics to enhance your skills.</p>
-          </div>
-        </Link>
-        <Link to="/hacking/cyber-articles">
-          <div className="description-box">
-            <h3>Cyber Articles</h3>
-            <p>Read detailed articles on the latest cybersecurity threats, trends, and insights.</p>
-          </div>
-        </Link>
-        <Link to="/information-technology-department/technology-news">
-          <div className="description-box">
-            <h3>Technology News</h3>
-            <p>Stay updated with the newest advancements and news in technology and IT fields.</p>
-          </div>
-        </Link>
-        <Link to="/information-technology-department/troubleshooting-guides">
-          <div className="description-box">
-            <h3>Troubleshooting Guides</h3>
-            <p>Access guides to solve common technical issues and improve IT efficiency.</p>
-          </div>
-        </Link>
-      </div>
-      
-      {/* Markdown content display */}
-      <div className="markdown-content" lang={detectLanguageDirection(content)}>
-        {loading && <p>Loading...</p>}
-        {error ? (
-          <p className="error">{error}</p>
-        ) : (
-          <ReactMarkdown
-            children={content}
-            rehypePlugins={[rehypeRaw]}
-            remarkPlugins={[remarkGfm]}
-            components={{
-              code: ({ node, inline, className, children, ...props }) => {
-                const match = /language-(\w+)/.exec(className || '');
-                return !inline && match ? (
-                  <CodeBlock className={className} {...props}>
-                    {children}
-                  </CodeBlock>
-                ) : (
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                );
-              }
-            }}
-          />
-        )}
+    <div className="cyber-wrapper">
+      <div className="cyber-page-layout">
+        <SideNav />
+        <div className="cyber-description-blocks">
+          <Link to="/hacking/cyber-guides">
+            <div className="description-box">
+              <h3>Cyber Guides</h3>
+              <p>Explore various guides and tutorials on cybersecurity topics to enhance your skills.</p>
+            </div>
+          </Link>
+          <Link to="/hacking/cyber-articles">
+            <div className="description-box">
+              <h3>Cyber Articles</h3>
+              <p>Read detailed articles on the latest cybersecurity threats, trends, and insights.</p>
+            </div>
+          </Link>
+          <Link to="/information-technology-department/technology-news">
+            <div className="description-box">
+              <h3>Technology News</h3>
+              <p>Stay updated with the newest advancements and news in technology and IT fields.</p>
+            </div>
+          </Link>
+          <Link to="/information-technology-department/troubleshooting-guides">
+            <div className="description-box">
+              <h3>Troubleshooting Guides</h3>
+              <p>Access guides to solve common technical issues and improve IT efficiency.</p>
+            </div>
+          </Link>
+        </div>
+        <div className="markdown-content" lang={detectLanguageDirection(content)}>
+          {loading && <p>Loading...</p>}
+          {error ? (
+            <p className="error">{error}</p>
+          ) : (
+            <ReactMarkdown
+              children={content}
+              rehypePlugins={[rehypeRaw]}
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: ({node, children, ...props}) => {
+                  const lang = detectLanguageDirection(String(children));
+                  return <h1 {...props}>{wrapWithLanguage(children, lang, true)}</h1>;
+                },
+                h2: ({node, children, ...props}) => {
+                  const lang = detectLanguageDirection(String(children));
+                  return <h2 {...props}>{wrapWithLanguage(children, lang, true)}</h2>;
+                },
+                h3: ({node, children, ...props}) => {
+                  const lang = detectLanguageDirection(String(children));
+                  return <h3 {...props}>{wrapWithLanguage(children, lang, true)}</h3>;
+                },
+                p: ({node, children, ...props}) => {
+                  const lang = detectLanguageDirection(String(children));
+                  return <p {...props} lang={lang}>{wrapWithLanguage(children, lang, false)}</p>;
+                },
+                code: ({ node, inline, className, children, ...props }) => {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match ? (
+                    <CodeBlock className={className} {...props}>
+                      {children}
+                    </CodeBlock>
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                }
+              }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
-};
-
-const detectLanguageDirection = (text) => {
-  const hebrewRegex = /[\u0590-\u05FF]/;
-  return hebrewRegex.test(text) ? 'he' : 'en';
 };
 
 export default CyberArticles;

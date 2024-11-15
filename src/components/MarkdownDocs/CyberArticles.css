@@ -4,12 +4,14 @@
   grid-template-columns: 1fr 2fr; /* Left side (1fr) for blocks, right side (2fr) for content */
   gap: 5px;
   padding: 20px;
+  direction: inherit; /* Ensure it inherits from parent */
 }
 
 .description-blocks {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  direction: inherit; /* Ensure it inherits from parent */
 }
 
 .description-box {
@@ -28,11 +30,25 @@
   margin: 0;
   font-size: 18px;
   color: #333;
+  text-align: inherit; /* Ensure it inherits alignment */
 }
 
 .description-box p {
   font-size: 14px;
   color: #666;
+  text-align: inherit; /* Ensure it inherits alignment */
 }
+
+/* Ensure description boxes respect the lang attribute */
+.page-layout [lang="en"] .description-box h3,
+.page-layout [lang="en"] .description-box p {
+  text-align: left !important;
+}
+
+.page-layout [lang="he"] .description-box h3,
+.page-layout [lang="he"] .description-box p {
+  text-align: right;
+}
+
 
 

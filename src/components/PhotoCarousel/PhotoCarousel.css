@@ -8,13 +8,15 @@
 
 .carousel-image {
   width: 95vw;
-  height: 85vh;
+  height: 42.75vw; /* Changed to maintain 21:9 ratio (95 * 9/21) */
+  max-height: 85vh;
+  object-fit: contain;
 }
 
 .control-button {
   position: absolute;
-  bottom: 1.3rem; /* Adjust to align with the bar */
-  left: 43rem; /* Positioned on the left side */
+  bottom: 2rem;
+  left: 50%;
   background: rgba(255, 255, 255, 0.5); /* Light white shade */
   border: none;
   cursor: pointer;
@@ -27,12 +29,13 @@
   align-items: center;
   justify-content: center;
   z-index: 1; /* Ensure button is above other elements */
+  transform: translateX(-120px); /* Adjust position relative to center */
 }
 
 .image-name {
   position: absolute;
-  bottom: 2.3rem; /* Adjust to position above the bar */
-  left: 47.5rem;
+  bottom: 3rem; /* Adjust to position above the bar */
+  left: 50%;
   transform: translateX(-50%);
   font-size: 16px; /* Font size for the caption */
   color: rgba(255, 255, 255, 0.5); /* Light white shade */
@@ -43,8 +46,8 @@
 
 .progress-bar-container {
   position: absolute;
-  bottom: 1.8rem; /* Adjust as needed */
-  left: 47.5rem;
+  bottom: 2.5rem; /* Adjust as needed */
+  left: 50%;
   transform: translateX(-50%);
   width: 5.2rem; /* Fixed width for progress bar container */
   height: 0.4rem;

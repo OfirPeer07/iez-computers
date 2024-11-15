@@ -1,106 +1,30 @@
-/* General Container for Markdown Docs */
-.markdown-docs {
-    position: relative;
-    height: 100%;
-    width: 84vw;
-    margin-right: 270px; /* Adjust for the fixed side nav on the right */
-    padding: 10px;
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-    line-height: 1.2;
-    font-family: 'Arial', sans-serif;
-}
-
-.markdown-docs h1,
-.markdown-docs h2,
-.markdown-docs h3,
-.markdown-docs h4 {
-    color: #00FFCC;
-    text-shadow: 0 0 5px #00FFCC;
-    border-bottom: 1px solid #00FFCC;
-    padding-bottom: 10px;
-    margin-top: 20px;
-    text-align: right;
-}
-
-.markdown-docs p {
-    margin: 10px 0;
-    text-align: right;
-}
-
-.markdown-docs a {
-    color: #00FFCC;
-    text-decoration: none;
-    border-bottom: 1px solid #00FFCC;
-    text-align: right;
-}
-
-.markdown-docs a:hover {
-    color: #00FFCC;
-    text-decoration: underline;
-}
-
-.markdown-docs img {
-    max-width: 100%;
-    height: auto;
-    border: 2px solid #00FFCC;
-    border-radius: 5px;
-    margin: 10px 0;
-}
-
-.markdown-docs pre {
-    background-color: #333;
-    padding: 10px;
-    border-radius: 5px;
-    color: #00FFCC;
-    overflow-x: auto;
-    text-align: left;
-}
-
-.markdown-docs code {
-    background-color: #1e1e1e;
-    padding: 2px 4px;
-    border-radius: 3px;
-    color: #00FFCC;
-}
-
-/* Loading and Error Styles */
-.loading {
-    color: #00FFCC;
-    text-align: center;
-    font-size: 1.5em;
-}
-
-.error {
-    color: red;
-    text-align: center;
-    font-size: 1.2em;
-    margin: 20px;
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .markdown-docs {
-        margin-right: 0;
-        padding: 10px;
-    }
-}
-
-/* Styles for the RTL box */
-.rtl-box {
+/* Only keeping IT-specific overrides */
+.it-container .markdown-content {
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(3px);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  /* Remove all duplicated styles that exist in Markdown-Global.css */
+  
+  /* RTL box specific to IT pages */
+  .rtl-box {
     height: 10vh;
-    direction: rtl; /* Right-to-left text direction */
-    background-color: #f0f0f0; /* Light grey background */
+    direction: rtl;
+    background-color: #f0f0f0;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
     margin: 20px 0;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Close button for the box */
-.rtl-box .close-btn {
+  }
+  
+  .rtl-box .close-btn {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -108,12 +32,13 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
-}
-
-.rtl-box p {
+  }
+  
+  .rtl-box p {
     text-align: center;
     margin: 0;
     color: #333;
     font-size: 20px;
     line-height: 1.5;
-}
+  }
+  

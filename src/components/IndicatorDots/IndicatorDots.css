@@ -1,8 +1,7 @@
-/* IndicatorDots/IndicatorDots.css */
 .indicator__list-wrap {
   position: fixed;
   top: 50%;
-  left: 10px; /* Adjust this value to position it further left or right */
+  left: 20px;
   transform: translateY(-50%);
   z-index: 1000;
 }
@@ -10,7 +9,7 @@
 .indicator__list {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Space between the indicators */
+  gap: 20px;
 }
 
 .indicator__item {
@@ -19,31 +18,52 @@
   cursor: pointer;
   padding: 0;
   margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .indicator__dot-wrap {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
 }
 
 .indicator__dot {
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 8px;
+  height: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #788; /* Border color of the dot */
+  border: 1px solid #ccc;
   border-radius: 50%;
 }
 
 .indicator__dot-inner {
-  width: 10px;
-  height: 10px;
-  background-color: #fff; /* Fill color of the dot */
+  width: 5px;
+  height: 5px;
+  background-color: transparent;
   border-radius: 50%;
 }
 
+.indicator__label {
+  font-size: 14px;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.indicator__item--active .indicator__dot {
+  border-color: #3399ff;
+}
+
 .indicator__item--active .indicator__dot-inner {
-  background-color: #fff; /* Fill color for the active dot */
+  background-color: #3399ff;
+}
+
+.indicator__item--active .indicator__label {
+  color: #3399ff;
+  font-weight: bold;
+}
+
+.indicator__item:hover .indicator__label {
+  color: #3399ff;
 }

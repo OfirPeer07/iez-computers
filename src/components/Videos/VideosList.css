@@ -13,8 +13,23 @@
   font-family: 'Segoe UI', 'Arial', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
-  direction: rtl;
   line-height: 1.6;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+.videos-list-page {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* מרכוז אופקי */
+ 
 }
 
 .videos-list-page .videos-container {
@@ -24,6 +39,11 @@
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
+  min-height: calc(100vh - 100px);
+  width: 100%;
+  max-width: 1800px; /* הגבלת רוחב מקסימלי */
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .videos-list-page .video-category {
@@ -32,6 +52,9 @@
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 1800px; /* תואם לרוחב המכיל */
+  margin: 0 auto 2rem auto;
 }
 
 .videos-list-page .video-category:hover {
@@ -48,7 +71,7 @@
 
 .videos-list-page .video-scroll {
   display: flex !important;
-  flex-direction: row !important;
+  flex-direction: row !important; /* Changed from row-reverse to row for RTL */
   overflow-x: auto !important;
   overflow-y: hidden !important;
   gap: 1.5rem;
@@ -68,7 +91,8 @@
   text-decoration: none;
   color: inherit;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-right: 1rem !important;
+  margin-right: 0 !important;
+  margin-left: 1rem !important;
 }
 
 .videos-list-page .video-item:hover {
@@ -197,5 +221,12 @@
   .videos-list-page * {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+@media (max-width: 1920px) {
+  .videos-list-page .videos-container,
+  .videos-list-page .video-category {
+    max-width: 95%; /* במסכים קטנים יותר, משתמשים באחוזים */
   }
 }

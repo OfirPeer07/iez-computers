@@ -7,7 +7,11 @@ import remarkGfm from 'remark-gfm';
 import remarkEmoji from 'remark-emoji';
 import { useParams } from 'react-router-dom';
 import SideNav from '../SideNav/SideNav';
+import './Markdown-Global.css';    // 1. Base styles must come first
+import './ITPages.css';           // 2. IT specific styles
 import './MarkdownDocs.css';
+// Remove any Cyber-specific CSS imports if present
+// import './CyberPages.css'; // Not needed for IT components
 
 const CodeBlock = ({ className, children }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -51,68 +55,148 @@ const CodeBlock = ({ className, children }) => {
   );
 };
 
+const splitTextAndWrap = (text, isHeading = false) => {
+  if (typeof text !== 'string') return text;
+  
+  // For English headings, return as is
+  if (isHeading && !/[\u0590-\u05FF]/.test(text)) {
+    return text;
+  }
+
+  const regex = /(\([^)]+\)|[a-zA-Z-]+(?:\s+[a-zA-Z-]+)*)/g;
+  let lastIndex = 0;
+  const parts = [];
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    parts.push(match[0]);
+    lastIndex = regex.lastIndex;
+  }
+  
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts.map((part, index) => {
+    const isEnglish = /^[a-zA-Z-\s()]+$/.test(part);
+    return isEnglish ? (
+      <span
+        key={index}
+        style={{
+          display: 'inline-block',
+          direction: 'ltr',
+          unicodeBidi: 'embed'
+        }}
+      >
+        {part}
+      </span>
+    ) : part;
+  });
+};
+
+const wrapWithLanguage = (children, parentLang, isHeading = false) => {
+  if (typeof children !== 'string') return children;
+  
+  // Special handling for English headings
+  const isEnglishHeading = isHeading && !/[\u0590-\u05FF]/.test(children);
+  
+  return (
+    <span style={{ 
+      display: 'block',
+      direction: isEnglishHeading || parentLang === 'en' ? 'ltr' : 'rtl',
+      textAlign: isEnglishHeading || parentLang === 'en' ? 'left' : 'right',
+      width: '100%'
+    }}>
+      {isEnglishHeading ? children : splitTextAndWrap(children, isHeading)}
+    </span>
+  );
+};
+
+const detectLanguageDirection = (text) => {
+  if (!text || typeof text !== 'string') return 'en';
+  return /[\u0590-\u05FF]/.test(text) ? 'he' : 'en';
+};
+
 const TroubleshootingGuides = () => {
     const { fileName } = useParams();
     const [content, setContent] = useState('');
-    const [showBox, setShowBox] = useState(true); // To control the visibility of the box
+    const [showBox, setShowBox] = useState(true);
 
     useEffect(() => {
         const fetchMarkdownFile = async () => {
             try {
                 const response = await fetch(`/md/TroubleshootingGuides/${fileName}`);
+                if (!response.ok) {
+                    throw new Error('Failed to load content');
+                }
                 const text = await response.text();
                 setContent(text);
             } catch (error) {
                 console.error('Error fetching the Markdown file:', error);
             }
         };
+
         if (fileName) {
             fetchMarkdownFile();
         }
     }, [fileName]);
 
     return (
-        <div className="container">
-            <SideNav />
-            {showBox && (
-                <div className="rtl-box">
-                    <button className="close-btn" onClick={() => setShowBox(false)}>×</button>
-                    <p>
-                        נתקלתם בבעיה? אל דאגה! במדור זה תמצאו מדריכים פשוטים וברורים לפתרון תקלות נפוצות במחשב.
-                    </p>
-                    <p>    
-                        עם הסברים מפורטים צעד אחר צעד, נעזור לכם להתגבר על מכשולים טכניים ולהחזיר את המחשב שלכם לפעולה מהירה ויעילה.
-                    </p>
+        <div className="it-container it-page-layout">
+            <div className="content-wrapper">
+                <SideNav />
+                {showBox && (
+                    <div className="rtl-box">
+                        <button className="close-btn" onClick={() => setShowBox(false)}>×</button>
+                        <p>נתקלתם בבעיה? אל דאגה! במדור זה תמצאו מדריכים פשוטים וברורים לפתרון תקלות נפוצות במחשב.</p>
+                        <p>עם הסברים מפורטים צעד אחר צעד, נעזור לכם להתגבר על מכשולים טכניים ולהחזיר את המחשב שלכם לפעולה מהירה ויעילה.</p>
+                    </div>
+                )}
+                <div className="markdown-content">
+                    {!content ? <p>Loading...</p> : (
+                        <ReactMarkdown
+                            children={content}
+                            rehypePlugins={[rehypeRaw]}
+                            remarkPlugins={[remarkGfm, remarkEmoji]}
+                            components={{
+                                h1: ({node, children, ...props}) => {
+                                  const lang = detectLanguageDirection(String(children));
+                                  return <h1 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h1>;
+                                },
+                                h2: ({node, children, ...props}) => {
+                                  const lang = detectLanguageDirection(String(children));
+                                  return <h2 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h2>;
+                                },
+                                h3: ({node, children, ...props}) => {
+                                  const lang = detectLanguageDirection(String(children));
+                                  return <h3 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h3>;
+                                },
+                                p: ({node, children, ...props}) => {
+                                  const lang = detectLanguageDirection(String(children));
+                                  return <p {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang)}</p>;
+                                },
+                                code: ({ node, inline, className, children, ...props }) => {
+                                    const match = /language-(\w+)/.exec(className || '');
+                                    return !inline && match ? (
+                                        <CodeBlock className={className} {...props}>
+                                            {children}
+                                        </CodeBlock>
+                                    ) : (
+                                        <code className={className} {...props}>
+                                            {children}
+                                        </code>
+                                    );
+                                }
+                            }}
+                        />
+                    )}
                 </div>
-            )}
-            <div className="markdown-content" lang={detectLanguageDirection(content)}>
-                <ReactMarkdown
-                    children={content}
-                    rehypePlugins={[rehypeRaw]}
-                    remarkPlugins={[remarkGfm, remarkEmoji]}
-                    components={{
-                        code: ({ node, inline, className, children, ...props }) => {
-                            const match = /language-(\w+)/.exec(className || '');
-                            return !inline && match ? (
-                                <CodeBlock className={className} {...props}>
-                                    {children}
-                                </CodeBlock>
-                            ) : (
-                                <code className={className} {...props}>
-                                    {children}
-                                </code>
-                            );
-                        }
-                    }}
-                />
             </div>
         </div>
     );
-};
-
-const detectLanguageDirection = (text) => {
-    const hebrewRegex = /[\u0590-\u05FF]/;
-    return hebrewRegex.test(text) ? 'he' : 'en';
 };
 
 export default TroubleshootingGuides;

@@ -1,0 +1,403 @@
+/* Remove or comment out global body styles */
+/* body { ... } */
+
+/* Scope all IT-related styles within .it-container */
+.it-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    isolation: isolate; /* Isolate background */
+    
+    /* ...existing styles... */
+  }
+  
+  .it-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/src/images/backgrounds/IT.png') !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+    z-index: -1;
+    filter: brightness(1.2) contrast(0.9);
+  }
+  
+  
+  
+  /* Remove markdown styling overrides */
+  .it-container .markdown-content {
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(3px);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    padding: 2rem;
+    isolation: isolate;
+    direction: initial;
+    text-align: initial;
+  }
+  
+  /* Increase specificity for IT containers */
+  .it-container.it-page-layout .markdown-content {
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(3px);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  /* תמיכה בכיווניות טקסט */
+  .it-container .markdown-content[lang="he"] * {
+    direction: rtl;
+    text-align: right !important;
+  }
+  
+  .it-container .markdown-content[lang="en"] * {
+    direction: ltr;
+    text-align: left !important;
+  }
+  
+  .it-container .markdown-content * {
+    text-align: inherit;
+  }
+  
+  /* Language-specific styles with higher specificity */
+  .it-container .content-en {
+    direction: ltr !important;
+    text-align: left !important;
+    display: block;
+    isolation: isolate;
+  }
+  
+  .it-container .content-he {
+    direction: rtl !important;
+    text-align: right !important;
+    display: block;
+    isolation: isolate;
+  }
+  
+  /* ...שאר הסגנונות ללייאוט בלבד... */
+  
+  /* RTL Box base styles */
+  .it-container .rtl-box {
+    position: fixed !important;
+    top: 50%; /* ממרכז אנכית */
+    transform: translateY(-50%); /* מרכוז מושלם */
+    left: calc(50% - 450px - 450px); /* מיקום ברירת מחדל חדש */
+    width: 300px;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(3px);
+    border-radius: 10px;
+    padding: 1.5rem;
+    direction: rtl;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    z-index: 1000 !important; /* Ensure it's above other elements */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: auto; /* גובה לפי התוכן */
+    overflow: visible; /* ביטול הגלילה */
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh; /* מגביל את הגובה המקסימלי */
+  }
+  
+  .it-container .rtl-box.hidden {
+    transform: translateX(-100%);
+  }
+  
+  .it-container .rtl-box p {
+    color: #fff;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0.3em 0; /* הקטנת המרווח בין פסקאות */
+    text-align: right;
+    font-size: 1em; /* הקטנת גודל הטקסט */
+    padding-right: 5px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+  }
+  
+  .it-container .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .it-container .close-btn:hover {
+    color: #4CAF50;
+  }
+  
+  @media (max-width: 1400px) {
+    .it-container .it-page-layout {
+      gap: 2rem;
+      grid-template-columns: 400px minmax(800px, 1fr);
+    }
+  
+    .it-container .rtl-box {
+      left: 40px;
+      width: 250px;
+      transform: translateX(-92%);
+    }
+  }
+  
+  @media (max-width: 1600px) {
+    .it-container .it-page-layout {
+      padding-left: 20px;
+    }
+  
+    .it-container .rtl-box {
+      left: 60px; /* הגדלת המרחק משמאל */
+      transform: translateX(-95%); /* הזזה נוספת שמאלה */
+      width: 280px; /* הקטנת הרוחב מעט */
+    }
+  }
+  
+  @media (max-width: 1200px) {
+    .it-container .rtl-box {
+      left: 30px;
+      transform: translateX(-90%);
+      flex: 0 0 250px; /* התאמת רוחב הקופסא למסכים קטנים יותר */
+      max-width: 250px;
+      margin-left: 0;
+      margin-right: 1rem; /* התאמת המרווח */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .it-container .it-page-layout {
+      flex-direction: column-reverse;
+      width: 100%;
+      padding: 1rem;
+      grid-template-columns: 1fr;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .it-container .markdown-content, .it-container .rtl-box {
+      margin: 10px;
+      padding: 15px;
+      font-size: 14px;
+      width: calc(100% - 20px);
+      grid-column: 1;
+    }
+    .it-container .content-wrapper {
+      padding: 0 10px;
+    }
+  
+    .it-container .markdown-content {
+      grid-row: 2;
+      grid-column: 1;
+      width: 100%;
+      margin: 0;
+    }
+  
+    .it-container .rtl-box {
+      position: relative;
+      top: 0;
+      grid-row: 1;
+      grid-column: 1;
+      max-width: 100%;
+      width: 100%;
+      margin: 0 0 1rem 0;
+      left: auto;
+      top: auto;
+      min-width: unset;
+      transform: none;
+      order: -1; /* להציג קודם */
+      top: auto;
+      margin-left: 0;
+      width: 100%;
+      max-width: 100%;
+      margin-right: 0;
+      margin-bottom: 2rem;
+    }
+  
+    .it-container .rtl-box p {
+      font-size: 1em; /* גודל טקסט מותאם למובייל */
+    }
+  }
+  
+  @media (min-width: 1600px) {
+    .it-container .it-page-layout {
+      max-width: 1600px;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 3rem;
+    }
+  
+    .it-container .rtl-box {
+      max-width: 300px;
+    }
+  
+    .it-container .markdown-content {
+      max-width: 1000px;
+    }
+  }
+  
+  @media (min-width: 1920px) {
+    .it-container .rtl-box {
+      left: calc(50% - 450px - 450px); /* התא��ה למסך רחב */
+      transform: translateY(-50%);
+      width: 300px;
+    }
+  }
+  
+  @media (min-width: 2560px) {
+    .it-container .rtl-box {
+      left: calc(50% - 450px - 600px); /* התאמה למסך 21:9 */
+      width: 350px;
+    }
+  }
+  
+  .it-container .code-block-container {
+    position: relative;
+    margin: 20px 0;
+  }
+  
+  .it-container .copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .it-container .copy-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .it-container .copy-button.copied {
+    background: #4CAF50;
+    border-color: #45a049;
+  }
+  
+  .it-container .markdown-content a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .it-container .markdown-content a:hover {
+    color: #45a049;
+    text-decoration: underline;
+  }
+  
+  .it-container .markdown-content h1, 
+  .it-container .markdown-content h2, 
+  .it-container .markdown-content h3, 
+  .it-container .markdown-content h4, 
+  .it-container .markdown-content h5, 
+  .it-container .markdown-content h6 {
+    color: inherit;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  /* Content wrapper for centering */
+  .it-container .content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .it-container .content-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .it-container .content-wrapper {
+      padding: 10px;
+    }
+  }
+  
+  /* Override RTL for code blocks specifically */
+  .it-container .markdown-content pre,
+  .it-container .markdown-content .code-block-container {
+    direction: ltr !important;
+    text-align: left !important;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  
+  /* Ensure code content is always LTR */
+  .it-container .markdown-content pre code {
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: plaintext;
+  }
+  
+  /* Remove any text alignment inheritance for code blocks */
+  .it-container .markdown-content[lang="he"] pre *,
+  .it-container .markdown-content[lang="he"] .code-block-container * {
+    text-align: left !important;
+  }
+  
+  /* Ensure higher specificity for language controls */
+  .it-container .markdown-content [lang="en"] {
+    direction: ltr !important;
+    text-align: left !important;
+  }
+  
+  .it-container .markdown-content [lang="he"] {
+    direction: rtl !important;
+    text-align: right !important;
+  }
+  
+  /* Add these rules with higher specificity */
+  .it-container .markdown-content .content-en,
+  .it-container .markdown-content [lang="en"] {
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: isolate !important;
+    writing-mode: horizontal-tb !important;
+  }
+  
+  .it-container .markdown-content h1[lang="en"],
+  .it-container .markdown-content h2[lang="en"],
+  .it-container .markdown-content h3[lang="en"],
+  .it-container .markdown-content p[lang="en"] {
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: isolate !important;
+    writing-mode: horizontal-tb !important;
+  }
+  
+  /* Remove any conflicting rules */
+  .it-container .markdown-content[lang="he"] *,
+  .it-container .markdown-content[lang="en"] * {
+    text-align: inherit;
+    direction: inherit;
+  }
