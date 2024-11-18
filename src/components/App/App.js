@@ -32,20 +32,24 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/contact-us" element={<ContactUs />} />
             
-            {/* Hacking Section */}
+            {/* Section Pages */}
             <Route path="/hacking" element={<Hacking />} />
             <Route path="/hacking/cyber-guides/:fileName" element={<CyberGuides />} />
+            <Route path="/hacking/cyber-guides" element={<CyberGuides />} />
             <Route path="/hacking/cyber-articles" element={<CyberArticles />} />
             <Route path="/hacking/cyber-articles/:fileName" element={<CyberArticles />} />
-            
-            {/* IT Department Section */}
-            <Route path="/information-technology-department" element={<ITdepartment />} />
-            <Route path="/information-technology-department/technology-news/:fileName" element={<TechnologyNews />} />
-            <Route path="/information-technology-department/troubleshooting-guides/:fileName" element={<TroubleshootingGuides />} />
             
             {/* Videos Section */}
             <Route path="/hacking/videos" element={<VideosList />} />
             <Route path="/hacking/videos/:id" element={<VideoPlayer />} />
+
+            {/* IT Department Section */}
+            <Route path="/information-technology-department" element={<ITdepartment />} />
+            <Route path="/information-technology-department/technology-news" element={<TechnologyNews />} />
+            <Route path="/information-technology-department/technology-news/:fileName" element={<TechnologyNews />} />
+            <Route path="/information-technology-department/troubleshooting-guides" element={<TroubleshootingGuides />} />
+            <Route path="/information-technology-department/troubleshooting-guides/:fileName" element={<TroubleshootingGuides />} />
+            <Route path="/information-technology-department/building-computers" element={<TroubleshootingGuides />} />
           </Routes>
         </div>
       </div>
