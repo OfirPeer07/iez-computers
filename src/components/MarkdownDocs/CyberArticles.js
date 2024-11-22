@@ -10,7 +10,6 @@ import SideNav from '../SideNav/SideNav';
 // CSS imports order is important!
 import './Markdown-Global.css';    // 1. Base styles
 import './CyberPages.css';        // 2. Cyber specific layout
-import './CyberArticles.css';     // 3. Article specific styles
 
 // Import languages for syntax highlighting
 import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
@@ -148,6 +147,129 @@ const wrapWithLanguage = (children, parentLang, isHeading = false) => {
   );
 };
 
+const extractMetadata = (markdown) => {
+  const metadata = {
+    title: '',
+    date: null,
+    description: '',
+    thumbnail: ''
+  };
+
+  const lines = markdown.split('\n');
+  let contentStart = 0;
+  let inMetadata = false;
+
+  // Extract metadata section
+  if (lines[0]?.trim() === '---') {
+    inMetadata = true;
+    for (let i = 1; i < lines.length; i++) {
+      if (lines[i]?.trim() === '---') {
+        contentStart = i + 1;
+        break;
+      }
+      const [key, ...valueParts] = lines[i].split(':');
+      if (key && valueParts.length) {
+        const value = valueParts.join(':').trim();
+        metadata[key.trim()] = value;
+      }
+    }
+  }
+
+  return {
+    ...metadata,
+    content: lines.slice(contentStart).join('\n')
+  };
+};
+
+const ArticlesList = () => {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadArticles = async () => {
+      try {
+        const context = require.context('../../../public/md/CyberArticles', false, /\.md$/);
+        const articlePromises = context.keys().map(async (fileName) => {
+          const response = await fetch(`/md/CyberArticles/${fileName.replace('./', '')}`);
+          const content = await response.text();
+          const { title, date, description, thumbnail, category, content: articleContent } = extractMetadata(content);
+          
+          return {
+            slug: fileName.replace('./', '').replace('.md', ''),
+            title: title || fileName.replace('./', '').replace('.md', '').replace(/-/g, ' '),
+            date: date || null,
+            description: description || articleContent.split('\n')[0].replace(/[#*`]/g, '').slice(0, 150) + '...',
+            thumbnail: thumbnail || '/images/default-article-thumb.jpg',
+            category: category || 'Cyber Security'
+          };
+        });
+
+        const loadedArticles = await Promise.all(articlePromises);
+        setArticles(loadedArticles.filter(article => article.title));
+        setLoading(false);
+      } catch (error) {
+        console.error('Error loading articles:', error);
+        setLoading(false);
+      }
+    };
+
+    loadArticles();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="articles-container">
+        {[1,2,3,4,5,6].map((i) => (
+          <div key={i} className="article-link">
+            <div className="article-item">
+              <div className="article-thumb article-skeleton"></div>
+              <div className="article-content">
+                <div className="article-meta article-skeleton" style={{width: '100px', height: '20px'}}></div>
+                <h2 className="article-skeleton" style={{height: '28px'}}></h2>
+                <p className="article-description article-skeleton" style={{height: '60px'}}></p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="articles-container">
+      {articles.map((article, index) => (
+        <Link 
+          to={`/hacking/cyber-articles/${article.slug}.md`} 
+          key={index}
+          className="article-link"
+        >
+          <article className="article-item">
+            {article.category && (
+              <span className="article-category">{article.category}</span>
+            )}
+            <div className="article-thumb">
+              <img src={article.thumbnail} alt="" loading="lazy" />
+            </div>
+            <div className="article-content">
+              <div className="article-meta">
+                <time dateTime={article.date}>
+                  {article.date && new Date(article.date).toLocaleDateString('he-IL', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+              </div>
+              <h2>{article.title}</h2>
+              <p className="article-description">{article.description}</p>
+            </div>
+          </article>
+        </Link>
+      ))}
+    </div>
+  );
+};
+
 const CyberArticles = () => {
   const { fileName } = useParams();
   const [content, setContent] = useState('');
@@ -161,7 +283,8 @@ const CyberArticles = () => {
         const response = await fetch(`/md/CyberArticles/${fileName}`);
         if (!response.ok) throw new Error('File not found');
         const text = await response.text();
-        setContent(text);
+        const { content } = extractMetadata(text);
+        setContent(content);
         setError(null);
       } catch (error) {
         setError(error.message);
@@ -171,81 +294,61 @@ const CyberArticles = () => {
       }
     };
 
-    fetchMarkdownFile();
+    if (fileName) {
+      fetchMarkdownFile();
+    }
   }, [fileName]);
 
   return (
     <div className="cyber-wrapper">
       <div className="cyber-page-layout">
         <SideNav />
-        <div className="cyber-description-blocks">
-          <Link to="/hacking/cyber-guides">
-            <div className="description-box">
-              <h3>Cyber Guides</h3>
-              <p>Explore various guides and tutorials on cybersecurity topics to enhance your skills.</p>
-            </div>
-          </Link>
-          <Link to="/hacking/cyber-articles">
-            <div className="description-box">
-              <h3>Cyber Articles</h3>
-              <p>Read detailed articles on the latest cybersecurity threats, trends, and insights.</p>
-            </div>
-          </Link>
-          <Link to="/information-technology-department/technology-news">
-            <div className="description-box">
-              <h3>Technology News</h3>
-              <p>Stay updated with the newest advancements and news in technology and IT fields.</p>
-            </div>
-          </Link>
-          <Link to="/information-technology-department/troubleshooting-guides">
-            <div className="description-box">
-              <h3>Troubleshooting Guides</h3>
-              <p>Access guides to solve common technical issues and improve IT efficiency.</p>
-            </div>
-          </Link>
-        </div>
-        <div className="markdown-content" lang={detectLanguageDirection(content)}>
-          {loading && <p>Loading...</p>}
-          {error ? (
-            <p className="error">{error}</p>
-          ) : (
-            <ReactMarkdown
-              children={content}
-              rehypePlugins={[rehypeRaw]}
-              remarkPlugins={[remarkGfm]}
-              components={{
-                h1: ({node, children, ...props}) => {
-                  const lang = detectLanguageDirection(String(children));
-                  return <h1 {...props}>{wrapWithLanguage(children, lang, true)}</h1>;
-                },
-                h2: ({node, children, ...props}) => {
-                  const lang = detectLanguageDirection(String(children));
-                  return <h2 {...props}>{wrapWithLanguage(children, lang, true)}</h2>;
-                },
-                h3: ({node, children, ...props}) => {
-                  const lang = detectLanguageDirection(String(children));
-                  return <h3 {...props}>{wrapWithLanguage(children, lang, true)}</h3>;
-                },
-                p: ({node, children, ...props}) => {
-                  const lang = detectLanguageDirection(String(children));
-                  return <p {...props} lang={lang}>{wrapWithLanguage(children, lang, false)}</p>;
-                },
-                code: ({ node, inline, className, children, ...props }) => {
-                  const match = /language-(\w+)/.exec(className || '');
-                  return !inline && match ? (
-                    <CodeBlock className={className} {...props}>
-                      {children}
-                    </CodeBlock>
-                  ) : (
-                    <code className={className} {...props}>
-                      {children}
-                    </code>
-                  );
-                }
-              }}
-            />
-          )}
-        </div>
+        {fileName ? (
+          <div className="markdown-content" lang={detectLanguageDirection(content)}>
+            {loading && <p>Loading...</p>}
+            {error ? (
+              <p className="error">{error}</p>
+            ) : (
+              <ReactMarkdown
+                children={content}
+                rehypePlugins={[rehypeRaw]}
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  h1: ({node, children, ...props}) => {
+                    const lang = detectLanguageDirection(String(children));
+                    return <h1 {...props}>{wrapWithLanguage(children, lang, true)}</h1>;
+                  },
+                  h2: ({node, children, ...props}) => {
+                    const lang = detectLanguageDirection(String(children));
+                    return <h2 {...props}>{wrapWithLanguage(children, lang, true)}</h2>;
+                  },
+                  h3: ({node, children, ...props}) => {
+                    const lang = detectLanguageDirection(String(children));
+                    return <h3 {...props}>{wrapWithLanguage(children, lang, true)}</h3>;
+                  },
+                  p: ({node, children, ...props}) => {
+                    const lang = detectLanguageDirection(String(children));
+                    return <p {...props} lang={lang}>{wrapWithLanguage(children, lang, false)}</p>;
+                  },
+                  code: ({ node, inline, className, children, ...props }) => {
+                    const match = /language-(\w+)/.exec(className || '');
+                    return !inline && match ? (
+                      <CodeBlock className={className} {...props}>
+                        {children}
+                      </CodeBlock>
+                    ) : (
+                      <code className={className} {...props}>
+                        {children}
+                      </code>
+                    );
+                  }
+                }}
+              />
+            )}
+          </div>
+        ) : (
+          <ArticlesList />
+        )}
       </div>
     </div>
   );

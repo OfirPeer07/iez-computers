@@ -7,11 +7,8 @@ import remarkGfm from 'remark-gfm';
 import remarkEmoji from 'remark-emoji';
 import { useParams } from 'react-router-dom';
 import SideNav from '../SideNav/SideNav';
-import './Markdown-Global.css';    // 1. Base styles must come first
-import './ITPages.css';           // 2. IT specific styles
-import './MarkdownDocs.css';
-// Remove any Cyber-specific CSS imports if present
-// import './CyberPages.css'; // Not needed for IT components
+import ArticlesList from './ArticlesList';
+import './ITPages.css';
 
 const CodeBlock = ({ className, children }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -57,12 +54,6 @@ const CodeBlock = ({ className, children }) => {
 
 const splitTextAndWrap = (text, isHeading = false) => {
   if (typeof text !== 'string') return text;
-  
-  // For English headings, return as is
-  if (isHeading && !/[\u0590-\u05FF]/.test(text)) {
-    return text;
-  }
-
   const regex = /(\([^)]+\)|[a-zA-Z-]+(?:\s+[a-zA-Z-]+)*)/g;
   let lastIndex = 0;
   const parts = [];
@@ -99,18 +90,14 @@ const splitTextAndWrap = (text, isHeading = false) => {
 
 const wrapWithLanguage = (children, parentLang, isHeading = false) => {
   if (typeof children !== 'string') return children;
-  
-  // Special handling for English headings
-  const isEnglishHeading = isHeading && !/[\u0590-\u05FF]/.test(children);
-  
   return (
     <span style={{ 
       display: 'block',
-      direction: isEnglishHeading || parentLang === 'en' ? 'ltr' : 'rtl',
-      textAlign: isEnglishHeading || parentLang === 'en' ? 'left' : 'right',
+      direction: parentLang === 'en' ? 'ltr' : 'rtl',
+      textAlign: parentLang === 'en' ? 'left' : 'right',
       width: '100%'
     }}>
-      {isEnglishHeading ? children : splitTextAndWrap(children, isHeading)}
+      {splitTextAndWrap(children, isHeading)}
     </span>
   );
 };
@@ -123,24 +110,32 @@ const detectLanguageDirection = (text) => {
 const TroubleshootingGuides = () => {
     const { fileName } = useParams();
     const [content, setContent] = useState('');
-    const [showBox, setShowBox] = useState(true);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);  
+    const [showBox, setShowBox] = useState(true);  // Add this line
 
     useEffect(() => {
-        const fetchMarkdownFile = async () => {
-            try {
-                const response = await fetch(`/md/TroubleshootingGuides/${fileName}`);
-                if (!response.ok) {
-                    throw new Error('Failed to load content');
-                }
-                const text = await response.text();
-                setContent(text);
-            } catch (error) {
-                console.error('Error fetching the Markdown file:', error);
-            }
-        };
-
         if (fileName) {
-            fetchMarkdownFile();
+            const fetchContent = async () => {
+                setLoading(true);
+                try {
+                    const response = await fetch(`/md/TroubleshootingGuides/${fileName}`);
+                    if (!response.ok) throw new Error('Content not found');
+                    const text = await response.text();
+                    
+                    // Add metadata stripping
+                    const contentWithoutMeta = text.replace(/^---[\s\S]*?---\s*\n*/m, '');
+                    setContent(contentWithoutMeta);
+                    setError(null);
+                } catch (err) {
+                    setError(err.message);
+                    setContent('');
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchContent();
         }
     }, [fileName]);
 
@@ -155,45 +150,56 @@ const TroubleshootingGuides = () => {
                         <p>עם הסברים מפורטים צעד אחר צעד, נעזור לכם להתגבר על מכשולים טכניים ולהחזיר את המחשב שלכם לפעולה מהירה ויעילה.</p>
                     </div>
                 )}
-                <div className="markdown-content">
-                    {!content ? <p>Loading...</p> : (
-                        <ReactMarkdown
-                            children={content}
-                            rehypePlugins={[rehypeRaw]}
-                            remarkPlugins={[remarkGfm, remarkEmoji]}
-                            components={{
-                                h1: ({node, children, ...props}) => {
-                                  const lang = detectLanguageDirection(String(children));
-                                  return <h1 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h1>;
-                                },
-                                h2: ({node, children, ...props}) => {
-                                  const lang = detectLanguageDirection(String(children));
-                                  return <h2 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h2>;
-                                },
-                                h3: ({node, children, ...props}) => {
-                                  const lang = detectLanguageDirection(String(children));
-                                  return <h3 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h3>;
-                                },
-                                p: ({node, children, ...props}) => {
-                                  const lang = detectLanguageDirection(String(children));
-                                  return <p {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang)}</p>;
-                                },
-                                code: ({ node, inline, className, children, ...props }) => {
-                                    const match = /language-(\w+)/.exec(className || '');
-                                    return !inline && match ? (
-                                        <CodeBlock className={className} {...props}>
-                                            {children}
-                                        </CodeBlock>
-                                    ) : (
-                                        <code className={className} {...props}>
-                                            {children}
-                                        </code>
-                                    );
-                                }
-                            }}
-                        />
-                    )}
-                </div>
+                {fileName ? (
+                    <div className="markdown-content">
+                        {loading && <p>Loading...</p>}
+                        {error ? (
+                            <p className="error">{error}</p>
+                        ) : (
+                            <ReactMarkdown
+                                children={content}
+                                rehypePlugins={[rehypeRaw]}
+                                remarkPlugins={[remarkGfm, remarkEmoji]}
+                                components={{
+                                    h1: ({node, children, ...props}) => {
+                                      const lang = detectLanguageDirection(String(children));
+                                      return <h1 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h1>;
+                                    },
+                                    h2: ({node, children, ...props}) => {
+                                      const lang = detectLanguageDirection(String(children));
+                                      return <h2 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h2>;
+                                    },
+                                    h3: ({node, children, ...props}) => {
+                                      const lang = detectLanguageDirection(String(children));
+                                      return <h3 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h3>;
+                                    },
+                                    p: ({node, children, ...props}) => {
+                                      const lang = detectLanguageDirection(String(children));
+                                      return <p {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang)}</p>;
+                                    },
+                                    code: ({ node, inline, className, children, ...props }) => {
+                                        const match = /language-(\w+)/.exec(className || '');
+                                        return !inline && match ? (
+                                            <CodeBlock className={className} {...props}>
+                                                {children}
+                                            </CodeBlock>
+                                        ) : (
+                                            <code className={className} {...props}>
+                                                {children}
+                                            </code>
+                                        );
+                                    }
+                                }}
+                            />
+                        )}
+                    </div>
+                ) : (
+                    <ArticlesList 
+                        folderName="TroubleshootingGuides"
+                        basePath="information-technology-department/troubleshooting-guides"
+                        defaultCategory="Troubleshooting"
+                    />
+                )}
             </div>
         </div>
     );

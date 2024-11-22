@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './SideNav.css';
 
 const SideNav = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [articles, setArticles] = useState({});
 
   useEffect(() => {

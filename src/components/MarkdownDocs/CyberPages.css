@@ -1,188 +1,124 @@
 body {
-    overflow-x: hidden; /* מונע גלילה אופקית */
-  }
-  
-  .page-layout {
-    position: relative;
-    min-height: 100vh;
-    width: 90vw;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-  
-  .page-layout::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/src/images/backgrounds/cyber.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.4; /* הגדלת השקיפות */
-    z-index: -1;
-    filter: brightness(1.2) contrast(0.9); /* שיפור הנראות */
-  }
-  
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+.markdown-content {
+  background: rgba(30, 30, 30, 0.8); /* Reduced opacity for background */
+  backdrop-filter: blur(3px);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+  margin: 20px auto; /* Centered horizontally */
+  padding: 30px;
+  max-width: calc(100% - 40px); /* Prevents horizontal scrolling */
+  width: 900px;
+}
+
+/* Basic wrapper structure */
+.cyber-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+/* Background */
+.cyber-wrapper::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/src/images/backgrounds/cyber.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  z-index: -1;
+  filter: brightness(1.2) contrast(0.9);
+}
+
+/* Content layout only - no text styling */
+.cyber-wrapper .content-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Markdown content - using markdown-content class */
+.cyber-wrapper .markdown-content {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  background: rgba(30, 30, 30, 0.8);
+  backdrop-filter: blur(3px);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+  width: 100%;
+  max-width: 900px;
+  padding: 2rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
   .markdown-content {
-    background: rgba(30, 30, 30, 0.8); /* הקטנת האטימות של הרקע */
-    backdrop-filter: blur(3px);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
-    margin: 20px auto; /* מרכוז אופקי */
-    padding: 30px;
-    max-width: calc(100% - 40px); /* מניעת גלילה אופקית */
-    width: 900px; /* או כל רוחב מקסימלי אחר שתרצה */
-  }
-  
-  /* Basic wrapper structure */
-  .cyber-wrapper {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    isolation: isolate;
-  }
-  
-  /* Background */
-  .cyber-wrapper::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/src/images/backgrounds/cyber2.jpg');
-    background-size: cover;
-    background-position: top;
-    background-repeat: no-repeat;
-    opacity: 0.4;
-    z-index: -1;
-    filter: brightness(1.2) contrast(0.9);
-  }
-  
-  /* Content layout only - no text styling */
-  .cyber-wrapper .content-wrapper {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 10px;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
-  
-  /* Markdown content - using markdown-content class */
-  .cyber-wrapper .markdown-content {
-    position: relative;
-    z-index: 1;
-    margin: 0 auto;
-    background: rgba(30, 30, 30, 0.8);
-    backdrop-filter: blur(3px);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+
+  .cyber-wrapper .content-wrapper {
+    padding: 10px;
+  }
+}
+
+/* Wide-screen adjustments (21:9) */
+@media (min-aspect-ratio: 21/9) {
+  .page-layout {
     width: 100%;
-    max-width: 900px;
+    max-width: 2560px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 40px;
+  }
+
+  .markdown-content {
+    width: min(1200px, 70%);
+    margin: 20px auto;
+    font-size: 1.2rem;
+  }
+
+  .cyber-page-layout {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
     padding: 2rem;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
   }
-  
-  /* תיקון למובייל */
-  @media (max-width: 768px) {
-    .markdown-content {
-      margin: 10px;
-      padding: 20px;
-    }
-  
-    .cyber-wrapper .content-wrapper {
-      padding: 10px;
-    }
+
+  .cyber-markdown-content {
+    justify-self: center;
+    width: min(1200px, 70%);
+    margin: 20px auto;
+    font-size: 1.2rem;
   }
-  
-  /* התאמה למסכים רחבים (21:9) */
-  @media (min-aspect-ratio: 21/9) {
-    .page-layout {
-      width: 100%;
-      max-width: 2560px; /* רוחב מקסימלי סטנדרטי למסכי 21:9 */
-      margin: 0 auto;
-      padding: 0 5%;
-      display: grid;
-      grid-template-columns: 250px 1fr;
-      gap: 40px;
-    }
-  
-    .markdown-content {
-      width: min(1200px, 70%); /* רוחב גדול יותר למסכים רחבים */
-      margin: 20px auto;
-      font-size: 1.2rem; /* גודל טקסט מותאם למסך רחב */
-    }
-  
-    .description-blocks {
-      position: sticky;
-      top: 20px;
-      left: 5%;
-      height: calc(100vh - 40px);
-      margin-top: 20px;
-      width: 300px; /* רוחב גדול יותר לתפריט */
-    }
-  
-    .description-box {
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-  
-    .description-box h3 {
-      font-size: 1.3rem;
-    }
-  
-    .description-box p {
-      font-size: 1rem;
-    }
-  
-    /* התאמת גודל קוד במסכים רחבים */
-    .code-block-container {
-      font-size: 1.1em;
-    }
-  
-    .cyber-page-layout {
-      position: relative;
-      width: 100%;
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: 300px 1fr; /* תיבת תיאור 300px, שאר המקום לתוכן */
-      gap: 2rem;
-    }
-  
-    .cyber-markdown-content {
-      justify-self: center; /* מרכוז בגריד */
-      width: min(1200px, 70%); /* רוחב גדול יותר למסכים רחבים */
-      margin: 20px auto;
-      font-size: 1.2rem; /* גודל טקסט מותאם למסך רחב */
-    }
-  
-    .cyber-description-blocks {
-      position: sticky;
-      top: 20px;
-      height: fit-content;
-    }
-  
-    .cyber-description-box {
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-  
-    .cyber-description-box h3 {
-      font-size: 1.3rem;
-    }
-  
-    .cyber-description-box p {
-      font-size: 1rem;
-    }
-  
-    /* התאמת גודל קוד במסכים רחבים */
-    .cyber-code-block-container {
-      font-size: 1.1em;
-    }
+
+  .cyber-description-blocks {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
   }
+
+  /* Adjust font size for code blocks on wide screens */
+  .cyber-code-block-container {
+    font-size: 1.1em;
+  }
+}

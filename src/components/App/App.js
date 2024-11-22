@@ -15,7 +15,6 @@ import VideosList from '../Videos/VideosList'; // Import the VIDEOS component
 import VideoPlayer from '../Videos/VideoPlayer'; // Import the VideoPlayer component
 import ContactUs from '../ContactUs/ContactUs';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import IndicatorDots from '../IndicatorDots/IndicatorDots';
 
 
 function App() {
