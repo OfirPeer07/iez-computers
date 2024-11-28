@@ -62,6 +62,7 @@ const CyberGuides = () => {
   const [content, setContent] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showBox, setShowBox] = useState(true);
 
   useEffect(() => {
     if (fileName) {
@@ -90,6 +91,14 @@ const CyberGuides = () => {
 
   return (
     <div className="cyber-wrapper">
+      {!fileName && showBox && (
+        <div className="rtl-box">
+          <button className="close-btn" onClick={() => setShowBox(false)}>×</button>
+          <p>ברוכים הבאים למדריכי הסייבר שלנו! כאן תמצאו מידע מקיף על אבטחת מידע והגנת סייבר.</p>
+          <p>המדריכים מכסים נושאים מגוונים, החל מיסודות האבטחה ועד לטכניקות מתקדמות.</p>
+        </div>
+      )}
+      
       <div className="cyber-page-layout">
         <SideNav />
         {fileName ? (

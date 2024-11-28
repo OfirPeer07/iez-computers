@@ -67,6 +67,7 @@
   color: var(--main-color);
   border-bottom: 2px solid var(--main-color);
   padding-bottom: 0.5rem;
+  text-align: right;
 }
 
 .videos-list-page .video-scroll {

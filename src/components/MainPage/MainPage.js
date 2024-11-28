@@ -6,10 +6,15 @@ import PhotoCarousel from '../PhotoCarousel/PhotoCarousel';
 import IndicatorDots from '../IndicatorDots/IndicatorDots';
 import welcomeImage from './Sections/welcome.png';  
 import welcome2Image from './Sections/welcome2.png';
+import resTester from './Sections/ResTester.png';
+import ResilienceTester from './Sections/ResilienceTester';
+import TheGreenHood from './Sections/TheGreenHood';
 
 const MainPage = () => {
   const introRef = useRef(null);
   const servicesRef = useRef(null);
+  const resilienceTestersRef = useRef(null);
+  const theGreenHoodRef = useRef(null);
   const photoCarouselRef = useRef(null);
 
   const [activeSection, setActiveSection] = useState('introduction');
@@ -42,6 +47,19 @@ const MainPage = () => {
         <div className="text-image-container">
           <img src={welcome2Image} alt="Welcome 2" className="services-image" /> {/* Welcome2 image on the left */}
           <Services />
+        </div>
+      </div>
+
+      <div ref={resilienceTestersRef} className="section">
+        <div className="text-image-container">
+          <img src={resTester} alt="resTester" className="services-image" /> {/*penTester image on the left */}
+          <ResilienceTester />
+        </div>
+      </div>
+
+      <div ref={theGreenHoodRef} className="section">
+        <div className="text-image-container">
+          <TheGreenHood />
         </div>
       </div>
 

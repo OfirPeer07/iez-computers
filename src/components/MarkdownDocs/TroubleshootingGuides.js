@@ -141,15 +141,16 @@ const TroubleshootingGuides = () => {
 
     return (
         <div className="it-container it-page-layout">
+            {!fileName && showBox && (
+                <div className="rtl-box">
+                    <button className="close-btn" onClick={() => setShowBox(false)}>×</button>
+                    <p>נתקלתם בבעיה? אל דאגה! במדור זה תמצאו מדריכים פשוטים וברורים לפתרון תקלות נפוצות במחשב.</p>
+                    <p>עם הסברים מפורטים צעד אחר צעד, נעזור לכם להתגבר על מכשולים טכניים ולהחזיר את המחשב שלכם לפעולה מהירה ויעילה.</p>
+                </div>
+            )}
+
             <div className="content-wrapper">
                 <SideNav />
-                {showBox && (
-                    <div className="rtl-box">
-                        <button className="close-btn" onClick={() => setShowBox(false)}>×</button>
-                        <p>נתקלתם בבעיה? אל דאגה! במדור זה תמצאו מדריכים פשוטים וברורים לפתרון תקלות נפוצות במחשב.</p>
-                        <p>עם הסברים מפורטים צעד אחר צעד, נעזור לכם להתגבר על מכשולים טכניים ולהחזיר את המחשב שלכם לפעולה מהירה ויעילה.</p>
-                    </div>
-                )}
                 {fileName ? (
                     <div className="markdown-content">
                         {loading && <p>Loading...</p>}

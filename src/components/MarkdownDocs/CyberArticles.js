@@ -121,7 +121,7 @@ const splitTextAndWrap = (text, isHeading = false) => {
 const wrapWithLanguage = (children, parentLang, isHeading = false) => {
   if (typeof children !== 'string') return children;
   
-  // טי��ול מיוחד בכותרות באנגלית
+  // טיול מיוחד בכותרות באנגלית
   if (isHeading && parentLang === 'en') {
     return (
       <span style={{ 
@@ -275,6 +275,7 @@ const CyberArticles = () => {
   const [content, setContent] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showBox, setShowBox] = useState(true);
 
   useEffect(() => {
     const fetchMarkdownFile = async () => {
@@ -301,6 +302,14 @@ const CyberArticles = () => {
 
   return (
     <div className="cyber-wrapper">
+      {!fileName && showBox && (
+        <div className="rtl-box">
+          <button className="close-btn" onClick={() => setShowBox(false)}>×</button>
+          <p>ברוכים הבאים למאמרי הסייבר שלנו! כאן תמצאו מאמרים מעמיקים בנושאי אבטחת מידע.</p>
+          <p>המאמרים מכסים מגוון רחב של נושאים, מחדשות אבטחה ועד לניתוחי מקרים ומחקרים.</p>
+        </div>
+      )}
+
       <div className="cyber-page-layout">
         <SideNav />
         {fileName ? (

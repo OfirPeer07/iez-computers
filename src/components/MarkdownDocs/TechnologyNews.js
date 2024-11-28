@@ -90,21 +90,21 @@ const TechnologyNews = () => {
     }, [fileName]);
 
     return (
-        <div className="it-container it-page-layout">
+        <div className="it-container">
+            {!fileName && showBox && (
+                <div className="rtl-box">
+                    <button className="close-btn" onClick={() => setShowBox(false)}>×</button>
+                    <p>
+                        צללו לעולם הטכנולוגיה עם מאמרינו המקיפים והמעניינים.
+                    </p>
+                    <p>
+                        מחומרה ותוכנה ועד טרנדים עדכניים בעולם ההייטק, כאן תמצאו מידע מגוון ועשיר שיעשיר את הידע שלכם ויפתח בפניכם אופקים חדשים בעולם המחשבים המתפתח.
+                    </p>
+                </div>
+            )}
+
             <div className="content-wrapper">
                 <SideNav />
-                {showBox && (
-                    <div className="rtl-box">
-                        <button className="close-btn" onClick={() => setShowBox(false)}>×</button>
-                        <p>
-                            צללו לעולם הטכנולוגיה עם מאמרינו המקיפים והמעניינים.
-                        </p>
-                        <p>
-                            מחומרה ותוכנה ועד טרנדים עדכניים בעולם ההייטק, כאן תמצאו מידע מגוון ועשיר שיעשיר את הידע שלכם ויפתח בפניכם אופקים חדשים בעולם המחשבים המתפתח.
-                        </p>
-                    </div>
-                )}
-
                 {fileName ? (
                     <div className="markdown-content" lang={detectLanguageDirection(content)}>
                         {loading && <p>Loading...</p>}

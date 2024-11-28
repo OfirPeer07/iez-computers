@@ -9,6 +9,28 @@
   color: #00ff00; /* Neon green text */
 }
 
+/* ResilienceTester section */
+.rsiliencetester-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  background-color: #000; /* Same dark theme as others */
+  color: #00ff00; /* Neon green text */
+}
+
+/* TheGreenHood section */
+.thegreenhood-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  background-color: #000; /* Same dark theme as others */
+  color: #00ff00; /* Neon green text */
+}
+
 /* Outer box - Text box styling */
 .text-box {
   flex: 1;
@@ -24,6 +46,13 @@
   position: relative; /* Needed for positioning the LED effect */
   overflow: hidden; /* Ensures the animation stays inside the box */
 }
+
+.rsiliencetester-container:hover .text-box,
+.thegreenhood-container:hover .text-box {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
 
 /* Updated glowing circular animation effect */
 .text-box::before {
