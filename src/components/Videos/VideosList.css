@@ -77,6 +77,7 @@
   overflow-y: hidden !important;
   gap: 1.5rem;
   padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
   scrollbar-color: var(--main-color) var(--background-color);
@@ -86,7 +87,6 @@
 .videos-list-page .video-item {
   flex: 0 0 200px !important;
   width: 200px !important;
-  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   text-decoration: none;

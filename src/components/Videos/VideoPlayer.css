@@ -75,24 +75,8 @@
 }
 
 /* Previous video button */
-.prev-video {
-  width: 160px;
-  height: 40px;
-  background-color: transparent;
-  border: 2px solid var(--main-color);
-  border-radius: 6px;
-  color: var(--main-color);
-  font-size: 1.2rem;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-/* Next video button */
+/* Common styles for both buttons */
+.prev-video,
 .next-video {
   width: 160px;
   height: 40px;
@@ -100,13 +84,18 @@
   border: 2px solid var(--main-color);
   border-radius: 6px;
   color: var(--main-color);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 10px;
 }
 
 /* Hover effects */

@@ -214,12 +214,18 @@ const VideoPlayer = () => {
         )}
         <div className="navigation-buttons">
           {prevVideo && (
-            <Link to={`/hacking/videos/${prevVideo.id}`} className="prev-video">
+            <button 
+              onClick={() => navigate(`/hacking/videos/${prevVideo.id}`)} 
+              className="prev-video"
+            >
               הסרטון הקודם
-            </Link>
+            </button>
           )}
           {nextVideo && (
-            <button onClick={handleNextVideo} className="next-video">
+            <button 
+              onClick={handleNextVideo} 
+              className="next-video"
+            >
               הסרטון הבא
             </button>
           )}

@@ -16,7 +16,7 @@
 .control-button {
   position: absolute;
   bottom: 2rem;
-  left: 54.2%;
+  left: 56rem;
   background: rgba(255, 255, 255, 0.5); /* Light white shade */
   border: none;
   cursor: pointer;
@@ -35,7 +35,7 @@
 .image-name {
   position: absolute;
   bottom: 3rem; /* Adjust to position above the bar */
-  left: 50%;
+  left: 53.2rem;
   transform: translateX(-50%);
   font-size: 16px; /* Font size for the caption */
   color: rgba(255, 255, 255, 0.5); /* Light white shade */
@@ -47,7 +47,7 @@
 .progress-bar-container {
   position: absolute;
   bottom: 2.5rem; /* Adjust as needed */
-  left: 50%;
+  left: 53.2rem;
   transform: translateX(-50%);
   width: 5.2rem; /* Fixed width for progress bar container */
   height: 0.4rem;
