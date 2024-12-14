@@ -1,0 +1,138 @@
+/* Wrapper for the indicators */
+.indicator__list-wrap {
+  position: fixed;
+  top: 50%;
+  right: 8px; /* Adjust as needed */
+  transform: translateY(-50%);
+  z-index: 1;
+  padding: 15px 10px;
+  background: rgba(15, 15, 15, 0.9); /* Dark cyber background */
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 255, 0, 0.7); /* Neon green glow */
+  border: 1px solid rgba(0, 255, 0, 0.7); /* Subtle neon border */
+  direction: rtl;
+}
+
+/* Indicator list */
+.indicator__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Clean spacing for futuristic look */
+}
+
+/* Individual indicator item */
+.indicator__item {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 0.8; /* Dimmed for inactive state */
+}
+
+.indicator__item:hover {
+  transform: scale(1.2); /* Bold scaling effect */
+  opacity: 1; /* Full visibility on hover */
+}
+
+/* Dot wrapper */
+.indicator__dot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main dot */
+.indicator__dot {
+  width: 15px;
+  height: 14.5px;
+  border: 2px solid rgba(0, 255, 0, 0.7); /* Neon green border for inactive state */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Neon glow */
+}
+
+/* Inner dot */
+.indicator__dot-inner {
+  width: 15px;
+  height: 14.5px;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Active dot styling */
+.indicator__item--active .indicator__dot {
+  border-color: rgba(0, 255, 0, 0.7); /* Bright neon green */
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.7), 0 0 30px rgba(0, 255, 0, 0.7); /* Intense glow for active state */
+}
+
+.indicator__item--active .indicator__dot-inner {
+  background-color: rgba(0, 255, 0, 0.7); /* Neon-filled dot for active state */
+  transform: scale(1.3); /* Enlarged inner dot */
+}
+
+/* Label styling */
+.indicator__label {
+  font-size: 13px; /* Futuristic size */
+  color: rgba(0, 255, 0, 0.7); /* Soft cyan for text */
+  font-family: 'Orbitron', sans-serif; /* Tech-inspired font */
+  text-transform: uppercase; /* Cyber aesthetic with all caps */
+  letter-spacing: 1px; /* Spaced-out text for futuristic style */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.indicator__item:hover .indicator__label {
+  transform: translateY(-3px); /* Lift effect on hover */
+  color: rgba(0, 255, 0, 0.7); /* Neon green hover effect */
+}
+
+.indicator__item--active .indicator__label {
+  color: rgba(0, 255, 0, 0.7); /* Matches active dot color */
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .indicator__list-wrap {
+    right: 10px;
+    padding: 10px;
+  }
+
+  .indicator__dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .indicator__dot-inner {
+    width: 6px;
+    height: 6px;
+  }
+
+  .indicator__label {
+    font-size: 11px;
+  }
+}
+
+/* Neon pulse animation for active items */
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.7), 0 0 20px rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7), 0 0 30px rgba(0, 255, 0, 0.7);
+  }
+}
+
+.indicator__item--active .indicator__dot {
+  animation: neonPulse 1.5s infinite; /* Pulsing glow effect for active dots */
+}

@@ -1,112 +1,51 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './MainPage.css';
-import PhotoCarousel from '../PhotoCarousel/PhotoCarousel';
-import IndicatorDots from '../IndicatorDots/IndicatorDots';
-import welcomeImage from './Sections/welcome.png';
-import welcome2Image from './Sections/welcome2.png';
-import theHood from './Sections/theHood.png';
-import Introduction from './Sections/Introduction';
-import Services from './Sections/Services';
-import ResilienceTester from './Sections/ResilienceTester';
-import TheGreenHood from './Sections/TheGreenHood';
+import React from 'react';
+import './MainPage.css'; // Importing CSS for styles
+import cyberImage from './Cyber.png';
+import itImage from './IT.png';
 
 const MainPage = () => {
-  const introRef = useRef(null);
-  const servicesRef = useRef(null);
-  const photoCarouselRef = useRef(null);
-  const resilienceTestersRef = useRef(null);
-  const theGreenHoodRef = useRef(null);
-
-  const [activeSection, setActiveSection] = useState('introduction');
-
-  const scrollToSection = (ref, section) => {
-    if (ref && ref.current) {
-      setActiveSection(section); // עדכן מיידית את המצב
-      ref.current.scrollIntoView({ behavior: 'smooth' }); // גלול למיקום
-    }
+  const navigateTo = (path) => {
+    window.location.href = path;
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        { ref: introRef, name: 'introduction' },
-        { ref: servicesRef, name: 'services' },
-        { ref: photoCarouselRef, name: 'carousel' },
-        { ref: resilienceTestersRef, name: 'resilienceTesters' },
-        { ref: theGreenHoodRef, name: 'theGreenHood' },
-      ];
-
-      let newActiveSection = activeSection;
-
-      sections.forEach(({ ref, name }) => {
-        if (ref.current) {
-          const rect = ref.current.getBoundingClientRect();
-          const isInViewport = rect.top < window.innerHeight && rect.bottom >= 0;
-
-          // Update the active section based on which section is currently visible
-          if (isInViewport && rect.top <= window.innerHeight * 0.3) {
-            newActiveSection = name;
-          }
-        }
-      });
-
-      // Update active section only if it has changed
-      if (newActiveSection !== activeSection) {
-        setActiveSection(newActiveSection);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    // Call handleScroll immediately to handle the state on page load
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [activeSection]);
 
   return (
     <div className="main-page">
-      <IndicatorDots
-        activeSection={activeSection}
-        scrollToSection={scrollToSection}
-        introRef={introRef}
-        servicesRef={servicesRef}
-        photoCarouselRef={photoCarouselRef}
-        resilienceTestersRef={resilienceTestersRef}
-        theGreenHoodRef={theGreenHoodRef}
-      />
+      <header className="main-header">
+        <h1 className="main-title">Welcome to the Future</h1>
+        <p className="main-subtitle">Explore the cutting-edge worlds of Cybersecurity and IT</p>
+      </header>
 
-      <div ref={introRef} className="section">
-        <div className="text-image-container">
-          <img src={welcomeImage} alt="Welcome" className="intro-image" />
-          <Introduction />
+      <div className="cyber-it-navigation">
+        <div
+          className="image-container"
+          onClick={() => navigateTo('/cyber')}
+        >
+          <img src={cyberImage} alt="Cyber Main Page" className="navigation-image" />
+          <div className="overlay">
+            <div className="overlay-content">
+              <h2 className="overlay-title">Cyber Main Page</h2>
+              <p className="overlay-description">Step into the world of Cybersecurity and protect the future.</p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="image-container"
+          onClick={() => navigateTo('/information-technology')}
+        >
+          <img src={itImage} alt="Information Technology Main Page" className="navigation-image" />
+          <div className="overlay">
+            <div className="overlay-content">
+              <h2 className="overlay-title">Information Technology Main Page</h2>
+              <p className="overlay-description">Discover IT innovations that drive success.</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div ref={servicesRef} className="section">
-        <div className="text-image-container">
-          <img src={welcome2Image} alt="Welcome 2" className="services-image" />
-          <Services />
-        </div>
-      </div>
-
-      <div ref={photoCarouselRef} className="carousel-section">
-        <PhotoCarousel />
-      </div>
-
-      <div ref={resilienceTestersRef} className="section">
-        <div className="text-image-container">
-          <ResilienceTester />
-        </div>
-      </div>
-
-      <div ref={theGreenHoodRef} className="section">
-        <div className="text-image-container">
-          <img src={theHood} alt="theHood" className="services-image" />
-          <TheGreenHood />
-        </div>
-      </div>
+      <footer className="main-footer">
+        <p className="footer-text">&#169; 2024 Future Visions. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

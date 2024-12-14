@@ -1,109 +1,103 @@
+/* MainPage.css */
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #292942);
+  color: #ffffff;
+}
+
 .main-page {
-  display: flex;
-  flex-direction: column;
-  margin-right: -1.5rem;
-  padding: 0;
-  box-sizing: border-box;
+  margin-top: -30px;
+  text-align: center;
+  padding: 50px;
 }
 
-.section {
-  padding: -1rem 0;
-  margin-right: 5rem;
+.main-header {
+  padding: 20px;
+  background: linear-gradient(97deg, rgba(0, 0, 0, 0.7), rgba(0, 255, 0, 0.7), rgba(0, 0, 0, 0.7));
+  color: white;
+  border-radius: 15px;
+  margin-bottom: 40px;
 }
 
-.text-image-container {
-  display: flex;
-  align-items: flex-start;  /* שינוי מ-stretch ל-flex-start */
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  gap: 105px;
-  margin-top: 2rem;  /* מרווח עליון */
+.main-title {
+  font-size: 3em;
+  font-weight: bold;
+  margin: 0;
 }
 
-.text-content, .image-content {
-  flex: 1 1 50%;
+.main-subtitle {
+  font-size: 1.5em;
+  margin: 10px 0 0;
+}
+
+.cyber-it-navigation {
   display: flex;
   justify-content: center;
-  align-items: flex-start;  /* שינוי ל-flex-start */
-  padding: 2rem;
-  box-sizing: border-box;
-  min-height: 400px;
+  gap: 25px;
 }
 
-.content::-webkit-scrollbar {
-  max-width: 8px;
-  width: 8px;
-  min-width: 8px;
+.image-container {
+  position: relative;
+  width: 75vw;
+  height: 50vh;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 255, 0, 0.7);
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.content::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  max-width: 8px;
-  width: 8px;
-  min-width: 8px;
+.image-container:hover {
+  transform: scale(1.05);
 }
 
-.content::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 255, 0, 0.7);
-  border-radius: 10px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  max-width: 8px;
-  width: 8px;
-  min-width: 8px;
-}
-
-.content {
-  scrollbar-width: 100px;
-  scrollbar-color: rgba(0, 255, 0, 0.7) rgba(0, 0, 0, 0.1);
-}
-
-.intro-image, .services-image {
-  width: 100%;
+.navigation-image {
+  width: 49.7rem;
+  height: 29.5rem;
   object-fit: cover;
-  margin-top: 0;  /* הסרת מרווח עליון מהתמונה */
 }
 
-/* התאמה ספציפית למסך 21:9 עבור התמונה העליונה */
-@media screen and (min-aspect-ratio: 21/9) {
-  .intro-image {
-    width: 95%;  /* קצת יותר קטן מהתמונה השנייה */
-    height: auto;
-  }
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (max-width: 100%) {
-  .text-content, .image-content {
-    flex-basis: 20%;
-    padding: 10px;
-  }
-
-  .intro-image, .services-image {
-    max-width: 75vw;
-  }
+.image-container:hover .overlay {
+  opacity: 1;
 }
 
-@media (max-width: 100%) {
-  .text-content, .image-content {
-    flex-basis: 100%;
-    padding: 1rem;
-    min-height: auto;
-  }
-
-  .intro-image, .services-image {
-    max-width: 50vw;
-    margin-bottom: 20px;
-  }
+.overlay-content {
+  text-align: center;
+  color: white;
 }
 
-@media (max-width: 100%) {
-  .text-image-container {
-    margin: 10px;
-    gap: 10px;
-    flex-direction: column;
-  }
+.overlay-title {
+  font-size: 1.3em;
+  margin: 0 0 10px;
+}
 
-  .intro-image, .services-image {
-    max-width: 50vw;
-    border-radius: 5px;
-  }
+.overlay-description {
+  font-size: 0.7em;
+  margin: 0;
+}
+
+.main-footer {
+  margin-top: 5%;
+  padding: 10px;
+  margin: 5%;
+  background: #111122;
+  color: white;
+  border-radius: 10px;
+  font-size: 1.3em;
 }
