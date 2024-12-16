@@ -13,13 +13,13 @@ const ITdepartment = () => {
   return (
     <div className="itdepartment-container">
       <div className="itdepartment-rectangle img1">
-        <img src={TroubleshootingGuides} alt="Troubleshooting Guides" onClick={() => handleNavigation('information-technology-department/troubleshooting-guides')} />
+        <img src={TroubleshootingGuides} alt="Troubleshooting Guides" onClick={() => handleNavigation('/information-technology/troubleshooting-guides')} />
       </div>
       <div className="itdepartment-rectangle img2">
-        <img src={TechnologyNews} alt="Technology News" onClick={() => handleNavigation('information-technology-department/technology-news')} />
+        <img src={TechnologyNews} alt="Technology News" onClick={() => handleNavigation('/information-technology/technology-news')} />
       </div>
       <div className="itdepartment-rectangle img3">
-        <img src={BuildingComputers} alt="Building Computers" onClick={() => handleNavigation('information-technology-department/building-computers')} />
+        <img src={BuildingComputers} alt="Building Computers" onClick={() => handleNavigation('/information-technology/building-computers')} />
       </div>
     </div>
   );

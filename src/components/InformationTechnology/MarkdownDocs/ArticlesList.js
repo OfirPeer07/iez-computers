@@ -10,7 +10,7 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
   useEffect(() => {
     const loadArticles = async () => {
       try {
-        const context = require.context('../../../public/md', true, /\.md$/);
+        const context = require.context('../../../../public/md', true, /\.md$/);
         const fileNames = context.keys()
           .filter(key => key.includes(`/${folderName}/`));
         

@@ -37,11 +37,11 @@ const SimilarArticles = ({ currentSlug }) => {
   useEffect(() => {
     const loadSimilarArticles = async () => {
       try {
-        const context = require.context('../../../public/md/CyberArticles', false, /\.md$/);
+        const context = require.context('/md/TechnologyNews', false, /\.md$/);
         const articlePromises = context.keys().map(async (fileName) => {
           if (currentSlug && fileName.includes(currentSlug)) return null;
           
-          const response = await fetch(`/md/CyberArticles/${fileName.replace('./', '')}`);
+          const response = await fetch(`/md/TechnologyNews/${fileName.replace('./', '')}`);
           const content = await response.text();
           const metadata = extractMetadata(content);
           
@@ -76,7 +76,7 @@ const SimilarArticles = ({ currentSlug }) => {
       <h3>כתבות נוספות שיעניינו אותך</h3>
       {similarArticles.map((article) => (
         <Link 
-          to={`/hacking/cyber-articles/${article.slug}.md`} 
+          to={`/information-technology/technology-news/${article.slug}.md`} 
           key={article.slug}
           className="similar-article-card"
         >

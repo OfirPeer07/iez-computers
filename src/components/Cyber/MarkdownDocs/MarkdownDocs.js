@@ -17,7 +17,7 @@ const MarkdownDocs = () => {
     useEffect(() => {
         const fetchMarkdownFile = async () => {
             try {
-                const response = await fetch(`/md/${fileName}`); // ודא שהקובץ קיים בתיקיית 'public/md'
+                const response = await fetch(`../../../../public/md/${fileName}`); // ודא שהקובץ קיים בתיקיית 'public/md'
                 if (!response.ok) {
                     throw new Error('Error fetching the Markdown file.');
                 }

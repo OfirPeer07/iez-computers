@@ -167,7 +167,7 @@ const TechnologyNews = () => {
                 ) : (
                     <ArticlesList 
                         folderName="TechnologyNews"
-                        basePath="information-technology-department/technology-news"
+                        basePath="information-technology/technology-news"
                         defaultCategory="Tech News"
                     />
                 )}

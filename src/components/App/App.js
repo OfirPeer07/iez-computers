@@ -49,7 +49,7 @@ function App() {
             <Route path="/cyber/hacking/videos/:id" element={<VideoPlayer />} />
 
             {/* IT Department Section */}
-            <Route path="/information-technology" element={<ITdepartment />} />
+            <Route path="/information-technology/InfoTechDepartment/" element={<ITdepartment />} />
             <Route path="/information-technology/technology-news" element={<TechnologyNews />} />
             <Route path="/information-technology/technology-news/:fileName" element={<TechnologyNews />} />
             <Route path="/information-technology/troubleshooting-guides" element={<TroubleshootingGuides />} />

@@ -189,7 +189,7 @@ const ArticlesList = () => {
   useEffect(() => {
     const loadArticles = async () => {
       try {
-        const context = require.context('../../../public/md/CyberArticles', false, /\.md$/);
+        const context = require.context('../../../../public/md/CyberArticles', true, /\.md$/);
         const articlePromises = context.keys().map(async (fileName) => {
           const response = await fetch(`/md/CyberArticles/${fileName.replace('./', '')}`);
           const content = await response.text();

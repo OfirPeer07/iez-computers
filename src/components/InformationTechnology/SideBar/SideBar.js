@@ -73,7 +73,7 @@ function SideBar() {
           onMouseEnter={() => handleMouseEnter('computer', 'computer')}
           onMouseLeave={handleMouseLeave}
         >
-          <Link to="/information-technology" className="menu-icon">
+          <Link to="/information-technology/InfoTechDepartment" className="menu-icon">
             <img src="/images/computer.png" alt="computer-section" />
           </Link>
           {activeMenu === 'computer' && (

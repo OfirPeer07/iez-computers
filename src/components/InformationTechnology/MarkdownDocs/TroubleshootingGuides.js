@@ -52,7 +52,7 @@ const CodeBlock = ({ className, children }) => {
   );
 };
 
-const splitTextAndWrap = (text, isHeading = false) => {
+const splitTextAndWrap = (text) => {
   if (typeof text !== 'string') return text;
   const regex = /(\([^)]+\)|[a-zA-Z-]+(?:\s+[a-zA-Z-]+)*)/g;
   let lastIndex = 0;

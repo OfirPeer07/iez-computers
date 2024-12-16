@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import remarkEmoji from 'remark-emoji'; // ודא שהתקנת את החבילה הזו
-import '../../styles/Markdown-Global.css';
+import '../MarkdownDocs/Markdown-Global.css';
 import RecommendedArticles from './RecommendedArticles';
 
 const MarkdownDocs = () => {
@@ -17,7 +17,7 @@ const MarkdownDocs = () => {
     useEffect(() => {
         const fetchMarkdownFile = async () => {
             try {
-                const response = await fetch(`/md/${fileName}`); // ודא שהקובץ קיים בתיקיית 'public/md'
+                const response = await fetch(`../../../../public/md/${fileName}`); // ודא שהקובץ קיים בתיקיית 'public/md'
                 if (!response.ok) {
                     throw new Error('Error fetching the Markdown file.');
                 }
@@ -55,19 +55,19 @@ const MarkdownDocs = () => {
 
     const recommendedArticles = [
         {
-            title: "IT Troubleshooting Guide",
-            summary: "Solve common IT problems efficiently.",
-            link: "/information-technology/troubleshooting-guides",
+            title: "Cybersecurity Basics",
+            summary: "Learn the fundamentals of staying safe online.",
+            link: "/cyber/hacking/guides/cybersecurity-basics",
         },
         {
-            title: "Technology News",
-            summary: "All news for IT people.",
-            link: "/information-technology/technology-news",
+            title: "Advanced Hacking Techniques",
+            summary: "Explore the latest methods used in ethical hacking.",
+            link: "/cyber/hacking/articles/advanced-techniques",
         },
     ];
 
     // תנאי להציג את רכיב RecommendedArticles רק בנתיבים הרצויים
-    const showRecommendedArticles = location.pathname.includes('/information-technology/technology-news') || location.pathname.includes('/information-technology/troubleshooting-guides');
+    const showRecommendedArticles = location.pathname.includes('/cyber/hacking/articles') || location.pathname.includes('/cyber/hacking/guides');
 
     return (
         <div className="markdown-docs-container">

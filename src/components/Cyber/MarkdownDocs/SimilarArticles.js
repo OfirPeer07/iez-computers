@@ -37,7 +37,7 @@ const SimilarArticles = ({ currentSlug }) => {
   useEffect(() => {
     const loadSimilarArticles = async () => {
       try {
-        const context = require.context('../../../public/md/CyberArticles', false, /\.md$/);
+        const context = require.context('/md/CyberArticles', false, /\.md$/);
         const articlePromises = context.keys().map(async (fileName) => {
           if (currentSlug && fileName.includes(currentSlug)) return null;
           
@@ -76,7 +76,7 @@ const SimilarArticles = ({ currentSlug }) => {
       <h3>כתבות נוספות שיעניינו אותך</h3>
       {similarArticles.map((article) => (
         <Link 
-          to={`/hacking/cyber-articles/${article.slug}.md`} 
+          to={`/cyber/hacking/articles/${article.slug}.md`} 
           key={article.slug}
           className="similar-article-card"
         >
