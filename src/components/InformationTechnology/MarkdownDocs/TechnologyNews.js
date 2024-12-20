@@ -6,7 +6,7 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import remarkEmoji from 'remark-emoji';
 import { useParams } from 'react-router-dom';
-import InformationTechnologyNav from '../InformationTechnologyNav/InformationTechnologyNav';
+import InfoTechNav from '../InfoTechNav/InfoTechNav';
 import ArticlesList from './ArticlesList';
 
 const CodeBlock = ({ className, children }) => {
@@ -104,7 +104,7 @@ const TechnologyNews = () => {
             )}
 
             <div className="content-wrapper">
-                <InformationTechnologyNav />
+                <InfoTechNav />
                 {fileName ? (
                     <div className="markdown-content" lang={detectLanguageDirection(content)}>
                         {loading && <p>Loading...</p>}

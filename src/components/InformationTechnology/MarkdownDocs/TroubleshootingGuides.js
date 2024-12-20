@@ -6,7 +6,7 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import remarkEmoji from 'remark-emoji';
 import { useParams } from 'react-router-dom';
-import InformationTechnologyNav from '../InformationTechnologyNav/InformationTechnologyNav';
+import InfoTechNav from '../InfoTechNav/InfoTechNav';
 import ArticlesList from './ArticlesList';
 import './ITPages.css';
 
@@ -150,7 +150,7 @@ const TroubleshootingGuides = () => {
             )}
 
             <div className="content-wrapper">
-                <InformationTechnologyNav />
+                <InfoTechNav />
                 {fileName ? (
                     <div className="markdown-content">
                         {loading && <p>Loading...</p>}
