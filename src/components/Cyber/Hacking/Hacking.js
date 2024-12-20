@@ -84,10 +84,10 @@ function Hacking() {
     <div className="app-container">
       <canvas id="matrix" data-testid="matrix"></canvas>
       <div className="hacker2" style={{ backgroundImage: `url(${hackerImage})` }}></div>
-      <div className="rectangle first" onClick={() => handleNavigation('hacking/cyber-articles')}>
+      <div className="rectangle first" onClick={() => handleNavigation('hacking/articles')}>
         <div className="title">Articles</div>
       </div>
-      <div className="rectangle second" onClick={() => handleNavigation('hacking/cyber-guides')}>
+      <div className="rectangle second" onClick={() => handleNavigation('hacking/guides')}>
         <div className="title">Guides</div>
       </div>
       <div className="rectangle third" onClick={() => handleNavigation('hacking/videos')}>

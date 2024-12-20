@@ -1,5 +1,5 @@
 import React from 'react';
-import './ITdepartment.css'; 
+import './InfoTechDepartment.css'; 
 import TechnologyNews from './TechnologyNews.jpg';  
 import TroubleshootingGuides from './TroubleshootingGuides.jpg';
 import BuildingComputers from './BuildingComputers.jpg';

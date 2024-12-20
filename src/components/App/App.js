@@ -5,7 +5,7 @@ import './App.css';
 // Import all Information Technology components  
 import InformationTechnology from '../InformationTechnology/InformationTechnology';
 import TechnologyNews from '../InformationTechnology/MarkdownDocs/TechnologyNews';
-import ITdepartment from '../InformationTechnology/ITdepartment/ITdepartment';
+import ITdepartment from '../InformationTechnology/InfoTechDepartment/InfoTechDepartment';
 import TroubleshootingGuides from '../InformationTechnology/MarkdownDocs/TroubleshootingGuides';
 
 // Import all Cyber components  
