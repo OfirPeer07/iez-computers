@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 
 // Import all Information Technology components  
@@ -9,7 +9,7 @@ import ITdepartment from '../InformationTechnology/InfoTechDepartment/InfoTechDe
 import TroubleshootingGuides from '../InformationTechnology/MarkdownDocs/TroubleshootingGuides';
 
 // Import all Cyber components  
-import Cyber from '../Cyber/Cyber'
+import Cyber from '../Cyber/Cyber';
 import Hacking from '../Cyber/Hacking/Hacking';
 import CyberArticles from '../Cyber/MarkdownDocs/CyberArticles';
 import CyberGuides from '../Cyber/MarkdownDocs/CyberGuides';
@@ -19,16 +19,15 @@ import VideoPlayer from '../Cyber/Videos/VideoPlayer';
 // Import all General components  
 import PageNotFound from '../PageNotFound/PageNotFound';
 import MainPage from '../MainPage/MainPage';
-import SideBar from '../Cyber/SideBar/SideBar'; //צריך להוסיף גם לדף איי.טיי את הסייד-בר
+import SideBar from '../Cyber/SideBar/SideBar';
 import ContactUs from '../ContactUs/ContactUs';
-
 
 function App() {
   return (
     <Router>
       <div className="App">
-        {/* Sidebar Navigation */}
-        <SideBar />
+        {/* Conditionally Render Sidebar */}
+        <ConditionalSidebar />
         <div className="content">
           <Routes>
             {/* Routin to: Relevant MainPage */}
@@ -63,6 +62,15 @@ function App() {
       </div>
     </Router>
   );
+}
+
+// Component to conditionally render the sidebar
+function ConditionalSidebar() {
+  const location = useLocation();
+  // Add more paths to exclude the sidebar if needed
+  const excludedPaths = ['/'];
+
+  return !excludedPaths.includes(location.pathname) ? <SideBar /> : null;
 }
 
 export default App;

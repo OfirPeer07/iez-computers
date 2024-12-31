@@ -1,51 +1,101 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './MainPage.css'; // Importing CSS for styles
-import cyberImage from './Cyber.png';
-import itImage from './IT.png';
+import cyberImage from './Cyber.gif';
+import itImage from './IT.gif';
 
 const MainPage = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isMoving, setIsMoving] = useState(false);
+
   const navigateTo = (path) => {
     window.location.href = path;
   };
 
+  const handleImageClick = useCallback((imageType) => {
+    if (isMoving) return;
+
+    setIsMoving(true);
+    setSelectedImage(imageType);
+
+    setTimeout(() => {
+      navigateTo(imageType === 'IT' ? '/information-technology' : '/cyber');
+      setIsMoving(false);
+    }, 1000); // Add transition delay for a smoother navigation effect
+  }, [isMoving]);
+
+  // Adding event listener on title click for ball animation
+  useEffect(() => {
+    const handleTitleClick = () => {
+      let balls = document.querySelectorAll(".ball");
+      balls.forEach((ball, index) => {
+        ball.style.animationDelay = `${index * 0.1}s`;
+        ball.classList.add('swing');  // Add the swing effect
+      });
+    };
+
+    const titleElement = document.querySelector(".title");
+    titleElement.addEventListener("click", handleTitleClick);
+
+    return () => {
+      titleElement.removeEventListener("click", handleTitleClick); // Clean up listener
+    };
+  }, []);
+
   return (
     <div className="main-page">
-      <header className="main-header">
-        <h1 className="main-title">Welcome to the Future</h1>
-        <p className="main-subtitle">Explore the cutting-edge worlds of Cybersecurity and IT</p>
+      {/* Descriptive header */}
+      <header className="title-container">
+        <div className="title-ball-container">
+          <div className="ball" id="ball1"></div>
+          <div className="ball" id="ball2"></div>
+          <div className="ball" id="ball3"></div>
+          <div className="ball" id="ball4"></div>
+          <div className="ball" id="ball5"></div>
+        </div>
+        <h1 className="title">Welcome To IEZ Website</h1>
       </header>
 
-      <div className="cyber-it-navigation">
-        <div
-          className="image-container"
-          onClick={() => navigateTo('/cyber')}
+      <main className="cyber-it-navigation">
+        <section
+          className={`image-container-wrapper-it ${selectedImage === 'IT' ? 'selected' : ''}`}
         >
-          <img src={cyberImage} alt="Cyber Main Page" className="navigation-image" />
-          <div className="overlay">
-            <div className="overlay-content">
-              <h2 className="overlay-title">Cyber Main Page</h2>
-              <p className="overlay-description">Step into the world of Cybersecurity and protect the future.</p>
-            </div>
+          <div
+            className={`image-container ${selectedImage === 'IT' ? 'move-right no-hover' : ''} ${selectedImage && selectedImage !== 'IT' ? 'blackout' : ''}`}
+            role="button"
+            aria-label="Navigate to IT Main Page"
+            aria-live="polite"
+            onClick={() => handleImageClick('IT')}
+          >
+            <img src={itImage} alt="IT Main Page" className="navigation-image" />
           </div>
-        </div>
+          <div
+            className={`title-box ${selectedImage === 'IT' ? 'move-right' : selectedImage === 'Cyber' ? 'move-left' : 'reset'}`}
+          >
+            <h2 className="photo-title">IT</h2>
+            <p className="photo-subtitle">Innovate with cutting-edge IT solutions.</p>
+          </div>
+        </section>
 
-        <div
-          className="image-container"
-          onClick={() => navigateTo('/information-technology')}
+        <section
+          className={`image-container-wrapper-cyber ${selectedImage === 'Cyber' ? 'selected' : ''}`}
         >
-          <img src={itImage} alt="Information Technology Main Page" className="navigation-image" />
-          <div className="overlay">
-            <div className="overlay-content">
-              <h2 className="overlay-title">Information Technology Main Page</h2>
-              <p className="overlay-description">Discover IT innovations that drive success.</p>
-            </div>
+          <div
+            className={`image-container ${selectedImage === 'Cyber' ? 'move-left no-hover' : ''} ${selectedImage && selectedImage !== 'Cyber' ? 'blackout' : ''}`}
+            role="button"
+            aria-label="Navigate to Cyber Main Page"
+            aria-live="polite"
+            onClick={() => handleImageClick('Cyber')}
+          >
+            <img src={cyberImage} alt="Cyber Main Page" className="navigation-image" />
           </div>
-        </div>
-      </div>
-
-      <footer className="main-footer">
-        <p className="footer-text">&#169; 2024 Future Visions. All rights reserved.</p>
-      </footer>
+          <div
+            className={`title-box ${selectedImage === 'Cyber' ? 'move-left' : selectedImage === 'IT' ? 'move-right' : 'reset'}`}
+          >
+            <h2 className="photo-title">Cyber</h2>
+            <p className="photo-subtitle">Secure the future with advanced cybersecurity.</p>
+          </div>
+        </section>
+      </main>
     </div>
   );
 };

@@ -4,71 +4,55 @@
   --primary-color: #17ca07;
   --bg-color: black;
   --text-color: white;
-  --rectangle-width: 26.5vw; /* Keeping width fixed relative to viewport */
-  --rectangle-height: 30vh;  /* Keeping height fixed relative to viewport */
+  --rectangle-width: 26.5vw;
+  --rectangle-height: 30vh;
 }
 
 html, body {
   margin: 0;
+  padding: 0;
   background: var(--bg-color);
   color: var(--primary-color);
-  height: 100vh; 
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
 .app-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
 }
 
 #matrix {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; 
-  height: 100vh; 
-  max-width: 100vw;
-  max-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
   z-index: -1;
   pointer-events: none;
 }
 
-/*.hacker2 {
-  position: absolute;
-  top: 85%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20vw;
-  height: 30vh;
-  max-width: 100vw;
-  max-height: 100vh;
-  background-image: url('../../images/backgrounds/hacker.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 9999;
-}*/
-
 .hacker2 {
-  position: absolute;
-  top: 80%;
+  position: fixed;
+  bottom: 0;
   left: 51.2%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   width: 20vw;
-  height: 45vh;
-  max-width: none;
-  max-height: none;
+  height: 35vh;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: bottom;
   z-index: 9999;
 }
 
-/* Common Rectangle Styles */
 .rectangle {
-  position: absolute;
+  position: fixed;
   background-color: rgba(255, 255, 255, 0.1);
   border: 2px solid #17ca07;
   opacity: 0;
@@ -83,32 +67,45 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: var(--rectangle-width);   /* Using viewport-based width */
-  height: var(--rectangle-height); /* Using viewport-based height */
+  width: var(--rectangle-width);
+  height: var(--rectangle-height);
 }
 
 .rectangle.first {
-  top: 35.5%;
+  top: 46.5%;
   left: 67.8%;
   transform: translate(-50%, -50%) rotateY(20deg);
   animation-delay: 0.525s;
-  background-image: url('./articles.jpg');
 }
 
 .rectangle.second {
-  top: 35.5%;
+  top: 46.5%;
   right: 65%;
   transform: translateY(-50%, -50%) rotateY(-20deg);
   animation-delay: 0.525s;
-  background-image: url('./guides.jpg');
 }
 
 .rectangle.third {
-  top: 10.5%;
+  top: 19.5%;
   left: 38%;
   transform: translate(-50%, -50%);
   animation-delay: 0.55s;
-  background-image: url('./videos.jpg');
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.background-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @keyframes float {
@@ -212,4 +209,3 @@ html, body {
     height: 45vh;
   }
 }
-

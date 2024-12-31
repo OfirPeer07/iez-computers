@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import './Hacking.css';
 import hackerImage from './Hacker.png';
+import videosVideo from './videos.mp4';
+import articlesVideo from './articles.mp4';
+import guidesVideo from './guides.mp4';
 
 function Hacking() {
   useEffect(() => {
@@ -85,12 +88,21 @@ function Hacking() {
       <canvas id="matrix" data-testid="matrix"></canvas>
       <div className="hacker2" style={{ backgroundImage: `url(${hackerImage})` }}></div>
       <div className="rectangle first" onClick={() => handleNavigation('hacking/articles')}>
+        <video className="background-video" autoPlay loop muted playsInline>
+          <source src={articlesVideo} type="video/mp4" />
+        </video>
         <div className="title">Articles</div>
       </div>
       <div className="rectangle second" onClick={() => handleNavigation('hacking/guides')}>
+        <video className="background-video" autoPlay loop muted playsInline>
+          <source src={guidesVideo} type="video/mp4" />
+        </video>
         <div className="title">Guides</div>
       </div>
       <div className="rectangle third" onClick={() => handleNavigation('hacking/videos')}>
+        <video className="background-video" autoPlay loop muted playsInline>
+          <source src={videosVideo} type="video/mp4" />
+        </video>
         <div className="title">Videos</div>
       </div>
     </div>
