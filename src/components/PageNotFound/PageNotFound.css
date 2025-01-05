@@ -17,7 +17,7 @@ body .page-not-found-container{
   background-position: 25vmax;
 }
 
-.hacker {
+.hackerPNF {
   position: fixed;
   background-size: contain;
   background-repeat: no-repeat;
@@ -259,7 +259,7 @@ body .page-not-found-container{
     font-size: 3.5rem;
   }
 
-  .hacker {
+  .hackerPNF {
     width: 100vmin;
     height: 100vmin;
     top: auto;
@@ -271,7 +271,7 @@ body .page-not-found-container{
 
 /* מובייל קטן */
 @media screen and (max-width: 480px) {
-  .hacker {
+  .hackerPNF {
     width: 90vmin;
     height: 90vmin;
     bottom: 0vh;
@@ -282,7 +282,7 @@ body .page-not-found-container{
 
 /* מובייל גדול וטאבלט קטן */
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  .hacker {
+  .hackerPNF {
     width: 85vmin;
     height: 85vmin;
     bottom: -5vh;
@@ -293,7 +293,7 @@ body .page-not-found-container{
 
 /* טאבלט */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-  .hacker {
+  .hackerPNF {
     width: 70vmax;
     height: 70vmax;
     bottom: -10vh;
@@ -303,7 +303,7 @@ body .page-not-found-container{
 
 /* לפטופים */
 @media screen and (min-width: 1025px) and (max-width: 1366px) {
-  .hacker {
+  .hackerPNF {
     width: 65vmax;
     height: 65vmax;
     bottom: -20vh;
@@ -313,7 +313,7 @@ body .page-not-found-container{
 
 /* מסכי FHD */
 @media screen and (min-width: 1367px) and (max-width: 1920px) {
-  .hacker {
+  .hackerPNF {
     width: 60vmax;
     height: 60vmax;
     bottom: -20vh;
@@ -323,7 +323,7 @@ body .page-not-found-container{
 
 /* מסכי 21:9 */
 @media (min-aspect-ratio: 21/9) {
-  .hacker {
+  .hackerPNF {
     width: 55vmax;
     height: 55vmax;
     bottom: -30vh;
@@ -333,7 +333,7 @@ body .page-not-found-container{
 
 /* התאמה למצב לאנדסקייפ במובייל */
 @media screen and (max-width: 900px) and (orientation: landscape) {
-  .hacker {
+  .hackerPNF {
     width: 70vmin;
     height: 70vmin;
     bottom: -35vh;
@@ -346,7 +346,7 @@ body .page-not-found-container{
     top: 40%;
   }
 
-  .hacker {
+  .hackerPNF {
     bottom: -30vh;
   }
 }

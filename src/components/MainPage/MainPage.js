@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './MainPage.css'; // Importing CSS for styles
-import cyberImage from './Cyber.gif';
-import itImage from './IT.gif';
+import cyberImage from './Cyber.mp4';
+import itImage from './IT.mp4';
 
 const MainPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -66,7 +66,15 @@ const MainPage = () => {
             aria-live="polite"
             onClick={() => handleImageClick('IT')}
           >
-            <img src={itImage} alt="IT Main Page" className="navigation-image" />
+            <video
+              className="navigation-video" src={itImage} autoPlay loop muted style={{
+                maxWidth: '100%',
+                maxHeight: '125%',
+                objectFit: 'contain',
+                width: 'auto',
+                height: 'auto',
+              }}
+            />
           </div>
           <div
             className={`title-box ${selectedImage === 'IT' ? 'move-right' : selectedImage === 'Cyber' ? 'move-left' : 'reset'}`}
@@ -86,7 +94,15 @@ const MainPage = () => {
             aria-live="polite"
             onClick={() => handleImageClick('Cyber')}
           >
-            <img src={cyberImage} alt="Cyber Main Page" className="navigation-image" />
+            <video
+              className="navigation-video" src={cyberImage} autoPlay loop muted style={{
+                maxWidth: '100%',
+                maxHeight: '125%',
+                objectFit: 'contain',
+                width: 'auto',
+                height: 'auto',
+              }}
+            />
           </div>
           <div
             className={`title-box ${selectedImage === 'Cyber' ? 'move-left' : selectedImage === 'IT' ? 'move-right' : 'reset'}`}

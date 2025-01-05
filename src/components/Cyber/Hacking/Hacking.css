@@ -38,7 +38,7 @@ html, body {
   pointer-events: none;
 }
 
-.hacker2 {
+.hacker {
   position: fixed;
   bottom: 0;
   left: 51.2%;
@@ -49,6 +49,44 @@ html, body {
   background-repeat: no-repeat;
   background-position: bottom;
   z-index: 9999;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hacker:active {
+  animation: clickEffect 0.3s ease-out;
+}
+
+@keyframes clickEffect {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(5.05);
+  }
+}
+
+.hacker.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.click-me {
+  position: fixed;
+  cursor: pointer;
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px #ffffff;
+  letter-spacing: 0.15em;
+  bottom: 0;
+  top: 67%;
+  left: 38.7%;
+  opacity: 1;
+  pointer-events: none;
+  animation: fadeIn 2s forwards, glow 1.5s infinite alternate, float 3s infinite alternate ease-in-out;
 }
 
 .rectangle {
@@ -102,21 +140,6 @@ html, body {
   z-index: -1;
 }
 
-.background-video video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(10px);
-  }
-}
-
 .rectangle::before {
   content: '';
   position: absolute;
@@ -139,7 +162,7 @@ html, body {
   border-color: #17ca07;
 }
 
-.title {
+.hackingTitle {
   position: absolute;
   bottom: 40%;
   left: 50%;
@@ -154,7 +177,7 @@ html, body {
   z-index: 1; /* Ensure title is above blur effect */
 }
 
-.rectangle:hover .title {
+.rectangle:hover .hackingTitle {
   opacity: 1;
   font-weight: bold;
   text-shadow: 0 0 10px #ffffff;
@@ -167,13 +190,17 @@ html, body {
   }
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
-  .hacker {
-    width: 25vw;
-    height: 40vh;
-  }
-
   .rectangle {
     width: 35vw; /* Adjusting for smaller screens */
     height: 25vh; /* Keeping the aspect ratio */
@@ -181,22 +208,18 @@ html, body {
 }
 
 @media (max-width: 480px) {
-  .hacker {
-    width: 35vw;
-    height: 30vh;
-  }
-
   .rectangle {
     width: 45vw;
     height: 20vh;
   }
 
-  .title {
+  .hackingTitle {
     font-size: 1rem;
   }
 }
+
 @media (min-aspect-ratio: 21/9) {
-  .hacker2 {
+  .hacker {
     width: 18vw;
     height: 40vh;
     left: 50%;
@@ -204,7 +227,7 @@ html, body {
 }
 
 @media (min-aspect-ratio: 16/9) and (max-aspect-ratio: 21/9) {
-  .hacker2 {
+  .hacker {
     width: 20vw;
     height: 45vh;
   }
