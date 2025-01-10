@@ -5,6 +5,7 @@ import './App.css';
 // Import all Information Technology components  
 import InformationTechnology from '../InformationTechnology/InformationTechnology';
 import TechnologyNews from '../InformationTechnology/MarkdownDocs/TechnologyNews';
+import BuildingComputers from '../InformationTechnology/BuildingComputers/BuildingComputers';
 import ITdepartment from '../InformationTechnology/InfoTechDepartment/InfoTechDepartment';
 import TroubleshootingGuides from '../InformationTechnology/MarkdownDocs/TroubleshootingGuides';
 
@@ -53,7 +54,7 @@ function App() {
             <Route path="/information-technology/technology-news/:fileName" element={<TechnologyNews />} />
             <Route path="/information-technology/troubleshooting-guides" element={<TroubleshootingGuides />} />
             <Route path="/information-technology/troubleshooting-guides/:fileName" element={<TroubleshootingGuides />} />
-            <Route path="/information-technology/building-computers" element={<TroubleshootingGuides />} />
+            <Route path="/information-technology/building-computers" element={<BuildingComputers />} />
 
             {/* 404 Not Found */}
             <Route path="*" element={<PageNotFound />} />

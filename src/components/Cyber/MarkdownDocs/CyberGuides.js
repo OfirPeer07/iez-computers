@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import rehypeRaw from 'rehype-raw';
-import matter from 'gray-matter';
 import remarkGfm from 'remark-gfm';
 import remarkEmoji from 'remark-emoji';
 import { useParams, Link } from 'react-router-dom';
 import CyberNav from '../CyberNav/CyberNav';
 import ArticlesList from './ArticlesList';
 
-// CSS imports order is important!
+// Import languages for syntax highlighting
+import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
+import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
+import python from 'react-syntax-highlighter/dist/esm/languages/prism/python';
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
+import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
+
+// CSS imports
 import './Markdown-Global.css';    // 1. Base styles
 import './CyberPages.css';        // 2. Cyber specific layout
+
+// Register languages
+SyntaxHighlighter.registerLanguage('javascript', javascript);
+SyntaxHighlighter.registerLanguage('json', json);
+SyntaxHighlighter.registerLanguage('python', python);
+SyntaxHighlighter.registerLanguage('bash', bash);
+SyntaxHighlighter.registerLanguage('css', css);
 
 const CodeBlock = ({ className, children }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -58,6 +71,40 @@ const CodeBlock = ({ className, children }) => {
   );
 };
 
+const extractMetadata = (markdown) => {
+  const metadata = {
+    title: '',
+    date: null,
+    description: '',
+    thumbnail: ''
+  };
+
+  const lines = markdown.split('\n');
+  let contentStart = 0;
+  let inMetadata = false;
+
+  // Extract metadata section
+  if (lines[0]?.trim() === '---') {
+    inMetadata = true;
+    for (let i = 1; i < lines.length; i++) {
+      if (lines[i]?.trim() === '---') {
+        contentStart = i + 1;
+        break;
+      }
+      const [key, ...valueParts] = lines[i].split(':');
+      if (key && valueParts.length) {
+        const value = valueParts.join(':').trim();
+        metadata[key.trim()] = value;
+      }
+    }
+  }
+
+  return {
+    ...metadata,
+    content: lines.slice(contentStart).join('\n')
+  };
+};
+
 const CyberGuides = () => {
   const { fileName } = useParams();
   const [content, setContent] = useState('');
@@ -73,7 +120,7 @@ const CyberGuides = () => {
           const response = await fetch(`/md/CyberGuides/${fileName}`);
           if (!response.ok) throw new Error('Content not found');
           const text = await response.text();
-          const { content: strippedContent } = matter(text);
+          const { content: strippedContent } = extractMetadata(text);
           setContent(strippedContent);
           setError(null);
         } catch (err) {
