@@ -62,9 +62,10 @@ body {
 /* Image container */
 .image-container {
   position: relative;
-  width: 45vw; /* Slightly smaller width */
+  width: 25vw; /* Slightly smaller width */
   max-width: 50rem; /* Reduced max width */
-  height: 75vh; /* Reduced height */
+  height: 45.4vh; /* Reduced height */
+  max-height: 50rem;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 255, 0, 0.7);
@@ -90,7 +91,7 @@ body {
 
 /* Navigation image styles */
 .navigation-image {
-  width: 100%;
+  width: 2%;
   height: 100%;
   object-fit: contain; /* Ensure the full image is visible */
   transform: scale(0.8); /* Reduce size to 80% */

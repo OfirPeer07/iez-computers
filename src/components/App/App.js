@@ -20,7 +20,8 @@ import VideoPlayer from '../Cyber/Videos/VideoPlayer';
 // Import all General components  
 import PageNotFound from '../PageNotFound/PageNotFound';
 import MainPage from '../MainPage/MainPage';
-import SideBar from '../Cyber/SideBar/SideBar';
+import CyberBar from '../Cyber/CyberBar/CyberBar';
+import InfoTechBar from '../InformationTechnology/InfoTechBar/InfoTechBar';
 import ContactUs from '../ContactUs/ContactUs';
 
 function App() {
@@ -68,10 +69,19 @@ function App() {
 // Component to conditionally render the sidebar
 function ConditionalSidebar() {
   const location = useLocation();
-  // Add more paths to exclude the sidebar if needed
-  const excludedPaths = ['/'];
+  
+  // Conditionally render CyberBar or InfoTechBar based on the path
+  if (location.pathname.startsWith('/cyber')) {
+    return <CyberBar />;
+  }
 
-  return !excludedPaths.includes(location.pathname) ? <SideBar /> : null;
+  if (location.pathname.startsWith('/information-technology')) {
+    return <InfoTechBar />;
+  }
+
+  // No sidebar for other routes
+  return null;
 }
 
 export default App;
+ 

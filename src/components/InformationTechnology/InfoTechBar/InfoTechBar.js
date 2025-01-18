@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './SideBar.css';
+import './InfoTechBar.css';
 
 function SideBar() {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -44,30 +44,6 @@ function SideBar() {
   return (
     <div className="sidebar">
       <ul>
-        {/* Section 1 - Hacking */}
-        <li
-          className="hacking-icon"
-          onMouseEnter={() => handleMouseEnter('hacking', 'hacking')}
-          onMouseLeave={handleMouseLeave}
-        >
-          <Link to="/cyber/hacking" className="menu-icon">
-            <img
-              src={hoverImage === 'hackerLogo' ? '/images/hackerLogo.png' : '/images/hackerLogo.png'}
-              alt="Hacking"
-            />
-          </Link>
-          {activeMenu === 'hacking' && (
-            <div
-              className="dropdown-menu"
-              onMouseEnter={handleMenuMouseEnter}
-              onMouseLeave={handleMenuMouseLeave}
-            >
-              <Link to="/cyber/hacking/guides">מדריכי סייבר</Link>
-              <Link to="/cyber/hacking/articles">מאמרי סייבר</Link>
-              <Link to="/cyber/hacking/videos">סרטוני סייבר</Link>
-            </div>
-          )}
-        </li>
         {/* Section 2 - Computer */}
         <li
           onMouseEnter={() => handleMouseEnter('computer', 'computer')}

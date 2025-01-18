@@ -39,8 +39,8 @@ html, body {
 }
 
 .hacker {
-  position: relative;
-  bottom: -25%;
+  position: fixed;
+  bottom: -5%;
   left: 50%;
   transform: translateX(-50%);
   width: 20vw;
@@ -69,7 +69,7 @@ html, body {
   pointer-events: none;
 }
 
-.click-me {
+/*.click-me {
   position: fixed;
   cursor: pointer;
   text-align: center;
@@ -86,7 +86,7 @@ html, body {
   pointer-events: none;
   animation-delay: 2.55s;
   animation: fadeIn 2s forwards, glow 1.5s infinite alternate, float 3s infinite alternate ease-in-out;
-}
+}*/
 
 .rectangle {
   position: fixed;

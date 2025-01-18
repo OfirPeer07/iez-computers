@@ -107,7 +107,7 @@ function Hacking() {
           style={{ backgroundImage: `url(${hackerImage})` }}
           onClick={handleHackerClick}
         >
-          <div className="click-me">Click Me</div>
+          {/*<div className="click-me">Click Me</div>*/}
         </div>
       )}
 

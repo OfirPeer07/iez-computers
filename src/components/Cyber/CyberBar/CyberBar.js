@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './SideBar.css';
+import './CyberBar.css';
 
 function SideBar() {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -65,26 +65,6 @@ function SideBar() {
               <Link to="/cyber/hacking/guides">מדריכי סייבר</Link>
               <Link to="/cyber/hacking/articles">מאמרי סייבר</Link>
               <Link to="/cyber/hacking/videos">סרטוני סייבר</Link>
-            </div>
-          )}
-        </li>
-        {/* Section 2 - Computer */}
-        <li
-          onMouseEnter={() => handleMouseEnter('computer', 'computer')}
-          onMouseLeave={handleMouseLeave}
-        >
-          <Link to="/information-technology/InfoTechDepartment" className="menu-icon">
-            <img src="/images/computer.png" alt="computer-section" />
-          </Link>
-          {activeMenu === 'computer' && (
-            <div
-              className="dropdown-menu"
-              onMouseEnter={handleMenuMouseEnter}
-              onMouseLeave={handleMenuMouseLeave}
-            >
-              <Link to="/information-technology/troubleshooting-guides">מדריכי פתרון תקלות</Link>
-              <Link to="/information-technology/technology-news">חדשות טכנולוגיה</Link>
-              <Link to="/information-technology/building-computers">הרכבות מחשבים</Link>
             </div>
           )}
         </li>
