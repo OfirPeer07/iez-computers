@@ -73,15 +73,76 @@
 .videos-list-page .video-scroll {
   display: flex !important;
   flex-direction: row !important; /* Changed from row-reverse to row for RTL */
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  overflow-y: hidden;
   gap: 1.5rem;
   padding-bottom: 1rem;
   margin-bottom: 0.5rem;
-  scroll-snap-type: x mandatory;
+  height: auto !important;
+  position: relative;
   scrollbar-width: thin;
   scrollbar-color: var(--main-color) var(--background-color);
-  height: auto !important;
+}
+
+.videos-list-page .video-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.videos-list-page .video-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 255, 0, 0.1);
+  border-radius: 4px;
+}
+
+.videos-list-page .video-scroll::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 4px;
+}
+
+.videos-list-page .video-scroll::-webkit-scrollbar-thumb:hover {
+  background: #00cc00;
+}
+
+.videos-list-page .video-scroll > * {
+  flex-shrink: 0;
+}
+
+.videos-list-page .video-scroll:active {
+  cursor: grabbing;
+}
+
+.videos-list-page .video-scroll-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+.videos-list-page .video-scroll-wrapper .scroll-arrow {
+  position: absolute;
+  cursor: pointer;
+  z-index: 100;
+  padding: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 5.5rem !important;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+}
+
+.videos-list-page .video-scroll-wrapper .scroll-arrow.left {
+  right: -100px;
+}
+
+.videos-list-page .video-scroll-wrapper .scroll-arrow.right {
+  left: -100px;
+}
+
+.videos-list-page .video-scroll-wrapper .scroll-arrow:hover {
+  transform: translateY(-50%) scale(1.2);
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+  color: #fff;
 }
 
 .videos-list-page .video-item {
@@ -180,35 +241,6 @@
 
 .error {
   color: var(--error-color);
-}
-
-/* Custom scrollbar styles */
-.videos-list-page .custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: var(--main-color) var(--background-color);
-}
-
-.videos-list-page .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.videos-list-page .custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--background-color);
-  border-radius: 4px;
-}
-
-.videos-list-page .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--main-color);
-  border-radius: 4px;
-}
-
-.videos-list-page .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--hover-color);
-}
-
-.videos-list-page .custom-scrollbar::-webkit-scrollbar-button {
-  display: none;
 }
 
 /* Responsive design */

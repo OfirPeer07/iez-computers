@@ -92,6 +92,161 @@ VideoItem.propTypes = {
   playlistFolder: PropTypes.string.isRequired,
 };
 
+const VideoCategory = React.memo(({ playlist }) => {
+  const [scrollState, setScrollState] = useState({
+    canScrollLeft: false,
+    canScrollRight: false,
+    contentWidth: 0,
+    containerWidth: 0
+  });
+  const [hasScroll, setHasScroll] = useState(false);
+  const scrollRef = useRef(null);
+  const scrollCheckRef = useRef(null);
+
+  const updateScrollState = useCallback(() => {
+    if (!scrollRef.current) return;
+    
+    const container = scrollRef.current;
+    const contentWidth = container.scrollWidth;
+    const containerWidth = container.clientWidth;
+    
+    console.log('Scroll Debug:', { contentWidth, containerWidth });
+    
+    setScrollState({
+      canScrollRight: true,
+      canScrollLeft: true,
+      contentWidth,
+      containerWidth
+    });
+  }, []);
+
+  const handleScroll = useCallback((direction) => {
+    if (!scrollRef.current) return;
+    
+    const container = scrollRef.current;
+    const scrollAmount = container.clientWidth * 0.8;
+    
+    container.scrollBy({
+      left: direction === 'left' ? scrollAmount : -scrollAmount,
+      behavior: 'smooth'
+    });
+  }, []);
+
+  const checkForScroll = useCallback(() => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const hasHorizontalScroll = container.scrollWidth > container.clientWidth;
+    setHasScroll(hasHorizontalScroll);
+  }, []);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    checkForScroll();
+
+    const resizeObserver = new ResizeObserver(() => {
+      checkForScroll();
+    });
+
+    resizeObserver.observe(container);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [checkForScroll]);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const handleWheel = (e) => {
+      e.preventDefault();
+      const scrollAmount = 300; // הגדלת מהירות הגלילה
+      
+      // גלילה מיידית במקום smooth
+      container.scrollBy({
+        left: e.deltaY > 0 ? scrollAmount : -scrollAmount,
+        behavior: 'auto'
+      });
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const handleScrollEvent = () => {
+      updateScrollState();
+    };
+
+    container.addEventListener('scroll', handleScrollEvent, { passive: true });
+
+    return () => {
+      container.removeEventListener('scroll', handleScrollEvent);
+    };
+  }, [updateScrollState]);
+
+  return (
+    <div className="video-category">
+      <h2 className="category-title">{playlist.title}</h2>
+      <div className="video-scroll-wrapper">
+        {hasScroll && (
+          <>
+            <div 
+              className={`scroll-arrow left`}
+              onClick={() => handleScroll('left')}
+              style={{ fontSize: '2rem', color: '#00ff00' }}
+            >
+              ‹
+            </div>
+            <div 
+              className={`scroll-arrow right`}
+              onClick={() => handleScroll('right')}
+              style={{ fontSize: '2rem', color: '#00ff00' }}
+            >
+              ›
+            </div>
+          </>
+        )}
+        <div 
+          ref={scrollRef}
+          className="video-scroll custom-scrollbar"
+        >
+          {playlist.videos.map((video) => (
+            <VideoItem 
+              key={video.id} 
+              video={video} 
+              playlistFolder={playlist.folder} 
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+});
+
+VideoCategory.propTypes = {
+  playlist: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    folder: PropTypes.string.isRequired,
+    videos: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        filename: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+};
+
 const VideosList = () => {
   const [playlists, setPlaylists] = useState([]);
   const [error, setError] = useState(null);
@@ -119,18 +274,7 @@ const VideosList = () => {
 
   const renderedPlaylists = useMemo(() => (
     playlists.map((playlist) => (
-      <div key={playlist.id} className="video-category">
-        <h2 className="category-title">{playlist.title}</h2>
-        <div className="video-scroll custom-scrollbar">
-          {playlist.videos.map((video) => (
-            <VideoItem 
-              key={video.id} 
-              video={video} 
-              playlistFolder={playlist.folder} 
-            />
-          ))}
-        </div>
-      </div>
+      <VideoCategory key={playlist.id} playlist={playlist} />
     ))
   ), [playlists]);
 

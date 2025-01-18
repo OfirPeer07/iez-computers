@@ -32,6 +32,39 @@
   text-align: right; /* Add this line to align to right */
 }
 
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+}
+
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-container .video-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+}
+
+.video-container.loaded .video-placeholder {
+  display: none;
+}
+
 .back-to-videos {
   display: inline-block;
   text-decoration: none;
@@ -103,6 +136,7 @@
 .next-video:hover {
   background-color: var(--main-color);
   color: var(--background-color);
+  transform: scale(1.05);
 }
 
 .prev-video:active,
@@ -147,6 +181,12 @@
 
 .related-video-item {
   margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.related-video-item:hover {
+  transform: translateX(-5px);
 }
 
 .related-video-item .video-item {
@@ -154,6 +194,12 @@
   flex-direction: column; /* שינוי לסידור אנכי */
   text-decoration: none;
   color: var(--text-color);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.related-video-item .video-item:hover {
+  transform: scale(1.02);
 }
 
 .related-video-item .video-thumbnail {
@@ -164,6 +210,12 @@
   overflow: hidden;
   border-radius: 8px;
   margin-bottom: 0.5rem; /* מרווח קטן מתחת לתמונה */
+  cursor: pointer;
+}
+
+.related-video-item .video-thumbnail:hover .play-button {
+  transform: scale(1.1);
+  background-color: rgba(0, 255, 0, 0.8);
 }
 
 .related-video-item .video-thumbnail img,
@@ -452,4 +504,70 @@
 .video-md-content {
   direction: rtl !important;
   text-align: right !important;
+}
+.video-md-content h4 { font-size: 1.6rem !important; }
+.video-md-content h5 { font-size: 1.4rem !important; }
+.video-md-content h6 { font-size: 1.2rem !important; }
+
+.video-info {
+  margin-top: 1rem;
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.video-info h1 {
+  font-size: 2rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+  direction: rtl;
+  text-align: right;
+}
+
+.video-description {
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.5;
+  direction: rtl;
+  text-align: right;
+}
+
+.video-info h1,
+.video-info p,
+.video-description,
+.video-md-content {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.video-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--main-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  max-width: 45%;
+  direction: rtl;
+}
+
+.nav-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.nav-button.prev-video {
+  margin-right: auto;
+}
+
+.nav-button.next-video {
+  margin-left: auto;
 }
