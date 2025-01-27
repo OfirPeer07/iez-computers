@@ -69,6 +69,11 @@ html, body {
   pointer-events: none;
 }
 
+.sidebar.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /*.click-me {
   position: fixed;
   cursor: pointer;

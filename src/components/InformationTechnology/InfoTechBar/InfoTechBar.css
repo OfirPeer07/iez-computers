@@ -80,106 +80,92 @@ html, body {
   transform: scale(1.1);
 }
 
-.sidebar ul li:hover a.menu-icon {
-  background-color: rgba(23, 202, 7, 0.2);
-  transform: scale(1.05);
+/* Delay for Logo Dropdown Menu */
+.dropdown-menu.logo-menu {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition-delay: 0.6s; /* Matches the computer shift animation duration */
+}
+
+.sidebar ul li.computer .dropdown-menu {
+  left: -32.5rem; /* Shift further to the left */
+  transform: translateY(-50%);
+}
+
+/* Shift animation when hovering over the "logo" */
+.sidebar ul li.computer.shift {
+  transform: translateX(-320px); /* Shift to the left */
+  /*animation: shiftLeft 0.6s ease forwards*/;
+}
+
+/* Return animation when the mouse leaves the "logo" */
+.sidebar ul li.computer.return {
+  animation: returnToPlace 0.6s ease forwards; /* Smooth return animation */
+}
+
+.sidebar ul li.computer {
+  transform: translateX(0); /* Ensure the computer icon starts in its default position */
+  transition: transform 0.6s ease;
+}
+
+@keyframes shiftLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-320px);
+  }
+}
+
+@keyframes returnToPlace {
+  from {
+    transform: translateX(-320px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.sidebar ul li:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%);
+  transition-delay: 0s; /* No delay when showing */
+}
+
+.sidebar ul li .dropdown-menu {
+  transition-delay: 0.5s; /* Delay when hiding */
 }
 
 .dropdown-menu {
   position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 3.7rem;
+  left: calc(7.7rem + -29.2rem); /* Dropdown starts right of the icon */
+  transform: translateY(-50%);
   background-color: rgba(27, 27, 27, 0.95);
-  padding: 8px;
-  border-radius: 8px;
+  padding: 15px;
+  border-radius: 15px;
   box-shadow: 0 4px 15px rgba(23, 202, 7, 0.2);
   z-index: 1001;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  border: 1px solid #17ca07;
-  min-width: 20px;
+  border: 3px solid #17ca07;
+  min-width: 150px;
   backdrop-filter: blur(1px);
-}
-
-.sidebar ul li:hover .dropdown-menu,
-.dropdown-menu:hover {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(10px);
 }
 
 .dropdown-menu a {
   color: #17ca07;
   text-decoration: none;
-  display: flex;
+  display: inline;
   padding: 10px 15px;
   transition: all 0.25s ease;
   direction: rtl;
   text-align: right;
   white-space: nowrap;
-  border-radius: px;
 }
 
 .dropdown-menu a:hover {
   background-color: rgba(23, 202, 7, 0.1);
   color: #ffffff;
-}
-
-/* Ultra-wide screen support */
-@media screen and (min-width: 2560px) {
-  .sidebar ul {
-    gap: 40px;
-  }
-  
-  .sidebar ul li a.menu-icon {
-    width: 140px;
-    height: 140px;
-  }
-  
-  .dropdown-menu {
-    min-width: 25px;
-  }
-}
-
-/* Tablet and mobile support */
-@media screen and (max-width: 1024px) {
-  .sidebar {
-    height: auto;
-    padding: 10px 0;
-  }
-  
-  .sidebar ul {
-    flex-wrap: wrap;
-    gap: 15px;
-  }
-  
-  .sidebar ul li a.menu-icon {
-    width: clamp(50px, 15vw, 80px);
-    height: clamp(50px, 15vw, 80px);
-  }
-  
-  .dropdown-menu {
-    min-width: 150px;
-  }
-}
-
-/* Animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }

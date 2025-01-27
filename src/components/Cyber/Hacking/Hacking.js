@@ -5,10 +5,12 @@ import hackerVideo from './vidHacker.mp4';
 import videosVideo from './videos.mp4';
 import articlesVideo from './articles.mp4';
 import guidesVideo from './guides.mp4';
+import HackingBar from '../Sidebars/HackingBar';
 
 function Hacking() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [rectanglesVisible, setRectanglesVisible] = useState(true); // State for rectangle visibility
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
   useEffect(() => {
     const canvas = document.getElementById('matrix');
@@ -76,6 +78,10 @@ function Hacking() {
   const handleHackerClick = () => {
     setIsVideoPlaying(true);
     setRectanglesVisible(false); // Hide rectangles when video is playing
+    setSidebarVisible(false); // Hide the HackingBar
+    document.querySelectorAll('.sidebar').forEach(sidebar => {
+      sidebar.classList.add('hidden'); // Add the 'hidden' class to hide all sidebars
+    });
   };
 
   const handleNavigation = (path) => {
@@ -85,6 +91,10 @@ function Hacking() {
   const handleVideoEnd = () => {
     setIsVideoPlaying(false);
     setRectanglesVisible(true); // Show rectangles again after the video ends
+    setSidebarVisible(true); // Show the HackingBar
+    document.querySelectorAll('.sidebar').forEach(sidebar => {
+      sidebar.classList.remove('hidden'); // Remove the 'hidden' class to show all sidebars
+    });
   };
 
   return (
@@ -106,12 +116,11 @@ function Hacking() {
           className="hacker"
           style={{ backgroundImage: `url(${hackerImage})` }}
           onClick={handleHackerClick}
-        >
-          {/*<div className="click-me">Click Me</div>*/}
-        </div>
+        />
       )}
-
-      {/* Conditionally render rectangles based on visibility */}
+  
+      {/* Only show the HackingBar if it's visible */}
+      {sidebarVisible && <HackingBar className={sidebarVisible ? '' : 'hidden'} />}
       {rectanglesVisible && (
         <>
           <div className="rectangle first" onClick={() => handleNavigation('hacking/articles')}>
