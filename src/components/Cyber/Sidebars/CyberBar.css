@@ -129,7 +129,8 @@ html, body {
   opacity: 1;
   visibility: visible;
   transform: translateY(-50%);
-  transition-delay: 0s; /* No delay when showing */
+  transition: all 0.3s ease;
+  transition-delay: 0.4s; /* Delay before showing */
 }
 
 .sidebar ul li .dropdown-menu {

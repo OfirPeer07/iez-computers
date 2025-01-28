@@ -4,43 +4,48 @@ import './InfoTechBar.css';
 
 function InfoTechBar() {
   const [activeMenu, setActiveMenu] = useState(null); // Track which menu is active
-  const [shiftComputer, setShiftComputer] = useState(false); // Control the computer icon shift
-  const [hoverLogoTimer, setHoverLogoTimer] = useState(null); // Timer for hover delay on logo
-  const [menuDelayTimer, setMenuDelayTimer] = useState(null); // Timer for menu delay
+  const [shiftComputer, setShiftHacking] = useState(false); // Control the computer icon shift
+  const [hoverLogoTimer, setHoverLogoTimer] = useState(null); // Timer for hover delay
+  const [closeMenuTimer, setCloseMenuTimer] = useState(null); // Timer for fast closing
 
   const handleMouseEnterLogo = () => {
-    // Start the hover delay timer for the "logo"
+    // Start the hover delay timer for the logo menu
+    clearTimeout(closeMenuTimer); // Prevent premature closing
     const shiftTimer = setTimeout(() => {
-      setShiftComputer(true); // Shift the computer icon after 250ms
+      setShiftHacking(true); // Shift the computer icon
       const menuTimer = setTimeout(() => {
-        setActiveMenu('logo'); // Open the logo menu with delay
+        setActiveMenu('logo'); // Open the logo menu with a delay
       }, 400); // Delay for opening the menu
-      setMenuDelayTimer(menuTimer);
-    }, 250); // Hover delay for the logo menu and computer shift
-    setHoverLogoTimer(shiftTimer); // Store the timer
+      setHoverLogoTimer(menuTimer);
+    }, 250); // Delay for logo shift
+    setHoverLogoTimer(shiftTimer);
   };
 
   const handleMouseEnterComputer = () => {
+    clearTimeout(closeMenuTimer); // Prevent premature closing
     setActiveMenu('computer'); // Open the computer menu immediately
   };
 
   const handleMouseLeave = () => {
-    // Clear any pending hover delay for the logo
+    // Clear all opening timers
     clearTimeout(hoverLogoTimer);
-    clearTimeout(menuDelayTimer);
     setHoverLogoTimer(null);
-    setMenuDelayTimer(null);
-    setActiveMenu(null); // Close all menus
-    setShiftComputer(false); // Reset the computer icon position
+
+    // Close menu faster on leave
+    const closeTimer = setTimeout(() => {
+      setActiveMenu(null); // Close menus
+      setShiftHacking(false); // Reset the computer icon position
+    }, 100); // Close immediately with a small delay to prevent flicker
+    setCloseMenuTimer(closeTimer);
   };
 
   useEffect(() => {
-    // Cleanup the hover delay timers on component unmount
+    // Cleanup timers on unmount
     return () => {
       clearTimeout(hoverLogoTimer);
-      clearTimeout(menuDelayTimer);
+      clearTimeout(closeMenuTimer);
     };
-  }, [hoverLogoTimer, menuDelayTimer]);
+  }, [hoverLogoTimer, closeMenuTimer]);
 
   return (
     <div className="sidebar">

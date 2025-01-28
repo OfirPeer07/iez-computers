@@ -5,50 +5,54 @@ import './CyberBar.css';
 function CyberBar() {
   const [activeMenu, setActiveMenu] = useState(null); // Track which menu is active
   const [shiftHacking, setShiftHacking] = useState(false); // Control the hacking icon shift
-  const [hoverLogoTimer, setHoverLogoTimer] = useState(null); // Timer for hover delay on logo
-  const [menuDelayTimer, setMenuDelayTimer] = useState(null); // Timer for menu delay
-
+  const [hoverLogoTimer, setHoverLogoTimer] = useState(null); // Timer for hover delay
+  const [closeMenuTimer, setCloseMenuTimer] = useState(null); // Timer for fast closing
 
   const handleMouseEnterLogo = () => {
-    // Start the hover delay timer for the "logo"
+    // Start the hover delay timer for the logo menu
+    clearTimeout(closeMenuTimer); // Prevent premature closing
     const shiftTimer = setTimeout(() => {
-      setShiftHacking(true); // Shift the hacking icon after 250ms
+      setShiftHacking(true); // Shift the hacking icon
       const menuTimer = setTimeout(() => {
-        setActiveMenu('logo'); // Open the logo menu with delay
+        setActiveMenu('logo'); // Open the logo menu with a delay
       }, 400); // Delay for opening the menu
-      setMenuDelayTimer(menuTimer);
-    }, 250); // Hover delay for the logo menu and hacking shift
-    setHoverLogoTimer(shiftTimer); // Store the timer
+      setHoverLogoTimer(menuTimer);
+    }, 250); // Delay for logo shift
+    setHoverLogoTimer(shiftTimer);
   };
 
   const handleMouseEnterComputer = () => {
+    clearTimeout(closeMenuTimer); // Prevent premature closing
     setActiveMenu('hacking'); // Open the hacking menu immediately
   };
 
   const handleMouseLeave = () => {
-    // Clear any pending hover delay for the logo
+    // Clear all opening timers
     clearTimeout(hoverLogoTimer);
-    clearTimeout(menuDelayTimer);
     setHoverLogoTimer(null);
-    setMenuDelayTimer(null);
-    setActiveMenu(null); // Close all menus
-    setShiftHacking(false); // Reset the hacking icon position
+
+    // Close menu faster on leave
+    const closeTimer = setTimeout(() => {
+      setActiveMenu(null); // Close menus
+      setShiftHacking(false); // Reset the hacking icon position
+    }, 100); // Close immediately with a small delay to prevent flicker
+    setCloseMenuTimer(closeTimer);
   };
 
   useEffect(() => {
-    // Cleanup the hover delay timers on component unmount
+    // Cleanup timers on unmount
     return () => {
       clearTimeout(hoverLogoTimer);
-      clearTimeout(menuDelayTimer);
+      clearTimeout(closeMenuTimer);
     };
-  }, [hoverLogoTimer, menuDelayTimer]);
+  }, [hoverLogoTimer, closeMenuTimer]);
 
   return (
     <div className="sidebar">
       <ul>
         {/* Section 1 - Hacking */}
         <li
-          className={`hacking ${shiftHacking ? 'shift' : ''}`} // No default "return" class
+          className={`hacking ${shiftHacking ? 'shift' : ''}`}
           onMouseEnter={handleMouseEnterComputer}
           onMouseLeave={handleMouseLeave}
         >

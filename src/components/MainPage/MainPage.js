@@ -23,38 +23,8 @@ const MainPage = () => {
     }, 1000); // Add transition delay for a smoother navigation effect
   }, [isMoving]);
 
-  // Adding event listener on title click for ball animation
-  useEffect(() => {
-    const handleTitleClick = () => {
-      let balls = document.querySelectorAll(".ball");
-      balls.forEach((ball, index) => {
-        ball.style.animationDelay = `${index * 0.1}s`;
-        ball.classList.add('swing');  // Add the swing effect
-      });
-    };
-
-    const titleElement = document.querySelector(".title");
-    titleElement.addEventListener("click", handleTitleClick);
-
-    return () => {
-      titleElement.removeEventListener("click", handleTitleClick); // Clean up listener
-    };
-  }, []);
-
   return (
     <div className="main-page">
-      {/* Descriptive header */}
-      <header className="title-container">
-        <div className="title-ball-container">
-          <div className="ball" id="ball1"></div>
-          <div className="ball" id="ball2"></div>
-          <div className="ball" id="ball3"></div>
-          <div className="ball" id="ball4"></div>
-          <div className="ball" id="ball5"></div>
-        </div>
-        <h1 className="title">Welcome To IEZ Website</h1>
-      </header>
-
       <main className="cyber-it-navigation">
         <section
           className={`image-container-wrapper-it ${selectedImage === 'IT' ? 'selected' : ''}`}
