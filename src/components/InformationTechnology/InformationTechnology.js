@@ -4,11 +4,8 @@ import PhotoCarousel from '../InformationTechnology/PhotoCarousel/PhotoCarousel'
 import IndicatorDots from '../InformationTechnology/IndicatorDots/IndicatorDots';
 import welcomeImage from './Sections/welcome.png';
 import welcome2Image from './Sections/welcome2.png';
-import theHood from './Sections/theHood.png';
 import Introduction from './Sections/Introduction';
 import Services from './Sections/Services';
-import ResilienceTester from './Sections/ResilienceTester';
-import TheGreenHood from './Sections/TheGreenHood';
 
 const InformationTechnology = () => {
   const introRef = useRef(null);
@@ -93,19 +90,6 @@ const InformationTechnology = () => {
 
       <div ref={photoCarouselRef} className="carousel-section">
         <PhotoCarousel />
-      </div>
-
-      <div ref={resilienceTestersRef} className="section">
-        <div className="text-image-container">
-          <ResilienceTester />
-        </div>
-      </div>
-
-      <div ref={theGreenHoodRef} className="section">
-        <div className="text-image-container">
-          <img src={theHood} alt="theHood" className="services-image" />
-          <TheGreenHood />
-        </div>
       </div>
     </div>
   );

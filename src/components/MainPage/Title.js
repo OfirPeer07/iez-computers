@@ -1,13 +1,38 @@
-import React from 'react';
-import './Title.css';
+import { useState, useEffect, useRef } from "react";
+import "./Title.css";
 
 const Title = () => {
-  return (
-    <div className="title-container">
-      <h1 className="title">Welcome to IEZ Website</h1>
-      <p className="subtitle">Your gateway to innovation and cybersecurity excellence.</p>
-    </div>
-  );
+  const texts = ["Welcome", "Welcome to IEZ", "Welcome to IEZ Website"];
+  const [currentText, setCurrentText] = useState("");
+  const [textIndex, setTextIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const typingTimeout = useRef(null);
+
+  useEffect(() => {
+    const currentWord = texts[textIndex];
+    const isWordComplete = charIndex === currentWord.length;
+    const isWordEmpty = charIndex === 0;
+    
+    let typingSpeed = isDeleting ? 50 : 100;
+    let delay = isWordComplete ? 1000 : isWordEmpty ? 500 : typingSpeed;
+
+    typingTimeout.current = setTimeout(() => {
+      setCurrentText(currentWord.substring(0, charIndex + (isDeleting ? -1 : 1)));
+      setCharIndex((prev) => prev + (isDeleting ? -1 : 1));
+
+      if (isWordComplete && !isDeleting) {
+        setIsDeleting(true);
+      } else if (isWordEmpty && isDeleting) {
+        setIsDeleting(false);
+        setTextIndex((prev) => (prev + 1) % texts.length);
+      }
+    }, delay);
+
+    return () => clearTimeout(typingTimeout.current);
+  }, [charIndex, isDeleting, textIndex, texts]);
+
+  return <h1 className="typing-title">{currentText}<span className="cursor">|</span></h1>;
 };
 
 export default Title;
