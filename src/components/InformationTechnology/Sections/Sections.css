@@ -1,16 +1,17 @@
 /* General container styling */
 .introduction-container, .services-container {
+  margin-left: -10rem;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  margin-bottom: 2.5rem;
   background-color: #000; /* Dark theme background */
   color: #00ff00; /* Neon green text */
 }
 
 /* ResilienceTester section */
 .rsiliencetester-container {
+  margin-left: 55rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,6 +23,7 @@
 
 /* TheGreenHood section */
 .thegreenhood-container {
+  margin-left: -10rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +50,9 @@
 }
 
 .rsiliencetester-container:hover .text-box,
-.thegreenhood-container:hover .text-box {
+.thegreenhood-container:hover .text-box,
+.introduction-container:hover .text-box, 
+.services-container:hover .text-box {
   transform: scale(1.02);
   transition: transform 0.3s ease;
 }
@@ -171,7 +175,10 @@
 
 /* Adjust image containers */
 .intro-image, .services-image {
-  max-width: 50%;
+  margin: 2rem;
+  margin-left: 2rem;
+  margin-right: 5rem;
+  max-width: 50rem;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);

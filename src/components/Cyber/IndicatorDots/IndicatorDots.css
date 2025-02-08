@@ -1,8 +1,9 @@
 /* Wrapper for the indicators */
 .indicator__list-wrap {
   position: fixed;
-  top: 50%;
-  right: 8px; /* Adjust as needed */
+  top: 50vh;
+  margin-left: 178.5dvb; /* Adjust as needed */
+  margin-right: 10.2rem;
   transform: translateY(-50%);
   z-index: 1;
   padding: 15px 10px;

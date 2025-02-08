@@ -178,11 +178,11 @@ p {
 .flag-animation {
   position: absolute;
   top: 0%;
-  left: -20%;
+  left: -22.5%;
   transform: translateX(-50%);
-  width: 300px;
-  height: 300px;
+  width: 375px;
+  height: 400px;
   background-size: cover;
-  border-radius: 8px;
+  border-radius: 18px;
 }
 
