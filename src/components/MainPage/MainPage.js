@@ -4,12 +4,12 @@ import cyberImage from "./Cyber.mp4";
 import itImage from "./IT.mp4";
 import backgroundVideo from "./background.mp4";
 import Title from "./Title";
-import CTFGame from "../CTFGame/CTFGame"; // ✅ Import CTFGame
+//import CTFGame from "../CTFGame/CTFGame"; // Import CTFGame
 
 const MainPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isMoving, setIsMoving] = useState(false);
-  const [gameStarted, setGameStarted] = useState(false); // ✅ Track if the game has started
+  const [gameStarted, setGameStarted] = useState(false); // Track if the game has started
 
   const navigateTo = (path) => {
     window.location.href = path;
@@ -49,19 +49,15 @@ const MainPage = () => {
       />
       <Title />
 
-      {/* Show the CTF button only when the game has not started */}
-      {!gameStarted && (
-        <button className="play-ctf-button" onClick={startCTFGame}>
-          Play CTF Challenge
-        </button>
-      )}
+      {/* Temporarily disabled CTF Game */}
+      {/* <button className="play-ctf-button" onClick={startCTFGame}>
+        Play CTF Game
+      </button> */}
 
       {/* Show the Close Game button when the game starts */}
-      {gameStarted && (
-        <button className="close-ctf-button" onClick={closeCTFGame}>
-          Close Game
-        </button>
-      )}
+      {/* <button className="close-ctf-button" onClick={closeCTFGame}>
+        Close Game
+      </button> */}
 
       {/* Hide other content when the game has started */}
       {!gameStarted && (
@@ -87,11 +83,9 @@ const MainPage = () => {
                 loop
                 muted
                 style={{
-                  maxWidth: "100%",
-                  maxHeight: "125%",
-                  objectFit: "contain",
-                  width: "auto",
-                  height: "auto",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "fill"
                 }}
               />
             </div>
@@ -132,11 +126,9 @@ const MainPage = () => {
                 loop
                 muted
                 style={{
-                  maxWidth: "100%",
-                  maxHeight: "125%",
-                  objectFit: "contain",
-                  width: "auto",
-                  height: "auto",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "fill"
                 }}
               />
             </div>
@@ -158,12 +150,12 @@ const MainPage = () => {
         </main>
       )}
 
-      {/* Show the CTF game when the game starts */}
-      {gameStarted && (
+      {/* Temporarily disabled CTF Game */}
+      {/* {gameStarted && (
         <div className="ctf-game-container">
           <CTFGame />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

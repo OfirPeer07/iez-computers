@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import CTFGame from '../CTFGame/CTFGame';
+//import CTFGame from '../CTFGame/CTFGame';
 import './App.css';
 
 // Import all Information Technology components  
@@ -40,7 +40,7 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/cyber" element={<Cyber />} />
               <Route path="/information-technology" element={<InformationTechnology />} />
-              <Route path="/ctf-game" component={CTFGame} /> {/* Route for the CTF game */}
+              {/*<Route path="/ctf-game" component={CTFGame} /> {/* Route for the CTF game */}
 
               {/* Contact Page */}
               <Route path="/contact-us" element={<ContactUs />} />

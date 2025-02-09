@@ -50,16 +50,16 @@ body {
 /* Image container */
 .image-container {
   position: relative;
-  width: 25vw; /* Slightly smaller width */
-  max-width: 50rem; /* Reduced max width */
-  height: 45.4vh; /* Reduced height */
-  max-height: 50rem;
+  width: 25vw;
+  max-width: 50rem;
+  height: auto;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 255, 0, 0.7);
   cursor: pointer;
   transition: transform 1s ease, box-shadow 0.3s ease;
   z-index: 1;
+  display: flex;
 }
 
 /* Movement effect for images */
@@ -136,7 +136,7 @@ body {
 
   .image-container {
     width: 100%;
-    height: 40vh;
+    height: auto;
   }
 
   .title-box {
@@ -158,59 +158,14 @@ body {
   z-index: -1;
 }
 
-/* Play CTF Button */
-.play-ctf-button {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color:  rgba(0, 120, 0, 0.9);
-  color: black;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.play-ctf-button:hover {
-  background-color: #00cc00;
-}
-
-/* Close CTF Button */
+/* Temporarily disabled CTF Game styles */
+.play-ctf-button,
 .close-ctf-button {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: #980000;
-  color: white;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  display: none;
 }
 
-.close-ctf-button:hover {
-  background-color: #ff0000;
-}
-
-/* CTF Game Visibility */
 .ctf-game-container {
-  position: relative;
-  z-index: 10;
-  animation: fadeIn 1s ease-in-out;
-}
-
-/* Fade-In Animation for CTF Game */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  display: none;
 }
 
 /* Hide other content when the game starts */
