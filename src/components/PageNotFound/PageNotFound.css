@@ -4,8 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 82.5vh;
-  width: 100vw;
+  max-height: 150.5vh;
+  max-width: 150vw;
   position: relative;
   overflow: hidden;
 }
@@ -13,12 +13,14 @@
 body .page-not-found-container{
   background: black;
   background-image: url('./Background.jpg');
-  background-size: 75vh;
+  background-size: 55vh;
   background-position: 25vmax;
 }
 
 .hackerPNF {
-  position: fixed;
+  position: relative;
+  margin-top: -5.7cqmax;
+  margin-left: -40.8cqmax;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -29,7 +31,7 @@ body .page-not-found-container{
 }
 
 .text {
-  font-size: 4.0625rem;
+  font-size: 4.0625cqmax;
   font-family: "Wallpoet", cursive;
   color: #17ca07;
   position: fixed;

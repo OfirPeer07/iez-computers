@@ -47,3 +47,25 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 255, 0, 0.7) rgba(0, 0, 0, 0.1);
 }
+
+h1 {
+  font-size: 3rem;
+  color: #00ff00;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+  animation: titleAnimation 1s ease-in-out;
+}
+
+@keyframes titleAnimation {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
