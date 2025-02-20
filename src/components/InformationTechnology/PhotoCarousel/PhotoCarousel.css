@@ -7,16 +7,17 @@
 }
 
 .carousel-image {
+  margin-top: -2vw;
   width: 95vw;
-  height: 42.75vw; /* Changed to maintain 21:9 ratio (95 * 9/21) */
-  max-height: 85vh;
+  height: 92.75vw; /* Changed to maintain 21:9 ratio (95 * 9/21) */
+  max-height: 95vh;
   object-fit: contain;
 }
 
 .control-button {
   position: absolute;
-  bottom: 2rem;
-  left: 56rem;
+  bottom: 1.85rem;
+  left: 53rem;
   background: rgba(255, 255, 255, 0.5); /* Light white shade */
   border: none;
   cursor: pointer;
@@ -35,9 +36,9 @@
 .image-name {
   position: absolute;
   bottom: 3rem; /* Adjust to position above the bar */
-  left: 53.2rem;
+  left: 55rem;
   transform: translateX(-50%);
-  font-size: 16px; /* Font size for the caption */
+  font-size: 18px; /* Font size for the caption */
   color: rgba(255, 255, 255, 0.5); /* Light white shade */
   background: rgba(0, 0, 0, 0.5); /* Optional: dark background for better readability */
   padding: 2px 5px;
@@ -47,9 +48,9 @@
 .progress-bar-container {
   position: absolute;
   bottom: 2.5rem; /* Adjust as needed */
-  left: 53.2rem;
+  left: 55rem;
   transform: translateX(-50%);
-  width: 5.2rem; /* Fixed width for progress bar container */
+  width: 15.2rem; /* Fixed width for progress bar container */
   height: 0.4rem;
   display: flex;
   gap: 2px; /* Add some spacing between bars */
@@ -58,7 +59,7 @@
 .progress-bar {
   position: relative;
   flex: 1;
-  height: 5.5px;
+  height: 10.5px;
   background: rgba(120, 120, 120, 0.5); /* Light white shade */
   border-radius: 5px;
   overflow: hidden;

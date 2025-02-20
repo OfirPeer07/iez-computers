@@ -9,7 +9,6 @@ import Title from "./Title";
 const MainPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isMoving, setIsMoving] = useState(false);
-  const [gameStarted, setGameStarted] = useState(false); // Track if the game has started
 
   const navigateTo = (path) => {
     window.location.href = path;
@@ -30,14 +29,6 @@ const MainPage = () => {
     [isMoving]
   );
 
-  const startCTFGame = () => {
-    setGameStarted(true); // Hide content and show the game
-  };
-
-  const closeCTFGame = () => {
-    setGameStarted(false); // Hide the game and show previous content
-  };
-
   return (
     <div className="main-page">
       <video
@@ -48,19 +39,7 @@ const MainPage = () => {
         muted
       />
       <Title />
-
-      {/* Temporarily disabled CTF Game */}
-      {/* <button className="play-ctf-button" onClick={startCTFGame}>
-        Play CTF Game
-      </button> */}
-
-      {/* Show the Close Game button when the game starts */}
-      {/* <button className="close-ctf-button" onClick={closeCTFGame}>
-        Close Game
-      </button> */}
-
-      {/* Hide other content when the game has started */}
-      {!gameStarted && (
+      {(
         <main className="cyber-it-navigation">
           <section
             className={`image-container-wrapper-it ${
@@ -149,13 +128,6 @@ const MainPage = () => {
           </section>
         </main>
       )}
-
-      {/* Temporarily disabled CTF Game */}
-      {/* {gameStarted && (
-        <div className="ctf-game-container">
-          <CTFGame />
-        </div>
-      )} */}
     </div>
   );
 };

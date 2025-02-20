@@ -1,60 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './InfoTechBar.css';
 
 function InfoTechBar() {
-  const [activeMenu, setActiveMenu] = useState(null); // Track which menu is active
-  const [shiftComputer, setShiftHacking] = useState(false); // Control the computer icon shift
-  const [hoverLogoTimer, setHoverLogoTimer] = useState(null); // Timer for hover delay
-  const [closeMenuTimer, setCloseMenuTimer] = useState(null); // Timer for fast closing
+  const [activeMenu, setActiveMenu] = useState(null);
+  const [shiftComputer, setShiftComputer] = useState(false);
+  const menuRef = useRef(null);
+  const timersRef = useRef({ hoverLogo: null, hoverComputer: null, closeMenu: null });
 
   const handleMouseEnterLogo = () => {
-    // Start the hover delay timer for the logo menu
-    clearTimeout(closeMenuTimer); // Prevent premature closing
-    const shiftTimer = setTimeout(() => {
-      setShiftHacking(true); // Shift the computer icon
-      const menuTimer = setTimeout(() => {
-        setActiveMenu('logo'); // Open the logo menu with a delay
-      }, 400); // Delay for opening the menu
-      setHoverLogoTimer(menuTimer);
-    }, 250); // Delay for logo shift
-    setHoverLogoTimer(shiftTimer);
+    clearTimeout(timersRef.current.closeMenu);
+    clearTimeout(timersRef.current.hoverComputer);
+    timersRef.current.hoverLogo = setTimeout(() => {
+      setShiftComputer(true);
+      timersRef.current.hoverLogo = setTimeout(() => {
+        setActiveMenu('logo');
+      }, 400);
+    }, 250);
   };
 
   const handleMouseEnterComputer = () => {
-    clearTimeout(closeMenuTimer); // Prevent premature closing
-    setActiveMenu('computer'); // Open the computer menu immediately
+    if (activeMenu === 'logo') return; // Prevent opening if the user is moving from logo menu
+    clearTimeout(timersRef.current.closeMenu);
+    timersRef.current.hoverComputer = setTimeout(() => {
+      setActiveMenu('computer');
+    }, 250);
   };
 
   const handleMouseLeave = () => {
-    // Clear all opening timers
-    clearTimeout(hoverLogoTimer);
-    setHoverLogoTimer(null);
+    clearTimeout(timersRef.current.hoverLogo);
+    clearTimeout(timersRef.current.hoverComputer);
+    timersRef.current.closeMenu = setTimeout(() => {
+      setActiveMenu(null);
+      setShiftComputer(false);
+    }, 200);
+  };
 
-    // Close menu faster on leave
-    const closeTimer = setTimeout(() => {
-      setActiveMenu(null); // Close menus
-      setShiftHacking(false); // Reset the computer icon position
-    }, 100); // Close immediately with a small delay to prevent flicker
-    setCloseMenuTimer(closeTimer);
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setActiveMenu(null);
+      setShiftComputer(false);
+    }
   };
 
   useEffect(() => {
-    // Cleanup timers on unmount
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      clearTimeout(hoverLogoTimer);
-      clearTimeout(closeMenuTimer);
+      document.removeEventListener('mousedown', handleClickOutside);
+      clearTimeout(timersRef.current.hoverLogo);
+      clearTimeout(timersRef.current.hoverComputer);
+      clearTimeout(timersRef.current.closeMenu);
     };
-  }, [hoverLogoTimer, closeMenuTimer]);
+  }, []);
 
   return (
-    <div className="sidebar">
+    <div className="sidebar" ref={menuRef}>
       <ul>
-        {/* Section 1 - Computer */}
         <li
-          className={`computer ${shiftComputer ? 'shift' : ''}`} // No default "return" class
+          className={`computer ${shiftComputer ? 'shift' : ''}`}
           onMouseEnter={handleMouseEnterComputer}
           onMouseLeave={handleMouseLeave}
+          onFocus={handleMouseEnterComputer}
+          onBlur={handleMouseLeave}
         >
           <Link to="/information-technology/InfoTechDepartment" className="menu-icon">
             <img src="/images/computer.png" alt="computer-section" />
@@ -67,10 +74,11 @@ function InfoTechBar() {
             </div>
           )}
         </li>
-        {/* Section 2 - Logo */}
         <li
           onMouseEnter={handleMouseEnterLogo}
           onMouseLeave={handleMouseLeave}
+          onFocus={handleMouseEnterLogo}
+          onBlur={handleMouseLeave}
         >
           <Link to="/" className="menu-icon">
             <img src="/images/logo.png" alt="logo-section" />

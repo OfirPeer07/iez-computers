@@ -12,6 +12,7 @@
 /* ResilienceTester section */
 .rsiliencetester-container {
   display: flex;
+  margin-left: 10%;
   align-items: center;
   justify-content: center;
   padding: 2rem;
@@ -143,18 +144,19 @@
 .inner-box h2 {
   color: #00ff00;
   font-size: 2.5vw; /* Scales with viewport */
-  margin-bottom: 15px;
+  margin-bottom: -55px;
+  margin-top: -20px;
   text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
   font-family: 'Courier New', monospace;
   position: relative; /* Ensure text is above the LED effect */
   z-index: 2; /* Ensures text is above the LED effect */
   background-color: rgb(0, 0, 0); /* הוספת רקע שחור גם לטקסט */
-  padding: 55px; /* מרווח קטן סביב הטקסט */
+  padding: 40px; /* מרווח קטן סביב הטקסט */
 }
 
 .inner-box p {
-  font-size: 1.5vw; /* Responsive size */
-  line-height: 1.6;
+  font-size: 1.3vw; /* Responsive size */
+  line-height: 1.5;
   color: #ffffff;
   font-family: 'Courier New', monospace;
   position: relative; /* Ensure text is above the LED effect */
@@ -172,7 +174,7 @@
 /* Adjust image containers */
 .intro-image, .services-image {
   max-width: 50%;
-  height: auto;
+  height: 100%;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
   border: 2px solid rgba(0, 255, 0, 0.7);
