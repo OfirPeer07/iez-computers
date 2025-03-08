@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import "./MainPage.css";
 import cyberImage from "./Cyber.mp4";
 import itImage from "./IT.mp4";
@@ -9,6 +9,43 @@ import Title from "./Title";
 const MainPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isMoving, setIsMoving] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [deviceType, setDeviceType] = useState('desktop');
+
+  // Check device type and screen size
+  useEffect(() => {
+    const detectDevice = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileDevice = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+      const isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent);
+      
+      // עדכון הלוגיקה: מכשיר נייד יזוהה רק אם זה באמת מכשיר נייד ולא טאבלט
+      setIsMobile(isMobileDevice && !isTablet);
+      
+      if (isTablet) {
+        setDeviceType('tablet');
+      } else if (isMobileDevice) {
+        setDeviceType('mobile');
+      } else {
+        setDeviceType('desktop');
+      }
+    };
+    
+    // Initial check
+    detectDevice();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', detectDevice);
+    
+    // Add event listener for orientation change
+    window.addEventListener('orientationchange', detectDevice);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', detectDevice);
+      window.removeEventListener('orientationchange', detectDevice);
+    };
+  }, []);
 
   const navigateTo = (path) => {
     window.location.href = path;
@@ -21,12 +58,19 @@ const MainPage = () => {
       setIsMoving(true);
       setSelectedImage(imageType);
 
+      // On mobile, navigate immediately without animation
+      if (isMobile) {
+        navigateTo(imageType === "IT" ? "/information-technology" : "/cyber");
+        return;
+      }
+
+      // On desktop, use animation before navigation
       setTimeout(() => {
         navigateTo(imageType === "IT" ? "/information-technology" : "/cyber");
         setIsMoving(false);
       }, 1000);
     },
-    [isMoving]
+    [isMoving, isMobile]
   );
 
   return (
@@ -37,6 +81,7 @@ const MainPage = () => {
         autoPlay
         loop
         muted
+        playsInline // Add playsInline for better mobile support
       />
       <Title />
       {(
@@ -61,10 +106,14 @@ const MainPage = () => {
                 autoPlay
                 loop
                 muted
+                playsInline
+                preload="auto"
+                onLoadedData={(e) => e.target.play()}
+                onError={(e) => console.error("Error loading IT video:", e)}
                 style={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "fill"
+                  objectFit: "cover"
                 }}
               />
             </div>
@@ -104,10 +153,14 @@ const MainPage = () => {
                 autoPlay
                 loop
                 muted
+                playsInline
+                preload="auto"
+                onLoadedData={(e) => e.target.play()}
+                onError={(e) => console.error("Error loading Cyber video:", e)}
                 style={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "fill"
+                  objectFit: "cover"
                 }}
               />
             </div>

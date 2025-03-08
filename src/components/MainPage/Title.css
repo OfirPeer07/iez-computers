@@ -53,3 +53,40 @@
     transform: translateY(0);
   }
 }
+
+/* Responsive design for title - Mobile only */
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .typing-title {
+    font-size: 1.6rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    white-space: normal;
+    width: 100%;
+    text-align: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+  
+  .cursor {
+    width: 5px;
+  }
+}
+
+/* Medium mobile devices and tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  .typing-title {
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    white-space: normal;
+    width: 100%;
+    text-align: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+  
+  .cursor {
+    width: 6px;
+  }
+}

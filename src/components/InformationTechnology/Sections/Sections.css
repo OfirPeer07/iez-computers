@@ -190,75 +190,89 @@
   transform: scale(1.05);
 }
 
-/* Adjustments for smaller screens */
-@media (max-width: 100%) {
-  .inner-box h2 {
-    font-size: 2vw;
+/* התאמה למובייל - טאבלטים */
+@media screen and (max-width: 768px) {
+  .introduction-container, .services-container {
+    margin-left: 0;
+    padding: 0;
+    gap: 0;
+    background-color: #000; /* הוספת רקע שחור */
   }
-
-  .inner-box p {
-    font-size: 1.2vw;
-  }
-
-  .intro-image, .services-image {
-    max-width: 80%;
-  }
-}
-
-@media (max-width: 100%) {
-  .content {
-    margin-top: 50px;
-  }
-
-  .intro-image, .services-image {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 100%) {
-  .text-image-container {
-    margin: 10px;
-  }
-
-  .intro-image, .services-image {
-    max-width: 100%;
-    border-radius: 5px;
-  }
-}
-
-/* הוספת media queries לשליטה בגודל האנימציה */
-@media (max-width: 768px) {
+  
   .text-box {
+    max-width: 100%;
+    padding: 10px;
     --scale: 1;
+    margin-top: 0;
+    background-color: #000; /* הוספת רקע שחור */
   }
+  
   .text-box::before {
     width: min(220%, calc(100vw / var(--wave-scale)));
     height: min(220%, calc(100vh / var(--wave-scale)));
   }
-
-  /* התאמה למסכי 21:9 */
-  @media (min-aspect-ratio: 21/9) {
-    .text-box::before {
-      width: min(220%, 100vw);
-      height: min(220%, 100vh);
-    }
+  
+  .inner-box {
+    padding: 10px;
+    background-color: #000; /* הוספת רקע שחור */
+  }
+  
+  .inner-box h2 {
+    font-size: 24px;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  
+  .inner-box p {
+    font-size: 16px;
+    padding: 5px;
+  }
+  
+  .intro-image, .services-image {
+    margin: 0 auto;
+    max-width: 100%;
   }
 }
 
-@media (max-width: 480px) {
+/* התאמה למובייל - מסכים קטנים */
+@media screen and (max-width: 480px) {
+  .introduction-container, .services-container {
+    padding: 0;
+    gap: 0;
+    background-color: #000; /* הוספת רקע שחור */
+  }
+  
   .text-box {
+    padding: 5px;
     --scale: 0.8;
+    background-color: #000; /* הוספת רקע שחור */
   }
+  
   .text-box::before {
-    width: min(180%, calc(90vw / var(--wave-scale)));
-    height: min(180%, calc(90vh / var(--wave-scale)));
+    width: min(200%, calc(90vw / var(--wave-scale)));
+    height: min(200%, calc(90vh / var(--wave-scale)));
   }
-
-  /* התאמה למסכי 21:9 */
-  @media (min-aspect-ratio: 21/9) {
-    .text-box::before {
-      width: min(180%, 90vw);
-      height: min(180%, 90vh);
-    }
+  
+  .inner-box {
+    padding: 5px;
+    background-color: #000; /* הוספת רקע שחור */
+  }
+  
+  .inner-box h2 {
+    font-size: 20px;
+    padding: 3px;
+    margin-bottom: 8px;
+    margin-top: 3px;
+  }
+  
+  .inner-box p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .intro-image, .services-image {
+    margin: 0 auto;
+    border-radius: 8px;
   }
 }

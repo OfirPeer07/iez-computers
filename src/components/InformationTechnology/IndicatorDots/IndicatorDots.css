@@ -2,11 +2,11 @@
 .indicator__list-wrap {
   position: fixed;
   top: 50vh;
-  margin-left: 178.5dvb; /* Adjust as needed */
+  margin-left: calc(100vw - 5rem); /* כמו בגרסת הסייבר */
   margin-right: 10.2rem;
   transform: translateY(-50%);
-  z-index: 1;
-  padding: 15px 10px;
+  z-index: 1000; /* הגדלת ה-z-index כדי להבטיח שהאינדיקטורים יהיו מעל אלמנטים אחרים */
+  padding: 10px 8px; /* הקטנת הפדינג */
   background: rgba(15, 15, 15, 0.9); /* Dark cyber background */
   border-radius: 20px;
   box-shadow: 0 0 25px rgba(0, 255, 0, 0.7); /* Neon green glow */
@@ -14,12 +14,117 @@
   direction: rtl;
 }
 
+/* Adjustments for different screen sizes */
+@media screen and (max-width: 1920px) {
+  .indicator__list-wrap:not(.mobile-device) {
+    margin-left: calc(100vw - 5rem); /* Moved slightly more to the left for Full HD */
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .indicator__list-wrap:not(.mobile-device) {
+    margin-left: calc(100vw - 5rem); /* Moved slightly more to the left for ultrawide */
+  }
+}
+
+/* התאמות למובייל וטאבלטים - סגנונות חדשים */
+.indicator__list-wrap.mobile-device {
+  margin-left: 0;
+  margin-right: 5px;
+  right: 0;
+  padding: 8px 6px;
+  max-width: 70px;
+  background: rgba(15, 15, 15, 0.95);
+}
+
+/* התאמות לטאבלטים */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .indicator__list-wrap.mobile-device {
+    padding: 10px 8px;
+    max-width: 80px;
+  }
+
+  .mobile-device .indicator__dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .mobile-device .indicator__label {
+    font-size: 10px;
+    max-width: 70px;
+  }
+}
+
+/* התאמות למובייל */
+@media (max-width: 480px) {
+  .indicator__list-wrap.mobile-device {
+    padding: 6px 4px;
+    max-width: 60px;
+  }
+
+  .mobile-device .indicator__list {
+    gap: 10px;
+  }
+
+  .mobile-device .indicator__dot {
+    width: 8px;
+    height: 8px;
+    margin-bottom: 3px;
+  }
+
+  .mobile-device .indicator__dot-inner {
+    width: 8px;
+    height: 8px;
+  }
+
+  .mobile-device .indicator__label {
+    font-size: 7px;
+    max-width: 50px;
+    white-space: normal;
+    display: block;
+  }
+}
+
+/* התאמה למצב לרוחב במובייל */
+@media (max-width: 768px) and (orientation: landscape) {
+  .indicator__list-wrap.mobile-device {
+    padding: 6px 4px;
+    max-width: 70px;
+  }
+
+  .mobile-device .indicator__list {
+    gap: 8px;
+  }
+
+  .mobile-device .indicator__dot {
+    width: 10px;
+    height: 10px;
+    margin-bottom: 2px;
+  }
+
+  .mobile-device .indicator__label {
+    font-size: 8px;
+    max-width: 60px;
+  }
+}
+
+/* התאמות למסכי מגע */
+@media (hover: none) and (pointer: coarse) {
+  .mobile-device .indicator__item:hover {
+    transform: none;
+  }
+
+  .mobile-device .indicator__item:active {
+    transform: scale(1.1);
+  }
+}
+
 /* Indicator list */
 .indicator__list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; /* Clean spacing for futuristic look */
+  gap: 18px; /* הקטנת המרווח בין האינדיקטורים */
 }
 
 /* Individual indicator item */
@@ -50,22 +155,22 @@
 
 /* Main dot */
 .indicator__dot {
-  width: 15px;
-  height: 14.5px;
+  width: 12px; /* הקטנת גודל הנקודה */
+  height: 12px; /* הקטנת גודל הנקודה */
   border: 2px solid rgba(0, 255, 0, 0.7); /* Neon green border for inactive state */
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px; /* הקטנת המרווח */
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Neon glow */
 }
 
 /* Inner dot */
 .indicator__dot-inner {
-  width: 15px;
-  height: 14.5px;
+  width: 12px; /* הקטנת גודל הנקודה הפנימית */
+  height: 12px; /* הקטנת גודל הנקודה הפנימית */
   background-color: transparent;
   border-radius: 50%;
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -84,12 +189,16 @@
 
 /* Label styling */
 .indicator__label {
-  font-size: 13px; /* Futuristic size */
+  font-size: 11px; /* הקטנת גודל הטקסט */
   color: rgba(0, 255, 0, 0.7); /* Soft cyan for text */
   font-family: 'Orbitron', sans-serif; /* Tech-inspired font */
   text-transform: uppercase; /* Cyber aesthetic with all caps */
   letter-spacing: 1px; /* Spaced-out text for futuristic style */
   transition: color 0.3s ease, transform 0.3s ease;
+  max-width: 70px; /* הגבלת רוחב הטקסט */
+  text-align: center; /* מרכוז הטקסט */
+  word-wrap: break-word; /* מאפשר שבירת מילים ארוכות */
+  overflow-wrap: break-word; /* תמיכה בדפדפנים מודרניים */
 }
 
 .indicator__item:hover .indicator__label {
@@ -100,28 +209,6 @@
 .indicator__item--active .indicator__label {
   color: rgba(0, 255, 0, 0.7); /* Matches active dot color */
   font-weight: bold;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .indicator__list-wrap {
-    right: 10px;
-    padding: 10px;
-  }
-
-  .indicator__dot {
-    width: 12px;
-    height: 12px;
-  }
-
-  .indicator__dot-inner {
-    width: 6px;
-    height: 6px;
-  }
-
-  .indicator__label {
-    font-size: 11px;
-  }
 }
 
 /* Neon pulse animation for active items */

@@ -176,12 +176,16 @@
 
 @media screen and (max-width: 1024px) {
   .sidenav {
-    top: auto; /* Reset top position for mobile */
-    height: calc(100vh - clamp(70px, 17vh, 100px)); /* Adjust height for mobile */
+    top: clamp(0.5vh, 1vh, 1.1rem); /* Reset top position for mobile */
+    left: clamp(0.3vw, 1vw, 1.1rem);
+    height: calc(100vh - clamp(50px, 12vh, 100px)); /* Adjust height for mobile */
+    background-color: black;
+    opacity: 1.01;
     bottom: 0;
   }
 
   .toggle-nav-btn {
-    top: auto; /* Reset top position for mobile */
+    top: clamp(90px, 1vh, 50px); /* Reset top position for mobile */
+    z-index: 1;  
   }
 }

@@ -60,50 +60,99 @@
 .intro-image, .services-image {
   width: 100%;
   object-fit: cover;
-  margin-top: 0;  /* הסרת מרווח עליון מהתמונה */
+  margin-top: 0;
 }
 
-/* התאמה ספציפית למסך 21:9 עבור התמונה העליונה */
-@media screen and (min-aspect-ratio: 21/9) {
-  .intro-image {
-    width: 95%;  /* קצת יותר קטן מהתמונה השנייה */
-    height: auto;
+/* התאמה למסך 21:9 */
+@media (min-aspect-ratio: 21/9) {
+  .intro-image, .services-image {
+    width: 40%;
   }
 }
 
-@media (max-width: 100%) {
+/* התאמה לטאבלטים */
+@media screen and (max-width: 1024px) {
+  .text-image-container {
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
   .text-content, .image-content {
-    flex-basis: 20%;
-    padding: 10px;
+    padding: 1rem;
   }
 
   .intro-image, .services-image {
-    max-width: 75vw;
+    width: 100%;
+    max-width: none;
   }
 }
 
-@media (max-width: 100%) {
+/* התאמה למובייל - טאבלטים */
+@media screen and (max-width: 768px) {
+  .main-page {
+    margin-right: 0;
+   
+  }
+  
+  .section {
+    margin-right: 0;
+    padding: 0;
+   
+  }
+  
+  .text-image-container {
+    flex-direction: column;
+    gap: 0rem; /* ביטול המרווח בין התמונה לטקסט */
+    margin-top: 0rem; /* ביטול המרווח העליון */
+    align-items: center;
+  
+  }
+  
   .text-content, .image-content {
     flex-basis: 100%;
-    padding: 1rem;
+    padding: 0rem; /* ביטול הפדינג */
     min-height: auto;
+    
   }
-
+  
   .intro-image, .services-image {
-    max-width: 50vw;
-    margin-bottom: 20px;
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 10px;
   }
 }
 
-@media (max-width: 100%) {
-  .text-image-container {
-    margin: 10px;
-    gap: 10px;
-    flex-direction: column;
+/* התאמה למובייל - מסכים קטנים */
+@media screen and (max-width: 480px) {
+  .main-page {
+    margin-right: 0;
+   
   }
-
+  
+  .section {
+    margin-right: 0;
+    padding: 0;
+    
+  }
+  
+  .text-image-container {
+    flex-direction: column;
+    gap: 0rem; /* ביטול המרווח בין התמונה לטקסט */
+    margin-top: 0rem; /* ביטול המרווח העליון */
+    padding: 0rem; /* ביטול הפדינג */
+    
+  }
+  
+  .text-content, .image-content {
+    padding: 0rem; /* ביטול הפדינג */
+    
+  }
+  
   .intro-image, .services-image {
-    max-width: 50vw;
-    border-radius: 5px;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 0; /* ביטול המרווח של התמונה */
   }
 }

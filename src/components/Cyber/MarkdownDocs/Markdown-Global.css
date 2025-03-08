@@ -7,6 +7,12 @@
   --md-border-color: rgba(0, 255, 0, 0.3);
   --md-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
   --md-link-hover: #00ff00;
+  
+  /* Mobile variables */
+  --mobile-padding: 1.2rem;
+  --mobile-font-size: 0.95rem;
+  --mobile-line-height: 1.5;
+  --mobile-heading-scale: 0.9;
 }
 
 /* Base markdown content styles - should be the only place defining these */
@@ -287,6 +293,29 @@
   border: 1px solid var(--md-border-color);
 }
 
+/* Images */
+.markdown-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5em auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Blockquotes */
+.markdown-content blockquote {
+  border-right: 4px solid var(--md-primary-color);
+  margin: 1.5em 0;
+  padding: 0.5em 1em;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.markdown-content blockquote p {
+  margin: 0.5em 0;
+}
+
 /* Media Queries */
 @media (min-width: 1921px) {
   .markdown-content {
@@ -308,9 +337,296 @@
 
 @media (max-width: 768px) {
   .markdown-content {
-    padding: 1.5rem;
+    padding: var(--mobile-padding);
     margin: 1rem;
+    font-size: var(--mobile-font-size);
+    width: calc(100% - 2rem);
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  /* שיפור קריאות כותרות במובייל */
+  .markdown-content h1 {
+    font-size: 1.8rem;
+    margin: 1.2em 0 0.7em;
+    padding-bottom: 0.2em;
+  }
+  
+  .markdown-content h2 {
+    font-size: 1.5rem;
+    margin: 1.1em 0 0.6em;
+  }
+  
+  .markdown-content h3 {
+    font-size: 1.3rem;
+    margin: 1em 0 0.5em;
+  }
+  
+  .markdown-content h4,
+  .markdown-content h5,
+  .markdown-content h6 {
+    font-size: 1.1rem;
+    margin: 0.9em 0 0.4em;
+  }
+  
+  /* התאמת רשימות למובייל */
+  .markdown-content ul,
+  .markdown-content ol {
+    margin: 0.8em 1.5em;
+  }
+  
+  /* התאמת טבלאות למובייל */
+  .markdown-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 0.9rem;
+  }
+  
+  .markdown-content th,
+  .markdown-content td {
+    padding: 0.6rem;
+  }
+  
+  /* התאמת קוד למובייל */
+  .code-block-container {
+    margin: 1.2em 0;
+  }
+  
+  .code-block-container pre {
+    padding: 0.8rem !important;
+    font-size: 0.85em !important;
+  }
+  
+  .copy-button {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+  
+  /* התאמת קוד מוטבע למובייל */
+  .markdown-content code:not(pre code) {
+    padding: 0.15em 0.3em;
+    font-size: 0.85em;
+  }
+  
+  /* התאמת תמונות למובייל */
+  .markdown-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.2em auto;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* התאמת ציטוטים למובייל */
+  .markdown-content blockquote {
+    margin: 1.2em 0;
+    padding: 0.4em 0.8em;
+    border-right-width: 3px;
+  }
+  
+  /* שיפור מרווחים בין פסקאות */
+  .markdown-content p {
+    margin: 0.8em 0;
+    line-height: var(--mobile-line-height);
+  }
+  
+  /* התאמת גודל הגופן הכללי */
+  .markdown-content {
+    font-size: var(--mobile-font-size);
+  }
+}
+
+@media (max-width: 480px) {
+  .markdown-content {
+    padding: var(--mobile-padding);
+    margin: 0.8rem;
+    font-size: var(--mobile-font-size);
+    border-radius: 6px;
+  }
+  
+  /* שיפור קריאות כותרות במובייל קטן */
+  .markdown-content h1 {
+    font-size: 1.6rem;
+    margin: 1em 0 0.6em;
+  }
+  
+  .markdown-content h2 {
+    font-size: 1.4rem;
+    margin: 0.9em 0 0.5em;
+  }
+  
+  .markdown-content h3 {
+    font-size: 1.2rem;
+    margin: 0.8em 0 0.4em;
+  }
+  
+  .markdown-content h4,
+  .markdown-content h5,
+  .markdown-content h6 {
     font-size: 1rem;
+    margin: 0.7em 0 0.3em;
+  }
+  
+  /* התאמת רשימות למובייל קטן */
+  .markdown-content ul,
+  .markdown-content ol {
+    margin: 0.7em 1.2em;
+  }
+  
+  /* התאמת טבלאות למובייל קטן */
+  .markdown-content th,
+  .markdown-content td {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  /* התאמת תמונות למובייל קטן */
+  .markdown-content img {
+    margin: 1em auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* התאמת ציטוטים למובייל קטן */
+  .markdown-content blockquote {
+    margin: 1em 0;
+    padding: 0.3em 0.6em;
+    border-right-width: 2px;
+  }
+  
+  /* שיפור מרווחים בין פסקאות במובייל קטן */
+  .markdown-content p {
+    margin: 0.7em 0;
+    line-height: var(--mobile-line-height);
+  }
+  
+  /* התאמת גודל הגופן הכללי */
+  .markdown-content {
+    font-size: 0.9rem;
+  }
+  
+  /* התאמת קוד למובייל קטן */
+  .code-block-container pre {
+    padding: 0.7rem !important;
+    font-size: 0.8em !important;
+    line-height: var(--mobile-line-height) !important;
+  }
+  
+  .copy-button {
+    padding: 2px 5px;
+    font-size: 10px;
+  }
+}
+
+/* Mobile-specific class for JavaScript detection */
+.mobile-view .markdown-content {
+  padding: var(--mobile-padding);
+  margin: 0.8rem;
+  font-size: var(--mobile-font-size);
+  width: calc(100% - 1.6rem);
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.mobile-view .markdown-content h1 {
+  font-size: 1.8rem;
+  margin: 1.2em 0 0.7em;
+  padding-bottom: 0.2em;
+}
+
+.mobile-view .markdown-content h2 {
+  font-size: 1.5rem;
+  margin: 1.1em 0 0.6em;
+}
+
+.mobile-view .markdown-content h3 {
+  font-size: 1.3rem;
+  margin: 1em 0 0.5em;
+}
+
+.mobile-view .markdown-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.2em auto;
+  border-radius: 6px;
+}
+
+.mobile-view .markdown-content table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.mobile-view .code-block-container {
+  margin: 1.2em 0;
+}
+
+.mobile-view .code-block-container pre {
+  padding: 0.8rem !important;
+  font-size: 0.85em !important;
+}
+
+/* Small mobile view */
+@media (max-width: 480px) {
+  .mobile-view .markdown-content {
+    padding: 1rem;
+    margin: 0.6rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (pointer: coarse) {
+  /* Larger touch targets for better usability on touch devices */
+  .markdown-content a {
+    padding: 0.2em 0;
+  }
+  
+  .markdown-content button,
+  .copy-button {
+    min-height: 36px;
+    min-width: 36px;
+  }
+  
+  /* Better spacing for touch interactions */
+  .markdown-content li {
+    margin-bottom: 0.8em;
+  }
+  
+  /* Improve scrolling on touch devices */
+  .markdown-content pre {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Print styles for better document printing */
+@media print {
+  .markdown-content {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    color: #000;
+    background: #fff;
+    font-size: 12pt;
+    box-shadow: none;
+  }
+  
+  .markdown-content pre,
+  .markdown-content code {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    color: #333;
+  }
+  
+  .markdown-content a {
+    color: #000;
+    text-decoration: underline;
+  }
+  
+  .copy-button {
+    display: none;
   }
 }
 

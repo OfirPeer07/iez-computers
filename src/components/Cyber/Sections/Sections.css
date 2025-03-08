@@ -83,6 +83,9 @@
     width: min(250%, 115vw);  /* ערכים מותאמים ל-21:9 */
     height: min(250%, 115vh);
   }
+  .intro-image, .services-image {
+    width: 32%;
+  }
 }
 
 /* התאמה למסכי 16:9 */
@@ -255,5 +258,127 @@
       width: min(180%, 90vw);
       height: min(180%, 90vh);
     }
+  }
+}
+
+/* תמיכה במסכי מגע */
+@media (hover: none) {
+  .text-box:hover::before {
+    animation: none;
+    opacity: 0.5;
+  }
+  
+  .intro-image:hover,
+  .services-image:hover {
+    transform: none;
+  }
+}
+
+/* מניעת zoom בעת לחיצה על אינפוטים */
+@media screen and (max-width: 768px) {
+  input,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* התאמות לניווט באצבע */
+.scroll-container {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* התאמות מובייל מתקדמות */
+@media (max-width: 768px) {
+  .introduction-container,
+  .services-container,
+  .rsiliencetester-container,
+  .thegreenhood-container {
+    flex-direction: column;
+    padding: 1rem;
+    margin-left: 0;
+  }
+
+  .text-box {
+    max-width: 90%;
+    margin: 1rem auto;
+    padding: 15px;
+  }
+
+  .inner-box {
+    padding: 15px;
+  }
+
+  .inner-box h2 {
+    font-size: 1.8rem;
+    margin-bottom: -30px;
+    margin-top: -10px;
+    padding: 20px;
+  }
+
+  .inner-box p {
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 3px;
+  }
+
+  .intro-image,
+  .services-image {
+    max-width: 100%;
+    margin-top: 1rem;
+    order: -1; /* תמונה למעלה */
+  }
+
+  /* השבת אנימציות במובייל לביצועים */
+  .text-box::before {
+    display: none;
+  }
+
+  .text-box:hover::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-box {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  .inner-box h2 {
+    font-size: 1.5rem;
+  }
+
+  .inner-box p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .inner-box p {
+    color: #e0e0e0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    line-height: 1.6;
+    padding: 8px 0;
+    font-size: 1.1rem;
+  }
+
+  .inner-box h2 {
+    font-size: 2rem;
+    margin-bottom: -20px;
+    padding: 15px 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media (max-width: 480px) {
+  .inner-box p {
+    font-size: 1rem;
+    line-height: 1.7;
+    letter-spacing: 0.3px;
+  }
+
+  .text-box {
+    max-width: 98%;
+    margin: 0.5rem auto;
   }
 }

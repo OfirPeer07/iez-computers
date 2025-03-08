@@ -73,9 +73,52 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .it-container .rtl-box {
-    width: calc(100% - 2rem);
-    margin: 1rem;
+    width: 95%;
+    margin: 1rem auto;
+    padding: 1.2rem 1.5rem;
+    border-radius: 8px;
   }
+  
+  .it-container .rtl-box p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .it-container .close-btn {
+    top: 8px;
+    left: 8px;
+    font-size: 24px; /* גדול יותר למסך מגע */
+    padding: 8px; /* אזור מגע גדול יותר */
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  .it-container .rtl-box {
+    width: 92%;
+    margin: 0.8rem auto;
+    padding: 1rem 1.2rem;
+    border-radius: 6px;
+  }
+  
+  .it-container .rtl-box p {
+    font-size: 0.95rem;
+  }
+  
+  /* כפתור סגירה גדול יותר למסכי מגע קטנים */
+  .it-container .close-btn {
+    top: 6px;
+    left: 6px;
+    font-size: 26px;
+    padding: 10px;
+  }
+}
+
+/* Mobile-view class שיכול להיות מופעל מה-React component */
+.mobile-view .rtl-box {
+  width: 94% !important;
+  padding: 1rem !important;
+  margin: 0.5rem auto !important;
 }
 
 /* Content wrapper - נפרד מההודעה */

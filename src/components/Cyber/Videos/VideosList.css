@@ -91,6 +91,8 @@
   position: relative;
   scrollbar-width: thin;
   scrollbar-color: var(--main-color) var(--background-color);
+  margin-right: 30px;
+  margin-left: 30px;
 }
 
 /* Scrollbar Styles */
@@ -128,6 +130,7 @@
   display: flex;
   align-items: center;
   overflow: visible;
+  width: 100%;
 }
 
 /* Scroll Arrow Styles */
@@ -135,23 +138,34 @@
   position: absolute;
   cursor: pointer;
   z-index: 100;
-  padding: 35px;
+  padding: 0;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 5.5rem !important;
+  font-size: 3.5rem;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   transition: all 0.3s ease;
+  background-color: transparent;
+  display: block;
+  color: var(--main-color);
+  border: none;
+  outline: none;
+  width: 40px;
+  height: 40px;
+  line-height: 0.7;
+  text-align: center;
 }
 
 /* Left Scroll Arrow */
 .videos-list-page .video-scroll-wrapper .scroll-arrow.left {
-  right: -100px;
+  left: -70px;
+  right: auto;
 }
 
 /* Right Scroll Arrow */
 .videos-list-page .video-scroll-wrapper .scroll-arrow.right {
-  left: -100px;
+  right: -70px;
+  left: auto;
 }
 
 /* Hover Effect for Scroll Arrows */
@@ -161,9 +175,20 @@
   color: #fff;
 }
 
+/* הגדרת תוכן לחיצים */
+.videos-list-page .video-scroll-wrapper .scroll-arrow.left::before {
+  content: '❯';
+  display: block;
+}
+
+.videos-list-page .video-scroll-wrapper .scroll-arrow.right::before {
+  content: '❮';
+  display: block;
+}
+
 .scroll-arrow.disabled {
+  opacity: 0.3;
   cursor: not-allowed;
-  color: #ccc; /* Disabled color */
 }
 
 /* Video Item Layout */
@@ -278,7 +303,96 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .videos-list-page .videos-container {
-    padding: 1rem; /* Adjust padding for smaller screens */
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  .videos-list-page .video-category {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .videos-list-page .video-scroll {
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    margin: 0;
+    overflow-x: auto;
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .videos-list-page .video-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .videos-list-page .video-item {
+    flex: 0 0 160px !important;
+    width: 160px !important;
+    margin-left: 0.5rem !important;
+    scroll-snap-align: none;
+    scroll-snap-stop: none;
+  }
+
+  .videos-list-page .video-thumbnail {
+    aspect-ratio: 16/9;
+  }
+
+  .videos-list-page .video-scroll-wrapper {
+    overflow-x: auto;
+    scroll-behavior: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+  }
+
+  .videos-list-page .video-scroll-wrapper .scroll-arrow {
+    display: none !important; /* הסתרת החיצים לחלוטין במובייל */
+  }
+
+  .videos-list-page .category-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+
+  .videos-list-page .video-title {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .videos-list-page .videos-container {
+    padding: 0.5rem;
+    gap: 1.5rem;
+  }
+
+  .videos-list-page .video-item {
+    flex: 0 0 140px !important;
+    width: 140px !important;
+  }
+
+  .videos-list-page .video-category {
+    padding: 0.75rem;
+  }
+
+  .videos-list-page .category-title {
+    font-size: 1.6rem;
+  }
+
+  .videos-list-page .play-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .videos-list-page .play-button::before {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid white;
   }
 }
 
@@ -296,4 +410,166 @@
   .videos-list-page .video-category {
     max-width: 95%; /* Set max-width to 95% for smaller screens */
   }
+}
+
+/* התאמות למובייל וטאבלטים */
+.videos-list.mobile-device {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 10px;
+}
+
+.video-item.mobile-device {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.video-item.mobile-device .video-thumbnail {
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+}
+
+.video-item.mobile-device .video-info {
+  padding: 0.5rem;
+}
+
+.video-item.mobile-device .video-title {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.video-item.mobile-device .video-description {
+  font-size: 0.9rem;
+  -webkit-line-clamp: 2;
+}
+
+/* התאמות לטאבלטים */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .videos-list.mobile-device {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    padding: 15px;
+  }
+
+  .video-item.mobile-device .video-thumbnail {
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-item.mobile-device .video-info {
+    padding: 0.8rem;
+  }
+
+  .video-item.mobile-device .video-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .video-item.mobile-device .video-description {
+    font-size: 1rem;
+  }
+}
+
+/* התאמות למובייל */
+@media (max-width: 480px) {
+  .videos-list.mobile-device {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 10px;
+  }
+
+  .video-item.mobile-device .video-thumbnail {
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-item.mobile-device .video-info {
+    padding: 0.5rem;
+  }
+
+  .video-item.mobile-device .video-title {
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .video-item.mobile-device .video-description {
+    font-size: 0.85rem;
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* התאמות למצב לרוחב במובייל */
+@media (max-width: 768px) and (orientation: landscape) {
+  .videos-list.mobile-device {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* התאמות למסכי מגע */
+@media (hover: none) and (pointer: coarse) {
+  .video-item.mobile-device:hover {
+    transform: none;
+  }
+
+  .video-item.mobile-device:active {
+    transform: scale(0.98);
+  }
+
+  .video-item.mobile-device .video-thumbnail:hover .play-button {
+    transform: none;
+  }
+
+  .video-item.mobile-device .video-thumbnail:active .play-button {
+    transform: scale(1.1);
+  }
+}
+
+/* עיצוב לטקסט הטעינה */
+.loading-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #00ff00; /* צבע ירוק זוהר תואם לעיצוב האתר */
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+/* התאמה למובייל */
+.loading-text.mobile-device {
+  font-size: 0.9rem;
+}
+
+/* אנימציית פולסים לטקסט */
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* סלקטור עבור הטקסט המהבהב */
+.loading-text-content {
+  display: inline-block;
+  animation: pulse 1.5s infinite;
+}
+
+/* וידוא שמיכל התמונה יש לו position relative */
+.video-thumbnail {
+  position: relative;
+  overflow: hidden;
 }

@@ -8,9 +8,9 @@ import videos from './videos.jpg';
 
 // Array of images
 const images = [
-    { src: articles, name: 'Articles' },
-    { src: guides, name: 'Guides' },
-    { src: videos, name: 'Videos' }
+    { src: articles, name: 'מאמרים' },
+    { src: guides, name: 'מדריכים' },
+    { src: videos, name: 'סרטונים' }
 ];
 
 const PHOTO_INTERVAL = 5000; // 5 seconds for image transition
@@ -20,8 +20,25 @@ const PhotoCarousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true);
     const [progress, setProgress] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
     const intervalRef = useRef(null);
     const progressRef = useRef(null);
+
+    // בדיקה אם המכשיר הוא מובייל
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        
+        // בדיקה ראשונית
+        checkMobile();
+        
+        // הוספת מאזין לשינוי גודל החלון
+        window.addEventListener('resize', checkMobile);
+        
+        // ניקוי
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const nextImage = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -34,6 +51,12 @@ const PhotoCarousel = () => {
 
     const pause = () => {
         setIsPlaying(false);
+    };
+
+    // פונקציה לבחירת תמונה ספציפית
+    const selectImage = (index) => {
+        setCurrentIndex(index);
+        setProgress(0);
     };
 
     useEffect(() => {
@@ -67,7 +90,11 @@ const PhotoCarousel = () => {
 
     return (
         <div className="photo-carousel">
-            <img src={images[currentIndex].src} alt="carousel" className="carousel-image" />
+            <img 
+                src={images[currentIndex].src} 
+                alt={images[currentIndex].name} 
+                className="carousel-image" 
+            />
 
             <button 
                 className="control-button"
@@ -83,7 +110,11 @@ const PhotoCarousel = () => {
 
             <div className="progress-bar-container">
                 {images.map((_, index) => (
-                    <div key={index} className={`progress-bar ${index === currentIndex ? 'active' : ''}`}>
+                    <div 
+                        key={index} 
+                        className={`progress-bar ${index === currentIndex ? 'active' : ''}`}
+                        onClick={() => selectImage(index)} // הוספת אפשרות לחיצה על שורת ההתקדמות
+                    >
                         <div 
                             className="progress-bar-background"
                             style={{ width: index === currentIndex ? `${progress}%` : '0%' }}

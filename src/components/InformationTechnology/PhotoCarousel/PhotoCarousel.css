@@ -3,13 +3,14 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  text-align: center; /* Center align text and buttons */
+  text-align: center;
+  direction: rtl;
 }
 
 .carousel-image {
   margin-top: -2vw;
   width: 95vw;
-  height: 92.75vw; /* Changed to maintain 21:9 ratio (95 * 9/21) */
+  height: auto;
   max-height: 95vh;
   object-fit: contain;
 }
@@ -17,50 +18,52 @@
 .control-button {
   position: absolute;
   bottom: 1.85rem;
-  left: 53rem;
-  background: rgba(255, 255, 255, 0.5); /* Light white shade */
+  right: 50%;
+  background: rgba(255, 255, 255, 0.5);
   border: none;
   cursor: pointer;
-  font-size: 15px; /* Small size */
+  font-size: 15px;
   padding: 5px;
   border-radius: 75%;
-  width: 1.5rem; /* Small button size */
-  height: 1.5rem; /* Small button size */
+  width: 1.5rem;
+  height: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1; /* Ensure button is above other elements */
-  transform: translateX(-120px); /* Adjust position relative to center */
+  z-index: 1;
+  transform: translateX(calc(50% - 200px));
 }
 
 .image-name {
   position: absolute;
-  bottom: 3rem; /* Adjust to position above the bar */
-  left: 55rem;
-  transform: translateX(-50%);
-  font-size: 18px; /* Font size for the caption */
-  color: rgba(255, 255, 255, 0.5); /* Light white shade */
-  background: rgba(0, 0, 0, 0.5); /* Optional: dark background for better readability */
+  bottom: 3rem;
+  right: 50%;
+  transform: translateX(50%);
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   padding: 2px 5px;
   border-radius: 5px;
+  white-space: nowrap;
 }
 
 .progress-bar-container {
   position: absolute;
-  bottom: 2.5rem; /* Adjust as needed */
-  left: 55rem;
-  transform: translateX(-50%);
-  width: 15.2rem; /* Fixed width for progress bar container */
+  bottom: 2.5rem;
+  right: 50%;
+  transform: translateX(50%);
+  width: 15.2rem;
   height: 0.4rem;
   display: flex;
-  gap: 2px; /* Add some spacing between bars */
+  gap: 2px;
+  direction: ltr;
 }
 
 .progress-bar {
   position: relative;
   flex: 1;
   height: 10.5px;
-  background: rgba(120, 120, 120, 0.5); /* Light white shade */
+  background: rgba(120, 120, 120, 0.5);
   border-radius: 5px;
   overflow: hidden;
 }
@@ -70,11 +73,128 @@
   top: 0;
   left: 0;
   height: 100rem;
-  background: rgba(255, 255, 255, 0.5); /* Running bar color */
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 3px;
   transition: width 0.1s linear;
 }
 
 .progress-bar.active .progress-bar-background {
   width: 100rem;
+}
+
+/* Media queries for different screen sizes */
+@media screen and (min-width: 2560px) {
+  .carousel-image {
+    width: 90vw;
+    margin-top: -1vw;
+  }
+  
+  .progress-bar-container {
+    width: 20rem;
+  }
+  
+  .control-button {
+    transform: translateX(calc(50% - 240px));
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  .carousel-image {
+    width: 95vw;
+    margin-top: -2vw;
+  }
+  
+  .progress-bar-container {
+    width: 15.2rem;
+  }
+  
+  .control-button {
+    transform: translateX(calc(50% - 200px));
+  }
+}
+
+/* התאמה לטאבלטים */
+@media screen and (max-width: 768px) {
+  .photo-carousel {
+    height: auto;
+    min-height: 60vh;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .carousel-image {
+    width: 92vw;
+    margin-top: 0;
+    margin-right: 0;
+    max-height: 60vh;
+    object-fit: contain;
+  }
+  
+  .control-button {
+    bottom: 2rem;
+    transform: translateX(calc(50% - 140px));
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 14px;
+  }
+  
+  .image-name {
+    bottom: 3.2rem;
+    font-size: 16px;
+  }
+  
+  .progress-bar-container {
+    bottom: 2.6rem;
+    width: 12rem;
+  }
+  
+  .progress-bar {
+    height: 8px;
+  }
+}
+
+/* התאמה למובייל */
+@media screen and (max-width: 480px) {
+  .photo-carousel {
+    height: auto;
+    min-height: 50vh;
+    margin-top: 10px;
+    margin-bottom: 25px;
+  }
+  
+  .carousel-image {
+    width: 90vw;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: auto;
+    max-height: 50vh;
+  }
+  
+  .control-button {
+    bottom: 2.5rem;
+    right: 50%;
+    left: auto;
+    transform: translateX(calc(50% - 120px));
+    width: 1.6rem;
+    height: 1.6rem;
+    font-size: 12px;
+  }
+  
+  .image-name {
+    bottom: 3.5rem;
+    font-size: 14px;
+    white-space: nowrap;
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .progress-bar-container {
+    bottom: 3rem;
+    width: 10rem;
+  }
+  
+  .progress-bar {
+    height: 6px;
+  }
 }

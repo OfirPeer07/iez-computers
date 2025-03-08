@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import VideoItem from './VideoItem';
 
-const VideoCategory = React.memo(({ playlist }) => {
+const VideoCategory = ({ playlist, isMobile }) => {
   const [scrollState, setScrollState] = useState({
     canScrollLeft: false,
     canScrollRight: false,
@@ -12,7 +12,8 @@ const VideoCategory = React.memo(({ playlist }) => {
   });
   const [hasScroll, setHasScroll] = useState(false);
   const scrollRef = useRef(null);
-  const scrollCheckRef = useRef(null); // Using this to track scroll state
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   // Updates the scroll state based on the scroll container's dimensions
   const updateScrollState = useCallback(() => {
@@ -35,15 +36,10 @@ const VideoCategory = React.memo(({ playlist }) => {
 
   // Handles the scroll event to scroll the container smoothly in the desired direction
   const handleScroll = useCallback((direction) => {
-    if (!scrollRef.current) return;
-    
-    const container = scrollRef.current;
-    const scrollAmount = container.clientWidth * 0.8; // Scroll by 80% of the container width
-    
-    container.scrollBy({
-      left: direction === 'left' ? scrollAmount : -scrollAmount,
-      behavior: 'smooth'
-    });
+    if (scrollRef.current) {
+      const scrollAmount = direction === 'right' ? -300 : 300;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
   }, []);
 
   // Check if the scroll container has horizontal scroll available
@@ -111,44 +107,88 @@ const VideoCategory = React.memo(({ playlist }) => {
     };
   }, []);
 
+  // Handle touch events for mobile swipe
+  const handleTouchStart = useCallback((e) => {
+    if (window.innerWidth <= 768) return; // Skip on mobile
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchMove = useCallback((e) => {
+    if (window.innerWidth <= 768) return; // Skip on mobile
+    touchEndX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (window.innerWidth <= 768) return; // Skip on mobile
+    if (!touchStartX.current || !touchEndX.current) return;
+
+    const diff = touchStartX.current - touchEndX.current;
+    const container = scrollRef.current;
+    
+    if (Math.abs(diff) > 50) {
+      const direction = diff > 0 ? 1 : -1;
+      const scrollAmount = container.clientWidth * 0.85;
+      
+      container.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  }, []);
+
+  // Add touch event listeners
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: true });
+    container.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+      container.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [handleTouchStart, handleTouchMove, handleTouchEnd]);
+
   return (
-    <div className="video-category">
-      <h2 className="category-title">{playlist.title}</h2>
+    <div className={`video-category ${isMobile ? 'mobile-device' : ''}`}>
+      <h2 className={`category-title ${isMobile ? 'mobile-device' : ''}`}>{playlist.title}</h2>
       <div className="video-scroll-wrapper">
-        {hasScroll && (
-          <>
-            <div 
-              className={`scroll-arrow left ${!scrollState.canScrollLeft ? 'disabled' : ''}`} // Disable arrow if can't scroll left
-              onClick={() => handleScroll('left')}
-              style={{ fontSize: '2rem', color: '#00ff00' }}
-            >
-              ‹
-            </div>
-            <div 
-              className={`scroll-arrow right ${!scrollState.canScrollRight ? 'disabled' : ''}`} // Disable arrow if can't scroll right
-              onClick={() => handleScroll('right')}
-              style={{ fontSize: '2rem', color: '#00ff00' }}
-            >
-              ›
-            </div>
-          </>
+        {!isMobile && (
+          <button
+            className="scroll-arrow right"
+            onClick={() => handleScroll('left')}
+            aria-label="גלול שמאלה"
+          >
+          </button>
         )}
-        <div 
-          ref={scrollRef}
-          className="video-scroll custom-scrollbar"
-        >
+        <div className={`video-scroll ${isMobile ? 'mobile-device' : ''}`} ref={scrollRef}>
           {playlist.videos.map((video) => (
-            <VideoItem 
-              key={video.id} 
-              video={video} 
-              playlistFolder={playlist.folder} 
+            <VideoItem
+              key={video.id}
+              video={video}
+              playlistFolder={playlist.folder}
+              isMobile={isMobile}
             />
           ))}
         </div>
+        {!isMobile && (
+          <button
+            className="scroll-arrow left"
+            onClick={() => handleScroll('right')}
+            aria-label="גלול ימינה"
+          >
+          </button>
+        )}
       </div>
     </div>
   );
-});
+};
 
 VideoCategory.propTypes = {
   playlist: PropTypes.shape({
@@ -160,9 +200,11 @@ VideoCategory.propTypes = {
         id: PropTypes.number.isRequired,
         filename: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
+        description: PropTypes.string,
       })
     ).isRequired,
   }).isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export default VideoCategory;

@@ -6,6 +6,23 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);  // הוספת משתנה error
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Mobile detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add listener for window resize
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const loadArticles = async () => {
@@ -104,12 +121,22 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
 
   // Articles grid
   return (
-    <div className="articles-container">
+    <div className={`articles-container ${isMobile ? 'mobile-view' : ''}`}>
       {articles.map((article, index) => (
         <Link 
           to={`/${basePath}/${article.slug}.md`} 
           key={article.slug || index}
           className="article-link"
+          onClick={(e) => {
+            // Add touch feedback for mobile
+            if (isMobile) {
+              const target = e.currentTarget;
+              target.style.transform = 'scale(0.98)';
+              setTimeout(() => {
+                target.style.transform = '';
+              }, 150);
+            }
+          }}
         >
           <article className="article-item">
             {article.category && (

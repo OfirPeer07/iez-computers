@@ -1,23 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom'; // הוספנו את useLocation כדי לבדוק את הנתיב הנוכחי
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams, useLocation } from 'react-router-dom'; 
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
-import remarkEmoji from 'remark-emoji'; // ודא שהתקנת את החבילה הזו
+import remarkEmoji from 'remark-emoji'; 
 import '../MarkdownDocs/Markdown-Global.css';
 import RecommendedArticles from './RecommendedArticles';
 
-const MarkdownDocs = () => {
-    const { fileName } = useParams(); // מקבלים את שם הקובץ מה-URL
-    const location = useLocation(); // מקבלים את הנתיב הנוכחי
+function MarkdownDocs() {
+    const { fileName } = useParams(); 
+    const location = useLocation(); 
     const [content, setContent] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const contentRef = useRef(null);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         const fetchMarkdownFile = async () => {
             try {
-                const response = await fetch(`../../../../public/md/${fileName}`); // ודא שהקובץ קיים בתיקיית 'public/md'
+                if (!fileName) {
+                    return;
+                }
+                const response = await fetch(`../../../../public/md/${fileName}`); 
                 if (!response.ok) {
                     throw new Error('Error fetching the Markdown file.');
                 }
@@ -36,14 +50,28 @@ const MarkdownDocs = () => {
         }
     }, [fileName]);
 
-    // פונקציה לזיהוי כיוון הטקסט
     const detectLanguageDirection = (text) => {
-        const hebrewRegex = /[\u0590-\u05FF]/; // ביטוי רגולרי לתוים בעברית
+        const hebrewRegex = /[\u0590-\u05FF]/; 
         return hebrewRegex.test(text) ? 'rtl' : 'ltr';
     };
 
-    // זיהוי כיוון הטקסט על פי התוכן
     const direction = detectLanguageDirection(content);
+
+    const handleImageRendering = ({ node, ...props }) => {
+        const imgStyle = isMobile ? { maxWidth: '100%', height: 'auto' } : {};
+        return <img {...props} style={imgStyle} loading="lazy" />;
+    };
+
+    const handleHeadingRendering = ({ node, level, ...props }) => {
+        const HeadingTag = `h${level}`;
+        const headingStyle = isMobile ? { fontSize: `${1.8 - (level * 0.2)}rem` } : {};
+        return <HeadingTag {...props} style={headingStyle} />;
+    };
+
+    const handleTableRendering = ({ node, ...props }) => {
+        const tableStyle = isMobile ? { display: 'block', overflowX: 'auto', whiteSpace: 'nowrap' } : {};
+        return <table {...props} style={tableStyle} />;
+    };
 
     if (loading) {
         return <div className="loading">Loading...</div>;
@@ -66,25 +94,32 @@ const MarkdownDocs = () => {
         },
     ];
 
-    // תנאי להציג את רכיב RecommendedArticles רק בנתיבים הרצויים
     const showRecommendedArticles = location.pathname.includes('/cyber/hacking/articles') || location.pathname.includes('/cyber/hacking/guides');
 
     return (
-        <div className="markdown-docs-container">
+        <div className={`markdown-docs-container ${isMobile ? 'mobile-view' : ''}`}>
             <div className="recommended-articles-section">
-                {/* הצגת רכיב RecommendedArticles רק אם הנתיב נכון */}
                 {showRecommendedArticles && <RecommendedArticles articles={recommendedArticles} />}
             </div>
-            <div className="markdown-docs" dir={direction}>
-                {/* תוכן ה-Markdown */}
+            <div className="markdown-docs" dir={direction} ref={contentRef}>
                 <ReactMarkdown
                     children={content}
                     rehypePlugins={[rehypeRaw]}
                     remarkPlugins={[remarkGfm, remarkEmoji]}
+                    components={{
+                        img: handleImageRendering,
+                        h1: props => handleHeadingRendering({ ...props, level: 1 }),
+                        h2: props => handleHeadingRendering({ ...props, level: 2 }),
+                        h3: props => handleHeadingRendering({ ...props, level: 3 }),
+                        h4: props => handleHeadingRendering({ ...props, level: 4 }),
+                        h5: props => handleHeadingRendering({ ...props, level: 5 }),
+                        h6: props => handleHeadingRendering({ ...props, level: 6 }),
+                        table: handleTableRendering,
+                    }}
                 />
             </div>
         </div>
     );
-};
+}
 
 export default MarkdownDocs;

@@ -16,6 +16,11 @@ html, body {
   flex-direction: column;
 }
 
+/* נוסיף קלאס ייעודי למכשירים ניידים */
+.mobile-device .sidebar {
+  /* סגנונות ספציפיים למובייל */
+}
+
 .sidebar {
   position: relative;
   background: linear-gradient(135deg, #000000, #1b1b1b);
@@ -169,4 +174,248 @@ html, body {
 .dropdown-menu a:hover {
   background-color: rgba(23, 202, 7, 0.1);
   color: #ffffff;
+}
+
+/* התאמה למובייל - טאבלטים */
+.mobile-device .sidebar {
+  height: clamp(100px, 18vh, 140px);
+}
+
+.mobile-device .sidebar ul {
+  gap: clamp(25px, 4vw, 45px);
+}
+
+.mobile-device .sidebar ul li a.menu-icon {
+  width: clamp(95px, 13vw, 180px);
+  height: clamp(95px, 13vw, 180px);
+  box-shadow: 0 0 25px #17ca07, 0 0 35px #17ca07;
+  background-color: rgba(23, 202, 7, 0.2);
+}
+
+.mobile-device .sidebar ul li a.menu-icon img {
+  width: clamp(140%, 13vw, 200px);
+  filter: none; /* ללא אפור במובייל */
+  transform: scale(1.2); /* תמיד גדול יותר */
+}
+
+/* סגנון חדש לאייקון פעיל במובייל */
+.mobile-device .sidebar ul li.active-mobile a.menu-icon {
+  background-color: rgba(23, 202, 7, 0.5);
+  box-shadow: 0 0 35px #17ca07, 0 0 45px #17ca07;
+}
+
+.mobile-device .sidebar ul li.active-mobile a.menu-icon img {
+  transform: scale(1.2); /* אותו גודל כמו במצב רגיל */
+}
+
+.mobile-device .sidebar ul li:hover .dropdown-menu {
+  transform: translateY(0);
+}
+
+/* במובייל אין צורך בהזזה של האייקון */
+.mobile-device .sidebar ul li.hacking.shift {
+  transform: translateX(0);
+}
+
+/* רקע כהה (overlay) במובייל */
+.mobile-device .mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1500;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* הגדלת אזור הלחיצה במובייל */
+.mobile-device .sidebar ul li a.menu-icon::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  z-index: -1;
+}
+
+/* התאמה למובייל - מסכים קטנים */
+@media screen and (max-width: 480px) {
+  .mobile-device .sidebar {
+    height: clamp(90px, 16vh, 120px);
+  }
+  
+  .mobile-device .sidebar ul {
+    gap: clamp(20px, 3vw, 35px);
+  }
+  
+  .mobile-device .sidebar ul li a.menu-icon {
+    width: clamp(85px, 12vw, 150px);
+    height: clamp(85px, 12vw, 150px);
+    box-shadow: 0 0 20px #17ca07, 0 0 30px #17ca07;
+  }
+  
+  .mobile-device .sidebar ul li a.menu-icon img {
+    width: clamp(135%, 12vw, 180px);
+    filter: none;
+    transform: scale(1.2); /* תמיד גדול יותר */
+  }
+  
+  /* הגדלת אזור הלחיצה במסכים קטנים */
+  .mobile-device .sidebar ul li a.menu-icon::after {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    z-index: -1;
+  }
+}
+
+/* תמיכה בסגנונות מגע */
+@media (hover: none) {
+  .mobile-device .sidebar ul li a.menu-icon:active {
+    background-color: rgba(23, 202, 7, 0.3);
+  }
+  
+  .mobile-device .dropdown-menu a:active {
+    background-color: rgba(23, 202, 7, 0.2);
+    color: #ffffff;
+  }
+}
+
+/* תפריט מובייל משותף */
+.mobile-device .mobile-dropdown-menu {
+  position: fixed;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  border-radius: 20px 20px 0 0;
+  background-color: rgba(27, 27, 27, 0.95);
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: slideUp 0.3s ease-out;
+  box-sizing: border-box;
+  z-index: 2000;
+  border: 3px solid #17ca07;
+  border-bottom: none;
+  box-shadow: 0 -4px 20px rgba(23, 202, 7, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.mobile-device .mobile-dropdown-menu.closing {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.mobile-device .mobile-dropdown-menu a {
+  color: #17ca07;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 18px;
+  margin: 8px 0;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.25s ease;
+  direction: rtl;
+}
+
+.mobile-device .mobile-dropdown-menu a:active {
+  background-color: rgba(23, 202, 7, 0.3);
+  color: white;
+  transform: scale(0.98);
+}
+
+/* מחוון החלקה בתפריט המובייל */
+.mobile-device .mobile-dropdown-menu .swipe-indicator {
+  width: 60px;
+  height: 6px;
+  background-color: rgba(23, 202, 7, 0.5);
+  border-radius: 10px;
+  margin: 0 auto 20px;
+  position: relative;
+}
+
+/* כפתור סגירה לתפריט במובייל */
+.mobile-device .mobile-dropdown-menu .close-menu-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #17ca07;
+  font-size: 28px;
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 9999;
+}
+
+.mobile-device .mobile-dropdown-menu .close-menu-btn:active {
+  background-color: rgba(23, 202, 7, 0.2);
+  transform: scale(1.1);
+}
+
+/* התאמה למובייל - מסכים קטנים */
+@media screen and (max-width: 480px) {
+  .mobile-device .mobile-dropdown-menu {
+    padding: 20px 15px;
+  }
+  
+  .mobile-device .mobile-dropdown-menu a {
+    padding: 15px;
+    margin: 6px 0;
+    font-size: 16px;
+  }
+  
+  .mobile-device .mobile-dropdown-menu .close-menu-btn {
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* אנימציות */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
 }

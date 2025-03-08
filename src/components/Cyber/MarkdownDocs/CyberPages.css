@@ -130,13 +130,68 @@ body {
 /* התאמה למסכים קטנים */
 @media (max-width: 768px) {
   .cyber-wrapper .rtl-box {
-    width: calc(100% - 2rem);
-    margin: 1rem;
+    width: 95%;
+    margin: 1rem auto;
     padding: 1.5rem;
+    left: 0; /* תיקון למיקום במובייל */
+    border-radius: 10px;
+  }
+  
+  .cyber-wrapper .rtl-box p {
+    font-size: 1rem;
+    line-height: 1.5;
   }
   
   .cyber-wrapper .rtl-box .close-btn {
     top: 10px;
     left: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
   }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  .cyber-wrapper .rtl-box {
+    width: 92%;
+    margin: 0.8rem auto;
+    padding: 1.2rem;
+    border-radius: 8px;
+  }
+  
+  .cyber-wrapper .rtl-box p {
+    font-size: 0.95rem;
+    margin: 0.6em 0;
+  }
+  
+  /* כפתור סגירה גדול יותר למסכי מגע קטנים */
+  .cyber-wrapper .rtl-box .close-btn {
+    top: 8px;
+    left: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+  
+  /* אנימציית זוהר מצומצמת (לביצועים טובים יותר במובייל) */
+  @keyframes cyber-glow {
+    from {
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.1),
+                  inset 0 0 10px rgba(0, 255, 255, 0.05);
+    }
+    to {
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.15),
+                  inset 0 0 15px rgba(0, 255, 255, 0.1);
+    }
+  }
+}
+
+/* Mobile-view class שיכול להיות מופעל מה-React component */
+.mobile-view .cyber-wrapper .rtl-box {
+  width: 94% !important;
+  padding: 1rem !important;
+  margin: 0.5rem auto !important;
+  left: 0 !important;
+  animation: cyber-glow 3s ease-in-out infinite alternate;
 }

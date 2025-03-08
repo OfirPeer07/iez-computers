@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaMicrochip, FaMemory, FaDesktop, FaServer, FaHdd, FaLaptop } from 'react-icons/fa';
 import computersData from './computers.json';
 import './BuildingComputers.css';
@@ -24,10 +24,34 @@ const specLabels = {
 export default function BuildingComputers() {
   const [hoveredId, setHoveredId] = useState(null);
   const [imageError, setImageError] = useState({});
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    try {
+      if (!computersData || !computersData.computers || !Array.isArray(computersData.computers)) {
+        throw new Error('נתוני המחשבים אינם בפורמט הנכון');
+      }
+    } catch (err) {
+      console.error('שגיאה בטעינת נתוני המחשבים:', err);
+      setError(err.message);
+    }
+  }, []);
 
   const handleMouseEnter = (id) => setHoveredId(id);
   const handleMouseLeave = () => setHoveredId(null);
-  const handleImageError = (id) => setImageError(prev => ({ ...prev, [id]: true }));
+  const handleImageError = (id) => {
+    console.warn(`שגיאה בטעינת תמונה למחשב ${id}`);
+    setImageError(prev => ({ ...prev, [id]: true }));
+  };
+
+  if (error) {
+    return (
+      <div className="error-container" style={{ textAlign: 'center', padding: '20px' }}>
+        <h2>😕 שגיאה</h2>
+        <p>{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container">

@@ -10,7 +10,26 @@ import './VideoPlayer.css';
 
 const LazyVideoFrame = React.memo(({ src, alt, className }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const videoRef = useRef(null);
+
+  // בדיקה אם המכשיר הוא מובייל
+  useEffect(() => {
+    const checkDevice = () => {
+      const mobileRegex = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i;
+      const tabletRegex = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/;
+      
+      const isMobileDevice = mobileRegex.test(navigator.userAgent.toLowerCase());
+      const isTablet = tabletRegex.test(navigator.userAgent.toLowerCase());
+      
+      setIsMobile(isMobileDevice || isTablet);
+    };
+    
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,10 +57,14 @@ const LazyVideoFrame = React.memo(({ src, alt, className }) => {
 
   return (
     <>
-      {!isLoaded && <div className="video-placeholder" aria-label="ממתין לטעינת הסרטון">הסרטון יעלה בקרוב</div>}
+      {!isLoaded && (
+        <div className={`video-placeholder loading-text ${isMobile ? 'mobile-device' : ''}`} aria-label="ממתין לטעינת הסרטון">
+          <span className="loading-text-content">בטעינה</span>
+        </div>
+      )}
       <video
         ref={videoRef}
-        className={`${className} ${isLoaded ? 'is-loaded' : 'is-loading'}`}
+        className={`${className} ${isLoaded ? 'is-loaded' : 'is-loading'} ${isMobile ? 'mobile-device' : ''}`}
         onLoadedData={handleLoad}
         muted
         playsInline
@@ -106,8 +129,27 @@ const VideoPlayer = () => {
   const [error, setError] = useState(null);
   const [showUnavailableModal, setShowUnavailableModal] = useState(false);
   const [mdContent, setMdContent] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
   const scrollRef = useRef(null);
   const itemRefs = useRef({});
+
+  // בדיקה אם המכשיר הוא מובייל או טאבלט
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobileRegex = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i;
+      const tabletRegex = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/;
+      
+      const isMobileDevice = mobileRegex.test(navigator.userAgent.toLowerCase());
+      const isTablet = tabletRegex.test(navigator.userAgent.toLowerCase());
+      
+      setIsMobile(isMobileDevice || isTablet);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const fetchVideoAndPlaylist = useCallback(async () => {
     setLoading(true);
@@ -191,7 +233,7 @@ const VideoPlayer = () => {
     }
   }, [playlist, video, navigate]);
 
-  if (loading) return <div className="loading" aria-live="polite">טוען...</div>;
+  if (loading) return <div className="loading loading-text" aria-live="polite"><span className="loading-text-content">בטעינה</span></div>;
   if (error) return <div className="error" aria-live="assertive">שגיאה: {error}</div>;
   if (!video) return <div className="no-content" aria-live="polite">הסרטון לא נמצא</div>;
 
@@ -200,23 +242,26 @@ const VideoPlayer = () => {
   const nextVideo = currentIndex < playlist.videos.length - 1 ? playlist.videos[currentIndex + 1] : null;
 
   return (
-    <div className="videos-page single-video-page">
-      <div className="video-player-container">
+    <div className={`videos-page single-video-page ${isMobile ? 'mobile-device' : ''}`}>
+      <div className={`video-player-container ${isMobile ? 'mobile-device' : ''}`}>
         <Link to="/cyber/hacking/videos" className="back-to-videos">חזרה לרשימת הסרטונים</Link>
         {video.filename ? (
           <video 
             controls 
             src={`/playlists/${video.playlistFolder}/${video.filename}`}
             onError={handleVideoError}
+            playsInline={isMobile}
           />
         ) : (
-          <div className="video-placeholder" aria-label="הסרטון עדיין לא זמין">הסרטון יעלה בקרוב</div>
+          <div className="video-placeholder loading-text">
+            <span className="loading-text-content">בטעינה</span>
+          </div>
         )}
-        <div className="navigation-buttons">
+        <div className={`navigation-buttons ${isMobile ? 'mobile-device' : ''}`}>
           {prevVideo && (
             <button 
               onClick={() => navigate(`/cyber/hacking/videos/${prevVideo.id}`)} 
-              className="prev-video"
+              className={`prev-video ${isMobile ? 'mobile-device' : ''}`}
             >
               הסרטון הקודם
             </button>
@@ -224,13 +269,13 @@ const VideoPlayer = () => {
           {nextVideo && (
             <button 
               onClick={() => navigate(`/cyber/hacking/videos/${nextVideo.id}`)}  
-              className="next-video"
+              className={`next-video ${isMobile ? 'mobile-device' : ''}`}
             >
               הסרטון הבא
             </button>
           )}
         </div>
-        <div className="video-info">
+        <div className={`video-info ${isMobile ? 'mobile-device' : ''}`}>
           <h1>{video.title}</h1>
           {video.description && <p className="video-description">{video.description}</p>}
         </div>

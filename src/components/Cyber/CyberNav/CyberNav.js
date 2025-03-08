@@ -5,6 +5,7 @@ import './CyberNav.css';
 const CyberNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [articles, setArticles] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const folders = {
@@ -32,9 +33,9 @@ const CyberNav = () => {
           title: fileName.replace('./', '').replace('.md', '').replace(/-/g, ' '),
           path: fileName.replace('./', '')
         }));
-        console.log('Imported files:', files);
         return files;
       } catch (error) {
+        setError('Error loading files');
         console.warn('Error importing files:', error);
         return [];
       }
@@ -46,8 +47,6 @@ const CyberNav = () => {
       const techNews = importAll(require.context('../../../../public/md/TechnologyNews', false, /\.md$/));
       const troubleshooting = importAll(require.context('../../../../public/md/TroubleshootingGuides', false, /\.md$/));
 
-      console.log('Loaded articles:', { cyberArticles, cyberGuides, techNews, troubleshooting });
-
       const articlesData = {
         CyberArticles: { title: folders.CyberArticles.title, path: folders.CyberArticles.path, files: cyberArticles },
         CyberGuides: { title: folders.CyberGuides.title, path: folders.CyberGuides.path, files: cyberGuides },
@@ -55,9 +54,9 @@ const CyberNav = () => {
         TroubleshootingGuides: { title: folders.TroubleshootingGuides.title, path: folders.TroubleshootingGuides.path, files: troubleshooting }
       };
 
-      console.log('Setting articles state:', articlesData);
       setArticles(articlesData);
     } catch (error) {
+      setError('Error loading articles');
       console.error('Error loading markdown files:', error);
     }
   }, []);
@@ -66,12 +65,17 @@ const CyberNav = () => {
     setIsOpen(!isOpen);
   };
 
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+
   return (
     <>
       <button 
         className={`toggle-nav-btn ${isOpen ? 'open' : ''}`} 
         onClick={toggleNav}
         aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+        aria-expanded={isOpen}
       >
         <span></span>
         <span></span>
