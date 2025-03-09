@@ -260,15 +260,16 @@ html, body {
   }
   
   .mobile-device .sidebar ul li a.menu-icon {
-    width: clamp(85px, 12vw, 150px);
-    height: clamp(85px, 12vw, 150px);
+    width: clamp(95px, 12vw, 150px);
+    height: clamp(95px, 12vw, 150px);
     box-shadow: 0 0 20px #17ca07, 0 0 30px #17ca07;
   }
   
   .mobile-device .sidebar ul li a.menu-icon img {
-    width: clamp(135%, 12vw, 180px);
+    width: clamp(110%, 12vw, 180px);
+    max-width: 150%;
     filter: none;
-    transform: scale(1.2); /* תמיד גדול יותר */
+    transform: scale(1.1); /* תמיד גדול יותר */
   }
   
   /* הגדלת אזור הלחיצה במסכים קטנים */

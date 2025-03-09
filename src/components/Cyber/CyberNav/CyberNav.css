@@ -159,7 +159,7 @@
     right: -100%;
   }
 
-  .toggle-nav-btn {
+  .toggle-nav-btn-cyber {
     top: 20px;
     right: 20px;
   }
@@ -184,10 +184,11 @@
     bottom: 0;
   }
 
-  .mobile-device .toggle-nav-btn {
+  .toggle-nav-btn-cyber {
     position: relative;
     top: -0.5rcap;
     left: 34rcap;
     z-index: 99999;
+    display: none;
   }
 }

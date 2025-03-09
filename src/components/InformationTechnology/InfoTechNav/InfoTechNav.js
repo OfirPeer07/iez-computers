@@ -5,6 +5,7 @@ import './InfoTechNav.css';
 const InfoTechNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [articles, setArticles] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const folders = {
@@ -30,34 +31,28 @@ const InfoTechNav = () => {
       try {
         const files = r.keys().map((fileName) => ({
           title: fileName.replace('./', '').replace('.md', '').replace(/-/g, ' '),
-          path: fileName.replace('./', '') // שומר על סיומת ה-.md
+          path: fileName.replace('./', '')
         }));
-        console.log('Imported files:', files);
         return files;
       } catch (error) {
+        setError('Error loading files');
         console.warn('Error importing files:', error);
         return [];
       }
     };
 
     try {
-      const cyberArticles = importAll(require.context('../../../../public/md/CyberArticles', false, /\.md$/));
-      const cyberGuides = importAll(require.context('../../../../public/md/CyberGuides', false, /\.md$/));
       const techNews = importAll(require.context('../../../../public/md/TechnologyNews', false, /\.md$/));
       const troubleshooting = importAll(require.context('../../../../public/md/TroubleshootingGuides', false, /\.md$/));
 
-      console.log('Loaded articles:', { cyberArticles, cyberGuides, techNews, troubleshooting });
-
       const articlesData = {
-        CyberArticles: { title: folders.CyberArticles.title, path: folders.CyberArticles.path, files: cyberArticles },
-        CyberGuides: { title: folders.CyberGuides.title, path: folders.CyberGuides.path, files: cyberGuides },
         TechnologyNews: { title: folders.TechnologyNews.title, path: folders.TechnologyNews.path, files: techNews },
         TroubleshootingGuides: { title: folders.TroubleshootingGuides.title, path: folders.TroubleshootingGuides.path, files: troubleshooting }
       };
 
-      console.log('Setting articles state:', articlesData);
       setArticles(articlesData);
     } catch (error) {
+      setError('Error loading articles');
       console.error('Error loading markdown files:', error);
     }
   }, []);
@@ -66,18 +61,23 @@ const InfoTechNav = () => {
     setIsOpen(!isOpen);
   };
 
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+
   return (
     <>
       <button 
         className={`toggle-nav-btn ${isOpen ? 'open' : ''}`} 
         onClick={toggleNav}
         aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+        aria-expanded={isOpen}
       >
         <span></span>
         <span></span>
         <span></span>
       </button>
-      
+
       <div className={`sidenav ${!isOpen ? 'closed' : ''}`}>
         {Object.entries(articles).map(([category, data]) => (
           <div key={category} className="category-section">
@@ -97,6 +97,5 @@ const InfoTechNav = () => {
     </>
   );
 };
-
 
 export default InfoTechNav;

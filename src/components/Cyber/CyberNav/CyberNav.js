@@ -44,14 +44,10 @@ const CyberNav = () => {
     try {
       const cyberArticles = importAll(require.context('../../../../public/md/CyberArticles', false, /\.md$/));
       const cyberGuides = importAll(require.context('../../../../public/md/CyberGuides', false, /\.md$/));
-      const techNews = importAll(require.context('../../../../public/md/TechnologyNews', false, /\.md$/));
-      const troubleshooting = importAll(require.context('../../../../public/md/TroubleshootingGuides', false, /\.md$/));
 
       const articlesData = {
         CyberArticles: { title: folders.CyberArticles.title, path: folders.CyberArticles.path, files: cyberArticles },
         CyberGuides: { title: folders.CyberGuides.title, path: folders.CyberGuides.path, files: cyberGuides },
-        TechnologyNews: { title: folders.TechnologyNews.title, path: folders.TechnologyNews.path, files: techNews },
-        TroubleshootingGuides: { title: folders.TroubleshootingGuides.title, path: folders.TroubleshootingGuides.path, files: troubleshooting }
       };
 
       setArticles(articlesData);
@@ -81,7 +77,19 @@ const CyberNav = () => {
         <span></span>
         <span></span>
       </button>
-      
+
+
+      <button 
+        className={`toggle-nav-btn-cyber ${isOpen ? 'open' : ''}`} 
+        onClick={toggleNav}
+        aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+        aria-expanded={isOpen}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <div className={`sidenav ${!isOpen ? 'closed' : ''}`}>
         {Object.entries(articles).map(([category, data]) => (
           <div key={category} className="category-section">
