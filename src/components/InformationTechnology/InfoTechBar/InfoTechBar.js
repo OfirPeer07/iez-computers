@@ -219,7 +219,7 @@ function InfoTechBar() {
           <>
             <Link to="/contact-us" onClick={handleMenuLinkClick}>צור קשר</Link>
             <Link to="/works-with" onClick={handleMenuLinkClick}>ספקים וחברות</Link>
-            <Link to="/thanks" onClick={handleMenuLinkClick}>תודות</Link>
+            <Link to="/information-technology/thanks" onClick={handleMenuLinkClick}>תודות</Link>
           </>
         )}
       </div>
@@ -289,7 +289,7 @@ function InfoTechBar() {
           {activeMenu === 'logo' && !isMobile && (
             <div className="dropdown-menu logo-menu">
               <Link to="/contact-us" onClick={() => { setActiveMenu(null); setShiftComputer(false); }}>צור קשר</Link>
-              <Link to="/works-with" onClick={() => { setActiveMenu(null); setShiftComputer(false); }}>ספקים וחברות</Link>
+              <Link to="/information-technology/works-with" onClick={() => { setActiveMenu(null); setShiftComputer(false); }}>ספקים וחברות</Link>
               <Link to="/thanks" onClick={() => { setActiveMenu(null); setShiftComputer(false); }}>תודות</Link>
             </div>
           )}

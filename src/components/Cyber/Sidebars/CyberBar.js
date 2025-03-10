@@ -212,8 +212,8 @@ function CyberBar() {
         ) : (
           <>
             <Link to="/contact-us" onClick={handleMenuLinkClick}>צור קשר</Link>
-            <Link to="/works-with" onClick={handleMenuLinkClick}>ספקים וחברות</Link>
-            <Link to="/thanks" onClick={handleMenuLinkClick}>תודות</Link>
+            <Link to="/cyber/works-with" onClick={handleMenuLinkClick}>ספקים וחברות</Link>
+            <Link to="/cyber/thanks" onClick={handleMenuLinkClick}>תודות</Link>
           </>
         )}
       </div>
@@ -280,7 +280,7 @@ function CyberBar() {
           {activeMenu === 'logo' && !isMobile && (
             <div className="dropdown-menu logo-menu">
               <Link to="/contact-us" onClick={() => { setActiveMenu(null); setShiftHacking(false); }}>צור קשר</Link>
-              <Link to="/works-with" onClick={() => { setActiveMenu(null); setShiftHacking(false); }}>ספקים וחברות</Link>
+              <Link to="/cyber/works-with" onClick={() => { setActiveMenu(null); setShiftHacking(false); }}>ספקים וחברות</Link>
               <Link to="/thanks" onClick={() => { setActiveMenu(null); setShiftHacking(false); }}>תודות</Link>
             </div>
           )}
