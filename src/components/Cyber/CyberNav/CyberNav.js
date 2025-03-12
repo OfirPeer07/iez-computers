@@ -17,14 +17,6 @@ const CyberNav = () => {
         title: 'Cyber Guides',
         path: 'cyber/hacking/guides'
       },
-      'TechnologyNews': { 
-        title: 'Technology News',
-        path: 'information-technology/technology-news'
-      },
-      'TroubleshootingGuides': { 
-        title: 'Troubleshooting Guides',
-        path: 'information-technology/troubleshooting-guides'
-      }
     };
 
     const importAll = (r) => {
@@ -69,18 +61,6 @@ const CyberNav = () => {
     <>
       <button 
         className={`toggle-nav-btn ${isOpen ? 'open' : ''}`} 
-        onClick={toggleNav}
-        aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
-        aria-expanded={isOpen}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-
-      <button 
-        className={`toggle-nav-btn-cyber ${isOpen ? 'open' : ''}`} 
         onClick={toggleNav}
         aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
         aria-expanded={isOpen}

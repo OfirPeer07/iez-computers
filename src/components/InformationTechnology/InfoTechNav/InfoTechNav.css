@@ -165,22 +165,23 @@
   }
 
   .category-section h2 {
+    margin-top: 10vh;
     font-size: 1.4rem;
   }
 
   .category-section a {
     font-size: 1.1rem;
-    padding: 14px;
+    padding: 0.2rem;
   }
 }
 
 @media screen and (max-width: 1024px) {
   .sidenav {
-    top: clamp(0.5vh, 1vh, 1.1rem); /* Reset top position for mobile */
-    left: clamp(0.3vw, 1vw, 1.1rem);
+    top: 3.2rem; /* Reset top position for mobile */
+    left: 0.4rem;
     height: calc(100vh - clamp(50px, 12vh, 100px)); /* Adjust height for mobile */
     background-color: black;
-    opacity: 1.01;
+    opacity: 1;
     bottom: 0;
   }
 

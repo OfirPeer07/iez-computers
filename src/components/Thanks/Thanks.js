@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import CyberBar from '../Cyber/Sidebars/CyberBar';
-import InfoTechBar from '../InformationTechnology/InfoTechBar/InfoTechBar';
 import { Heart, Code, Bug, Award, Github, Linkedin, Twitter, ExternalLink, ThumbsUp, User } from 'lucide-react';
 import './Thanks.css';
 
@@ -10,17 +8,6 @@ const Thanks = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [heartAnims, setHeartAnims] = useState({});
   const location = useLocation();
-
-  // Determine which sidebar to render
-  const renderSidebar = () => {
-    if (location.pathname.startsWith('/cyber')) {
-      return <CyberBar />;
-    }
-    if (location.pathname.startsWith('/information-technology')) {
-      return <InfoTechBar />;
-    }
-    return null;
-  };
 
   const contributors = [
     {
@@ -201,8 +188,6 @@ const Thanks = () => {
           <p className="subtitle">לכל מי שתרם ועזר בבניית האתר</p>
         </div>
       </div>
-      {/* Sidebar (if applicable) */}
-      {renderSidebar()}
       <div className="contributors-grid">
         {contributors.map((contributor, index) => (
           <div 

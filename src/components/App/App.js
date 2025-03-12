@@ -4,20 +4,20 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import './App.css';
 
 // Import all Information Technology components  
-import InfoTechWorksWith from '../InformationTechnology/InfoTechWorksWith/InfoTechWorksWith';
 import InformationTechnology from '../InformationTechnology/InformationTechnology';
-import TechnologyNews from '../InformationTechnology/MarkdownDocs/TechnologyNews';
+import InfoTechWorksWith from '../InformationTechnology/InfoTechWorksWith/InfoTechWorksWith';
+import TroubleshootingGuides from '../InformationTechnology/MarkdownDocs/TroubleshootingGuides';
 import BuildingComputers from '../InformationTechnology/BuildingComputers/BuildingComputers';
 import ITdepartment from '../InformationTechnology/InfoTechDepartment/InfoTechDepartment';
-import TroubleshootingGuides from '../InformationTechnology/MarkdownDocs/TroubleshootingGuides';
+import TechnologyNews from '../InformationTechnology/MarkdownDocs/TechnologyNews';
 
 // Import all Cyber components  
 import Cyber from '../Cyber/Cyber';
 import CyberWorksWith from '../Cyber/CyberWorksWith/CyberWorksWith';
 import CyberArticles from '../Cyber/MarkdownDocs/CyberArticles';
 import CyberGuides from '../Cyber/MarkdownDocs/CyberGuides';
-import VideosList from '../Cyber/Videos/VideosList';
 import VideoPlayer from '../Cyber/Videos/VideoPlayer';
+import VideosList from '../Cyber/Videos/VideosList';
 
 // Import all General components  
 import { lazy, Suspense } from 'react';
@@ -26,6 +26,7 @@ import CyberBar from '../Cyber/Sidebars/CyberBar';
 import InfoTechBar from '../InformationTechnology/InfoTechBar/InfoTechBar';
 import ContactUs from '../ContactUs/ContactUs';
 import Thanks from '../Thanks/Thanks';
+
 
 
 function App() {
@@ -43,11 +44,11 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/cyber" element={<Cyber />} />
               <Route path="/information-technology" element={<InformationTechnology />} />
-              <Route path="/thanks" element={<Thanks />} />
               {/*<Route path="/ctf-game" component={CTFGame} /> {/* Route for the CTF game */}
 
               {/* Contact Page */}
               <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/thanks" element={<Thanks />} />
               <Route path="/cyber/works-with" element={<CyberWorksWith />} />
               <Route path="/information-technology/works-with" element={<InfoTechWorksWith />} />
 

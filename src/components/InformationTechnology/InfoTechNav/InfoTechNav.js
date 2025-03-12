@@ -9,14 +9,6 @@ const InfoTechNav = () => {
 
   useEffect(() => {
     const folders = {
-      'CyberArticles': { 
-        title: 'Cyber Articles',
-        path: 'cyber/hacking/articles'
-      },
-      'CyberGuides': { 
-        title: 'Cyber Guides',
-        path: 'cyber/hacking/guides'
-      },
       'TechnologyNews': { 
         title: 'Technology News',
         path: 'information-technology/technology-news'
