@@ -115,21 +115,21 @@ html, body {
 
 .rectangle.first {
   top: 46.5%;
-  left: 67.8%;
+  left: 70%;
   transform: translate(-50%, -50%) rotateY(20deg);
   animation-delay: 1.525s;
 }
 
 .rectangle.second {
   top: 46.5%;
-  right: 65%;
+  right: 70%;
   transform: translateY(-50%, -50%) rotateY(-20deg);
   animation-delay: 1.525s;
 }
 
 .rectangle.third {
   top: 19.5%;
-  left: 38%;
+  left: 36.5%;
   transform: translate(-50%, -50%);
   animation-delay: 1.55s;
 }

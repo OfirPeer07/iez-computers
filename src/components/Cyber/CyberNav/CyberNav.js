@@ -6,6 +6,7 @@ const CyberNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [articles, setArticles] = useState({});
   const [error, setError] = useState(null);
+  const [isScrollingDown, setIsScrollingDown] = useState(false); // למעקב אחרי כיוון הגלילה
 
   useEffect(() => {
     const folders = {
@@ -53,6 +54,22 @@ const CyberNav = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > 100) {
+      setIsScrollingDown(true); // אם הגלילה למטה
+    } else {
+      setIsScrollingDown(false); // אם הגלילה למעלה
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   if (error) {
     return <div className="error-message">{error}</div>;
   }
@@ -60,7 +77,7 @@ const CyberNav = () => {
   return (
     <>
       <button 
-        className={`toggle-nav-btn ${isOpen ? 'open' : ''}`} 
+        className={`toggle-nav-btn ${isOpen ? 'open' : ''} ${isScrollingDown ? 'hidden' : ''}`} 
         onClick={toggleNav}
         aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
         aria-expanded={isOpen}
@@ -77,7 +94,7 @@ const CyberNav = () => {
             <ul>
               {data.files && data.files.map((file, index) => (
                 <li key={index}>
-                  <Link to={`/${data.path}/${file.path}`}>
+                  <Link to={`/${data.path}/${file.path}`} onClick={toggleNav}>
                     {file.title}
                   </Link>
                 </li>

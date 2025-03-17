@@ -99,6 +99,7 @@ function CyberBar() {
     }
   };
 
+  
   // טיפול בלחיצה על אייקון במובייל
   const handleMobileIconClick = (menuType) => {
     if (!isMobile) return; // רק במובייל
@@ -135,7 +136,7 @@ function CyberBar() {
     setTimeout(() => {
       setActiveMenu(null);
       setIsClosing(false);
-    }, 300);
+    }, 30);
   };
 
   // טיפול בהחלקה למטה לסגירת התפריט
@@ -211,6 +212,7 @@ function CyberBar() {
           </>
         ) : (
           <>
+            <Link to="/" onClick={handleMenuLinkClick}>דף ראשי</Link>
             <Link to="/cyber/works-with" onClick={handleMenuLinkClick}>ספקים וחברות</Link>
             <Link to="/thanks" onClick={handleMenuLinkClick}>תודות</Link>
             <Link to="/contact-us" onClick={handleMenuLinkClick}>צור קשר</Link>
@@ -279,7 +281,7 @@ function CyberBar() {
           
           {activeMenu === 'logo' && !isMobile && (
             <div className="dropdown-menu logo-menu">
-              <Link to="/cyber/works-with" onClick={() => { setActiveMenu(null); setShiftHacking(false); }}>ספקים וחברות</Link>
+              <Link to="/cyber/works-with" onClick={(e) => e.stopPropagation()}>ספקים וחברות</Link>
               <Link to="/thanks" onClick={() => { setActiveMenu(null); setShiftHacking(false); }}>תודות</Link>
               <Link to="/contact-us" onClick={() => { setActiveMenu(null); setShiftHacking(false); }}>צור קשר</Link>
             </div>

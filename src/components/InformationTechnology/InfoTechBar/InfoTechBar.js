@@ -217,6 +217,7 @@ function InfoTechBar() {
         ) : (
           // תוכן תפריט הלוגו
           <>
+            <Link to="/" onClick={handleMenuLinkClick}>דף ראשי</Link>
             <Link to="/information-technology/works-with" onClick={handleMenuLinkClick}>ספקים וחברות</Link>
             <Link to="/thanks" onClick={handleMenuLinkClick}>תודות</Link>
             <Link to="/contact-us" onClick={handleMenuLinkClick}>צור קשר</Link>
@@ -288,7 +289,7 @@ function InfoTechBar() {
           {/* תפריט הלוגו במחשב (לא במובייל) */}
           {activeMenu === 'logo' && !isMobile && (
             <div className="dropdown-menu logo-menu">
-              <Link to="/information-technology/works-with" onClick={() => { setActiveMenu(null); setShiftComputer(false); }}>ספקים וחברות</Link>
+              <Link to="/information-technology/works-with" onClick={(e) => e.stopPropagation()}>ספקים וחברות</Link>
               <Link to="/thanks" onClick={() => { setActiveMenu(null); setShiftComputer(false); }}>תודות</Link>
               <Link to="/contact-us" onClick={() => { setActiveMenu(null); setShiftComputer(false); }}>צור קשר</Link>
             </div>

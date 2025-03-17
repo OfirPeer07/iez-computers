@@ -6,6 +6,7 @@ const InfoTechNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [articles, setArticles] = useState({});
   const [error, setError] = useState(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const folders = {
@@ -49,6 +50,21 @@ const InfoTechNav = () => {
     }
   }, []);
 
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        setIsVisible(false);  // Hide the button when scrolling down
+      } else if (window.scrollY < lastScrollY) {
+        setIsVisible(true);   // Show the button when scrolling up
+      }
+      lastScrollY = window.scrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const toggleNav = () => {
     setIsOpen(!isOpen);
   };
@@ -60,7 +76,8 @@ const InfoTechNav = () => {
   return (
     <>
       <button 
-        className={`toggle-nav-btn ${isOpen ? 'open' : ''}`} 
+        id="menuButton"
+        className={`toggle-nav-btn ${isOpen ? 'open' : ''} ${isVisible ? '' : 'hidden'}`} 
         onClick={toggleNav}
         aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
         aria-expanded={isOpen}
@@ -77,7 +94,7 @@ const InfoTechNav = () => {
             <ul>
               {data.files && data.files.map((file, index) => (
                 <li key={index}>
-                  <Link to={`/${data.path}/${file.path}`}>
+                  <Link to={`/${data.path}/${file.path}`} onClick={toggleNav}>
                     {file.title}
                   </Link>
                 </li>

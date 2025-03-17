@@ -5,6 +5,10 @@
   min-height: 100vh;
 }
 
+.mobile-view {
+  padding: 1rem;
+}
+
 .pageHeader {
   text-align: center;
   margin-bottom: 3rem;
@@ -16,6 +20,7 @@
   margin-bottom: 1rem;
   background: linear-gradient(45deg, #00ff00, #008000);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -143,14 +148,85 @@
   margin-bottom: 1rem;
 }
 
+/* סגנונות ספציפיים למובייל */
+.mobile-info-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 255, 0, 0.8);
+  color: #000;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.active-mobile {
+  box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.5);
+}
+
+.active-mobile .mobile-info-hint {
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+}
+
 @media (max-width: 768px) {
   .computersGrid {
     grid-template-columns: 1fr;
-    padding: 1rem;
+    gap: 1.5rem;
+    padding: 0;
   }
   
   .computerCard {
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 auto;
+    transform: none !important;
+  }
+  
+  .computerCard:hover {
+    transform: none !important;
+  }
+  
+  .computerCard:hover .computerImage {
+    transform: none;
+  }
+  
+  .pageHeader h1 {
+    font-size: 1.8rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .specs {
+    position: relative;
+    top: 0;
+    border-radius: 0 0 16px 16px;
+    max-height: 0;
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+    margin-top: -10px;
+  }
+  
+  .specs.active {
+    border-top: none;
+    padding: 1rem;
+  }
+  
+  .specs h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .specs li {
+    padding: 0.6rem 0;
+    font-size: 0.9rem;
+  }
+  
+  .specIcon {
+    font-size: 1rem;
   }
 }

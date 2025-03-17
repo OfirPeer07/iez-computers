@@ -138,6 +138,8 @@
     rgba(100, 255, 218, 0.05));
   opacity: 0;
   transition: opacity 0.4s ease;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .contributor-card.is-hovered {
@@ -199,6 +201,8 @@
   flex-direction: column;
   height: 100%;
   gap: 15px;
+  position: relative;
+  z-index: 5;
 }
 
 .contributor-name {
@@ -244,6 +248,9 @@
   display: flex;
   gap: 12px;
   margin: 15px 0;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
 }
 
 .social-link {
@@ -256,6 +263,10 @@
   background: rgba(255, 255, 255, 0.05);
   color: var(--text-color);
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 15;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .social-link:hover {

@@ -1,20 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Wallpoet&display=swap');
 
+/* מניעת גלילה לחלוטין */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
 .page-not-found-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 150.5vh;
-  max-width: 150vw;
-  position: relative;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
   overflow: hidden;
 }
 
 body .page-not-found-container{
   background: black;
   background-image: url('./Background.jpg');
-  background-size: 55vh;
-  background-position: 25vmax;
+  background-size: cover;
+  background-position: center;
 }
 
 .hackerPNF {
@@ -276,8 +286,8 @@ body .page-not-found-container{
   .hackerPNF {
     width: 90vmin;
     height: 90vmin;
-    bottom: 0vh;
-    left: 50%;
+    bottom: -18vh;
+    left: 75%;
     transform: translateX(-50%);
   }
 }
@@ -297,9 +307,9 @@ body .page-not-found-container{
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .hackerPNF {
     width: 70vmax;
-    height: 70vmax;
-    bottom: -10vh;
-    left: 40vw;
+    height: 51vmax;
+    bottom: -21vh;
+    left: 33vw;
   }
 }
 
@@ -308,7 +318,7 @@ body .page-not-found-container{
   .hackerPNF {
     width: 65vmax;
     height: 65vmax;
-    bottom: -20vh;
+    bottom: 0;
     left: 35vw;
   }
 }
@@ -318,18 +328,69 @@ body .page-not-found-container{
   .hackerPNF {
     width: 60vmax;
     height: 60vmax;
-    bottom: -20vh;
+    bottom: -9vh;
     left: 40vw;
   }
 }
 
-/* מסכי 21:9 */
-@media (min-aspect-ratio: 21/9) {
+/* מדיה קוורי למסכי 21:9 */
+@media screen and (min-aspect-ratio: 21/9) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden !important;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+  }
+
+  .page-not-found-container {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5vw;
+  }
+
   .hackerPNF {
-    width: 55vmax;
-    height: 55vmax;
-    bottom: -30vh;
-    left: 45vw;
+    width: 50vmax;
+    height: 50vmax;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin: 0;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .text {
+    position: absolute;
+    left: 8%;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 2.8vmax;
+    white-space: nowrap;
+    text-align: left;
+    z-index: 2;
+    width: 40%;
+  }
+
+  ._404 {
+    font-size: 4vmax;
+    display: inline-block;
+  }
+
+  .error {
+    font-size: 5vmax;
+    display: inline-block;
+    margin-left: -0.3vmax;
+  }
+
+  .flickerProblem {
+    display: inline-block;
   }
 }
 
@@ -349,6 +410,6 @@ body .page-not-found-container{
   }
 
   .hackerPNF {
-    bottom: -30vh;
+    bottom: -7vh;
   }
 }

@@ -53,7 +53,7 @@ function App() {
               <Route path="/information-technology/works-with" element={<InfoTechWorksWith />} />
 
 
-              {/* Hacking Section */}
+              {/* Hacking Section For Computers */}
               <Route path="/cyber/hacking" element={<Hacking />} />
               <Route path="/cyber/hacking/guides" element={<CyberGuides />} />
               <Route path="/cyber/hacking/guides/:fileName" element={<CyberGuides />} />
@@ -62,7 +62,7 @@ function App() {
               <Route path="/cyber/hacking/videos" element={<VideosList />} />
               <Route path="/cyber/hacking/videos/:id" element={<VideoPlayer />} />
 
-              {/* IT Department Section */}
+              {/* Information-Technology Section For Computers&Mobile */}
               <Route path="/information-technology/InfoTechDepartment/" element={<ITdepartment />} />
               <Route path="/information-technology/technology-news" element={<TechnologyNews />} />
               <Route path="/information-technology/technology-news/:fileName" element={<TechnologyNews />} />
