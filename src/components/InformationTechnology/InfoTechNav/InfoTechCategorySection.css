@@ -1,0 +1,42 @@
+/* Category Section styles */
+.category-section h2 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin: 1px 0 5.5px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-color);
+    text-shadow: var(--text-shadow);
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  
+  .category-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .category-section li {
+    margin: 2.5px 0;
+  }
+  
+  .category-section a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 2.5px 2.5px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    border: 1px solid transparent;
+  }
+  
+  .category-section a:hover {
+    background-color: var(--hover-color);
+    transform: translateX(-8px);
+    border: 1px solid var(--primary-color);
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+  
