@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom'; // הוספנו את useLocation כדי לבדוק את הנתיב הנוכחי
+import { useParams, useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
-import remarkEmoji from 'remark-emoji'; // ודא שהתקנת את החבילה הזו
+import remarkEmoji from 'remark-emoji';
 import '../MarkdownDocs/Markdown-Global.css';
 import RecommendedArticles from './RecommendedArticles';
 
 const MarkdownDocs = () => {
-    const { fileName } = useParams(); // מקבלים את שם הקובץ מה-URL
-    const location = useLocation(); // מקבלים את הנתיב הנוכחי
+    const { fileName } = useParams(); 
+    const location = useLocation();
     const [content, setContent] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -17,7 +17,7 @@ const MarkdownDocs = () => {
     useEffect(() => {
         const fetchMarkdownFile = async () => {
             try {
-                const response = await fetch(`../../../../public/md/${fileName}`); // ודא שהקובץ קיים בתיקיית 'public/md'
+                const response = await fetch(`../../../../public/md/${fileName}`); 
                 if (!response.ok) {
                     throw new Error('Error fetching the Markdown file.');
                 }
@@ -38,12 +38,61 @@ const MarkdownDocs = () => {
 
     // פונקציה לזיהוי כיוון הטקסט
     const detectLanguageDirection = (text) => {
-        const hebrewRegex = /[\u0590-\u05FF]/; // ביטוי רגולרי לתוים בעברית
+        const hebrewRegex = /[\u0590-\u05FF]/; 
         return hebrewRegex.test(text) ? 'rtl' : 'ltr';
     };
 
-    // זיהוי כיוון הטקסט על פי התוכן
     const direction = detectLanguageDirection(content);
+
+    const handleLinkRendering = ({ node, children, href, ...props }) => {
+        const containsHebrew = /[\u0590-\u05FF]/.test(children.toString());
+        
+        if (containsHebrew) {
+            return (
+                <a href={href} {...props} dir="rtl" lang="he">
+                    {children}
+                </a>
+            );
+        }
+        
+        return <a href={href} {...props}>{children}</a>;
+    };
+
+    const handleParagraphRendering = ({ node, children, ...props }) => {
+        const paragraphText = children.toString();
+        const containsHebrew = /[\u0590-\u05FF]/.test(paragraphText);
+        const hasLink = React.Children.toArray(children).some(child => 
+            child && typeof child === 'object' && child.type === 'a'
+        );
+        
+        if (containsHebrew) {
+            return (
+                <p 
+                    {...props} 
+                    dir="rtl" 
+                    lang="he" 
+                    style={{ 
+                        textAlign: "right",
+                        direction: "rtl",
+                        marginBottom: hasLink ? "2em" : "inherit"
+                    }}
+                >
+                    {children}
+                </p>
+            );
+        }
+        
+        return (
+            <p 
+                {...props}
+                style={{
+                    marginBottom: hasLink ? "2em" : "inherit"
+                }}
+            >
+                {children}
+            </p>
+        );
+    };
 
     if (loading) {
         return <div className="loading">Loading...</div>;
@@ -66,21 +115,22 @@ const MarkdownDocs = () => {
         },
     ];
 
-    // תנאי להציג את רכיב RecommendedArticles רק בנתיבים הרצויים
     const showRecommendedArticles = location.pathname.includes('/cyber/hacking/articles') || location.pathname.includes('/cyber/hacking/guides');
 
     return (
         <div className="markdown-docs-container">
             <div className="recommended-articles-section">
-                {/* הצגת רכיב RecommendedArticles רק אם הנתיב נכון */}
                 {showRecommendedArticles && <RecommendedArticles articles={recommendedArticles} />}
             </div>
             <div className="markdown-docs" dir={direction}>
-                {/* תוכן ה-Markdown */}
                 <ReactMarkdown
                     children={content}
                     rehypePlugins={[rehypeRaw]}
                     remarkPlugins={[remarkGfm, remarkEmoji]}
+                    components={{
+                        a: handleLinkRendering,
+                        p: handleParagraphRendering
+                    }}
                 />
             </div>
         </div>

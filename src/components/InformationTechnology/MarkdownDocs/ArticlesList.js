@@ -5,22 +5,18 @@ import './ArticlesList.css';
 const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);  // הוספת משתנה error
+  const [error, setError] = useState(null);  
   const [isMobile, setIsMobile] = useState(false);
 
-  // Mobile detection
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
     
-    // Initial check
     checkMobile();
     
-    // Add listener for window resize
     window.addEventListener('resize', checkMobile);
     
-    // Cleanup
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
@@ -40,7 +36,6 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
           const response = await fetch(`/md/${fileName.slice(2)}`);
           const content = await response.text();
           
-          // Improved metadata extraction
           let metadata = {};
           const metadataMatch = content.match(/^---\s*\n([\s\S]*?)\n---/);
           
@@ -55,7 +50,6 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
             }, {});
           }
 
-          // Generate a fallback title if none exists in metadata
           const fallbackTitle = fileName
             .split('/')
             .pop()
@@ -65,20 +59,26 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
 
           return {
             slug: fileName.split('/').pop().replace('.md', ''),
-            title: metadata.title || fallbackTitle,
-            date: metadata.date || new Date().toISOString(),
-            description: metadata.description || '',
-            thumbnail: metadata.thumbnail ? `/images/${folderName}/${metadata.thumbnail}` : '/images/default-article-thumb.jpg',
-            category: metadata.category || defaultCategory
+            title: metadata.כותרת || fallbackTitle,
+            date: metadata.תאריך || new Date().toISOString(),
+            description: metadata.תיאור || '',
+            thumbnail: metadata.תמונה ? `/${metadata.תמונה}` : '/images/default-article-thumb.jpg',
+            category: metadata.קטגוריות ? metadata.קטגוריות.split(',')[0].trim() : defaultCategory,
+            author: metadata.מחבר || ''
           };
         });
 
         const loadedArticles = await Promise.all(articlePromises);
         
-        // Sort articles by date (newest first)
         const sortedArticles = loadedArticles
           .filter(article => article.title)
-          .sort((a, b) => new Date(b.date) - new Date(a.date));
+          .sort((a, b) => {
+            try {
+              return new Date(b.date) - new Date(a.date);
+            } catch (e) {
+              return b.date.localeCompare(a.date);
+            }
+          });
         
         setArticles(sortedArticles);
         
@@ -109,7 +109,6 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
     );
   }
 
-  // Error state
   if (error) {
     return (
       <div className="error-container">
@@ -119,7 +118,6 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
     );
   }
 
-  // Articles grid
   return (
     <div className={`articles-container ${isMobile ? 'mobile-view' : ''}`}>
       {articles.map((article, index) => (
@@ -128,7 +126,6 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
           key={article.slug || index}
           className="article-link"
           onClick={(e) => {
-            // Add touch feedback for mobile
             if (isMobile) {
               const target = e.currentTarget;
               target.style.transform = 'scale(0.98)';
@@ -155,15 +152,11 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
             <div className="article-content">
               <div className="article-meta">
                 <time dateTime={article.date}>
-                  {new Date(article.date).toLocaleDateString('he-IL', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
+                  {article.date}
                 </time>
               </div>
               <h2>{article.title}</h2>
-              <p className="article-description">{article.description}</p>
+              {article.description && <p className="article-description">{article.description}</p>}
             </div>
           </article>
         </Link>

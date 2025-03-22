@@ -26,7 +26,6 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* אלמנט דקורטיבי - רשת קווים */
 .works-with-container::before {
   content: '';
   position: fixed;
@@ -40,7 +39,6 @@
   z-index: -1;
 }
 
-/* אלמנט דקורטיבי - עיגולים מרחפים */
 .works-with-container::after {
   content: '';
   position: fixed;
@@ -54,7 +52,6 @@
   z-index: -1;
 }
 
-/* כותרת ראשית */
 .works-with-header {
   text-align: right;
   margin-bottom: 5rem;
@@ -94,7 +91,6 @@
   text-align: right;
 }
 
-/* כותרות סקשנים */
 .section-title {
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   color: var(--iez-text);
@@ -119,7 +115,6 @@
   box-shadow: 0 0 12px var(--iez-green);
 }
 
-/* רשתות */
 .vendors-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
@@ -138,7 +133,6 @@
   max-width: 1400px;
 }
 
-/* כרטיסים */
 .vendor-card {
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
@@ -193,7 +187,6 @@
   opacity: 0.2;
 }
 
-/* לוגואים */
 .vendor-logo {
   width: clamp(80px, 12vw, 110px);
   height: clamp(80px, 12vw, 110px);
@@ -251,7 +244,6 @@
   transform: scale(1.1);
 }
 
-/* אייקונים */
 .benefit-icon {
   width: clamp(85px, 14vw, 120px);
   height: clamp(85px, 14vw, 120px);
@@ -285,7 +277,6 @@
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), inset 0 0 25px rgba(0, 255, 76, 0.2);
 }
 
-/* טקסט */
 .vendor-card h3 {
   font-size: clamp(1.3rem, 1.8vw, 1.6rem);
   color: var(--iez-green);
@@ -320,7 +311,101 @@
   text-align: right;
 }
 
-/* אפקט התחלתי בטעינת הדף */
+.cta-section {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-right: 2px solid var(--iez-border);
+  border-bottom: 2px solid var(--iez-border);
+  border-radius: var(--card-radius);
+  padding: clamp(3rem, 5vw, 5rem);
+  margin: 4rem auto;
+  max-width: 800px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--iez-light-green), transparent 70%);
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.cta-section h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--iez-text);
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: var(--iez-text-secondary);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  background: linear-gradient(45deg, var(--iez-dark-green), var(--iez-green));
+  color: var(--iez-black);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 1rem 2.8rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 8px 20px rgba(0, 255, 76, 0.25);
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--iez-green), var(--iez-light-green));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.cta-button:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 255, 76, 0.4);
+}
+
+.cta-button:hover::before {
+  opacity: 1;
+}
+
+.cta-button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 5px 10px rgba(0, 255, 76, 0.3);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .cta-section {
+    margin: 3rem 2rem;
+    padding: 2.5rem 1.5rem;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -335,7 +420,8 @@
 .works-with-header,
 .section-title,
 .vendor-card,
-.benefit-card {
+.benefit-card,
+.cta-section {
   animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
 }
 
@@ -354,7 +440,7 @@
   animation-delay: 0.3s;
 }
 
-/* מובייל */
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .works-with-container {
     padding: 3rem 1rem;
@@ -394,7 +480,6 @@
   }
 }
 
-/* מגע */
 @media (hover: none) {
   .vendor-card:active,
   .benefit-card:active {
@@ -407,7 +492,6 @@
   }
 }
 
-/* הפחתת תנועה */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

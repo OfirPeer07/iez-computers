@@ -11,23 +11,17 @@ function CyberBar() {
   const dropdownRef = useRef(null);
   const timersRef = useRef({ hoverLogo: null, hoverHacking: null, closeMenu: null });
   
-  // מצב התחלתי של מגע
   const touchStartRef = useRef({ y: 0 });
 
-  // בדיקה אם המכשיר הוא נייד באמצעות User Agent
   useEffect(() => {
     const checkMobile = () => {
-      // בדיקת User Agent כדי לזהות מכשירים ניידים
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
       
-      // רגקס לזיהוי מכשירים ניידים (טלפונים וטאבלטים)
       const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
       
-      // קביעת המצב לפי בדיקת הרגקס
       const isMobileDevice = mobileRegex.test(userAgent);
       setIsMobile(isMobileDevice);
       
-      // הוספה או הסרה של קלאס 'mobile-device' מאלמנט ה-body
       if (isMobileDevice) {
         document.body.classList.add('mobile-device');
       } else {
@@ -35,14 +29,11 @@ function CyberBar() {
       }
     };
     
-    // בדיקה ראשונית
     checkMobile();
     
-    // לא מוסיפים מאזין לשינוי גודל החלון כי אנחנו רוצים רק לבדוק את סוג המכשיר
   }, []);
 
   const handleMouseEnterLogo = () => {
-    // במובייל אין צורך בטיפול באירועי מעבר עכבר
     if (isMobile) return;
     
     clearTimeout(timersRef.current.closeMenu);
@@ -57,7 +48,6 @@ function CyberBar() {
   };
 
   const handleMouseEnterHacking = () => {
-    // במובייל אין צורך בטיפול באירועי מעבר עכבר
     if (isMobile) return;
     
     if (activeMenu === 'logo') return;
@@ -69,7 +59,6 @@ function CyberBar() {
   };
 
   const handleMouseLeave = () => {
-    // במובייל אין צורך בטיפול באירועי מעבר עכבר
     if (isMobile) return;
     
     clearTimeout(timersRef.current.hoverLogo);
@@ -82,7 +71,6 @@ function CyberBar() {
   };
 
   const handleClickOutside = (event) => {
-    // אם לחצו על הרקע הכהה (overlay) או מחוץ לתפריט במובייל
     if (isMobile && 
         activeMenu && 
         menuRef.current && 
@@ -92,7 +80,6 @@ function CyberBar() {
       return;
     }
     
-    // טיפול רגיל בלחיצה מחוץ לתפריט במחשב
     if (!isMobile && menuRef.current && !menuRef.current.contains(event.target)) {
       setActiveMenu(null);
       setShiftHacking(false);
@@ -100,35 +87,28 @@ function CyberBar() {
   };
 
   
-  // טיפול בלחיצה על אייקון במובייל
   const handleMobileIconClick = (menuType) => {
-    if (!isMobile) return; // רק במובייל
+    if (!isMobile) return; 
     
     if (activeMenu === menuType) {
-      // סגור את התפריט אם הוא כבר פתוח
       closeMenuWithAnimation();
     } else {
-      // סגור תפריט קודם אם פתוח
       if (activeMenu) {
         closeMenuWithAnimation();
-        // פתח את התפריט החדש אחרי שהתפריט הקודם נסגר
         setTimeout(() => {
           setActiveMenu(menuType);
           setIsClosing(false);
         }, 350);
       } else {
-        // פתח את התפריט הנבחר
         setActiveMenu(menuType);
       }
       
-      // וודא שהתפריט יוצג כראוי
       if (menuType === 'logo') {
         setShiftHacking(false);
       }
     }
   };
 
-  // סגירת התפריט עם אנימציה
   const closeMenuWithAnimation = () => {
     if (!activeMenu) return;
     
@@ -139,7 +119,6 @@ function CyberBar() {
     }, 30);
   };
 
-  // טיפול בהחלקה למטה לסגירת התפריט
   const handleTouchStart = (e) => {
     touchStartRef.current.y = e.touches[0].clientY;
   };
@@ -178,13 +157,11 @@ function CyberBar() {
     };
   }, [isMobile]);
 
-  // רנדור התפריט הנפתח במובייל
   const renderMobileMenu = () => {
     if (!isMobile || !activeMenu) return null;
     
     const isHackingMenu = activeMenu === 'hacking';
     
-    // פונקציה לטיפול בלחיצה על קישור בתפריט
     const handleMenuLinkClick = () => {
       closeMenuWithAnimation();
     };

@@ -57,6 +57,22 @@ function MarkdownDocs() {
 
     const direction = detectLanguageDirection(content);
 
+    // Simple component for handling links with Hebrew content
+    const handleLinkRendering = ({ node, children, href, ...props }) => {
+        // Check if link contains Hebrew content
+        const containsHebrew = /[\u0590-\u05FF]/.test(children.toString());
+        
+        if (containsHebrew) {
+            return (
+                <a href={href} {...props} dir="rtl" lang="he">
+                    {children}
+                </a>
+            );
+        }
+        
+        return <a href={href} {...props}>{children}</a>;
+    };
+
     const handleImageRendering = ({ node, ...props }) => {
         const imgStyle = isMobile ? { maxWidth: '100%', height: 'auto' } : {};
         return <img {...props} style={imgStyle} loading="lazy" />;
@@ -71,6 +87,48 @@ function MarkdownDocs() {
     const handleTableRendering = ({ node, ...props }) => {
         const tableStyle = isMobile ? { display: 'block', overflowX: 'auto', whiteSpace: 'nowrap' } : {};
         return <table {...props} style={tableStyle} />;
+    };
+
+    // טיפול בפסקאות - גישה שמטפלת בסדר הנכון של תוכן
+    const handleParagraphRendering = ({ node, children, ...props }) => {
+        // בדיקה אם הפסקה מכילה עברית
+        const paragraphText = children.toString();
+        const containsHebrew = /[\u0590-\u05FF]/.test(paragraphText);
+        
+        // בדיקה אם הפסקה מכילה קישור
+        const hasLink = React.Children.toArray(children).some(child => 
+            child && typeof child === 'object' && child.type === 'a'
+        );
+        
+        if (containsHebrew) {
+            // פסקה בעברית
+            return (
+                <p 
+                    {...props} 
+                    dir="rtl" 
+                    lang="he" 
+                    style={{ 
+                        textAlign: "right",
+                        direction: "rtl",
+                        marginBottom: hasLink ? "2em" : "inherit"
+                    }}
+                >
+                    {children}
+                </p>
+            );
+        }
+        
+        // פסקה באנגלית
+        return (
+            <p 
+                {...props}
+                style={{
+                    marginBottom: hasLink ? "2em" : "inherit"
+                }}
+            >
+                {children}
+            </p>
+        );
     };
 
     if (loading) {
@@ -115,6 +173,8 @@ function MarkdownDocs() {
                         h5: props => handleHeadingRendering({ ...props, level: 5 }),
                         h6: props => handleHeadingRendering({ ...props, level: 6 }),
                         table: handleTableRendering,
+                        a: handleLinkRendering,
+                        p: handleParagraphRendering
                     }}
                 />
             </div>

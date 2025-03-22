@@ -80,30 +80,28 @@ html, body {
   transform: scale(1.1);
 }
 
-/* Delay for Logo Dropdown Menu */
 .dropdown-menu.logo-menu {
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  transition-delay: 0.6s; /* Matches the hacking shift animation duration */
+  transition-delay: 0.6s; 
 }
 
 .sidebar ul li.hacking .dropdown-menu {
-  left: -25.5rem; /* Shift further to the left */
+  left: -25.5rem;
   transform: translateY(-50%);
 }
 
 /* Shift animation when hovering over the "logo" */
 .sidebar ul li.hacking.shift {
-  transform: translateX(-320px); /* Shift to the left */
-  /*animation: shiftLeft 0.6s ease forwards*/;
+  transform: translateX(-320px); 
 }
 
 /* Return animation when the mouse leaves the "logo" */
 .sidebar ul li.hacking.return {
-  animation: returnToPlace 0.6s ease forwards; /* Smooth return animation */
+  animation: returnToPlace 0.6s ease forwards; 
 }
 
 .sidebar ul li.hacking {
-  transform: translateX(0); /* Ensure the hacking icon starts in its default position */
+  transform: translateX(0); 
   transition: transform 0.6s ease;
 }
 
@@ -129,17 +127,17 @@ html, body {
   opacity: 1;
   visibility: visible;
   transform: translateY(-50%);
-  transition-delay: 0s; /* No delay when showing */
+  transition-delay: 0s;
 }
 
 .sidebar ul li .dropdown-menu {
-  transition-delay: 0.5s; /* Delay when hiding */
+  transition-delay: 0.5s; 
 }
 
 .dropdown-menu {
   position: absolute;
   top: 3.7rem;
-  left: calc(7.7rem + -29.2rem); /* Dropdown starts right of the icon */
+  left: calc(7.7rem + -29.2rem); 
   transform: translateY(-50%);
   background-color: rgba(27, 27, 27, 0.95);
   padding: 15px;

@@ -115,7 +115,7 @@
   text-align: right !important;
 }
 
-/* הוספת חוקים ספציפיים לכותרות */
+/* Adding specific rules to titles */
 .markdown-content h1[lang="en"],
 .markdown-content h2[lang="en"],
 .markdown-content h3[lang="en"] {
@@ -141,7 +141,7 @@
   padding-bottom: 0.3em;
 }
 
-/* ביטול הגדות קודמות שעלולות להפריע */
+/* Cancel previous settings that could interfere */
 .markdown-content h1,
 .markdown-content h2,
 .markdown-content h3 {
@@ -182,6 +182,34 @@
   direction: ltr !important;
 }
 
+/* Fix for RTL links */
+.markdown-content a[lang="he"],
+.markdown-content a[dir="rtl"] {
+  direction: rtl !important;
+  text-align: right !important;
+  unicode-bidi: isolate !important;
+  display: inline;
+  width: auto;
+}
+
+/* Ensure RTL links inside paragraphs maintain proper alignment */
+.markdown-content p[dir="rtl"] a {
+  direction: rtl !important;
+  text-align: right !important;
+  display: inline;
+}
+
+/* Fix for inline RTL links */
+.markdown-content p[dir="rtl"] a span {
+  direction: inherit;
+  text-align: inherit;
+  display: inline;
+}
+
+/* Ensures paragraphs maintain proper alignment */
+.markdown-content p[dir="rtl"] {
+  text-align: right !important;
+}
 /* SyntaxHighlighter Styles */
 .code-block-container pre {
   margin: 0 !important;
@@ -266,6 +294,24 @@
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: all 0.3s ease;
+  unicode-bidi: isolate;
+}
+
+/* Hebrew links - right side positioning */
+.markdown-content a:lang(he),
+.markdown-content a[dir="rtl"] {
+  text-align: right !important;
+  float: right;
+  clear: right;
+  margin-left: 8px;
+  color: #0f0 !important; 
+}
+
+/* Clear floats after paragraphs with links */
+.markdown-content p:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .markdown-content a:hover {
@@ -277,6 +323,14 @@
 .markdown-content ol {
   margin: 1em 2em;
   padding: 0;
+  text-align: right;
+  direction: rtl;
+}
+
+.markdown-content li {
+  margin-bottom: 0.8em;
+  text-align: right;
+  direction: rtl;
 }
 
 /* Tables */
@@ -345,7 +399,7 @@
     border-radius: 8px;
   }
   
-  /* שיפור קריאות כותרות במובייל */
+  /* Improving readability of mobile headlines */
   .markdown-content h1 {
     font-size: 1.8rem;
     margin: 1.2em 0 0.7em;
@@ -369,13 +423,11 @@
     margin: 0.9em 0 0.4em;
   }
   
-  /* התאמת רשימות למובייל */
   .markdown-content ul,
   .markdown-content ol {
     margin: 0.8em 1.5em;
   }
   
-  /* התאמת טבלאות למובייל */
   .markdown-content table {
     display: block;
     overflow-x: auto;
@@ -388,7 +440,6 @@
     padding: 0.6rem;
   }
   
-  /* התאמת קוד למובייל */
   .code-block-container {
     margin: 1.2em 0;
   }
@@ -403,13 +454,11 @@
     font-size: 11px;
   }
   
-  /* התאמת קוד מוטבע למובייל */
   .markdown-content code:not(pre code) {
     padding: 0.15em 0.3em;
     font-size: 0.85em;
   }
   
-  /* התאמת תמונות למובייל */
   .markdown-content img {
     max-width: 100%;
     height: auto;
@@ -418,25 +467,23 @@
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
   }
   
-  /* התאמת ציטוטים למובייל */
   .markdown-content blockquote {
     margin: 1.2em 0;
     padding: 0.4em 0.8em;
     border-right-width: 3px;
   }
   
-  /* שיפור מרווחים בין פסקאות */
   .markdown-content p {
     margin: 0.8em 0;
     line-height: var(--mobile-line-height);
   }
   
-  /* התאמת גודל הגופן הכללי */
   .markdown-content {
     font-size: var(--mobile-font-size);
   }
 }
 
+/* Mobile adjustments */
 @media (max-width: 480px) {
   .markdown-content {
     padding: var(--mobile-padding);
@@ -445,7 +492,6 @@
     border-radius: 6px;
   }
   
-  /* שיפור קריאות כותרות במובייל קטן */
   .markdown-content h1 {
     font-size: 1.6rem;
     margin: 1em 0 0.6em;
@@ -468,45 +514,38 @@
     margin: 0.7em 0 0.3em;
   }
   
-  /* התאמת רשימות למובייל קטן */
   .markdown-content ul,
   .markdown-content ol {
     margin: 0.7em 1.2em;
   }
   
-  /* התאמת טבלאות למובייל קטן */
   .markdown-content th,
   .markdown-content td {
     padding: 0.5rem;
     font-size: 0.85rem;
   }
   
-  /* התאמת תמונות למובייל קטן */
   .markdown-content img {
     margin: 1em auto;
     border-radius: 5px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   }
   
-  /* התאמת ציטוטים למובייל קטן */
   .markdown-content blockquote {
     margin: 1em 0;
     padding: 0.3em 0.6em;
     border-right-width: 2px;
   }
   
-  /* שיפור מרווחים בין פסקאות במובייל קטן */
   .markdown-content p {
     margin: 0.7em 0;
     line-height: var(--mobile-line-height);
   }
   
-  /* התאמת גודל הגופן הכללי */
   .markdown-content {
     font-size: 0.9rem;
   }
   
-  /* התאמת קוד למובייל קטן */
   .code-block-container pre {
     padding: 0.7rem !important;
     font-size: 0.8em !important;
@@ -579,7 +618,6 @@
 
 /* Touch-friendly improvements */
 @media (pointer: coarse) {
-  /* Larger touch targets for better usability on touch devices */
   .markdown-content a {
     padding: 0.2em 0;
   }
@@ -590,12 +628,10 @@
     min-width: 36px;
   }
   
-  /* Better spacing for touch interactions */
   .markdown-content li {
     margin-bottom: 0.8em;
   }
   
-  /* Improve scrolling on touch devices */
   .markdown-content pre {
     -webkit-overflow-scrolling: touch;
   }
@@ -630,7 +666,6 @@
   }
 }
 
-/* New Styles */
 .text-wrapper {
   display: block;
   width: 100%;

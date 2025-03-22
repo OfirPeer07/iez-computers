@@ -109,7 +109,7 @@
   text-align: right !important;
 }
 
-/* הוספת חוקים ספציפיים לכותרות */
+/* Adding specific rules to titles */
 .markdown-content h1[lang="en"],
 .markdown-content h2[lang="en"],
 .markdown-content h3[lang="en"] {
@@ -135,7 +135,7 @@
   padding-bottom: 0.3em;
 }
 
-/* ביטול הגדות קודמות שעלולות להפריע */
+/* Cancel previous settings that could interfere */
 .markdown-content h1,
 .markdown-content h2,
 .markdown-content h3 {
@@ -260,6 +260,32 @@
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: all 0.3s ease;
+  unicode-bidi: isolate;
+}
+
+/* Hebrew links - right side positioning */
+.markdown-content a:lang(he),
+.markdown-content a[dir="rtl"] {
+  text-align: right !important;
+  float: right;
+  clear: right;
+  margin-left: 8px;
+  color: #0f0 !important; 
+}
+
+/* English links - left side positioning */
+.markdown-content a:not([lang="he"]):not([dir="rtl"]) {
+  text-align: left !important;
+  float: left;
+  clear: left;
+  margin-right: 8px;
+}
+
+/* Clear floats after paragraphs with links */
+.markdown-content p:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .markdown-content a:hover {
@@ -271,6 +297,14 @@
 .markdown-content ol {
   margin: 1em 2em;
   padding: 0;
+  text-align: right;
+  direction: rtl;
+}
+
+.markdown-content li {
+  margin-bottom: 0.8em;
+  text-align: right;
+  direction: rtl;
 }
 
 /* Tables */

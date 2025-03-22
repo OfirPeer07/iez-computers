@@ -9,7 +9,7 @@ const LazyVideoFrame = React.memo(({ src, alt, className, preload }) => {
   const [isIOS, setIsIOS] = useState(false);
   const videoRef = useRef(null);
 
-  // בדיקה אם המכשיר הוא מובייל או טאבלט
+  // Checking if is Mobile and Tablet
   useEffect(() => {
     const checkDevice = () => {
       const ua = navigator.userAgent.toLowerCase();
@@ -32,20 +32,17 @@ const LazyVideoFrame = React.memo(({ src, alt, className, preload }) => {
   }, []);
 
   useEffect(() => {
-    // אם preload מוגדר כ-true, טוען את התמונה מיד ללא קשר למיקום במסך
     if (preload && videoRef.current) {
       try {
         videoRef.current.src = src;
         videoRef.current.load();
-        return; // אין צורך להמשיך אם כבר טוענים מראש
+        return; 
       } catch (error) {
         console.error('Error preloading video:', error);
       }
     }
     
-    // בדיקה אם הדפדפן תומך ב-IntersectionObserver
     if (!('IntersectionObserver' in window)) {
-      // אם הדפדפן לא תומך, פשוט טוען את התמונה מיד
       if (videoRef.current) {
         try {
           videoRef.current.src = src;
@@ -59,9 +56,7 @@ const LazyVideoFrame = React.memo(({ src, alt, className, preload }) => {
     
     try {
       const options = { 
-        // שינוי ל-threshold מאוד נמוך כדי שכל חלק קטן שמופיע יגרום לטעינה
         threshold: 0.01,
-        // rootMargin קטן יותר כי אנחנו כבר טוענים מהר יותר בגלל threshold הנמוך
         rootMargin: isMobile ? '50px' : '100px'
       };
       
@@ -94,7 +89,6 @@ const LazyVideoFrame = React.memo(({ src, alt, className, preload }) => {
       };
     } catch (error) {
       console.error('Error with IntersectionObserver:', error);
-      // במקרה של שגיאה, פשוט טוען את התמונה מיד
       if (videoRef.current) {
         try {
           videoRef.current.src = src;

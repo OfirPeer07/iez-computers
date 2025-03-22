@@ -11,37 +11,35 @@ function HackingBar() {
 
   const handleMouseEnterLogo = () => {
     // Start the hover delay timer for the logo menu
-    clearTimeout(closeMenuTimer); // Prevent premature closing
+    clearTimeout(closeMenuTimer); 
     const shiftTimer = setTimeout(() => {
-      setShiftHacking(true); // Shift the hacking icon
+      setShiftHacking(true); 
       const menuTimer = setTimeout(() => {
-        setActiveMenu('logo'); // Open the logo menu with a delay
-      }, 400); // Delay for opening the menu
+        setActiveMenu('logo'); 
+      }, 400); 
       setHoverLogoTimer(menuTimer);
-    }, 250); // Delay for logo shift
+    }, 250); 
     setHoverLogoTimer(shiftTimer);
   };
 
   const handleMouseEnterComputer = () => {
-    clearTimeout(closeMenuTimer); // Prevent premature closing
-    setActiveMenu('hacking'); // Open the hacking menu immediately
+    clearTimeout(closeMenuTimer); 
+    setActiveMenu('hacking'); 
   };
 
   const handleMouseLeave = () => {
-    // Clear all opening timers
     clearTimeout(hoverLogoTimer);
     setHoverLogoTimer(null);
 
     // Close menu faster on leave
     const closeTimer = setTimeout(() => {
-      setActiveMenu(null); // Close menus
-      setShiftHacking(false); // Reset the hacking icon position
-    }, 100); // Close immediately with a small delay to prevent flicker
+      setActiveMenu(null); 
+      setShiftHacking(false);
+    }, 100);
     setCloseMenuTimer(closeTimer);
   };
 
   useEffect(() => {
-    // Cleanup timers on unmount
     return () => {
       clearTimeout(hoverLogoTimer);
       clearTimeout(closeMenuTimer);

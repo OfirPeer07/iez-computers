@@ -1,4 +1,4 @@
-/* להשאיר רק הגדרות ספציפיות ל-IT שלא קשורות לרוחב */
+/* Leave only IT-specific settings that are not related to the width */
 .it-container .markdown-content {
   background: rgba(30, 30, 30, 0.85);
   backdrop-filter: blur(3px);

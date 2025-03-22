@@ -1,0 +1,63 @@
+/* Metadata Styling */
+.article-metadata {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: rgba(240, 240, 240, 0.6);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.article-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+.article-meta-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.article-date, .article-author {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.8rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.article-categories {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.metadata-divider {
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+  margin: 1rem 0;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .article-metadata {
+    background-color: rgba(40, 40, 40, 0.6);
+  }
+  
+  .article-title {
+    color: #f0f0f0;
+  }
+  
+  .article-date, .article-author {
+    background-color: rgba(60, 60, 60, 0.7);
+    color: #f0f0f0;
+  }
+  
+  .metadata-divider {
+    background-color: #444;
+  }
+}

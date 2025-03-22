@@ -12,43 +12,35 @@ const Thanks = () => {
   const contributors = [
     {
       id: 1,
-      name: "שלומי כהן",
-      contribution: "עזרה בפיתוח חלק הניווט של האתר ופתרון בעיות CSS מורכבות",
-      image: "/images/contributors/shlomi.jpg", 
-      type: "development",
+      name: "רן עקיבא",
+      role: "בודק QA",
+      contribution: "רן היקר, תודה ענקית על העין החדה, הדייקנות והסבלנות האינסופית שלך בבדיקת האתר. היסודיות והמקצועיות שלך הפכו חלום למציאות מושלמת. בזכותך האתר פועל בצורה חלקה ללא תקלות!",
+      type: "security",
+      image: "/images/contributors/ran.jpg",
       socialLinks: {
-        github: "https://github.com/username1",
-        linkedin: "https://linkedin.com/in/username1"
+        github: "https://github.com/ranakiva1",
+        linkedin: "https://www.linkedin.com/in/ran-akiva-9aa079260//"
       }
     },
     {
       id: 2,
-      name: "דנה לוי",
-      contribution: "מצאה וסייעה בתיקון מספר פריצות אבטחה משמעותיות באתר",
-      image: "/images/contributors/dana.jpg", 
-      type: "security",
+      name: "אופיר פאר",
+      role: "מתכנת FRONT END",
+      contribution: "אופיר, הכישרון, היצירתיות והחשיבה מחוץ לקופסה שלך הם פשוט מעוררי השראה. המסירות והנחישות שהפגנת בבניית האתר מאפס הפכו חזון לאתר מדהים. ההתמדה והפתרונות החכמים שלך בכל אתגר ראויים להערכה אינסופית!",
+      type: "development",
       socialLinks: {
-        twitter: "https://twitter.com/username2",
-        website: "https://personalsite.com/username2"
+        github: "https://github.com/ofirpeer07",
+        linkedin: "https://www.linkedin.com/in/ofir-peer-658506210/"
       }
     },
     {
       id: 3,
-      name: "אליהו ישראלי",
-      contribution: "תרם תוכן ומאמרים מקצועיים בנושא אבטחת מידע וסייבר",
+      name: "אורי דביר",
+      role: "מנטור",
+      contribution: "אורי, החכמה, הניסיון והנדיבות שלך שינו את חיי המקצועיים. הסבלנות, האמונה והתמיכה הבלתי מתפשרת שלך הפכו רעיון לפרויקט אמיתי. ההכוונה הברורה והעצות החכמות שלך תמיד הגיעו ברגע הנכון ופתחו בפני דרכים חדשות. תודה על שהאמנת בי גם כשאני התקשיתי.",
       type: "content",
       socialLinks: {
-        linkedin: "https://linkedin.com/in/username3",
-        twitter: "https://twitter.com/username3"
-      }
-    },
-    {
-      id: 4,
-      name: "רן עקיבא",
-      contribution: "עזרה בעיצוב UI/UX של האתר והציעה שיפורים משמעותיים לחווית המשתמש",
-      type: "development",
-      socialLinks: {
-        github: "https://github.com/username4"
+        linkedin: "https://linkedin.com/in/ori-dvir-7aaa1a122"
       }
     }
   ];
@@ -227,6 +219,7 @@ const Thanks = () => {
             </div>
             <div className="contributor-content">
               <h3 className="contributor-name">{contributor.name}</h3>
+              {contributor.role && <div className="contributor-role">{contributor.role}</div>}
               {renderSocialLinks(contributor.socialLinks)}
               <p className="contributor-description">{contributor.contribution}</p>
               <div className="appreciation-button">

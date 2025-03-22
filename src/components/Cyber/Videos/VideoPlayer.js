@@ -13,7 +13,7 @@ const LazyVideoFrame = React.memo(({ src, alt, className }) => {
   const [isMobile, setIsMobile] = useState(false);
   const videoRef = useRef(null);
 
-  // בדיקה אם המכשיר הוא מובייל
+  // Checking if is Mobile or Tablet
   useEffect(() => {
     const checkDevice = () => {
       const mobileRegex = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i;

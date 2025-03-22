@@ -3,19 +3,19 @@
     --text-color: #ffffff;
     --bg-color: rgba(0, 0, 0, 0.98);
     --text-shadow: 0 0 5px rgba(23, 202, 7, 0.7);
-    --hover-color: rgba(23, 202, 7, 0.1); /* added a hover color for link hover */
+    --hover-color: rgba(23, 202, 7, 0.1); 
   }  
 
-/* התאמה למסכים קטנים */
+  /* Cyber menu and category sections for 768px screens */
 @media (max-width: 768px) {
     .sidenav {
       width: 85%;
       height: 100vh;
-      right: 0; /* שומר שהתפריט יהיה בצד ימין */
-      left: auto; /* מבטל כל שינוי אפשרי של left */
+      right: 0; 
+      left: auto; 
       top: 0;
-      padding: 25px 15px 25px 8px; /* מרווח גדול יותר בצד ימין */
-      direction: rtl; /* מגדיר כיוון מימין לשמאל */
+      padding: 25px 15px 25px 8px; 
+      direction: rtl; 
       overflow-y: auto;
       background-color: rgba(0, 0, 0, 0.97);
       z-index: 999;
@@ -25,36 +25,22 @@
     }
   
     .sidenav.closed {
-      transform: translateX(100%); /* שומר שהתזוזה תהיה ימינה */
+      transform: translateX(100%);
       visibility: hidden;
     }
-    
-    /* שומר על הכפתור קבוע גם בגלילה */
-    .toggle-nav-btn {
-      /* שומר על כל ערכי המיקום המקוריים */
-      position: fixed !important;
-      z-index: 1010 !important;
-    }
   
-    .toggle-nav-btn-cyber {
-      top: 20px;
-      right: 20px;
-    }
-  
-    /* שיפור מראה התפריט */
     .category-section {
       position: relative;
-      padding: 15px 15px 15px 5px; /* מרווח גדול יותר בצד ימין */
-      direction: rtl; /* מגדיר כיוון מימין לשמאל */
+      padding: 15px 15px 15px 5px; 
+      direction: rtl; 
       margin-bottom: 30px;
       background-color: rgba(0, 0, 0, 0.8);
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(23, 202, 7, 0.2);
       overflow: hidden;
-      text-align: right; /* יישור טקסט לימין */
+      text-align: right; 
     }
     
-    /* אפקט גבול זוהר */
     .category-section::before {
       content: '';
       position: absolute;
@@ -76,14 +62,13 @@
       padding-bottom: 12px;
       padding-top: 5px;
       margin-bottom: 20px;
-      text-align: right; /* יישור טקסט לימין */
+      text-align: right; 
       text-shadow: 0 0 10px var(--primary-color);
       letter-spacing: 1.5px;
       border-bottom: 2px solid var(--primary-color);
       position: relative;
     }
     
-    /* אפקט זוהר לכותרות */
     .category-section h2::after {
       content: '';
       position: absolute;
@@ -96,19 +81,18 @@
     }
   
     .category-section ul {
-      margin: 0 10px 0 0; /* מרווח ימני גדול יותר */
+      margin: 0 10px 0 0; 
       padding: 0;
       list-style-type: none;
-      text-align: right; /* יישור טקסט לימין */
+      text-align: right; 
     }
   
     .category-section li {
       margin-bottom: 15px;
       position: relative;
-      text-align: right; /* יישור טקסט לימין */
+      text-align: right; 
     }
     
-    /* סמן סייבר לפני כל קישור - משנה מיקום */
     .category-section li::before {
       content: '<';
       color: var(--primary-color);
@@ -133,68 +117,94 @@
       display: block;
       border-radius: 8px;
       transition: all 0.3s ease;
-      border-right: 3px solid transparent; /* שינוי מגבול שמאלי לגבול ימני */
-      border-left: none; /* מסיר כל גבול שמאלי */
+      border-right: 3px solid transparent; 
+      border-left: none; 
       letter-spacing: 0.8px;
       color: #eee;
       font-weight: 500;
       background-color: rgba(0, 20, 0, 0.4);
-      text-align: right; /* יישור טקסט לימין */
+      text-align: right; 
     }
     
     .category-section a:hover {
       background-color: rgba(23, 202, 7, 0.15);
-      border-right: 3px solid var(--primary-color); /* שינוי מגבול שמאלי לגבול ימני */
-      border-left: none; /* מסיר כל גבול שמאלי */
-      transform: translateX(-8px); /* שינוי כיוון התזוזה */
+      border-right: 3px solid var(--primary-color); 
+      border-left: none; 
+      transform: translateX(-8px); 
       color: #fff;
       text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
       box-shadow: 0 0 10px rgba(23, 202, 7, 0.3);
     }
   }
-  
+
+  /* Cyber menu and category sections for 1024px screens */
   @media screen and (max-width: 1024px) {
     .sidenav {
       width: 85%;
       height: 100vh;
       position: fixed;
       top: 0;
-      right: 0; /* שומר שהתפריט יהיה בצד ימין */
-      left: auto; /* מבטל כל שינוי אפשרי של left */
+      right: 0; 
+      left: auto; 
       bottom: 0;
-      padding: 35px 15px 35px 5px; /* מרווח גדול יותר בצד ימין */
-      direction: rtl; /* מגדיר כיוון מימין לשמאל */
+      padding: 35px 15px 35px 5px; 
+      direction: rtl; 
       background-color: rgba(0, 0, 0, 0.97);
       overflow-y: auto;
       z-index: 999;
       box-shadow: -5px 0 25px rgba(23, 202, 7, 0.3);
     }
     
-    /* הוספת רווח עליון לתוכן */
     .category-section:first-child {
       margin-top: 75px;
     }
-  
-    .toggle-nav-btn-cyber {
-      display: none;
-    }
     
-    /* עיצוב רכיב סגירה */
     .sidenav .close-btn {
       position: relative;
       top: 15px;
-      left: 15px; /* שינוי מצד ימין לצד שמאל */
-      right: auto; /* מבטל כל שינוי אפשרי של right */
+      left: 15px; 
+      right: auto;
       font-size: 1.5rem;
       color: var(--primary-color);
       cursor: pointer;
       z-index: 1001;
     }
-    
-    .toggle-nav-btn.hidden {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-  
   }
+  
+/* Cyber toggle button */
+@media screen and (max-width: 1024px) {
+  .cyber-nav-btn {
+    position: relative !important;
+    top: 0 !important;
+    left: clamp(48vh, 5vh, 100px) !important;
+    z-index: 1010 !important;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5.5px;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+  }
+
+  .cyber-nav-btn span {
+    display: block;
+    width: 16px;
+    height: 3.2px;
+    background-color: var(--primary-color);
+    margin: 6px 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 3.5px rgba(23, 202, 7, 0.6);
+  }
+
+  .cyber-nav-btn.open span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+
+  .cyber-nav-btn.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .cyber-nav-btn.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+  }
+}

@@ -1,93 +1,68 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaNetworkWired, FaTools, FaServer, FaDesktop, FaDatabase } from 'react-icons/fa';
 import './InfoTechWorksWith.css';
-import { FaServer, FaShieldAlt, FaLaptopCode, FaTools, FaNetworkWired, FaUserShield } from 'react-icons/fa';
 
-const CyberWorksWith = () => {
-  // נתוני ספקים
+const InfoTechWorksWith = () => {
   const vendors = [
     {
-      name: 'Dell',
-      description: 'ספק מחשבים, שרתים וציוד היקפי מהמובילים בעולם. אנו מספקים פתרונות Dell מקצועיים לעסקים וללקוחות פרטיים.',
-      logo: '/images/vendors/dell_logo.png'
+      name: 'מור לוי יבואן רשמי',
+      description: 'יבואן רשמי של מגוון מוצרי חומרה ואלקטרוניקה איכותיים. אני עובד עם מור לוי להבאת הפתרונות הטובים ביותר ללקוחותיי.',
+      logo: '/images/vendors/mor_levy_logo.png'
     },
     {
-      name: 'HP',
-      description: 'שותף מורשה של HP המספק מחשבים, מדפסות וציוד היקפי איכותי. אנו מציעים מגוון פתרונות מבית HP לעסקים ופרטיים.',
-      logo: '/images/vendors/hp_logo.png'
+      name: 'גרנד אדוונס',
+      description: 'ספק פתרונות מחשוב מתקדמים וציוד היקפי. באמצעות גרנד אדוונס אני מספק רכיבי מחשב ופתרונות טכנולוגיים מתקדמים.',
+      logo: '/images/vendors/grand_advance_logo.png'
     },
     {
-      name: 'Microsoft',
-      description: 'שותף מורשה של Microsoft המספק רישוי תוכנה, פתרונות ענן ושירותי Microsoft 365 לארגונים ולקוחות פרטיים.',
-      logo: '/images/vendors/microsoft_logo.png'
+      name: 'איסטרוניקס',
+      description: 'יבואן ומפיץ מוביל של מוצרי אלקטרוניקה ומחשבים. אני משתמש במוצרי איסטרוניקס לספק פתרונות אמינים ללקוחותיי.',
+      logo: '/images/vendors/eastronics_logo.png'
     },
     {
-      name: 'Lenovo',
-      description: 'ספק מורשה של Lenovo המציע מחשבים ניידים, מחשבי כף יד וציוד היקפי ללקוחות עסקיים ופרטיים באיכות גבוהה.',
-      logo: '/images/vendors/lenovo_logo.png'
+      name: 'C-DATA',
+      description: 'ספק מוביל של פתרונות תקשורת ואחסון נתונים. אני עובד עם C-DATA לספק פתרונות תקשורת ואחסון מידע מתקדמים.',
+      logo: '/images/vendors/cdata_logo.png'
+    },
+    {
+      name: 'TZAG',
+      description: 'ספק של פתרונות אבטחה וציוד מחשוב איכותי. באמצעות TZAG אני מספק ללקוחותיי פתרונות אבטחה מתקדמים לצד ציוד מחשוב.',
+      logo: '/images/vendors/tzag_logo.png'
     },
   ];
 
-  // נתוני שותפי סייבר
-  const cyberPartners = [
-    {
-      name: 'CheckPoint',
-      description: 'שותף של CheckPoint המספק פתרונות אבטחת מידע מתקדמים, חומות אש וטכנולוגיות הגנת סייבר לארגונים.',
-      logo: '/images/vendors/checkpoint_logo.png'
-    },
-    {
-      name: 'CrowdStrike',
-      description: 'שותף של CrowdStrike המספק פתרונות הגנה מפני איומים מתקדמים, ניטור אירועי אבטחה והגנה בקצה.',
-      logo: '/images/vendors/crowdstrike_logo.png'
-    },
-    {
-      name: 'Fortinet',
-      description: 'שותף של Fortinet המספק פתרונות אבטחת רשת, VPN, חומות אש ופתרונות אבטחה מקיפים לעסקים מכל הגדלים.',
-      logo: '/images/vendors/fortinet_logo.png'
-    },
-  ];
-
-  // שירותים ללקוחות פרטיים
   const privateServices = [
     {
-      icon: <FaLaptopCode />,
       title: 'התקנה ותיקון מחשבים',
-      description: 'שירותי התקנה, תיקון ותחזוקה של מחשבים אישיים ומחשבים ניידים. מענה מקצועי ומהיר לכל בעיה טכנית.',
+      description: 'שירותי התקנה, תיקון ותחזוקת מחשבים ביתיים. אני מתמחה בפתרון בעיות חומרה ותוכנה.',
+      icon: <FaTools />
     },
     {
-      icon: <FaTools />,
-      title: 'שדרוג חומרה',
-      description: 'שירותי שדרוג חומרה כולל זיכרון, כונני SSD, כרטיסי מסך ומעבדים. פתרונות מותאמים אישית לשיפור ביצועים.',
+      title: 'שדרוגי חומרה',
+      description: 'שדרוג רכיבי חומרה כמו זיכרון, דיסקים וכרטיסי מסך לשיפור ביצועי המחשב.',
+      icon: <FaDesktop />
     },
     {
-      icon: <FaNetworkWired />,
-      title: 'פתרונות רשת ביתיים',
-      description: 'הקמה ותחזוקה של רשתות ביתיות, התקנת נתבים, מגבירי טווח WiFi ופתרונות אבטחת רשת ביתית.',
+      title: 'פתרונות רשת ביתית',
+      description: 'התקנה והגדרה של רשתות ביתיות, מכשירי נתב אלחוטיים ופתרונות קישוריות.',
+      icon: <FaNetworkWired />
+    },
+    {
+      title: 'שחזור מידע וגיבויים',
+      description: 'שירותי שחזור מידע מדיסקים פגומים והקמת מערכות גיבוי אוטומטיות להגנה על המידע.',
+      icon: <FaDatabase />
+    },
+    {
+      title: 'בניית מחשבים מותאמים אישית',
+      description: 'תכנון ובניית מחשבים ביתיים מותאמים אישית לפי צרכי הלקוח ותקציבו.',
+      icon: <FaServer />
     },
   ];
 
-  // שירותים לעסקים וחברות סייבר
-  const businessServices = [
-    {
-      icon: <FaShieldAlt />,
-      title: 'בדיקות חוסן',
-      description: 'שירותי בדיקות חוסן (Penetration Testing) לאיתור פרצות אבטחה ונקודות תורפה במערכות ארגוניות.',
-    },
-    {
-      icon: <FaServer />,
-      title: 'ניהול תשתיות IT',
-      description: 'שירותי ניהול ותחזוקת תשתיות IT לעסקים, כולל שרתים, גיבויים, תקשורת ואבטחת מידע עם תמיכה 24/7.',
-    },
-    {
-      icon: <FaUserShield />,
-      title: 'ייעוץ אבטחת מידע',
-      description: 'שירותי ייעוץ מקצועיים בתחום אבטחת המידע והסייבר, כולל בניית תוכניות הגנה וסקרי סיכונים.',
-    },
-  ];
-
-  // רינדור של כרטיסי ספקים
-  const renderVendorCards = (vendors) => {
-    return vendors.map((vendor, index) => (
-      <div className="vendor-card" key={index}>
+  const renderVendorCards = (vendorList) => {
+    return vendorList.map((vendor, index) => (
+      <div className="vendor-card" key={`vendor-${index}`}>
         <div className="vendor-logo">
           {vendor.logo ? (
             <img 
@@ -109,13 +84,14 @@ const CyberWorksWith = () => {
     ));
   };
 
-  // רינדור של כרטיסי שירותים
-  const renderBenefitCards = (benefits) => {
-    return benefits.map((benefit, index) => (
-      <div className="benefit-card" key={index}>
-        <div className="benefit-icon">{benefit.icon}</div>
-        <h3>{benefit.title}</h3>
-        <p>{benefit.description}</p>
+  const renderBenefitCards = (benefitList) => {
+    return benefitList.map((benefit, index) => (
+      <div className="benefit-card" key={`benefit-${index}`}>
+        <div className="benefit-icon">
+          {benefit.icon}
+        </div>
+        <h3 className="benefit-title">{benefit.title}</h3>
+        <p className="benefit-description">{benefit.description}</p>
       </div>
     ));
   };
@@ -123,46 +99,34 @@ const CyberWorksWith = () => {
   return (
     <div className="works-with-container" dir="rtl">
       <div className="works-with-header">
-        <h1>עובדים עם</h1>
+        <h1>שירותי טכנאי מחשבים</h1>
         <p className="subheading">
-          ב-IEZ אנו גאים לעבוד עם הספקים המובילים בתעשייה ולספק שירותים מקצועיים ברמה הגבוהה ביותר. 
-          מצד אחד אנו שותפים של חברות הטכנולוגיה המובילות, ומצד שני אנו מספקים שירותים מקצועיים ללקוחות פרטיים ולחברות.
+          אני מספק שירותי טכנאות מחשבים ברמה הגבוהה ביותר ללקוחות פרטיים. 
+          אני עובד עם המותגים המובילים בתעשייה ומספק פתרונות מקצועיים לכל צרכי המחשוב שלכם.
         </p>
       </div>
 
-      {/* ספקים מורשים */}
-      <div className="partners-section">
-        <h2 className="section-title">ספקים מורשים</h2>
-        <div className="vendors-grid">
-          {renderVendorCards(vendors)}
-        </div>
-      </div>
-
-      {/* שותפי סייבר */}
-      <div className="partners-section">
-        <h2 className="section-title">שותפי סייבר</h2>
-        <div className="vendors-grid">
-          {renderVendorCards(cyberPartners)}
-        </div>
-      </div>
-
-      {/* שירותים ללקוחות פרטיים */}
       <div className="services-section">
-        <h2 className="section-title">שירותים ללקוחות פרטיים</h2>
+        <h2 className="section-title">השירותים שאני מציע</h2>
         <div className="benefits-grid">
           {renderBenefitCards(privateServices)}
         </div>
       </div>
 
-      {/* שירותים לעסקים */}
-      <div className="services-section">
-        <h2 className="section-title">שירותים לעסקים</h2>
-        <div className="benefits-grid">
-          {renderBenefitCards(businessServices)}
+      <div className="partners-section">
+        <h2 className="section-title">הספקים איתם אני עובד</h2>
+        <div className="vendors-grid">
+          {renderVendorCards(vendors)}
         </div>
+      </div>
+
+      <div className="cta-section">
+        <h2>צריכים עזרה עם המחשב?</h2>
+        <p>צרו איתי קשר לקבלת ייעוץ מקצועי או להזמנת שירות</p>
+        <Link to="/contact-us" className="cta-button">צרו קשר עכשיו</Link>
       </div>
     </div>
   );
 };
 
-export default CyberWorksWith;
+export default InfoTechWorksWith;

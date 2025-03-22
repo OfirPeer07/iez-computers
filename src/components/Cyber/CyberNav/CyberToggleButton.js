@@ -1,8 +1,9 @@
 import React from 'react';
+import './CyberToggleButton.css';
 
-const CyberToggleButton = ({ isOpen, isScrollingDown, toggleNav }) => (
+const CyberToggleButton = ({ isOpen, toggleNav }) => (
   <button 
-    className={`toggle-nav-btn ${isOpen ? 'open' : ''} ${isScrollingDown ? 'hidden' : ''}`} 
+    className={`cyber-nav-btn ${isOpen ? 'open' : ''}`} 
     onClick={toggleNav}
     aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
     aria-expanded={isOpen}

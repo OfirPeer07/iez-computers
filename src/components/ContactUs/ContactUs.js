@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MessageCircle, Send, Clock, BellRing } from 'lucide-react';
+import { Phone, Mail, MessageCircle, Send, Clock, BellRing, Linkedin } from 'lucide-react';
 import './ContactUs.css';
 
 const ContactUs = () => {
@@ -9,6 +9,7 @@ const ContactUs = () => {
   const telegramUsername = "hoodexe";
   const telegramChannel1 = "+4AEO8NTydHYxMDQ0";
   const telegramChannel2 = "+K7S8HGNgPRQ3Nzg8";
+  const linkedinProfile = "idan-emanuel-zohar";
 
   const containerStyle = {
     maxWidth: '600px',
@@ -182,6 +183,21 @@ const ContactUs = () => {
             <span style={textStyle}>Telegram - ערוץ הברדס הירוק</span>
           </div>
           <span style={descriptionStyle}>הצטרף לערוץ של הברדס הירוק על מנת להקבל עכונים בנושא</span>
+        </a>
+        <a 
+          href={`https://www.linkedin.com/in/${linkedinProfile}`} 
+          style={contactMethodStyle} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          aria-label="עקוב אחרינו בלינקדאין"
+        >
+          <div style={contactMethodHeaderStyle}>
+            <Linkedin size={24} style={iconStyle} aria-hidden="true" />
+            <span style={textStyle}>LinkedIn</span>
+          </div>
+          <span style={descriptionStyle}>התחברו אליי בלינקדאין</span>
         </a>
       </div>
       <div style={workingHoursStyle}>

@@ -27,8 +27,8 @@ const VideoCategory = ({ playlist, isMobile }) => {
     
     setScrollState((prevState) => ({
       ...prevState,
-      canScrollRight: contentWidth > containerWidth, // Can scroll right if content is wider than container
-      canScrollLeft: container.scrollLeft > 0, // Can scroll left if we're not at the start
+      canScrollRight: contentWidth > containerWidth, 
+      canScrollLeft: container.scrollLeft > 0, 
       contentWidth,
       containerWidth
     }));
@@ -91,7 +91,7 @@ const VideoCategory = ({ playlist, isMobile }) => {
 
     const handleWheel = (e) => {
       e.preventDefault();
-      const scrollAmount = 300; // Increase scroll speed
+      const scrollAmount = 300; 
       
       // Scroll immediately instead of smoothly
       container.scrollBy({
@@ -109,17 +109,17 @@ const VideoCategory = ({ playlist, isMobile }) => {
 
   // Handle touch events for mobile swipe
   const handleTouchStart = useCallback((e) => {
-    if (window.innerWidth <= 768) return; // Skip on mobile
+    if (window.innerWidth <= 768) return;
     touchStartX.current = e.touches[0].clientX;
   }, []);
 
   const handleTouchMove = useCallback((e) => {
-    if (window.innerWidth <= 768) return; // Skip on mobile
+    if (window.innerWidth <= 768) return;
     touchEndX.current = e.touches[0].clientX;
   }, []);
 
   const handleTouchEnd = useCallback(() => {
-    if (window.innerWidth <= 768) return; // Skip on mobile
+    if (window.innerWidth <= 768) return;
     if (!touchStartX.current || !touchEndX.current) return;
 
     const diff = touchStartX.current - touchEndX.current;

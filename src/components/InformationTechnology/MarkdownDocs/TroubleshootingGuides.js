@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import InfoTechNav from '../InfoTechNav/InfoTechNav';
 import ArticlesList from './ArticlesList';
 import './ITPages.css';
+import './MetadataStyles.css';
 
 const CodeBlock = ({ className, children }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -107,12 +108,56 @@ const detectLanguageDirection = (text) => {
   return /[\u0590-\u05FF]/.test(text) ? 'he' : 'en';
 };
 
+const parseYamlFrontmatter = (text) => {
+  const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
+  const match = frontmatterRegex.exec(text);
+  
+  if (!match) return { content: text, metadata: {} };
+  
+  const frontmatter = match[1];
+  const content = text.replace(frontmatterRegex, '');
+  
+  // Parse the YAML frontmatter into an object
+  const metadata = {};
+  frontmatter.split('\n').forEach(line => {
+    const colonIndex = line.indexOf(':');
+    if (colonIndex !== -1) {
+      const key = line.slice(0, colonIndex).trim();
+      const value = line.slice(colonIndex + 1).trim().replace(/^"(.*)"$/, '$1');
+      metadata[key] = value;
+    }
+  });
+  
+  return { content, metadata };
+};
+
+const ArticleMetadata = ({ metadata }) => {
+  if (!metadata || Object.keys(metadata).length === 0) return null;
+  
+  return (
+    <div className="article-metadata" dir="rtl">
+      {metadata.כותרת && <h1 className="article-title">{metadata.כותרת}</h1>}
+      <div className="article-meta-info">
+        {metadata.תאריך && <span className="article-date">📅 {metadata.תאריך}</span>}
+        {metadata.מחבר && <span className="article-author">✍️ {metadata.מחבר}</span>}
+        {metadata.קטגוריות && (
+          <div className="article-categories">
+            🏷️ {metadata.קטגוריות.split(',').map(cat => cat.trim()).join(' | ')}
+          </div>
+        )}
+      </div>
+      <hr className="metadata-divider" />
+    </div>
+  );
+};
+
 const TroubleshootingGuides = () => {
     const { fileName } = useParams();
     const [content, setContent] = useState('');
+    const [metadata, setMetadata] = useState({});
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);  
-    const [showBox, setShowBox] = useState(true);  // Add this line
+    const [showBox, setShowBox] = useState(true);  
 
     useEffect(() => {
         if (fileName) {
@@ -123,13 +168,15 @@ const TroubleshootingGuides = () => {
                     if (!response.ok) throw new Error('Content not found');
                     const text = await response.text();
                     
-                    // Add metadata stripping
-                    const contentWithoutMeta = text.replace(/^---[\s\S]*?---\s*\n*/m, '');
-                    setContent(contentWithoutMeta);
+                    // Parse metadata instead of stripping it
+                    const { content: parsedContent, metadata: parsedMetadata } = parseYamlFrontmatter(text);
+                    setContent(parsedContent);
+                    setMetadata(parsedMetadata);
                     setError(null);
                 } catch (err) {
                     setError(err.message);
                     setContent('');
+                    setMetadata({});
                 } finally {
                     setLoading(false);
                 }
@@ -157,41 +204,44 @@ const TroubleshootingGuides = () => {
                         {error ? (
                             <p className="error">{error}</p>
                         ) : (
-                            <ReactMarkdown
-                                children={content}
-                                rehypePlugins={[rehypeRaw]}
-                                remarkPlugins={[remarkGfm, remarkEmoji]}
-                                components={{
-                                    h1: ({node, children, ...props}) => {
-                                      const lang = detectLanguageDirection(String(children));
-                                      return <h1 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h1>;
-                                    },
-                                    h2: ({node, children, ...props}) => {
-                                      const lang = detectLanguageDirection(String(children));
-                                      return <h2 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h2>;
-                                    },
-                                    h3: ({node, children, ...props}) => {
-                                      const lang = detectLanguageDirection(String(children));
-                                      return <h3 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h3>;
-                                    },
-                                    p: ({node, children, ...props}) => {
-                                      const lang = detectLanguageDirection(String(children));
-                                      return <p {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang)}</p>;
-                                    },
-                                    code: ({ node, inline, className, children, ...props }) => {
-                                        const match = /language-(\w+)/.exec(className || '');
-                                        return !inline && match ? (
-                                            <CodeBlock className={className} {...props}>
-                                                {children}
-                                            </CodeBlock>
-                                        ) : (
-                                            <code className={className} {...props}>
-                                                {children}
-                                            </code>
-                                        );
-                                    }
-                                }}
-                            />
+                            <>
+                                <ArticleMetadata metadata={metadata} />
+                                <ReactMarkdown
+                                    children={content}
+                                    rehypePlugins={[rehypeRaw]}
+                                    remarkPlugins={[remarkGfm, remarkEmoji]}
+                                    components={{
+                                        h1: ({node, children, ...props}) => {
+                                          const lang = detectLanguageDirection(String(children));
+                                          return <h1 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h1>;
+                                        },
+                                        h2: ({node, children, ...props}) => {
+                                          const lang = detectLanguageDirection(String(children));
+                                          return <h2 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h2>;
+                                        },
+                                        h3: ({node, children, ...props}) => {
+                                          const lang = detectLanguageDirection(String(children));
+                                          return <h3 {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang, true)}</h3>;
+                                        },
+                                        p: ({node, children, ...props}) => {
+                                          const lang = detectLanguageDirection(String(children));
+                                          return <p {...props} dir={lang === 'en' ? 'ltr' : 'rtl'}>{wrapWithLanguage(children, lang)}</p>;
+                                        },
+                                        code: ({ node, inline, className, children, ...props }) => {
+                                            const match = /language-(\w+)/.exec(className || '');
+                                            return !inline && match ? (
+                                                <CodeBlock className={className} {...props}>
+                                                    {children}
+                                                </CodeBlock>
+                                            ) : (
+                                                <code className={className} {...props}>
+                                                    {children}
+                                                </code>
+                                            );
+                                        }
+                                    }}
+                                />
+                            </>
                         )}
                     </div>
                 ) : (

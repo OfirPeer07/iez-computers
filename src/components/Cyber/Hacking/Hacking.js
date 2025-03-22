@@ -9,7 +9,7 @@ import HackingBar from '../Sidebars/HackingBar';
 
 function Hacking() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [rectanglesVisible, setRectanglesVisible] = useState(true); // State for rectangle visibility
+  const [rectanglesVisible, setRectanglesVisible] = useState(true);
   const [sidebarVisible, setSidebarVisible] = useState(true);
 
   useEffect(() => {
@@ -26,7 +26,6 @@ function Hacking() {
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
   
-    // Resize canvas without reloading the effect
     const resizeCanvas = () => {
       const newColumns = Math.floor(window.innerWidth / fontSize);
       if (newColumns !== columns) {
@@ -37,7 +36,6 @@ function Hacking() {
       canvas.height = window.innerHeight;
     };
   
-    // Debounce resize handling
     const debounceResize = () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(resizeCanvas, 100);
@@ -90,10 +88,10 @@ function Hacking() {
   
   const handleVideoEnd = () => {
     setIsVideoPlaying(false);
-    setRectanglesVisible(true); // Show rectangles again after the video ends
-    setSidebarVisible(true); // Show the HackingBar
+    setRectanglesVisible(true); 
+    setSidebarVisible(true); 
     document.querySelectorAll('.sidebar').forEach(sidebar => {
-      sidebar.classList.remove('hidden'); // Remove the 'hidden' class to show all sidebars
+      sidebar.classList.remove('hidden'); 
     });
   };
 
@@ -119,7 +117,6 @@ function Hacking() {
         />
       )}
   
-      {/* Only show the HackingBar if it's visible */}
       {sidebarVisible && <HackingBar className={sidebarVisible ? '' : 'hidden'} />}
       {rectanglesVisible && (
         <>

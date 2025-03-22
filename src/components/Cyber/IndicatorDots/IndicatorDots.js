@@ -6,7 +6,6 @@ const IndicatorDots = ({resilienceTestersRef, theGreenHoodRef }) => {
   const [isMobile, setIsMobile] = useState(false);
   const indicatorRef = useRef(null);
 
-  // בדיקה אם המכשיר הוא מובייל או טאבלט
   useEffect(() => {
     const checkMobile = () => {
       const mobileRegex = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i;
@@ -18,19 +17,15 @@ const IndicatorDots = ({resilienceTestersRef, theGreenHoodRef }) => {
       setIsMobile(isMobileDevice || isTablet);
     };
     
-    // בדיקה ראשונית
     checkMobile();
     
-    // הוספת מאזין לשינוי גודל החלון
     window.addEventListener('resize', checkMobile);
     
-    // ניקוי
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const scrollToSection = (ref, sectionName) => {
     if (ref.current) {
-      // התאמת ההתנהגות למובייל - גלילה מהירה יותר
       const behavior = isMobile ? 'auto' : 'smooth';
       ref.current.scrollIntoView({ behavior, block: 'start' });
       setActiveSection(sectionName);
@@ -53,8 +48,8 @@ const IndicatorDots = ({resilienceTestersRef, theGreenHoodRef }) => {
         });
       },
       { 
-        threshold: isMobile ? 0.2 : 0.6, // סף נמוך יותר למובייל וטאבלט
-        rootMargin: isMobile ? '-10% 0px' : '0px' // מרווח שונה למובייל וטאבלט
+        threshold: isMobile ? 0.2 : 0.6, 
+        rootMargin: isMobile ? '-10% 0px' : '0px' 
       }
     );
 

@@ -13,8 +13,8 @@ const Cyber = () => {
 
   const scrollToSection = (ref, section) => {
     if (ref && ref.current) {
-      setActiveSection(section); // עדכן מיידית את המצב
-      ref.current.scrollIntoView({ behavior: 'smooth' }); // גלול למיקום
+      setActiveSection(section); 
+      ref.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -46,7 +46,6 @@ const Cyber = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    // Call handleScroll immediately to handle the state on page load
     handleScroll();
 
     return () => {

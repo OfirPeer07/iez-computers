@@ -20,6 +20,7 @@ import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
 import './Markdown-Global.css';    // 1. Base styles
 import './CyberPages.css';        // 2. Cyber specific layout
 
+
 // Register languages
 SyntaxHighlighter.registerLanguage('javascript', javascript);
 SyntaxHighlighter.registerLanguage('json', json);
@@ -72,42 +73,59 @@ const CodeBlock = ({ className, children }) => {
 };
 
 const extractMetadata = (markdown) => {
-  const metadata = {
-    title: '',
-    date: null,
-    description: '',
-    thumbnail: ''
-  };
-
-  const lines = markdown.split('\n');
-  let contentStart = 0;
-  let inMetadata = false;
+  const metadata = {};
+  let content = markdown;
 
   // Extract metadata section
-  if (lines[0]?.trim() === '---') {
-    inMetadata = true;
-    for (let i = 1; i < lines.length; i++) {
-      if (lines[i]?.trim() === '---') {
-        contentStart = i + 1;
-        break;
+  const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
+  const match = frontmatterRegex.exec(markdown);
+  
+  if (match) {
+    const frontmatter = match[1];
+    content = markdown.replace(frontmatterRegex, '');
+    
+    // Parse the YAML frontmatter into an object
+    frontmatter.split('\n').forEach(line => {
+      const colonIndex = line.indexOf(':');
+      if (colonIndex !== -1) {
+        const key = line.slice(0, colonIndex).trim();
+        const value = line.slice(colonIndex + 1).trim().replace(/^"(.*)"$/, '$1');
+        metadata[key] = value;
       }
-      const [key, ...valueParts] = lines[i].split(':');
-      if (key && valueParts.length) {
-        const value = valueParts.join(':').trim();
-        metadata[key.trim()] = value;
-      }
-    }
+    });
   }
 
   return {
-    ...metadata,
-    content: lines.slice(contentStart).join('\n')
+    metadata,
+    content
   };
+};
+
+// Component to display metadata
+const ArticleMetadata = ({ metadata }) => {
+  if (!metadata || Object.keys(metadata).length === 0) return null;
+  
+  return (
+    <div className="article-metadata" dir="rtl">
+      {metadata.כותרת && <h1 className="article-title">{metadata.כותרת}</h1>}
+      <div className="article-meta-info">
+        {metadata.תאריך && <span className="article-date">📅 {metadata.תאריך}</span>}
+        {metadata.מחבר && <span className="article-author">✍️ {metadata.מחבר}</span>}
+        {metadata.קטגוריות && (
+          <div className="article-categories">
+            🏷️ {metadata.קטגוריות.split(',').map(cat => cat.trim()).join(' | ')}
+          </div>
+        )}
+      </div>
+      <hr className="metadata-divider" />
+    </div>
+  );
 };
 
 const CyberGuides = () => {
   const { fileName } = useParams();
   const [content, setContent] = useState('');
+  const [metadata, setMetadata] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showBox, setShowBox] = useState(true);
@@ -120,12 +138,14 @@ const CyberGuides = () => {
           const response = await fetch(`/md/CyberGuides/${fileName}`);
           if (!response.ok) throw new Error('Content not found');
           const text = await response.text();
-          const { content: strippedContent } = extractMetadata(text);
-          setContent(strippedContent);
+          const { content: parsedContent, metadata: parsedMetadata } = extractMetadata(text);
+          setContent(parsedContent);
+          setMetadata(parsedMetadata);
           setError(null);
         } catch (err) {
           setError(err.message);
           setContent('');
+          setMetadata({});
         } finally {
           setLoading(false);
         }
@@ -153,25 +173,28 @@ const CyberGuides = () => {
             {error ? (
               <p className="error">{error}</p>
             ) : (
-              <ReactMarkdown
-                children={content}
-                rehypePlugins={[rehypeRaw]}
-                remarkPlugins={[remarkGfm, remarkEmoji]}
-                components={{
-                  code: ({node, inline, className, children, ...props}) => {
-                    const match = /language-(\w+)/.exec(className || '');
-                    return !inline && match ? (
-                      <CodeBlock className={className} {...props}>
-                        {children}
-                      </CodeBlock>
-                    ) : (
-                      <code className={className} {...props}>
-                        {children}
-                      </code>
-                    );
-                  }
-                }}
-              />
+              <>
+                <ArticleMetadata metadata={metadata} />
+                <ReactMarkdown
+                  children={content}
+                  rehypePlugins={[rehypeRaw]}
+                  remarkPlugins={[remarkGfm, remarkEmoji]}
+                  components={{
+                    code: ({node, inline, className, children, ...props}) => {
+                      const match = /language-(\w+)/.exec(className || '');
+                      return !inline && match ? (
+                        <CodeBlock className={className} {...props}>
+                          {children}
+                        </CodeBlock>
+                      ) : (
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
+                      );
+                    }
+                  }}
+                />
+              </>
             )}
           </div>
         ) : (

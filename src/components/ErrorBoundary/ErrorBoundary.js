@@ -21,7 +21,6 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      // בסביבת פיתוח נציג הודעת שגיאה, בייצור נחזיר את הילדים
       if (process.env.NODE_ENV === 'development') {
         return (
           <div style={{ display: 'none' }}>

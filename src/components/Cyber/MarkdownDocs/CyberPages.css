@@ -2,9 +2,6 @@ body {
   overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
-
-
-/* Background */
 .cyber-wrapper::before {
   content: '';
   position: fixed;
@@ -21,7 +18,6 @@ body {
   filter: brightness(1.2) contrast(0.9);
 }
 
-/* Content layout only - no text styling */
 .cyber-wrapper .content-wrapper {
   width: 100%;
   max-width: 1200px;
@@ -31,7 +27,6 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
@@ -45,14 +40,11 @@ body {
   }
 }
 
-
-/* RTL Box styling for Cyber theme */
 .cyber-wrapper .rtl-box {
   position: relative;
   width: min(800px, 90%);
   margin-top: calc(clamp(10px, 2vh, 150px) + 1rem);
   
-  /* עיצוב מתקדם */
   background: rgba(15, 15, 20, 0.95);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(0, 255, 255, 0.1);
@@ -61,16 +53,13 @@ body {
               inset 0 0 20px rgba(0, 255, 255, 0.05);
   padding: 2rem;
   
-  /* אנימציה */
   animation: cyber-glow 2s ease-in-out infinite alternate;
   left: 31%;
-  /* טקסט */
   direction: rtl;
   text-align: right;
   z-index: 10;
 }
 
-/* טקסט בתוך ה-box */
 .cyber-wrapper .rtl-box p {
   margin: 0.8em 0;
   line-height: 1.6;
@@ -79,7 +68,6 @@ body {
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
 }
 
-/* כפתור סגירה בסגנון סייבר */
 .cyber-wrapper .rtl-box .close-btn {
   position: absolute;
   top: 15px;
@@ -97,11 +85,9 @@ body {
   align-items: center;
   justify-content: center;
   
-  /* אפקט זוהר */
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
 }
 
-/* אפקט hover על הכפתור */
 .cyber-wrapper .rtl-box .close-btn:hover {
   background: rgba(0, 255, 255, 0.1);
   border-color: rgba(0, 255, 255, 0.4);
@@ -110,12 +96,10 @@ body {
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
 }
 
-/* אפקט active על הכפתור */
 .cyber-wrapper .rtl-box .close-btn:active {
   transform: scale(0.95);
 }
 
-/* אנימציית זוהר */
 @keyframes cyber-glow {
   from {
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.1),
@@ -127,13 +111,13 @@ body {
   }
 }
 
-/* התאמה למסכים קטנים */
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .cyber-wrapper .rtl-box {
     width: 95%;
     margin: 1rem auto;
     padding: 1.5rem;
-    left: 0; /* תיקון למיקום במובייל */
+    left: 0; 
     border-radius: 10px;
   }
   
@@ -151,7 +135,7 @@ body {
   }
 }
 
-/* Small mobile screens */
+/* Mobile adjustments */
 @media (max-width: 480px) {
   .cyber-wrapper .rtl-box {
     width: 92%;
@@ -165,7 +149,6 @@ body {
     margin: 0.6em 0;
   }
   
-  /* כפתור סגירה גדול יותר למסכי מגע קטנים */
   .cyber-wrapper .rtl-box .close-btn {
     top: 8px;
     left: 8px;
@@ -174,7 +157,6 @@ body {
     font-size: 22px;
   }
   
-  /* אנימציית זוהר מצומצמת (לביצועים טובים יותר במובייל) */
   @keyframes cyber-glow {
     from {
       box-shadow: 0 0 10px rgba(0, 255, 255, 0.1),
@@ -187,7 +169,6 @@ body {
   }
 }
 
-/* Mobile-view class שיכול להיות מופעל מה-React component */
 .mobile-view .cyber-wrapper .rtl-box {
   width: 94% !important;
   padding: 1rem !important;

@@ -5,12 +5,12 @@
         "mainImage": "/images/pc/pc1.jpg",
         "hoverImage": "/images/pc/pc1-inside.jpg",
         "specs": {
-          "cpu": "Intel Core i9-12900K",
-          "gpu": "NVIDIA RTX 3080",
-          "ram": "32GB DDR4 3600MHz",
-          "motherboard": "ASUS ROG STRIX Z690-E",
-          "storage": "2TB NVMe SSD",
-          "case": "Lian Li PC-O11"
+          "cpu": "Intel Core i9-14900K",
+          "gpu": "NVIDIA RTX 4070",
+          "ram": "32GB DDR5 5600MHz",
+          "motherboard": "MSI PRO Z790-A MAX WIFI",
+          "storage": "4TB NVMe PCIe 4.0 990 PRO",
+          "case": "AN1-C8"
         }
       },
       {
@@ -18,51 +18,12 @@
         "mainImage": "/images/pc/pc2.jpg",
         "hoverImage": "/images/pc/pc2-inside.jpg",
         "specs": {
-          "cpu": "AMD Ryzen 9 7950X",
-          "gpu": "NVIDIA RTX 4090",
-          "ram": "64GB DDR5 6000MHz",
-          "motherboard": "MSI MEG X670E ACE",
-          "storage": "4TB NVMe PCIe 4.0 SSD",
-          "case": "Lian Li O11 Dynamic EVO"
-        }
-      },
-      {
-        "id": 3,
-        "mainImage": "/images/pc/pc3.jpg",
-        "hoverImage": "/images/pc/pc3-inside.jpg",
-        "specs": {
-          "cpu": "Intel Core i7-13700K",
-          "gpu": "AMD RX 7900 XTX",
-          "ram": "32GB DDR5 5600MHz",
-          "motherboard": "ASUS ROG MAXIMUS Z790 HERO",
-          "storage": "2TB NVMe PCIe 5.0 + 4TB SATA SSD",
-          "case": "Phanteks Enthoo 719"
-        }
-      },
-      {
-        "id": 4,
-        "mainImage": "/images/pc/pc4.jpg",
-        "hoverImage": "/images/pc/pc4-inside.jpg",
-        "specs": {
-          "cpu": "AMD Ryzen 7 7800X3D",
+          "cpu": "AMD Ryzen 7 9800XD",
           "gpu": "NVIDIA RTX 4080",
-          "ram": "32GB DDR5 6400MHz",
-          "motherboard": "ASRock X670E Taichi",
-          "storage": "2TB NVMe PCIe 4.0 + 2TB SATA SSD",
-          "case": "Fractal Design Torrent"
-        }
-      },
-      {
-        "id": 5,
-        "mainImage": "/images/pc/pc5.jpg",
-        "hoverImage": "/images/pc/pc5-inside.jpg",
-        "specs": {
-          "cpu": "Intel Core i5-13600K",
-          "gpu": "NVIDIA RTX 4070 Ti",
-          "ram": "32GB DDR5 5200MHz",
-          "motherboard": "MSI MPG Z790 EDGE WIFI",
-          "storage": "2TB NVMe PCIe 4.0 SSD",
-          "case": "be quiet! Dark Base 700"
+          "ram": "64GB DDR5 6000MHz",
+          "motherboard": "MSI MEG X870 TOMAHAWK WIFI",
+          "storage": "4TB NVMe PCIe 5.0 SSD",
+          "case": "AN1-C8"
         }
       }
     ]

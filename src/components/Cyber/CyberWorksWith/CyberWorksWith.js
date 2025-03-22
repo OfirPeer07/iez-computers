@@ -1,121 +1,155 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CyberWorksWith.css';
-import { FaServer, FaShieldAlt, FaLaptopCode, FaTools, FaNetworkWired, FaUserShield } from 'react-icons/fa';
+import { 
+  FaShieldAlt, 
+  FaServer, 
+  FaNetworkWired, 
+  FaLock, 
+  FaCloudversify,
+  FaUserSecret,
+  FaCertificate,
+  FaFileAlt,
+  FaLaptopCode,
+  FaBookReader,
+  FaUsers,
+  FaLightbulb,
+  FaBrain,
+  FaEye
+} from 'react-icons/fa';
 
 const CyberWorksWith = () => {
-  // נתוני ספקים
-  const vendors = [
-    {
-      name: 'Dell',
-      description: 'ספק מחשבים, שרתים וציוד היקפי מהמובילים בעולם. אנו מספקים פתרונות Dell מקצועיים לעסקים וללקוחות פרטיים.',
-      logo: '/images/vendors/dell_logo.png'
-    },
-    {
-      name: 'HP',
-      description: 'שותף מורשה של HP המספק מחשבים, מדפסות וציוד היקפי איכותי. אנו מציעים מגוון פתרונות מבית HP לעסקים ופרטיים.',
-      logo: '/images/vendors/hp_logo.png'
-    },
-    {
-      name: 'Microsoft',
-      description: 'שותף מורשה של Microsoft המספק רישוי תוכנה, פתרונות ענן ושירותי Microsoft 365 לארגונים ולקוחות פרטיים.',
-      logo: '/images/vendors/microsoft_logo.png'
-    },
-    {
-      name: 'Lenovo',
-      description: 'ספק מורשה של Lenovo המציע מחשבים ניידים, מחשבי כף יד וציוד היקפי ללקוחות עסקיים ופרטיים באיכות גבוהה.',
-      logo: '/images/vendors/lenovo_logo.png'
-    },
-  ];
+  const [failedImages, setFailedImages] = useState([]);
+  
+  const handleImageError = (index) => {
+    if (!failedImages.includes(index)) {
+      setFailedImages([...failedImages, index]);
+    }
+  };
 
-  // נתוני שותפי סייבר
-  const cyberPartners = [
-    {
-      name: 'CheckPoint',
-      description: 'שותף של CheckPoint המספק פתרונות אבטחת מידע מתקדמים, חומות אש וטכנולוגיות הגנת סייבר לארגונים.',
-      logo: '/images/vendors/checkpoint_logo.png'
-    },
-    {
-      name: 'CrowdStrike',
-      description: 'שותף של CrowdStrike המספק פתרונות הגנה מפני איומים מתקדמים, ניטור אירועי אבטחה והגנה בקצה.',
-      logo: '/images/vendors/crowdstrike_logo.png'
-    },
-    {
-      name: 'Fortinet',
-      description: 'שותף של Fortinet המספק פתרונות אבטחת רשת, VPN, חומות אש ופתרונות אבטחה מקיפים לעסקים מכל הגדלים.',
-      logo: '/images/vendors/fortinet_logo.png'
-    },
-  ];
-
-  // שירותים ללקוחות פרטיים
-  const privateServices = [
-    {
-      icon: <FaLaptopCode />,
-      title: 'התקנה ותיקון מחשבים',
-      description: 'שירותי התקנה, תיקון ותחזוקה של מחשבים אישיים ומחשבים ניידים. מענה מקצועי ומהיר לכל בעיה טכנית.',
-    },
-    {
-      icon: <FaTools />,
-      title: 'שדרוג חומרה',
-      description: 'שירותי שדרוג חומרה כולל זיכרון, כונני SSD, כרטיסי מסך ומעבדים. פתרונות מותאמים אישית לשיפור ביצועים.',
-    },
+  const expertiseAreas = [
     {
       icon: <FaNetworkWired />,
-      title: 'פתרונות רשת ביתיים',
-      description: 'הקמה ותחזוקה של רשתות ביתיות, התקנת נתבים, מגבירי טווח WiFi ופתרונות אבטחת רשת ביתית.',
-    },
-  ];
-
-  // שירותים לעסקים וחברות סייבר
-  const businessServices = [
-    {
-      icon: <FaShieldAlt />,
-      title: 'בדיקות חוסן',
-      description: 'שירותי בדיקות חוסן (Penetration Testing) לאיתור פרצות אבטחה ונקודות תורפה במערכות ארגוניות.',
+      title: 'בדיקות חוסן לתשתיות',
+      description: 'מתמחה בביצוע בדיקות חוסן מקיפות לתשתיות IT, תקשורת, רשתות ומערכות הפעלה. זיהוי נקודות תורפה בארכיטקטורת התשתית וסיכוני אבטחה.',
     },
     {
       icon: <FaServer />,
-      title: 'ניהול תשתיות IT',
-      description: 'שירותי ניהול ותחזוקת תשתיות IT לעסקים, כולל שרתים, גיבויים, תקשורת ואבטחת מידע עם תמיכה 24/7.',
+      title: 'בדיקות אבטחה לשרתים',
+      description: 'ניתוח אבטחה מעמיק לשרתים, שירותי רשת ותשתיות קריטיות. זיהוי ניצול חולשות הרשאות, תצורות שגויות ומנגנוני הזדהות.',
     },
     {
-      icon: <FaUserShield />,
-      title: 'ייעוץ אבטחת מידע',
-      description: 'שירותי ייעוץ מקצועיים בתחום אבטחת המידע והסייבר, כולל בניית תוכניות הגנה וסקרי סיכונים.',
+      icon: <FaCloudversify />,
+      title: 'אבטחת תשתיות ענן',
+      description: 'הערכת אבטחה ובדיקות חדירה למערכות תשתית מבוססות ענן. מיפוי תצורות שגויות והערכת מדיניות הרשאות ב־AWS, Azure ו־GCP.',
+    },
+    {
+      icon: <FaUserSecret />,
+      title: 'Red Team לתשתיות',
+      description: 'ביצוע סימולציות תקיפה מתקדמות על תשתיות ארגוניות, תוך שימוש בטקטיקות תוקף אמיתיות למטרת שיפור יכולות ההגנה והזיהוי.',
     },
   ];
 
-  // רינדור של כרטיסי ספקים
-  const renderVendorCards = (vendors) => {
-    return vendors.map((vendor, index) => (
+  const knowledgeAreas = [
+    {
+      name: 'אבטחת רשתות',
+      description: 'הבנה יסודית של עקרונות אבטחת רשתות, פרוטוקולים, ומנגנוני הגנה. יכולת לזהות חולשות נפוצות בתצורות רשת.',
+      icon: '/images/skills/network_logo.png'
+    },
+    {
+      name: 'אבטחת מערכות הפעלה',
+      description: 'הכרת מנגנוני האבטחה במערכות הפעלה שונות (Windows, Linux) וזיהוי נקודות תורפה בהגדרות ותצורות.',
+      icon: '/images/skills/os_logo.png'
+    },
+    {
+      name: 'בסיסי ידע בסקריפטינג',
+      description: 'יכולות כתיבת סקריפטים בסיסיים ב-Python ו-Bash לאוטומציה של משימות אבטחה ותהליכי בדיקה.',
+      icon: '/images/skills/script_logo.png'
+    },
+    {
+      name: 'כלי בדיקות חוסן',
+      description: 'הכרות עם מגוון כלי בדיקות חוסן כמו Nmap, Metasploit, וכלים נוספים הנמצאים בשימוש נפוץ בתעשייה.',
+      icon: '/images/skills/tools_logo.png'
+    },
+  ];
+
+  const professionalDevelopment = [
+    {
+      icon: <FaBookReader />,
+      title: 'למידה מתמדת',
+      description: 'מחויבות ללמידה מתמדת של טכנולוגיות, טכניקות ומגמות חדשות בעולם הסייבר. מעקב אחר מאמרים, כנסים וקהילות מקצועיות.',
+    },
+    {
+      icon: <FaLightbulb />,
+      title: 'קליטה מהירה',
+      description: 'יכולת גבוהה לקליטה והטמעה מהירה של טכנולוגיות, כלים ומושגים חדשים. גישה אנליטית המאפשרת לימוד עצמאי והסתגלות מהירה לסביבות עבודה חדשות.',
+    },
+    {
+      icon: <FaBrain />,
+      title: 'חשיבה ייחודית',
+      description: 'דרך חשיבה ייחודית המאפשרת זיהוי חולשות ואנומליות שגישות סטנדרטיות מתקשות לאתר. יכולת לראות קשרים בין מערכות ולנתח מצבים מורכבים מזוויות בלתי שגרתיות, מה שמעניק יתרון משמעותי באיתור נקודות תורפה בתשתיות.',
+    },
+    {
+      icon: <FaEye />,
+      title: 'ראייה הוליסטית',
+      description: 'ראייה מערכתית רחבה של תשתיות ומערכות, המאפשרת לזהות נקודות תורפה בהקשר הרחב של הארגון. הבנה אינטואיטיבית של הקשרים בין מערכות שונות.',
+    },
+    {
+      icon: <FaUsers />,
+      title: 'שיתוף ידע בקהילה',
+      description: 'השתתפות פעילה בקהילות סייבר מקומיות, פורומים ומפגשי Meetup. האמנה בשיתוף ידע כמנוע לצמיחה אישית ומקצועית.',
+    },
+    {
+      icon: <FaLaptopCode />,
+      title: 'סביבות תרגול עצמאיות',
+      description: 'בניית סביבות תרגול בווירטואליזציה להתנסות עם כלים וטכניקות. השתתפות באתגרי CTF ובפלטפורמות כמו HackTheBox.',
+    },
+    {
+      icon: <FaLightbulb />,
+      title: 'חשיבה יצירתית',
+      description: 'פיתוח גישה יצירתית לפתרון בעיות אבטחה. חיפוש דרכים לא שגרתיות לזיהוי ומיפוי חולשות אבטחה בסביבות ארגוניות.',
+    },
+  ];
+
+  const certifications = [
+    {
+      icon: <FaCertificate />,
+      title: 'CEH - Certified Ethical Hacker',
+      description: 'הסמכה בינלאומית המעידה על מיומנויות ביצוע בדיקות חוסן מקיפות והכרת מתודולוגיות האקינג אתי.',
+    },
+    {
+      icon: <FaCertificate />,
+      title: 'ITSAFE PENTESTING INFRASTRUCTURE',
+      description: 'הסמכה מקצועית המתמקדת בביצוע בדיקות חוסן לתשתיות ארגוניות. כוללת הכשרה מעמיקה בזיהוי, ניתוח וניצול חולשות במערכות תשתית.',
+    }
+  ];
+
+  const renderKnowledgeCards = (knowledgeAreas) => {
+    return knowledgeAreas.map((area, index) => (
       <div className="vendor-card" key={index}>
         <div className="vendor-logo">
-          {vendor.logo ? (
+          {area.icon && !failedImages.includes(index) ? (
             <img 
-              src={vendor.logo} 
-              alt={`${vendor.name} לוגו`} 
+              src={area.icon} 
+              alt={`${area.name} לוגו`} 
               className="logo-image" 
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.parentNode.innerHTML = `<div class="logo-placeholder">${vendor.name.charAt(0)}</div>`;
-              }}
+              onError={() => handleImageError(index)}
             />
           ) : (
-            <div className="logo-placeholder">{vendor.name.charAt(0)}</div>
+            <div className="logo-placeholder">{area.name.charAt(0)}</div>
           )}
         </div>
-        <h3>{vendor.name}</h3>
-        <p>{vendor.description}</p>
+        <h3>{area.name}</h3>
+        <p>{area.description}</p>
       </div>
     ));
   };
 
-  // רינדור של כרטיסי שירותים
-  const renderBenefitCards = (benefits) => {
-    return benefits.map((benefit, index) => (
+  const renderServiceCards = (services) => {
+    return services.map((service, index) => (
       <div className="benefit-card" key={index}>
-        <div className="benefit-icon">{benefit.icon}</div>
-        <h3>{benefit.title}</h3>
-        <p>{benefit.description}</p>
+        <div className="benefit-icon">{service.icon}</div>
+        <h3>{service.title}</h3>
+        <p>{service.description}</p>
       </div>
     ));
   };
@@ -123,42 +157,38 @@ const CyberWorksWith = () => {
   return (
     <div className="works-with-container" dir="rtl">
       <div className="works-with-header">
-        <h1>עובדים עם</h1>
+        <h1>שירותי בדיקות חוסן לתשתיות</h1>
         <p className="subheading">
-          ב-IEZ אנו גאים לעבוד עם הספקים המובילים בתעשייה ולספק שירותים מקצועיים ברמה הגבוהה ביותר. 
-          מצד אחד אנו שותפים של חברות הטכנולוגיה המובילות, ומצד שני אנו מספקים שירותים מקצועיים ללקוחות פרטיים ולחברות.
+          מתמחה באבטחת תשתיות IT וסייבר, עם דגש על בדיקות חוסן לרשתות, שרתים ותשתיות. בתחילת דרכי המקצועית בתחום,
+          אך מביא ידע טכני מעמיק וגישה שיטתית לזיהוי נקודות תורפה ושיפור מערך ההגנה בארגונים.
         </p>
       </div>
 
-      {/* ספקים מורשים */}
-      <div className="partners-section">
-        <h2 className="section-title">ספקים מורשים</h2>
-        <div className="vendors-grid">
-          {renderVendorCards(vendors)}
-        </div>
-      </div>
-
-      {/* שותפי סייבר */}
-      <div className="partners-section">
-        <h2 className="section-title">שותפי סייבר</h2>
-        <div className="vendors-grid">
-          {renderVendorCards(cyberPartners)}
-        </div>
-      </div>
-
-      {/* שירותים ללקוחות פרטיים */}
       <div className="services-section">
-        <h2 className="section-title">שירותים ללקוחות פרטיים</h2>
+        <h2 className="section-title">התמחות בתשתיות</h2>
         <div className="benefits-grid">
-          {renderBenefitCards(privateServices)}
+          {renderServiceCards(expertiseAreas)}
         </div>
       </div>
 
-      {/* שירותים לעסקים */}
       <div className="services-section">
-        <h2 className="section-title">שירותים לעסקים</h2>
+        <h2 className="section-title">התפתחות מקצועית</h2>
         <div className="benefits-grid">
-          {renderBenefitCards(businessServices)}
+          {renderServiceCards(professionalDevelopment)}
+        </div>
+      </div>
+
+      <div className="partners-section">
+        <h2 className="section-title">תחומי ידע</h2>
+        <div className="vendors-grid">
+          {renderKnowledgeCards(knowledgeAreas)}
+        </div>
+      </div>
+
+      <div className="services-section">
+        <h2 className="section-title">הסמכות והשכלה</h2>
+        <div className="benefits-grid">
+          {renderServiceCards(certifications)}
         </div>
       </div>
     </div>

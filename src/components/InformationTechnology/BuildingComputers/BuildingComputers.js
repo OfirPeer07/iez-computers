@@ -21,11 +21,9 @@ const specLabels = {
   case: 'קייס',
 };
 
-// פונקציה לזיהוי מכשיר מובייל באמצעות User-Agent
 const detectMobileDevice = () => {
   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
   
-  // רשימת ביטויים שמזהים מכשירים ניידים
   const mobileRegex = 
     /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(userAgent) 
     || 
@@ -41,17 +39,14 @@ export default function BuildingComputers() {
   const [isMobile, setIsMobile] = useState(false);
   const [activeCardId, setActiveCardId] = useState(null);
 
-  // בדיקה האם המכשיר הוא מובייל
   useEffect(() => {
     try {
-      // זיהוי מכשיר מובייל באמצעות User-Agent
       const mobile = detectMobileDevice();
       setIsMobile(mobile);
       
       console.log("האם המכשיר מובייל:", mobile);
     } catch (err) {
       console.error("שגיאה בזיהוי מכשיר:", err);
-      // אם יש שגיאה בזיהוי, נשתמש בגישה אלטרנטיבית של רוחב מסך
       setIsMobile(window.innerWidth <= 768);
     }
   }, []);
@@ -67,21 +62,18 @@ export default function BuildingComputers() {
     }
   }, []);
 
-  // פונקציה לטיפול בכניסת עכבר - פעילה רק בדסקטופ
   const handleMouseEnter = (id) => {
     if (!isMobile) {
       setHoveredId(id);
     }
   };
   
-  // פונקציה לטיפול ביציאת עכבר - פעילה רק בדסקטופ
   const handleMouseLeave = () => {
     if (!isMobile) {
       setHoveredId(null);
     }
   };
 
-  // פונקציה לטיפול בלחיצה - פעילה רק במובייל
   const handleCardClick = (id, event) => {
     if (isMobile) {
       event.preventDefault();

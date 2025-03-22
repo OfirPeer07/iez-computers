@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Wallpoet&display=swap');
 
-/* מניעת גלילה לחלוטין */
 html, body {
   margin: 0;
   padding: 0;
@@ -29,8 +28,8 @@ body .page-not-found-container{
 
 .hackerPNF {
   position: relative;
-  margin-top: -5.7cqmax;
-  margin-left: -40.8cqmax;
+  margin-top: 12.7cqmax;
+  margin-left: 46.2cqmax;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -63,7 +62,6 @@ body .page-not-found-container{
   font-size: 7.75rem;
   font-weight: bold;
   text-shadow: 2px 2px 1px rgba(0,0,0,0.3), 0 0px 15px #000, 0 0 15px #15ff00, 0 0 50px #15ff00;
-  /*-webkit-animation: flicker 5.5s infinite alternate;*/
 }
 
 .blink {
@@ -246,7 +244,7 @@ body .page-not-found-container{
   }
 }
 
-/* התאמה למסכי טלפון */
+/* Mobile adjustments */
 @media screen and (max-width: 768px) {
   .page-not-found-container {
     height: 100vh;
@@ -281,7 +279,7 @@ body .page-not-found-container{
   }
 }
 
-/* מובייל קטן */
+/* Small Mobile */
 @media screen and (max-width: 480px) {
   .hackerPNF {
     width: 90vmin;
@@ -292,7 +290,7 @@ body .page-not-found-container{
   }
 }
 
-/* מובייל גדול וטאבלט קטן */
+/* Mobiles Small and Big */
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .hackerPNF {
     width: 85vmin;
@@ -303,37 +301,37 @@ body .page-not-found-container{
   }
 }
 
-/* טאבלט */
+/* Tablets */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .hackerPNF {
     width: 70vmax;
     height: 51vmax;
-    bottom: -21vh;
-    left: 33vw;
+    bottom: -23vh;
+    left: 0vw;
   }
 }
 
-/* לפטופים */
+/* Laptops */
 @media screen and (min-width: 1025px) and (max-width: 1366px) {
   .hackerPNF {
     width: 65vmax;
     height: 65vmax;
-    bottom: 0;
-    left: 35vw;
+    bottom: -10vh;
+    left: 0vw;
   }
 }
 
-/* מסכי FHD */
+/* Full-HD Screens */
 @media screen and (min-width: 1367px) and (max-width: 1920px) {
   .hackerPNF {
     width: 60vmax;
     height: 60vmax;
-    bottom: -9vh;
-    left: 40vw;
+    bottom: 0;
+    left: 0vw;
   }
 }
 
-/* מדיה קוורי למסכי 21:9 */
+/* Screen  21/9 adjustments */
 @media screen and (min-aspect-ratio: 21/9) {
   html, body {
     margin: 0;
@@ -394,7 +392,6 @@ body .page-not-found-container{
   }
 }
 
-/* התאמה למצב לאנדסקייפ במובייל */
 @media screen and (max-width: 900px) and (orientation: landscape) {
   .hackerPNF {
     width: 70vmin;
@@ -403,7 +400,6 @@ body .page-not-found-container{
   }
 }
 
-/* התאמה לגובה נמוך */
 @media screen and (max-height: 600px) {
   .text {
     top: 40%;

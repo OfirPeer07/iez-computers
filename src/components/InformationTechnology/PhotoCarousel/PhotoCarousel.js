@@ -1,20 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './PhotoCarousel.css'; // Ensure to create or update this CSS file
+import './PhotoCarousel.css'; 
+import PC1 from './PC1.png';
+import PC2 from './PC2.png';
 
-// Image imports
-import articles from './articles.jpg';
-import guides from './guides.jpg';
-import videos from './videos.jpg';
-
-// Array of images
 const images = [
-    { src: articles, name: 'מאמרים' },
-    { src: guides, name: 'מדריכים' },
-    { src: videos, name: 'סרטונים' }
+    { src: PC1, name: 'AMD מחשב גיימינג' },
+    { src: PC2, name: 'INTEL מחשב גיימינג' },
+  
 ];
 
-const PHOTO_INTERVAL = 5000; // 5 seconds for image transition
-const PROGRESS_UPDATE_INTERVAL = 50; // Update progress every 50ms
+const PHOTO_INTERVAL = 5000; 
+const PROGRESS_UPDATE_INTERVAL = 50; 
 
 const PhotoCarousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,19 +20,15 @@ const PhotoCarousel = () => {
     const intervalRef = useRef(null);
     const progressRef = useRef(null);
 
-    // בדיקה אם המכשיר הוא מובייל
     useEffect(() => {
         const checkMobile = () => {
             setIsMobile(window.innerWidth <= 768);
         };
         
-        // בדיקה ראשונית
         checkMobile();
         
-        // הוספת מאזין לשינוי גודל החלון
         window.addEventListener('resize', checkMobile);
         
-        // ניקוי
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
@@ -53,7 +45,6 @@ const PhotoCarousel = () => {
         setIsPlaying(false);
     };
 
-    // פונקציה לבחירת תמונה ספציפית
     const selectImage = (index) => {
         setCurrentIndex(index);
         setProgress(0);
@@ -61,14 +52,11 @@ const PhotoCarousel = () => {
 
     useEffect(() => {
         if (isPlaying) {
-            // Clear any existing intervals
             clearInterval(intervalRef.current);
             clearInterval(progressRef.current);
 
-            // Set the interval for changing the image
             intervalRef.current = setInterval(nextImage, PHOTO_INTERVAL);
             
-            // Set the interval for updating the progress bar
             progressRef.current = setInterval(() => {
                 setProgress((prev) => {
                     const progressIncrement = (100 / (PHOTO_INTERVAL / PROGRESS_UPDATE_INTERVAL));
@@ -76,12 +64,10 @@ const PhotoCarousel = () => {
                 });
             }, PROGRESS_UPDATE_INTERVAL);
         } else {
-            // Clear intervals when paused
             clearInterval(intervalRef.current);
             clearInterval(progressRef.current);
         }
 
-        // Clean up intervals when the component unmounts or when play/pause changes
         return () => {
             clearInterval(intervalRef.current);
             clearInterval(progressRef.current);
@@ -113,7 +99,7 @@ const PhotoCarousel = () => {
                     <div 
                         key={index} 
                         className={`progress-bar ${index === currentIndex ? 'active' : ''}`}
-                        onClick={() => selectImage(index)} // הוספת אפשרות לחיצה על שורת ההתקדמות
+                        onClick={() => selectImage(index)} 
                     >
                         <div 
                             className="progress-bar-background"

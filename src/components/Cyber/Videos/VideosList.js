@@ -26,7 +26,7 @@ const VideosList = () => {
     fetchPlaylists();
   }, [fetchPlaylists]);
 
-  // בדיקה אם המכשיר הוא מובייל או טאבלט
+/* Mobile adjustments */
   useEffect(() => {
     const checkMobile = () => {
       const mobileRegex = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i;

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './InformationTechnology.css';
 import PhotoCarousel from '../InformationTechnology/PhotoCarousel/PhotoCarousel';
 import IndicatorDots from '../InformationTechnology/IndicatorDots/IndicatorDots';
-import welcomeImage from './Sections/welcome.png';
+import welcomeVideo from './Sections/welcome.mp4';
 import welcome2Image from './Sections/welcome2.png';
 import Introduction from './Sections/Introduction';
 import Services from './Sections/Services';
@@ -18,8 +18,8 @@ const InformationTechnology = () => {
 
   const scrollToSection = (ref, section) => {
     if (ref && ref.current) {
-      setActiveSection(section); // עדכן מיידית את המצב
-      ref.current.scrollIntoView({ behavior: 'smooth' }); // גלול למיקום
+      setActiveSection(section); 
+      ref.current.scrollIntoView({ behavior: 'smooth' }); 
     }
   };
 
@@ -76,7 +76,14 @@ const InformationTechnology = () => {
 
       <div ref={introRef} className="section">
         <div className="text-image-container">
-          <img src={welcomeImage} alt="Welcome" className="intro-image" />
+          <video 
+            src={welcomeVideo} 
+            className="intro-image" 
+            autoPlay 
+            muted 
+            loop
+            playsInline
+          />
           <Introduction />
         </div>
       </div>

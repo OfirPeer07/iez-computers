@@ -1,8 +1,10 @@
-.toggle-nav-btn {
-  position: fixed !important; /* מוסיף !important כדי לוודא שלא יוחלף על ידי CSS אחר */
-  top: clamp(110px, 17vh, 150px) !important; /* Match sidebar height - עם !important להבטחת העדיפות */
-  right: 9px !important; /* עם !important להבטחת העדיפות */
-  z-index: 1010 !important; /* עדיפות גבוהה מאוד */
+/* CyberToggleButton.css */
+
+.cyber-nav-btn {
+  position: relative !important;
+  top: clamp(0, 17vh, 150px) !important;
+  left: clamp(182vh, 17vh, 150px) !important;
+  z-index: 1010 !important;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -11,19 +13,7 @@
   border-radius: 50%;
 }
 
-.toggle-nav-btn:hover {
-  top: calc(clamp(100px, 17vh, 150px) + 0.2px) !important; /* Match sidebar height + hover offset */
-  right: 10px !important;
-  z-index: 1010 !important;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  transition: all 0.3s ease;
-  border-radius: 50%;
-}
-
-.toggle-nav-btn span {
+.cyber-nav-btn span {
   display: block;
   width: 16px;
   height: 3.2px;
@@ -33,24 +23,15 @@
   box-shadow: 0 0 3.5px rgba(23, 202, 7, 0.6);
 }
 
-.toggle-nav-btn:hover span {
-  display: block;
-  width: 17.5px;
-  height: 4px;
-  background-color: var(--primary-color);
-  margin: 7px 5.5px;
-  transition: all 0.6s ease;
-  box-shadow: 0 0 3.5px rgba(23, 202, 7, 0.6);
-}
-
-.toggle-nav-btn.open span:nth-child(1) {
+.cyber-nav-btn.open span:nth-child(1) {
   transform: rotate(45deg) translate(6px, 6px);
 }
 
-.toggle-nav-btn.open span:nth-child(2) {
+.cyber-nav-btn.open span:nth-child(2) {
   opacity: 0;
 }
 
-.toggle-nav-btn.open span:nth-child(3) {
+.cyber-nav-btn.open span:nth-child(3) {
   transform: rotate(-45deg) translate(8px, -8px);
 }
+
