@@ -24,6 +24,7 @@
   position: relative;
   z-index: 1;
   box-sizing: border-box;
+  min-height: 100%; /* Ensures the content area can stretch */
 }
 
 /* Custom scrollbar styling for WebKit browsers */
@@ -67,5 +68,18 @@ h1 {
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* Safari-specific styles for invisible blocks */
+@supports (-webkit-touch-callout: none) {
+  .content {
+    padding-bottom: 60px; /* Add extra space at the bottom */
+  }
+  
+  .invisible-block {
+    display: block;
+    height: 60px; /* Create space for scrolling */
+    visibility: hidden; /* Make it invisible */
   }
 }

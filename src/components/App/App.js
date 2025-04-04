@@ -76,7 +76,9 @@ function App() {
               {/* 404 Not Found */}
               <Route path="*" element={<PageNotFound />} />
             </Routes>
-         </Suspense>
+          </Suspense>
+          {/* Invisible Block for Safari Scrolling Issue */}
+          <div className="invisible-block"></div>         
         </div>
       </div>
     </Router>
