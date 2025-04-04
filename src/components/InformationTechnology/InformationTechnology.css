@@ -13,18 +13,18 @@
 
 .text-image-container {
   display: flex;
-  align-items: flex-start;  
+  align-items: flex-start;  /* שינוי מ-stretch ל-flex-start */
   justify-content: flex-start;
   flex-wrap: nowrap;
   gap: 105px;
-  margin-top: 2rem;  
+  margin-top: 2rem;  /* מרווח עליון */
 }
 
 .text-content, .image-content {
   flex: 1 1 50%;
   display: flex;
   justify-content: center;
-  align-items: flex-start; 
+  align-items: flex-start;  /* שינוי ל-flex-start */
   padding: 2rem;
   box-sizing: border-box;
   min-height: 400px;
@@ -63,14 +63,14 @@
   margin-top: 0;
 }
 
-/* Screens 21/9 adjustments */
+/* התאמה למסך 21:9 */
 @media (min-aspect-ratio: 21/9) {
   .intro-image, .services-image {
     width: 40%;
   }
 }
 
-/* Tablet adjustments */
+/* התאמה לטאבלטים */
 @media screen and (max-width: 1024px) {
   .text-image-container {
     gap: 2rem;
@@ -87,7 +87,7 @@
   }
 }
 
-/* Mobile and Tablet adjustments */
+/* התאמה למובייל - טאבלטים */
 @media screen and (max-width: 768px) {
   .main-page {
     margin-right: 0;
@@ -102,15 +102,15 @@
   
   .text-image-container {
     flex-direction: column;
-    gap: 0rem; 
-    margin-top: 0rem; 
+    gap: 0rem; /* ביטול המרווח בין התמונה לטקסט */
+    margin-top: 0rem; /* ביטול המרווח העליון */
     align-items: center;
   
   }
   
   .text-content, .image-content {
     flex-basis: 100%;
-    padding: 0rem;
+    padding: 0rem; /* ביטול הפדינג */
     min-height: auto;
     
   }
@@ -123,7 +123,7 @@
   }
 }
 
-/* Mobile adjustments */
+/* התאמה למובייל - מסכים קטנים */
 @media screen and (max-width: 480px) {
   .main-page {
     margin-right: 0;
@@ -138,14 +138,14 @@
   
   .text-image-container {
     flex-direction: column;
-    gap: 0rem; 
-    margin-top: 0rem; 
-    padding: 0rem; 
+    gap: 0rem; /* ביטול המרווח בין התמונה לטקסט */
+    margin-top: 0rem; /* ביטול המרווח העליון */
+    padding: 0rem; /* ביטול הפדינג */
     
   }
   
   .text-content, .image-content {
-    padding: 0rem; 
+    padding: 0rem; /* ביטול הפדינג */
     
   }
   
@@ -153,6 +153,6 @@
     width: 100%;
     max-width: 100%;
     border-radius: 8px;
-    margin: 0; 
+    margin: 0; /* ביטול המרווח של התמונה */
   }
 }

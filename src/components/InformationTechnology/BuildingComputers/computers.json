@@ -2,8 +2,8 @@
     "computers": [
       {
         "id": 1,
-        "mainImage": "/images/pc/pc1.jpg",
-        "hoverImage": "/images/pc/pc1-inside.jpg",
+        "mainImage": "/images/pc/PC1.svg",
+        "hoverImage": "/images/pc/PC1-inside.svg",
         "specs": {
           "cpu": "Intel Core i9-14900K",
           "gpu": "NVIDIA RTX 4070",
@@ -15,8 +15,8 @@
       },
       {
         "id": 2,
-        "mainImage": "/images/pc/pc2.jpg",
-        "hoverImage": "/images/pc/pc2-inside.jpg",
+        "mainImage": "/images/pc/PC2.svg",
+        "hoverImage": "/images/pc/PC2-inside.svg",
         "specs": {
           "cpu": "AMD Ryzen 7 9800XD",
           "gpu": "NVIDIA RTX 4080",

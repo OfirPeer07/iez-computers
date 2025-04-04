@@ -148,7 +148,7 @@
   margin-bottom: 1rem;
 }
 
-
+/* סגנונות ספציפיים למובייל */
 .mobile-info-hint {
   position: absolute;
   bottom: 10px;
@@ -173,7 +173,6 @@
   color: white;
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
   .computersGrid {
     grid-template-columns: 1fr;

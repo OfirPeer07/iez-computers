@@ -109,7 +109,7 @@
   text-align: right !important;
 }
 
-/* Adding specific rules to titles */
+/* הוספת חוקים ספציפיים לכותרות */
 .markdown-content h1[lang="en"],
 .markdown-content h2[lang="en"],
 .markdown-content h3[lang="en"] {
@@ -135,7 +135,7 @@
   padding-bottom: 0.3em;
 }
 
-/* Cancel previous settings that could interfere */
+/* ביטול הגדות קודמות שעלולות להפריע */
 .markdown-content h1,
 .markdown-content h2,
 .markdown-content h3 {
@@ -263,14 +263,14 @@
   unicode-bidi: isolate;
 }
 
-/* Hebrew links - right side positioning */
+/* לינקים בעברית - פתרון פשוט */
 .markdown-content a:lang(he),
 .markdown-content a[dir="rtl"] {
   text-align: right !important;
   float: right;
   clear: right;
   margin-left: 8px;
-  color: #0f0 !important; 
+  color: #0f0 !important; /* Green color for Hebrew links */
 }
 
 /* English links - left side positioning */

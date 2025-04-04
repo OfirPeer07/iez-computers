@@ -18,14 +18,17 @@ import {
 } from 'react-icons/fa';
 
 const CyberWorksWith = () => {
+  // State to track which images failed to load
   const [failedImages, setFailedImages] = useState([]);
   
+  // Handle image load error
   const handleImageError = (index) => {
     if (!failedImages.includes(index)) {
       setFailedImages([...failedImages, index]);
     }
   };
 
+  // תחומי התמחות בתשתיות
   const expertiseAreas = [
     {
       icon: <FaNetworkWired />,
@@ -49,6 +52,7 @@ const CyberWorksWith = () => {
     },
   ];
 
+  // תחומי ידע
   const knowledgeAreas = [
     {
       name: 'אבטחת רשתות',
@@ -72,6 +76,7 @@ const CyberWorksWith = () => {
     },
   ];
 
+  // התפתחות מקצועית
   const professionalDevelopment = [
     {
       icon: <FaBookReader />,
@@ -110,6 +115,7 @@ const CyberWorksWith = () => {
     },
   ];
 
+  // הסמכות מקצועיות
   const certifications = [
     {
       icon: <FaCertificate />,
@@ -123,6 +129,7 @@ const CyberWorksWith = () => {
     }
   ];
 
+  // רינדור של כרטיסי ידע
   const renderKnowledgeCards = (knowledgeAreas) => {
     return knowledgeAreas.map((area, index) => (
       <div className="vendor-card" key={index}>
@@ -144,6 +151,7 @@ const CyberWorksWith = () => {
     ));
   };
 
+  // רינדור של כרטיסי שירותים
   const renderServiceCards = (services) => {
     return services.map((service, index) => (
       <div className="benefit-card" key={index}>
@@ -164,6 +172,7 @@ const CyberWorksWith = () => {
         </p>
       </div>
 
+      {/* תחומי התמחות */}
       <div className="services-section">
         <h2 className="section-title">התמחות בתשתיות</h2>
         <div className="benefits-grid">
@@ -171,6 +180,7 @@ const CyberWorksWith = () => {
         </div>
       </div>
 
+      {/* התפתחות מקצועית */}
       <div className="services-section">
         <h2 className="section-title">התפתחות מקצועית</h2>
         <div className="benefits-grid">
@@ -178,6 +188,7 @@ const CyberWorksWith = () => {
         </div>
       </div>
 
+      {/* תחומי ידע */}
       <div className="partners-section">
         <h2 className="section-title">תחומי ידע</h2>
         <div className="vendors-grid">
@@ -185,6 +196,7 @@ const CyberWorksWith = () => {
         </div>
       </div>
 
+      {/* הסמכות */}
       <div className="services-section">
         <h2 className="section-title">הסמכות והשכלה</h2>
         <div className="benefits-grid">

@@ -5,16 +5,19 @@ import './ArticlesList.css';
 const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Mobile detection
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
     
+    // Initial check
     checkMobile();
     
+    // Add listener for window resize
     window.addEventListener('resize', checkMobile);
     
     // Cleanup
@@ -24,12 +27,111 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
   useEffect(() => {
     const loadArticles = async () => {
       try {
+        setLoading(true);
+        
+        // Try to use the PHP API first (works with files added directly to build folder)
+        try {
+          const apiResponse = await fetch(`/md-files.php?folder=${folderName}`);
+          if (apiResponse.ok) {
+            const data = await apiResponse.json();
+            if (data.files && data.files.length > 0) {
+              console.log(`Found ${data.files.length} MD files via PHP API for ${folderName}:`, data.files);
+              await processApiFiles(data.files);
+              return;
+            }
+          }
+        } catch (apiError) {
+          console.log('PHP API not available, trying webpack method:', apiError);
+          loadArticlesFromWebpack();
+          return;
+        }
+        
+        // Fallback to webpack method if API fails
+        loadArticlesFromWebpack();
+        
+      } catch (err) {
+        console.error('Error loading articles:', err);
+        // Fallback to webpack method if all else fails
+        loadArticlesFromWebpack();
+      }
+    };
+    
+    // Process files from API endpoint
+    const processApiFiles = async (files) => {
+      try {
+        const articlePromises = files.map(async (file) => {
+          try {
+            const mdResponse = await fetch(file.path);
+            const content = await mdResponse.text();
+            
+            // Improved metadata extraction
+            let metadata = {};
+            const metadataMatch = content.match(/^---\s*\n([\s\S]*?)\n---/);
+            
+            if (metadataMatch) {
+              const metadataContent = metadataMatch[1];
+              metadata = metadataContent.split('\n').reduce((acc, line) => {
+                const [key, ...values] = line.split(':');
+                if (key && values.length) {
+                  acc[key.trim()] = values.join(':').trim();
+                }
+                return acc;
+              }, {});
+            }
+
+            // Generate a fallback title if none exists in metadata
+            const fallbackTitle = file.name
+              .replace('.md', '')
+              .replace(/-/g, ' ')
+              .replace(/\b\w/g, c => c.toUpperCase());
+
+            return {
+              slug: file.name.replace('.md', ''),
+              title: metadata.title || metadata.כותרת || fallbackTitle,
+              date: metadata.date || metadata.תאריך || new Date().toISOString(),
+              description: metadata.description || metadata.תיאור || '',
+              thumbnail: metadata.thumbnail || metadata.תמונה ? `/${metadata.thumbnail || metadata.תמונה}` : '/images/default-article-thumb.jpg',
+              category: metadata.category || metadata.קטגוריות ? metadata.category || metadata.קטגוריות.split(',')[0].trim() : defaultCategory,
+              author: metadata.author || metadata.מחבר || ''
+            };
+          } catch (err) {
+            console.error(`Error loading ${file.name}:`, err);
+            return null;
+          }
+        });
+
+        const loadedArticles = (await Promise.all(articlePromises)).filter(Boolean);
+        
+        // Sort articles by date (newest first)
+        const sortedArticles = loadedArticles
+          .filter(article => article.title)
+          .sort((a, b) => {
+            // Try to parse dates, fallback to string comparison
+            try {
+              return new Date(b.date) - new Date(a.date);
+            } catch (e) {
+              return b.date.localeCompare(a.date);
+            }
+          });
+        
+        setArticles(sortedArticles);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error processing API files:', err);
+        loadArticlesFromWebpack();
+      }
+    };
+    
+    const loadArticlesFromWebpack = async () => {
+      try {
+        // Fallback to the old webpack require.context method
         const context = require.context('../../../../public/md', true, /\.md$/);
         const fileNames = context.keys()
           .filter(key => key.includes(`/${folderName}/`));
         
         if (!fileNames.length) {
           setError('No articles found');
+          setLoading(false);
           return;
         }
 
@@ -37,6 +139,7 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
           const response = await fetch(`/md/${fileName.slice(2)}`);
           const content = await response.text();
           
+          // Improved metadata extraction
           let metadata = {};
           const metadataMatch = content.match(/^---\s*\n([\s\S]*?)\n---/);
           
@@ -51,6 +154,7 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
             }, {});
           }
 
+          // Generate a fallback title if none exists in metadata
           const fallbackTitle = fileName
             .split('/')
             .pop()
@@ -58,32 +162,35 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
             .replace(/-/g, ' ')
             .replace(/\b\w/g, c => c.toUpperCase());
 
-          console.log("ArticlesList metadata:", fileName, metadata);
-          console.log("ArticlesList image path:", metadata.thumbnail || metadata.תמונה ? 
-            `/${metadata.thumbnail || metadata.תמונה}` : 
-            '/images/default-article-thumb.jpg');
-
           return {
             slug: fileName.split('/').pop().replace('.md', ''),
             title: metadata.title || metadata.כותרת || fallbackTitle,
             date: metadata.date || metadata.תאריך || new Date().toISOString(),
             description: metadata.description || metadata.תיאור || '',
-            thumbnail: metadata.thumbnail || metadata.תמונה ? 
-              `/${metadata.thumbnail || metadata.תמונה}` : 
-              '/images/default-article-thumb.jpg',
-            category: metadata.category || metadata.קטגוריות || defaultCategory
+            thumbnail: metadata.thumbnail || metadata.תמונה ? `/${metadata.thumbnail || metadata.תמונה}` : '/images/default-article-thumb.jpg',
+            category: metadata.category || metadata.קטגוריות ? metadata.category || metadata.קטגוריות.split(',')[0].trim() : defaultCategory,
+            author: metadata.author || metadata.מחבר || ''
           };
         });
 
         const loadedArticles = await Promise.all(articlePromises);
+        
+        // Sort articles by date (newest first)
         const sortedArticles = loadedArticles
           .filter(article => article.title)
-          .sort((a, b) => new Date(b.date) - new Date(a.date));
+          .sort((a, b) => {
+            // Try to parse dates, fallback to string comparison
+            try {
+              return new Date(b.date) - new Date(a.date);
+            } catch (e) {
+              return b.date.localeCompare(a.date);
+            }
+          });
         
         setArticles(sortedArticles);
         
       } catch (err) {
-        console.error('Error loading articles:', err);
+        console.error('Error loading articles from webpack context:', err);
         setError(err.message || 'Failed to load articles');
       } finally {
         setLoading(false);
@@ -93,6 +200,7 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
     loadArticles();
   }, [folderName, basePath, defaultCategory]);
 
+  // Single loading skeleton
   if (loading) {
     return (
       <div className="articles-container">
@@ -108,15 +216,17 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
     );
   }
 
+  // Error state
   if (error) {
     return (
       <div className="error-container">
-        <h3>😕 {error}</h3>
+        <h3>{error}</h3>
         <p>Try refreshing the page or come back later.</p>
       </div>
     );
   }
 
+  // Articles grid
   return (
     <div className={`articles-container ${isMobile ? 'mobile-view' : ''}`}>
       {articles.map((article, index) => (
@@ -125,6 +235,7 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
           key={article.slug || index}
           className="article-link"
           onClick={(e) => {
+            // Add touch feedback for mobile
             if (isMobile) {
               const target = e.currentTarget;
               target.style.transform = 'scale(0.98)';
@@ -144,7 +255,6 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
                 alt={article.title}
                 loading="lazy"
                 onError={(e) => {
-                  console.error("Image failed to load:", article.thumbnail);
                   e.target.src = '/images/default-article-thumb.jpg';
                 }}
               />
@@ -156,7 +266,7 @@ const ArticlesList = ({ folderName, basePath, defaultCategory }) => {
                 </time>
               </div>
               <h2>{article.title}</h2>
-              <p className="article-description">{article.description}</p>
+              {article.description && <p className="article-description">{article.description}</p>}
             </div>
           </article>
         </Link>

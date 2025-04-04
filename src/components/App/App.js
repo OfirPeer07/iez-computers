@@ -26,6 +26,7 @@ import CyberBar from '../Cyber/Sidebars/CyberBar';
 import InfoTechBar from '../InformationTechnology/InfoTechBar/InfoTechBar';
 import ContactUs from '../ContactUs/ContactUs';
 import Thanks from '../Thanks/Thanks';
+import CacheClearOnRouteChange from '../ClearCache/ClearCache';
 
 
 
@@ -34,6 +35,8 @@ function App() {
   const MainPage = lazy(() => import('../MainPage/MainPage'));
   return (
     <Router>
+      {/* ✅ This runs the cache clear logic on every route change */}
+      <CacheClearOnRouteChange />      
       <div className="App">
         {/* Conditionally Render Sidebar */}
         <ConditionalSidebar />

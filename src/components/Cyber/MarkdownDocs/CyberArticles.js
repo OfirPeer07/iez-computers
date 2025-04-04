@@ -5,13 +5,15 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
-
 import CyberNav from '../CyberNav/CyberNav';
 
 // CSS imports order is important!
 import './Markdown-Global.css';    // 1. Base styles
 import './CyberPages.css';        // 2. Cyber specific layout
+import './CyberArticles.css';
 
+// ייבוא של הקומפוננטה החיצונית של ArticlesList
+import ArticlesList from './ArticlesList';
 
 // Import languages for syntax highlighting
 import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
@@ -80,10 +82,12 @@ const detectLanguageDirection = (text) => {
 const splitTextAndWrap = (text, isHeading = false) => {
   if (typeof text !== 'string') return text;
   
+  // אם זו כותרת באנגלית, להחזיר כמו שהיא
   if (isHeading && detectLanguageDirection(text) === 'en') {
     return text;
   }
 
+  // רק לטקסט עברי או מעורב
   const regex = /(\([^)]+\)|[a-zA-Z-]+(?:\s+[a-zA-Z-]+)*)/g;
   let lastIndex = 0;
   const parts = [];
@@ -121,6 +125,7 @@ const splitTextAndWrap = (text, isHeading = false) => {
 const wrapWithLanguage = (children, parentLang, isHeading = false) => {
   if (typeof children !== 'string') return children;
   
+  // טיול מיוחד בכותרות באנגלית
   if (isHeading && parentLang === 'en') {
     return (
       <span style={{ 
@@ -134,6 +139,7 @@ const wrapWithLanguage = (children, parentLang, isHeading = false) => {
     );
   }
 
+  // טיפול בטקסט רגיל
   return (
     <span style={{ 
       display: 'block',
@@ -190,106 +196,6 @@ const ArticleMetadata = ({ metadata }) => {
         )}
       </div>
       <hr className="metadata-divider" />
-    </div>
-  );
-};
-
-const ArticlesList = () => {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadArticles = async () => {
-      try {
-        const context = require.context('../../../../public/md/CyberArticles', true, /\.md$/);
-        const articlePromises = context.keys().map(async (fileName) => {
-          const response = await fetch(`/md/CyberArticles/${fileName.replace('./', '')}`);
-          const content = await response.text();
-          const { metadata, content: articleContent } = extractMetadata(content);
-          
-          // Debug image paths
-          console.log("Article metadata:", fileName, metadata);
-          console.log("Image path:", metadata.תמונה ? `/${metadata.תמונה}` : '/images/default-article-thumb.jpg');
-          
-          return {
-            slug: fileName.replace('./', '').replace('.md', ''),
-            title: metadata.כותרת || fileName.replace('./', '').replace('.md', '').replace(/-/g, ' '),
-            date: metadata.תאריך || null,
-            description: articleContent.split('\n')[0].replace(/[#*`]/g, '').slice(0, 150) + '...',
-            thumbnail: metadata.תמונה ? `/${metadata.תמונה}` : '/images/default-article-thumb.jpg',
-            category: metadata.קטגוריות || 'Cyber Security'
-          };
-        });
-
-        const loadedArticles = await Promise.all(articlePromises);
-        setArticles(loadedArticles.filter(article => article.title));
-        setLoading(false);
-      } catch (error) {
-        console.error('Error loading articles:', error);
-        setLoading(false);
-      }
-    };
-
-    loadArticles();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="articles-container">
-        {[1,2,3,4,5,6].map((i) => (
-          <div key={i} className="article-link">
-            <div className="article-item">
-              <div className="article-thumb article-skeleton"></div>
-              <div className="article-content">
-                <div className="article-meta article-skeleton" style={{width: '100px', height: '20px'}}></div>
-                <p className="article-description article-skeleton" style={{height: '60px'}}></p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  return (
-    <div className="articles-container">
-      {articles.map((article, index) => (
-        <Link 
-          to={`/cyber/hacking/articles/${article.slug}.md`} 
-          key={index}
-          className="article-link"
-        >
-          <article className="article-item">
-            {article.category && (
-              <span className="article-category">{article.category}</span>
-            )}
-            <div className="article-thumb">
-              <img 
-                src={article.thumbnail} 
-                alt="" 
-                loading="lazy" 
-                onError={(e) => {
-                  console.error("Image failed to load:", article.thumbnail);
-                  e.target.src = '/images/default-article-thumb.jpg';
-                }}
-              />
-            </div>
-            <div className="article-content">
-              <div className="article-meta">
-                <time dateTime={article.date}>
-                  {article.date && new Date(article.date).toLocaleDateString('he-IL', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </time>
-              </div>
-              <h2>{article.title}</h2>
-              <p className="article-description">{article.description}</p>
-            </div>
-          </article>
-        </Link>
-      ))}
     </div>
   );
 };
@@ -387,9 +293,9 @@ const CyberArticles = () => {
           </div>
         ) : (
           <ArticlesList 
-          folderName="CyberArticles"
-          basePath="cyber/hacking/articles"
-          defaultCategory="Cyber Articles"
+            folderName="CyberArticles"
+            basePath="cyber/hacking/articles"
+            defaultCategory="Cyber Articles"
           />
         )}
       </div>

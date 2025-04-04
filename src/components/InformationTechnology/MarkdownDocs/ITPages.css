@@ -25,20 +25,27 @@
   filter: brightness(1.2) contrast(0.9);
 }
 
+/* RTL Box - מחוץ לתוכן */
 .it-container .rtl-box {
+  /* מיקום וגודל */
   position: relative;
   width: min(800px, 90%);
   margin-top: calc(clamp(10px, 2vh, 150px) + 1rem);
+  
+  /* עיצוב */
   background: rgba(30, 30, 30, 0.95);
   backdrop-filter: blur(3px);
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   padding: 1.5rem 2rem;
+  
+  /* טקסט */
   direction: rtl;
   text-align: right;
   z-index: 10;
 }
 
+/* RTL Box content */
 .it-container .rtl-box p {
   margin: 0;
   line-height: 1.6;
@@ -46,6 +53,7 @@
   color: #fff;
 }
 
+/* Close button */
 .it-container .close-btn {
   position: absolute;
   top: 10px;
@@ -79,8 +87,8 @@
   .it-container .close-btn {
     top: 8px;
     left: 8px;
-    font-size: 24px; 
-    padding: 8px; 
+    font-size: 24px; /* גדול יותר למסך מגע */
+    padding: 8px; /* אזור מגע גדול יותר */
   }
 }
 
@@ -97,6 +105,7 @@
     font-size: 0.95rem;
   }
   
+  /* כפתור סגירה גדול יותר למסכי מגע קטנים */
   .it-container .close-btn {
     top: 6px;
     left: 6px;
@@ -105,12 +114,14 @@
   }
 }
 
+/* Mobile-view class שיכול להיות מופעל מה-React component */
 .mobile-view .rtl-box {
   width: 94% !important;
   padding: 1rem !important;
   margin: 0.5rem auto !important;
 }
 
+/* Content wrapper - נפרד מההודעה */
 .it-container .content-wrapper {
   width: 100%;
   max-width: 1200px;
@@ -120,6 +131,7 @@
   align-items: center;
 }
 
+/* הוספת sticky elements */
 .it-description-blocks {
   position: sticky;
   top: 2rem;

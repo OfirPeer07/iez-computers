@@ -26,6 +26,7 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+/* אלמנט דקורטיבי - רשת קווים */
 .works-with-container::before {
   content: '';
   position: fixed;
@@ -39,6 +40,7 @@
   z-index: -1;
 }
 
+/* אלמנט דקורטיבי - עיגולים מרחפים */
 .works-with-container::after {
   content: '';
   position: fixed;
@@ -52,6 +54,7 @@
   z-index: -1;
 }
 
+/* כותרת ראשית */
 .works-with-header {
   text-align: right;
   margin-bottom: 5rem;
@@ -91,6 +94,7 @@
   text-align: right;
 }
 
+/* כותרות סקשנים */
 .section-title {
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   color: var(--iez-text);
@@ -115,6 +119,7 @@
   box-shadow: 0 0 12px var(--iez-green);
 }
 
+/* רשתות */
 .vendors-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
@@ -133,6 +138,7 @@
   max-width: 1400px;
 }
 
+/* כרטיסים */
 .vendor-card {
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
@@ -187,6 +193,7 @@
   opacity: 0.2;
 }
 
+/* לוגואים */
 .vendor-logo {
   width: clamp(80px, 12vw, 110px);
   height: clamp(80px, 12vw, 110px);
@@ -244,6 +251,7 @@
   transform: scale(1.1);
 }
 
+/* אייקונים */
 .benefit-icon {
   width: clamp(85px, 14vw, 120px);
   height: clamp(85px, 14vw, 120px);
@@ -277,6 +285,7 @@
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), inset 0 0 25px rgba(0, 255, 76, 0.2);
 }
 
+/* טקסט */
 .vendor-card h3 {
   font-size: clamp(1.3rem, 1.8vw, 1.6rem);
   color: var(--iez-green);
@@ -311,6 +320,7 @@
   text-align: right;
 }
 
+/* אפקט התחלתי בטעינת הדף */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -344,6 +354,7 @@
   animation-delay: 0.3s;
 }
 
+/* מובייל */
 @media (max-width: 768px) {
   .works-with-container {
     padding: 3rem 1rem;
@@ -383,6 +394,7 @@
   }
 }
 
+/* מגע */
 @media (hover: none) {
   .vendor-card:active,
   .benefit-card:active {
@@ -395,6 +407,7 @@
   }
 }
 
+/* הפחתת תנועה */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

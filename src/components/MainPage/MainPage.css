@@ -5,9 +5,9 @@ body {
   padding: 0;
   font-family: 'Arial', sans-serif;
   color: white;
-  background: linear-gradient(135deg, #090909, #020000); 
+  background: linear-gradient(135deg, #090909, #020000); /* Dark background gradient */
   overflow: hidden;
-  font-size: 16px; 
+  font-size: 16px; /* Set base font size for rem units */
 }
 
 .main-page {
@@ -19,15 +19,17 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Cyber-IT Navigation */
 .cyber-it-navigation {
   display: flex;
   justify-content: center;
-  gap: 2rem; 
+  gap: 2rem; /* Reduced gap */
   flex-wrap: wrap;
-  padding: 6rem; 
+  padding: 6rem; /* Slightly reduced padding */
   width: 100%;
 }
 
+/* Image container wrapper */
 .image-container-wrapper-it,
 .image-container-wrapper-cyber {
   position: relative;
@@ -38,12 +40,14 @@ body {
   opacity: 1;
 }
 
+/* Selected image styles */
 .image-container-wrapper-it.selected,
 .image-container-wrapper-cyber.selected {
   opacity: 1;
   z-index: 10;
 }
 
+/* Image container */
 .image-container {
   position: relative;
   width: min(25vw, 50rem);
@@ -73,19 +77,21 @@ body {
   transition: opacity 1s ease;
 }
 
+/* Navigation image styles */
 .navigation-image {
   width: 2%;
   height: 100%;
-  object-fit: contain; 
-  transform: scale(0.8); 
-  transform-origin: center; 
+  object-fit: contain; /* Ensure the full image is visible */
+  transform: scale(0.8); /* Reduce size to 80% */
+  transform-origin: center; /* Scale from the center */
 }
 
+/* Title box styles */
 .title-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1rem; 
+  margin-top: 1rem; /* Reduced margin */
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
@@ -94,6 +100,7 @@ body {
   opacity: 0;
 }
 
+/* Hover effects for title boxes */
 .image-container:hover + .title-box {
   opacity: 1;
   transform: translateY(0);
@@ -140,13 +147,13 @@ body {
   .image-container {
     width: 90vw;
     max-width: 100%;
-    aspect-ratio: 1/1; 
+    aspect-ratio: 1/1; /* יחס תצוגה ריבועי במובייל */
   }
 
   .title-box {
     margin-top: 0.8rem;
     margin-bottom: 1rem;
-    opacity: 1; 
+    opacity: 1; /* תמיד מציג את הכותרת במובייל */
   }
 
   .photo-title {
@@ -180,12 +187,12 @@ body {
   .image-container {
     width: 80vw;
     max-width: 100%;
-    aspect-ratio: 1/1; 
+    aspect-ratio: 1/1; /* יחס תצוגה ריבועי במובייל */
   }
 
   .title-box {
     margin-top: 1rem;
-    opacity: 1; 
+    opacity: 1; /* תמיד מציג את הכותרת במובייל */
   }
 
   .photo-title {
@@ -250,9 +257,45 @@ body {
 /* Fix for mobile devices to ensure video background works properly */
 @media (max-width: 768px) {
   .background-video {
-    height: 100vh;
-    object-position: center; 
+    height: 100vh; /* Use viewport height instead of percentage */
+    object-position: center; /* Center the video */
   }
+}
+
+/* Temporarily disabled CTF Game styles */
+.play-ctf-button,
+.close-ctf-button {
+  display: none;
+}
+
+.ctf-game-container {
+  display: none;
+}
+
+/* Hide other content when the game starts */
+.main-page > main {
+  transition: opacity 0.3s ease;
+}
+
+.main-page > main {
+  opacity: 1;
+}
+
+.main-page > main.hidden {
+  opacity: 0;
+}
+
+/* Hide image sections when game has started */
+.image-container-wrapper-it,
+.image-container-wrapper-cyber,
+.play-ctf-button {
+  display: block;
+}
+
+.main-page .hidden .image-container-wrapper-it,
+.main-page .hidden .image-container-wrapper-cyber,
+.main-page .hidden .play-ctf-button {
+  display: none;
 }
 
 /* Mobile devices in portrait mode */

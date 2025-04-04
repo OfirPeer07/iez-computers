@@ -4,6 +4,7 @@ import cyberImage from "./Cyber.mp4";
 import itImage from "./IT.mp4";
 import backgroundVideo from "./background.mp4";
 import Title from "./Title";
+//import CTFGame from "../CTFGame/CTFGame"; // Import CTFGame
 
 const MainPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -18,6 +19,7 @@ const MainPage = () => {
       const isMobileDevice = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
       const isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent);
       
+      // עדכון הלוגיקה: מכשיר נייד יזוהה רק אם זה באמת מכשיר נייד ולא טאבלט
       setIsMobile(isMobileDevice && !isTablet);
       
       if (isTablet) {

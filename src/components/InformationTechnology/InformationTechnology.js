@@ -18,8 +18,8 @@ const InformationTechnology = () => {
 
   const scrollToSection = (ref, section) => {
     if (ref && ref.current) {
-      setActiveSection(section); 
-      ref.current.scrollIntoView({ behavior: 'smooth' }); 
+      setActiveSection(section); // עדכן מיידית את המצב
+      ref.current.scrollIntoView({ behavior: 'smooth' }); // גלול למיקום
     }
   };
 

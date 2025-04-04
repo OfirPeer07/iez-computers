@@ -2,8 +2,8 @@
 body, html {
     margin: 0;
     padding: 0;
-    overflow: hidden; 
-    height: 100%; 
+    overflow: hidden; /* Disable scrollbars */
+    height: 100%; /* Ensure body and html take full height */
   }
   
   .itdepartment-container {
@@ -21,8 +21,8 @@ body, html {
   }
   
   .itdepartment-rectangle {
-    width: 31.2%; 
-    height: 100%; 
+    width: 31.2%; /* Each rectangle takes approximately one-third of the width */
+    height: 100%; /* Full height of the viewport */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,8 +33,8 @@ body, html {
   }
   
   .itdepartment-rectangle img {
-    width: 99%; 
-    height: 99%; 
+    width: 99%; /* Image takes full width */
+    height: 99%; /* Image takes full height */
     display: block;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.1);
@@ -71,8 +71,8 @@ body, html {
   }
   
   .itdepartment-rectangle img:hover {
-    width: 99%; 
-    height: 99%; 
+    width: 99%; /* Image takes full width */
+    height: 99%; /* Image takes full height */
     display: block;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.1);

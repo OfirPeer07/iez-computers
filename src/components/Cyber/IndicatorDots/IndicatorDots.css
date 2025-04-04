@@ -1,32 +1,33 @@
+/* Wrapper for the indicators */
 .indicator__list-wrap {
   position: fixed;
   top: 50vh;
-  margin-left: calc(100vw - 5rem); 
+  margin-left: calc(100vw - 5rem); /* Moved slightly more to the left */
   margin-right: 10.2rem;
   transform: translateY(-50%);
-  z-index: 1000;
-  padding: 10px 8px; 
-  background: rgba(15, 15, 15, 0.9); 
+  z-index: 1000; /* הגדלת ה-z-index כדי להבטיח שהאינדיקטורים יהיו מעל אלמנטים אחרים */
+  padding: 10px 8px; /* הקטנת הפדינג */
+  background: rgba(15, 15, 15, 0.9); /* Dark cyber background */
   border-radius: 20px;
-  box-shadow: 0 0 25px rgba(0, 255, 0, 0.7);
-  border: 1px solid rgba(0, 255, 0, 0.7); 
+  box-shadow: 0 0 25px rgba(0, 255, 0, 0.7); /* Neon green glow */
+  border: 1px solid rgba(0, 255, 0, 0.7); /* Subtle neon border */
   direction: rtl;
 }
 
-/* Tablet adjustments */
+/* Adjustments for different screen sizes */
 @media screen and (max-width: 1920px) {
   .indicator__list-wrap:not(.mobile-device) {
-    margin-left: calc(100vw - 5rem); 
+    margin-left: calc(100vw - 5rem); /* Moved slightly more to the left for Full HD */
   }
 }
 
-/* Tablet adjustments */
 @media screen and (min-width: 2560px) {
   .indicator__list-wrap:not(.mobile-device) {
-    margin-left: calc(100vw - 5rem); 
+    margin-left: calc(100vw - 5rem); /* Moved slightly more to the left for ultrawide */
   }
 }
 
+/* התאמות למובייל וטאבלטים - סגנונות חדשים */
 .indicator__list-wrap.mobile-device {
   margin-left: 0;
   margin-right: 5px;
@@ -36,7 +37,7 @@
   background: rgba(15, 15, 15, 0.95);
 }
 
-/* Mobile adjustments */
+/* התאמות לטאבלטים */
 @media (min-width: 481px) and (max-width: 1024px) {
   .indicator__list-wrap.mobile-device {
     padding: 10px 8px;
@@ -54,7 +55,7 @@
   }
 }
 
-/* Mobile adjustments */
+/* התאמות למובייל */
 @media (max-width: 480px) {
   .indicator__list-wrap.mobile-device {
     padding: 6px 4px;
@@ -83,7 +84,8 @@
     display: block;
   }
 }
-/* Mobile adjustments */
+
+/* התאמה למצב לרוחב במובייל */
 @media (max-width: 768px) and (orientation: landscape) {
   .indicator__list-wrap.mobile-device {
     padding: 6px 4px;
@@ -106,6 +108,7 @@
   }
 }
 
+/* התאמות למסכי מגע */
 @media (hover: none) and (pointer: coarse) {
   .mobile-device .indicator__item:hover {
     transform: none;
@@ -116,13 +119,15 @@
   }
 }
 
+/* Indicator list */
 .indicator__list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 18px; /* הקטנת המרווח בין האינדיקטורים */
 }
 
+/* Individual indicator item */
 .indicator__item {
   background: none;
   border: none;
@@ -133,74 +138,80 @@
   align-items: center;
   flex-direction: column;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-  opacity: 0.8; 
+  opacity: 0.8; /* Dimmed for inactive state */
 }
 
 .indicator__item:hover {
-  transform: scale(1.2); 
-  opacity: 1; 
+  transform: scale(1.2); /* Bold scaling effect */
+  opacity: 1; /* Full visibility on hover */
 }
 
+/* Dot wrapper */
 .indicator__dot-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Main dot */
 .indicator__dot {
-  width: 12px; 
-  height: 12px; 
-  border: 2px solid rgba(0, 255, 0, 0.7); 
+  width: 12px; /* הקטנת גודל הנקודה */
+  height: 12px; /* הקטנת גודל הנקודה */
+  border: 2px solid rgba(0, 255, 0, 0.7); /* Neon green border for inactive state */
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 8px; 
+  margin-bottom: 8px; /* הקטנת המרווח */
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Neon glow */
 }
 
+/* Inner dot */
 .indicator__dot-inner {
-  width: 12px; 
-  height: 12px; 
+  width: 12px; /* הקטנת גודל הנקודה הפנימית */
+  height: 12px; /* הקטנת גודל הנקודה הפנימית */
   background-color: transparent;
   border-radius: 50%;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+/* Active dot styling */
 .indicator__item--active .indicator__dot {
-  border-color: rgba(0, 255, 0, 0.7); 
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.7), 0 0 30px rgba(0, 255, 0, 0.7);
+  border-color: rgba(0, 255, 0, 0.7); /* Bright neon green */
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.7), 0 0 30px rgba(0, 255, 0, 0.7); /* Intense glow for active state */
 }
 
 .indicator__item--active .indicator__dot-inner {
-  background-color: rgba(0, 255, 0, 0.7); 
-  transform: scale(1.3); 
+  background-color: rgba(0, 255, 0, 0.7); /* Neon-filled dot for active state */
+  transform: scale(1.3); /* Enlarged inner dot */
 }
 
+/* Label styling */
 .indicator__label {
-  font-size: 11px; 
-  color: rgba(0, 255, 0, 0.7); 
-  font-family: 'Orbitron', sans-serif; 
-  text-transform: uppercase; 
-  letter-spacing: 1px; 
+  font-size: 11px; /* הקטנת גודל הטקסט */
+  color: rgba(0, 255, 0, 0.7); /* Soft cyan for text */
+  font-family: 'Orbitron', sans-serif; /* Tech-inspired font */
+  text-transform: uppercase; /* Cyber aesthetic with all caps */
+  letter-spacing: 1px; /* Spaced-out text for futuristic style */
   transition: color 0.3s ease, transform 0.3s ease;
-  max-width: 70px; 
-  text-align: center; 
-  word-wrap: break-word; 
-  overflow-wrap: break-word;
+  max-width: 70px; /* הגבלת רוחב הטקסט */
+  text-align: center; /* מרכוז הטקסט */
+  word-wrap: break-word; /* מאפשר שבירת מילים ארוכות */
+  overflow-wrap: break-word; /* תמיכה בדפדפנים מודרניים */
 }
 
 .indicator__item:hover .indicator__label {
-  transform: translateY(-3px);
-  color: rgba(0, 255, 0, 0.7);
+  transform: translateY(-3px); /* Lift effect on hover */
+  color: rgba(0, 255, 0, 0.7); /* Neon green hover effect */
 }
 
 .indicator__item--active .indicator__label {
-  color: rgba(0, 255, 0, 0.7);
+  color: rgba(0, 255, 0, 0.7); /* Matches active dot color */
   font-weight: bold;
 }
 
+/* Neon pulse animation for active items */
 @keyframes neonPulse {
   0%, 100% {
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.7), 0 0 20px rgba(0, 255, 0, 0.7);
@@ -211,5 +222,5 @@
 }
 
 .indicator__item--active .indicator__dot {
-  animation: neonPulse 1.5s infinite; 
+  animation: neonPulse 1.5s infinite; /* Pulsing glow effect for active dots */
 }

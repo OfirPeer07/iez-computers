@@ -5,8 +5,8 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background-color: #000; 
-  color: #00ff00;
+  background-color: #000; /* Dark theme background */
+  color: #00ff00; /* Neon green text */
 }
 
 /* ResilienceTester section */
@@ -17,8 +17,8 @@
   justify-content: center;
   padding: 2rem;
   margin-bottom: 2.5rem;
-  background-color: #000; 
-  color: #00ff00;
+  background-color: #000; /* Same dark theme as others */
+  color: #00ff00; /* Neon green text */
 }
 
 /* TheGreenHood section */
@@ -29,10 +29,11 @@
   justify-content: center;
   padding: 2rem;
   margin-bottom: 2.5rem;
-  background-color: #000; 
-  color: #00ff00;
+  background-color: #000; /* Same dark theme as others */
+  color: #00ff00; /* Neon green text */
 }
 
+/* Outer box - Text box styling */
 .text-box {
   flex: 1;
   max-width: 250%;
@@ -44,8 +45,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative; 
-  overflow: hidden; 
+  position: relative; /* Needed for positioning the LED effect */
+  overflow: hidden; /* Ensures the animation stays inside the box */
 }
 
 .rsiliencetester-container:hover .text-box,
@@ -57,14 +58,16 @@
 }
 
 
+/* Updated glowing circular animation effect */
 .text-box::before {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  --wave-scale: 1.31; 
-  width: min(250%, calc(115vw / var(--wave-scale)));
-  height: min(250%, calc(115vh / var(--wave-scale)));
+  /* ערכי ברירת מחדל ל-16:9 */
+  --wave-scale: 1.31; /* יחס ההמרה בין 21:9 ל-16:9 */
+  width: min(250%, calc(115vw / var(--wave-scale))); /* ברירת מחדל - התאמה ל-16:9 */
+  height: min(250%, calc(115vh / var(--wave-scale))); /* ברירת מחדל - התאמה ל-16:9 */
   border-radius: 50%;
   background: radial-gradient(circle, 
     rgba(0, 255, 0, 0.5) 0%,
@@ -74,25 +77,26 @@
   transform: translate(-50%, -50%);
   opacity: 0;
   z-index: 0;
-  transition: opacity 0.3s ease-in-out; 
+  transition: opacity 0.3s ease-in-out; /* Smoother transition */
 }
 
-/* Screens 21/9 adjustments */
+/* התאמה למסכי 21:9 */
 @media (min-aspect-ratio: 21/9) {
   .text-box::before {
-    width: min(250%, 115vw);  
+    width: min(250%, 115vw);  /* ערכים מותאמים ל-21:9 */
     height: min(250%, 115vh);
   }
 }
 
-/* Screens 16/9 adjustments */
+/* התאמה למסכי 16:9 */
 @media (aspect-ratio: 16/9) {
   .text-box::before {
-    width: min(250%, 115vw); 
+    width: min(250%, 115vw);  /* ערכים מותאמים ל-16:9 */
     height: min(250%, 115vh);
   }
 }
 
+/* Updated circular loading animation */
 @keyframes circularGlow {
   0% {
     transform: translate(-50%, -50%) rotate(0deg) scale(var(--scale, 1.2));
@@ -119,13 +123,15 @@
   }
 }
 
+/* Hover effect for the text-box */
 .text-box:hover::before {
   opacity: 1;
-  animation: circularGlow 15s infinite linear; 
+  animation: circularGlow 15s infinite linear; /* האטת האנימציה ל-15 שניות */
 }
 
+/* Inner box styling */
 .inner-box {
-  background-color: rgb(0, 0, 0); 
+  background-color: rgb(0, 0, 0); /* שינוי לשחור מלא במקום rgba */
   border-radius: 15px;
   padding: 30px;
   border: 2px solid rgba(0, 255, 0, 0.5);
@@ -134,31 +140,31 @@
   max-width: 800vw;
   text-align: right;
   direction: rtl;
-  position: relative; 
-  z-index: 2; 
+  position: relative; /* Needed for positioning the LED effect */
+  z-index: 2; /* הגדלת ה-z-index כדי שיהיה מעל האנימציה */
 }
 
 .inner-box h2 {
   color: #00ff00;
-  font-size: 2.5vw; 
+  font-size: 2.5vw; /* Scales with viewport */
   margin-bottom: 15px;
   text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
   font-family: 'Courier New', monospace;
-  position: relative; 
-  z-index: 2; 
-  background-color: rgb(0, 0, 0); 
-  padding: 55px; 
+  position: relative; /* Ensure text is above the LED effect */
+  z-index: 2; /* Ensures text is above the LED effect */
+  background-color: rgb(0, 0, 0); /* הוספת רקע שחור גם לטקסט */
+  padding: 55px; /* מרווח קטן סביב הטקסט */
 }
 
 .inner-box p {
-  font-size: 1.5vw; 
+  font-size: 1.5vw; /* Responsive size */
   line-height: 1.6;
   color: #ffffff;
   font-family: 'Courier New', monospace;
-  position: relative; 
-  z-index: 2; 
-  background-color: rgb(0, 0, 0); 
-  padding: 5px; 
+  position: relative; /* Ensure text is above the LED effect */
+  z-index: 2; /* Ensures text is above the LED effect */
+  background-color: rgb(0, 0, 0); /* הוספת רקע שחור גם לטקסט */
+  padding: 5px; /* מרווח קטן סביב הטקסט */
 }
 
 /* Animation for fade-in effect */
@@ -190,7 +196,7 @@
     margin-left: 0;
     padding: 0;
     gap: 0;
-    background-color: #000;
+    background-color: #000; /* הוספת רקע שחור */
   }
   
   .text-box {
@@ -198,7 +204,7 @@
     padding: 10px;
     --scale: 1;
     margin-top: 0;
-    background-color: #000;
+    background-color: #000; /* הוספת רקע שחור */
   }
   
   .text-box::before {
@@ -208,7 +214,7 @@
   
   .inner-box {
     padding: 10px;
-    background-color: #000;
+    background-color: #000; /* הוספת רקע שחור */
   }
   
   .inner-box h2 {
@@ -229,18 +235,18 @@
   }
 }
 
-/* Mobile adjustments */
+/* התאמה למובייל - מסכים קטנים */
 @media screen and (max-width: 480px) {
   .introduction-container, .services-container {
     padding: 0;
     gap: 0;
-    background-color: #000; 
+    background-color: #000; /* הוספת רקע שחור */
   }
   
   .text-box {
     padding: 5px;
     --scale: 0.8;
-    background-color: #000; 
+    background-color: #000; /* הוספת רקע שחור */
   }
   
   .text-box::before {
@@ -250,7 +256,7 @@
   
   .inner-box {
     padding: 5px;
-    background-color: #000; 
+    background-color: #000; /* הוספת רקע שחור */
   }
   
   .inner-box h2 {

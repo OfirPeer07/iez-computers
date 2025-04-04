@@ -108,7 +108,7 @@ const TechnologyNews = () => {
     const [content, setContent] = useState('');
     const [metadata, setMetadata] = useState({});
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);  // Changed to false by default
     const [showBox, setShowBox] = useState(true);
 
     useEffect(() => {

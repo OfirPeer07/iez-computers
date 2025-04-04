@@ -1,10 +1,12 @@
 /* VideosList.css */
+
+/* General Color Variables */
 :root {
-  --main-color: #0f0;
-  --background-color: #1e1e1e; 
-  --text-color: #e0e0e0;
-  --error-color: #ff3333; 
-  --hover-color: #00ff00;
+  --main-color: #0f0; /* Main color */
+  --background-color: #1e1e1e; /* Background color */
+  --text-color: #e0e0e0; /* Text color */
+  --error-color: #ff3333; /* Error color */
+  --hover-color: #00ff00; /* Hover color */
 }
 
 /* Video Page Layout */
@@ -20,7 +22,7 @@
   padding: 0;
   margin: 0;
   overflow-x: hidden;
-  direction: rtl; 
+  direction: rtl; /* Right to left */
 }
 
 /* Container for Video List */
@@ -30,7 +32,7 @@
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center; 
+  justify-content: center; /* Centering horizontally */
 }
 
 /* Video Container */
@@ -56,7 +58,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   width: 100%;
-  max-width: 1800px; 
+  max-width: 1800px; /* Matches container width */
   margin: 0 auto 2rem auto;
 }
 
@@ -347,7 +349,7 @@
   }
 
   .videos-list-page .video-scroll-wrapper .scroll-arrow {
-    display: none !important; 
+    display: none !important; /* הסתרת החיצים לחלוטין במובייל */
   }
 
   .videos-list-page .category-title {
@@ -406,11 +408,11 @@
 @media (max-width: 1920px) {
   .videos-list-page .videos-container,
   .videos-list-page .video-category {
-    max-width: 95%; 
+    max-width: 95%; /* Set max-width to 95% for smaller screens */
   }
 }
 
-/* Mobile adjustments */
+/* התאמות למובייל וטאבלטים */
 .videos-list.mobile-device {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -446,7 +448,7 @@
   overflow: hidden;
 }
 
-/* Tablets adjustments */
+/* התאמות לטאבלטים */
 @media (min-width: 481px) and (max-width: 1024px) {
   .videos-list.mobile-device {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -472,7 +474,7 @@
   }
 }
 
-/* Mobile adjustments */
+/* התאמות למובייל */
 @media (max-width: 480px) {
   .videos-list.mobile-device {
     grid-template-columns: 1fr;
@@ -503,7 +505,7 @@
   }
 }
 
-
+/* התאמות למצב לרוחב במובייל */
 @media (max-width: 768px) and (orientation: landscape) {
   .videos-list.mobile-device {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -511,6 +513,7 @@
   }
 }
 
+/* התאמות למסכי מגע */
 @media (hover: none) and (pointer: coarse) {
   .video-item.mobile-device:hover {
     transform: none;
@@ -529,6 +532,7 @@
   }
 }
 
+/* עיצוב לטקסט הטעינה */
 .loading-text {
   display: flex;
   justify-content: center;
@@ -536,7 +540,7 @@
   text-align: center;
   font-size: 1.1rem;
   font-weight: bold;
-  color: #00ff00; 
+  color: #00ff00; /* צבע ירוק זוהר תואם לעיצוב האתר */
   text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
   height: 100%;
   width: 100%;
@@ -548,10 +552,12 @@
   z-index: 2;
 }
 
+/* התאמה למובייל */
 .loading-text.mobile-device {
   font-size: 0.9rem;
 }
 
+/* אנימציית פולסים לטקסט */
 @keyframes pulse {
   0% {
     opacity: 0.6;
@@ -564,11 +570,13 @@
   }
 }
 
+/* סלקטור עבור הטקסט המהבהב */
 .loading-text-content {
   display: inline-block;
   animation: pulse 1.5s infinite;
 }
 
+/* וידוא שמיכל התמונה יש לו position relative */
 .video-thumbnail {
   position: relative;
   overflow: hidden;

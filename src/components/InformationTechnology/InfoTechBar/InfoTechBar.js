@@ -10,17 +10,24 @@ function InfoTechBar() {
   const menuRef = useRef(null);
   const dropdownRef = useRef(null);
   const timersRef = useRef({ hoverLogo: null, hoverComputer: null, closeMenu: null });
+  
+  // מצב התחלתי של מגע
   const touchStartRef = useRef({ y: 0 });
 
+  // בדיקה אם המכשיר הוא נייד באמצעות User Agent
   useEffect(() => {
     const checkMobile = () => {
+      // בדיקת User Agent כדי לזהות מכשירים ניידים
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
       
+      // רגקס לזיהוי מכשירים ניידים (טלפונים וטאבלטים)
       const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
       
+      // קביעת המצב לפי בדיקת הרגקס
       const isMobileDevice = mobileRegex.test(userAgent);
       setIsMobile(isMobileDevice);
       
+      // הוספה או הסרה של קלאס 'mobile-device' מאלמנט ה-body
       if (isMobileDevice) {
         document.body.classList.add('mobile-device');
       } else {
@@ -28,11 +35,14 @@ function InfoTechBar() {
       }
     };
     
+    // בדיקה ראשונית
     checkMobile();
     
+    // לא מוסיפים מאזין לשינוי גודל החלון כי אנחנו רוצים רק לבדוק את סוג המכשיר
   }, []);
 
   const handleMouseEnterLogo = () => {
+    // במובייל אין צורך בטיפול באירועי מעבר עכבר
     if (isMobile) return;
     
     clearTimeout(timersRef.current.closeMenu);
@@ -47,9 +57,10 @@ function InfoTechBar() {
   };
 
   const handleMouseEnterComputer = () => {
+    // במובייל אין צורך בטיפול באירועי מעבר עכבר
     if (isMobile) return;
     
-    if (activeMenu === 'logo') return; 
+    if (activeMenu === 'logo') return; // Prevent opening if the user is moving from logo menu
     clearTimeout(timersRef.current.closeMenu);
     
     timersRef.current.hoverComputer = setTimeout(() => {
@@ -58,6 +69,7 @@ function InfoTechBar() {
   };
 
   const handleMouseLeave = () => {
+    // במובייל אין צורך בטיפול באירועי מעבר עכבר
     if (isMobile) return;
     
     clearTimeout(timersRef.current.hoverLogo);
@@ -70,6 +82,7 @@ function InfoTechBar() {
   };
 
   const handleClickOutside = (event) => {
+    // אם לחצו על הרקע הכהה (overlay) או מחוץ לתפריט במובייל
     if (isMobile && 
         activeMenu && 
         menuRef.current && 
@@ -79,34 +92,43 @@ function InfoTechBar() {
       return;
     }
     
+    // טיפול רגיל בלחיצה מחוץ לתפריט במחשב
     if (!isMobile && menuRef.current && !menuRef.current.contains(event.target)) {
       setActiveMenu(null);
       setShiftComputer(false);
     }
   };
 
+  // טיפול בלחיצה על אייקון במובייל
   const handleMobileIconClick = (menuType) => {
-    if (!isMobile) return; 
+    if (!isMobile) return; // רק במובייל
     
     if (activeMenu === menuType) {
+      // סגור את התפריט אם הוא כבר פתוח
       closeMenuWithAnimation();
     } else {
+      // סגור תפריט קודם אם פתוח
       if (activeMenu) {
         closeMenuWithAnimation();
+        // פתח את התפריט החדש אחרי שהתפריט הקודם נסגר
         setTimeout(() => {
           setActiveMenu(menuType);
           setIsClosing(false);
         }, 350);
       } else {
+        // פתח את התפריט הנבחר
         setActiveMenu(menuType);
       }
       
+      // וודא שהתפריט יוצג כראוי
       if (menuType === 'logo') {
+        // אם פותחים את תפריט הלוגו, וודא שהמחשב לא מוזז
         setShiftComputer(false);
       }
     }
   };
 
+  // סגירת התפריט עם אנימציה
   const closeMenuWithAnimation = () => {
     if (!activeMenu) return;
     
@@ -114,9 +136,10 @@ function InfoTechBar() {
     setTimeout(() => {
       setActiveMenu(null);
       setIsClosing(false);
-    }, 300); 
+    }, 300); // זמן האנימציה
   };
 
+  // טיפול בהחלקה למטה לסגירת התפריט
   const handleTouchStart = (e) => {
     touchStartRef.current.y = e.touches[0].clientY;
   };
@@ -128,6 +151,7 @@ function InfoTechBar() {
     const startY = touchStartRef.current.y;
     const deltaY = touchY - startY;
     
+    // אם המשתמש החליק למטה מספיק, סגור את התפריט
     if (deltaY > 70) {
       closeMenuWithAnimation();
     }
@@ -136,6 +160,7 @@ function InfoTechBar() {
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     
+    // הוסף מאזינים לאירועי מגע במובייל
     if (isMobile) {
       document.addEventListener('touchstart', handleTouchStart);
       document.addEventListener('touchmove', handleTouchMove);
@@ -144,6 +169,7 @@ function InfoTechBar() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       
+      // הסר מאזינים לאירועי מגע
       if (isMobile) {
         document.removeEventListener('touchstart', handleTouchStart);
         document.removeEventListener('touchmove', handleTouchMove);
@@ -155,11 +181,13 @@ function InfoTechBar() {
     };
   }, [isMobile]);
 
+  // רנדור התפריט הנפתח במובייל
   const renderMobileMenu = () => {
     if (!isMobile || !activeMenu) return null;
     
     const isComputerMenu = activeMenu === 'computer';
     
+    // פונקציה לטיפול בלחיצה על קישור בתפריט
     const handleMenuLinkClick = () => {
       closeMenuWithAnimation();
     };
@@ -180,12 +208,14 @@ function InfoTechBar() {
         </button>
         
         {isComputerMenu ? (
+          // תוכן תפריט המחשב
           <>
             <Link to="/information-technology/troubleshooting-guides" onClick={handleMenuLinkClick}>מדריכי פתרון תקלות</Link>
             <Link to="/information-technology/technology-news" onClick={handleMenuLinkClick}>חדשות טכנולוגיה</Link>
             <Link to="/information-technology/building-computers" onClick={handleMenuLinkClick}>הרכבות מחשבים</Link>
           </>
         ) : (
+          // תוכן תפריט הלוגו
           <>
             <Link to="/" onClick={handleMenuLinkClick}>דף ראשי</Link>
             <Link to="/information-technology/works-with" onClick={handleMenuLinkClick}>ספקים וחברות</Link>
@@ -203,6 +233,7 @@ function InfoTechBar() {
         <div className="mobile-overlay" onClick={() => closeMenuWithAnimation()}></div>
       )}
       
+      {/* תפריט מובייל משותף */}
       {renderMobileMenu()}
       
       <ul>
@@ -226,6 +257,7 @@ function InfoTechBar() {
             <img src="/images/computer.png" alt="computer-section" />
           </Link>
           
+          {/* תפריט המחשב במחשב (לא במובייל) */}
           {activeMenu === 'computer' && !isMobile && (
             <div className="dropdown-menu">
               <Link to="/information-technology/troubleshooting-guides" onClick={() => setActiveMenu(null)}>מדריכי פתרון תקלות</Link>
@@ -254,6 +286,7 @@ function InfoTechBar() {
             <img src="/images/logo.png" alt="logo-section" />
           </Link>
           
+          {/* תפריט הלוגו במחשב (לא במובייל) */}
           {activeMenu === 'logo' && !isMobile && (
             <div className="dropdown-menu logo-menu">
               <Link to="/information-technology/works-with" onClick={(e) => e.stopPropagation()}>ספקים וחברות</Link>

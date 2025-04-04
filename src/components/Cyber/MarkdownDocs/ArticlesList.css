@@ -32,7 +32,7 @@
 .article-thumb {
   position: relative;
   width: 100%;
-  padding-top: 56.25%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
   overflow: hidden;
   background: #1a1a1a;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -70,7 +70,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0; 
+  font-size: 0;  /* מסתיר את הטקסט המקורי (Invalid Date) */
 }
 
 .article-meta time::before {
@@ -78,10 +78,10 @@
   font-size: 1rem;
 }
 
-
+/* מציג את התאריך שבתכונת datetime במקום הטקסט המקורי */
 .article-meta time::after {
   content: attr(datetime);
-  font-size: 0.875rem; 
+  font-size: 0.875rem;  /* החזרת גודל הפונט לנורמלי */
   color: #888;
   font-style: italic;
 }
@@ -120,7 +120,7 @@
   color: #007bff;
 }
 
-/* Mobile adjustments */
+/* Mobile Optimizations for React */
 @media (max-width: 768px) {
   .articles-container {
     grid-template-columns: 1fr;
@@ -138,22 +138,25 @@
     font-size: 1.25rem;
   }
   
+  /* Improved touch targets for mobile */
   .article-link, 
   .article-category {
     cursor: pointer;
   }
   
+  /* Mobile adaptations for meta info */
   .article-meta {
     flex-wrap: wrap;
     gap: 0.75rem;
   }
   
+  /* Increase image size */
   .article-thumb {
-    padding-top: 70%; 
+    padding-top: 70%; /* Increased height for better visibility on mobile */
   }
 }
 
-/* Mobile adjustments */
+/* Smaller screens (mobile phones) */
 @media (max-width: 480px) {
   .articles-container {
     margin: 0.7rem auto;
@@ -162,10 +165,12 @@
     width: 95%;
   }
   
+  /* Much larger images on mobile */
   .article-thumb {
-    padding-top: 75%; 
+    padding-top: 75%; /* Significantly increased for mobile visibility */
   }
   
+  /* Full width cards on mobile */
   .article-link {
     width: 100%;
     margin: 0 auto;
@@ -178,7 +183,7 @@
   }
   
   .article-item h2 {
-    font-size: 1.3rem; 
+    font-size: 1.3rem; /* Larger titles on mobile */
   }
   
   .article-description {
@@ -195,20 +200,24 @@
   }
 }
 
+/* Mobile-view class that can be toggled with React state */
 .mobile-view .articles-container {
   -webkit-overflow-scrolling: touch;
-  width: 98%; 
+  width: 98%; /* Nearly full width on mobile */
   max-width: 100%;
   padding: 0.4rem;
 }
 
 .mobile-view .article-link {
+  /* More compact cards on mobile */
   transform: none !important;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   width: 100%;
 }
 
+/* Touch device optimizations */
 @media (pointer: coarse) {
+  /* Better touch feedback */
   .article-link:active {
     background: rgba(50, 50, 50, 0.95);
     transform: scale(0.98);
@@ -231,6 +240,7 @@
   animation: loading 1.5s infinite;
 }
 
+/* Category tag styles */
 .article-category {
   position: absolute;
   top: 1rem;

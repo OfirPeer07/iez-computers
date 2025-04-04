@@ -1,17 +1,17 @@
 .page-layout {
   display: grid;
   width: 80%;
-  grid-template-columns: 1fr 2fr; 
+  grid-template-columns: 1fr 2fr; /* Left side (1fr) for blocks, right side (2fr) for content */
   gap: 5px;
   padding: 20px;
-  direction: inherit; 
+  direction: inherit; /* Ensure it inherits from parent */
 }
 
 .description-blocks {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  direction: inherit; 
+  direction: inherit; /* Ensure it inherits from parent */
 }
 
 .description-box {
@@ -30,15 +30,16 @@
   margin: 0;
   font-size: 18px;
   color: #333;
-  text-align: inherit;
+  text-align: inherit; /* Ensure it inherits alignment */
 }
 
 .description-box p {
   font-size: 14px;
   color: #666;
-  text-align: inherit;
+  text-align: inherit; /* Ensure it inherits alignment */
 }
 
+/* Ensure description boxes respect the lang attribute */
 .page-layout [lang="en"] .description-box h3,
 .page-layout [lang="en"] .description-box p {
   text-align: left !important;
@@ -83,7 +84,7 @@
 .article-thumb {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; 
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
   overflow: hidden;
   background: #1a1a1a;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -161,6 +162,7 @@
   color: #007bff;
 }
 
+/* Category tag styles */
 .article-category {
   position: absolute;
   top: 1rem;
@@ -176,7 +178,6 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
   .articles-container {
     grid-template-columns: 1fr;
@@ -193,6 +194,7 @@
     font-size: 1.25rem;
   }
   
+  /* התאמת מבנה הדף למובייל */
   .page-layout {
     display: flex;
     flex-direction: column;
@@ -201,9 +203,10 @@
     gap: 15px;
   }
   
+  /* התאמת תיבות התיאור למובייל */
   .description-blocks {
     width: 100%;
-    order: 2; 
+    order: 2; /* הזזת הבלוקים לאחר התוכן במובייל */
   }
   
   .description-box {
@@ -218,12 +221,13 @@
     font-size: 0.9rem;
   }
   
+  /* שיפור מראה כרטיסי המאמרים במובייל */
   .article-link {
     margin-bottom: 10px;
   }
   
   .article-thumb {
-    padding-top: 50%; 
+    padding-top: 50%; /* יחס רוחב-גובה קטן יותר במובייל */
   }
   
   .article-meta {
@@ -231,7 +235,7 @@
   }
   
   .article-description {
-    -webkit-line-clamp: 2; 
+    -webkit-line-clamp: 2; /* פחות שורות תיאור במובייל */
     font-size: 0.9rem;
   }
   
@@ -243,7 +247,6 @@
   }
 }
 
-/* Mobile adjustments */
 @media (max-width: 480px) {
   .page-layout {
     padding: 5px;
@@ -279,6 +282,7 @@
     font-size: 0.85rem;
   }
   
+  /* שיפור ביצועים במובייל */
   .article-link {
     transition: transform 0.2s ease;
   }

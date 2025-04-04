@@ -13,18 +13,18 @@
 
 .text-image-container {
   display: flex;
-  align-items: flex-start; 
+  align-items: flex-start;  /* שינוי מ-stretch ל-flex-start */
   justify-content: flex-start;
   flex-wrap: nowrap;
   gap: 105px;
-  margin-top: 2rem; 
+  margin-top: 2rem;  /* מרווח עליון */
 }
 
 .text-content, .image-content {
   flex: 1 1 50%;
   display: flex;
   justify-content: center;
-  align-items: flex-start; 
+  align-items: flex-start;  /* שינוי ל-flex-start */
   padding: 2rem;
   box-sizing: border-box;
   min-height: 400px;
@@ -60,13 +60,13 @@
 .intro-image, .services-image {
   width: 100%;
   object-fit: cover;
-  margin-top: 0; 
+  margin-top: 0;  /* הסרת מרווח עליון מהתמונה */
 }
 
-/* Screens 21/9 adjustments */
+/* התאמה ספציפית למסך 21:9 עבור התמונה העליונה */
 @media screen and (min-aspect-ratio: 21/9) {
   .intro-image {
-    width: 95%; 
+    width: 95%;  /* קצת יותר קטן מהתמונה השנייה */
     height: auto;
   }
 }

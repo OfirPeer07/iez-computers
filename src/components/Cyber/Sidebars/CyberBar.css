@@ -16,6 +16,11 @@ html, body {
   flex-direction: column;
 }
 
+/* נוסיף קלאס ייעודי למכשירים ניידים */
+.mobile-device .sidebar {
+  /* סגנונות ספציפיים למובייל */
+}
+
 .sidebar {
   position: relative;
   background: linear-gradient(135deg, #000000, #1b1b1b);
@@ -87,22 +92,23 @@ html, body {
 }
 
 .sidebar ul li.hacking .dropdown-menu {
-  left: -25.5rem;
+  left: -25.5rem; /* Shift further to the left */
   transform: translateY(-50%);
 }
 
 /* Shift animation when hovering over the "logo" */
 .sidebar ul li.hacking.shift {
-  transform: translateX(-320px); 
+  transform: translateX(-320px); /* Shift to the left */
+  /*animation: shiftLeft 0.6s ease forwards*/;
 }
 
 /* Return animation when the mouse leaves the "logo" */
 .sidebar ul li.hacking.return {
-  animation: returnToPlace 0.6s ease forwards; 
+  animation: returnToPlace 0.6s ease forwards; /* Smooth return animation */
 }
 
 .sidebar ul li.hacking {
-  transform: translateX(0); 
+  transform: translateX(0); /* Ensure the hacking icon starts in its default position */
   transition: transform 0.6s ease;
 }
 
@@ -129,17 +135,17 @@ html, body {
   visibility: visible;
   transform: translateY(-50%);
   transition: all 0.3s ease;
-  transition-delay: 0.4s; 
+  transition-delay: 0.4s; /* Delay before showing */
 }
 
 .sidebar ul li .dropdown-menu {
-  transition-delay: 0.5s; 
+  transition-delay: 0.5s; /* Delay when hiding */
 }
 
 .dropdown-menu {
   position: absolute;
   top: 3.7rem;
-  left: calc(7.7rem + -29.2rem);
+  left: calc(7.7rem + -29.2rem); /* Dropdown starts right of the icon */
   transform: translateY(-50%);
   background-color: rgba(27, 27, 27, 0.95);
   padding: 15px;
@@ -170,7 +176,7 @@ html, body {
   color: #ffffff;
 }
 
-/* Mobile and Tablet adjustments */
+/* התאמה למובייל - טאבלטים */
 .mobile-device .sidebar {
   height: clamp(100px, 18vh, 140px);
 }
@@ -188,27 +194,30 @@ html, body {
 
 .mobile-device .sidebar ul li a.menu-icon img {
   width: clamp(140%, 13vw, 200px);
-  filter: none; 
-  transform: scale(1.2); 
+  filter: none; /* ללא אפור במובייל */
+  transform: scale(1.2); /* תמיד גדול יותר */
 }
 
+/* סגנון חדש לאייקון פעיל במובייל */
 .mobile-device .sidebar ul li.active-mobile a.menu-icon {
   background-color: rgba(23, 202, 7, 0.5);
   box-shadow: 0 0 35px #17ca07, 0 0 45px #17ca07;
 }
 
 .mobile-device .sidebar ul li.active-mobile a.menu-icon img {
-  transform: scale(1.2); 
+  transform: scale(1.2); /* אותו גודל כמו במצב רגיל */
 }
 
 .mobile-device .sidebar ul li:hover .dropdown-menu {
   transform: translateY(0);
 }
 
+/* במובייל אין צורך בהזזה של האייקון */
 .mobile-device .sidebar ul li.hacking.shift {
   transform: translateX(0);
 }
 
+/* רקע כהה (overlay) במובייל */
 .mobile-device .mobile-overlay {
   position: fixed;
   top: 0;
@@ -229,6 +238,7 @@ html, body {
   }
 }
 
+/* הגדלת אזור הלחיצה במובייל */
 .mobile-device .sidebar ul li a.menu-icon::after {
   content: '';
   position: absolute;
@@ -239,7 +249,7 @@ html, body {
   z-index: -1;
 }
 
-/* Mobile adjustments */
+/* התאמה למובייל - מסכים קטנים */
 @media screen and (max-width: 480px) {
   .mobile-device .sidebar {
     height: clamp(90px, 16vh, 120px);
@@ -259,9 +269,10 @@ html, body {
     width: clamp(110%, 12vw, 180px);
     max-width: 150%;
     filter: none;
-    transform: scale(1.1); 
+    transform: scale(1.1); /* תמיד גדול יותר */
   }
   
+  /* הגדלת אזור הלחיצה במסכים קטנים */
   .mobile-device .sidebar ul li a.menu-icon::after {
     content: '';
     position: absolute;
@@ -273,6 +284,7 @@ html, body {
   }
 }
 
+/* תמיכה בסגנונות מגע */
 @media (hover: none) {
   .mobile-device .sidebar ul li a.menu-icon:active {
     background-color: rgba(23, 202, 7, 0.3);
@@ -284,6 +296,7 @@ html, body {
   }
 }
 
+/* תפריט מובייל משותף */
 .mobile-device .mobile-dropdown-menu {
   position: fixed;
   top: auto;
@@ -333,6 +346,7 @@ html, body {
   transform: scale(0.98);
 }
 
+/* מחוון החלקה בתפריט המובייל */
 .mobile-device .mobile-dropdown-menu .swipe-indicator {
   width: 60px;
   height: 6px;
@@ -342,6 +356,7 @@ html, body {
   position: relative;
 }
 
+/* כפתור סגירה לתפריט במובייל */
 .mobile-device .mobile-dropdown-menu .close-menu-btn {
   position: absolute;
   top: 20px;
@@ -366,7 +381,7 @@ html, body {
   transform: scale(1.1);
 }
 
-/* Mobile adjustments */
+/* התאמה למובייל - מסכים קטנים */
 @media screen and (max-width: 480px) {
   .mobile-device .mobile-dropdown-menu {
     padding: 20px 15px;
@@ -387,6 +402,7 @@ html, body {
   }
 }
 
+/* אנימציות */
 @keyframes slideUp {
   from {
     transform: translateY(100%);

@@ -4,6 +4,7 @@ import { FaNetworkWired, FaTools, FaServer, FaDesktop, FaDatabase } from 'react-
 import './InfoTechWorksWith.css';
 
 const InfoTechWorksWith = () => {
+  // נתוני ספקים עבור טכנאות מחשבים
   const vendors = [
     {
       name: 'מור לוי יבואן רשמי',
@@ -32,6 +33,7 @@ const InfoTechWorksWith = () => {
     },
   ];
 
+  // נתוני שירותים ללקוחות פרטיים
   const privateServices = [
     {
       title: 'התקנה ותיקון מחשבים',
@@ -60,6 +62,7 @@ const InfoTechWorksWith = () => {
     },
   ];
 
+  // פונקציה ליצירת כרטיסי ספקים
   const renderVendorCards = (vendorList) => {
     return vendorList.map((vendor, index) => (
       <div className="vendor-card" key={`vendor-${index}`}>
@@ -84,6 +87,7 @@ const InfoTechWorksWith = () => {
     ));
   };
 
+  // פונקציה ליצירת כרטיסי שירותים
   const renderBenefitCards = (benefitList) => {
     return benefitList.map((benefit, index) => (
       <div className="benefit-card" key={`benefit-${index}`}>
@@ -106,6 +110,7 @@ const InfoTechWorksWith = () => {
         </p>
       </div>
 
+      {/* שירותים ללקוחות פרטיים */}
       <div className="services-section">
         <h2 className="section-title">השירותים שאני מציע</h2>
         <div className="benefits-grid">
@@ -113,6 +118,7 @@ const InfoTechWorksWith = () => {
         </div>
       </div>
 
+      {/* ספקים מורשים */}
       <div className="partners-section">
         <h2 className="section-title">הספקים איתם אני עובד</h2>
         <div className="vendors-grid">
@@ -120,6 +126,7 @@ const InfoTechWorksWith = () => {
         </div>
       </div>
 
+      {/* קריאה לפעולה */}
       <div className="cta-section">
         <h2>צריכים עזרה עם המחשב?</h2>
         <p>צרו איתי קשר לקבלת ייעוץ מקצועי או להזמנת שירות</p>

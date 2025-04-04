@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Wallpoet&display=swap');
 
+/* מניעת גלילה לחלוטין */
 html, body {
   margin: 0;
   padding: 0;
@@ -62,6 +63,7 @@ body .page-not-found-container{
   font-size: 7.75rem;
   font-weight: bold;
   text-shadow: 2px 2px 1px rgba(0,0,0,0.3), 0 0px 15px #000, 0 0 15px #15ff00, 0 0 50px #15ff00;
+  /*-webkit-animation: flicker 5.5s infinite alternate;*/
 }
 
 .blink {
@@ -244,7 +246,7 @@ body .page-not-found-container{
   }
 }
 
-/* Mobile adjustments */
+/* התאמה למסכי טלפון */
 @media screen and (max-width: 768px) {
   .page-not-found-container {
     height: 100vh;
@@ -279,7 +281,7 @@ body .page-not-found-container{
   }
 }
 
-/* Small Mobile */
+/* מובייל קטן */
 @media screen and (max-width: 480px) {
   .hackerPNF {
     width: 90vmin;
@@ -290,7 +292,7 @@ body .page-not-found-container{
   }
 }
 
-/* Mobiles Small and Big */
+/* מובייל גדול וטאבלט קטן */
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .hackerPNF {
     width: 85vmin;
@@ -301,7 +303,7 @@ body .page-not-found-container{
   }
 }
 
-/* Tablets */
+/* טאבלט */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .hackerPNF {
     width: 70vmax;
@@ -311,7 +313,7 @@ body .page-not-found-container{
   }
 }
 
-/* Laptops */
+/* לפטופים */
 @media screen and (min-width: 1025px) and (max-width: 1366px) {
   .hackerPNF {
     width: 65vmax;
@@ -321,7 +323,7 @@ body .page-not-found-container{
   }
 }
 
-/* Full-HD Screens */
+/* מסכי FHD */
 @media screen and (min-width: 1367px) and (max-width: 1920px) {
   .hackerPNF {
     width: 60vmax;
@@ -331,7 +333,7 @@ body .page-not-found-container{
   }
 }
 
-/* Screen  21/9 adjustments */
+/* מדיה קוורי למסכי 21:9 */
 @media screen and (min-aspect-ratio: 21/9) {
   html, body {
     margin: 0;
@@ -392,6 +394,7 @@ body .page-not-found-container{
   }
 }
 
+/* התאמה למצב לאנדסקייפ במובייל */
 @media screen and (max-width: 900px) and (orientation: landscape) {
   .hackerPNF {
     width: 70vmin;
@@ -400,6 +403,7 @@ body .page-not-found-container{
   }
 }
 
+/* התאמה לגובה נמוך */
 @media screen and (max-height: 600px) {
   .text {
     top: 40%;
